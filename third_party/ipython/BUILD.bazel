@@ -1,0 +1,8 @@
+load("@pip_deps//:requirements.bzl", "all_requirements")
+
+py_binary(
+    name = "ipython",
+    srcs = ["main.py"],
+    main = "main.py",
+    deps = all_requirements,
+)
