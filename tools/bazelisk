@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -euo pipefail
+
+FILEPATH=$(readlink -f "$0")
+BASEDIR=$(dirname "$FILEPATH")
+WORKSPACEDIR=$(dirname "$BASEDIR")
+cd "$WORKSPACEDIR" || exit 1
+BAZELISK="$WORKSPACEDIR/tools/bazelisk-linux-amd64-1.11.0"
+exec "$BAZELISK" "$@"

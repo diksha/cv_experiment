@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Custom Bazel shim to ensure dependencies, auth, etc. are in place.
+
+####################### Access Token #######################
+
+FILEPATH=$(readlink -f "$0")
+TOOLSDIR=$(dirname "$FILEPATH")
+
+if [ -z "$BAZEL_REAL" ]; then
+	# bazel-real is not set, run bazelisk
+	exec "$TOOLSDIR/bazelisk" "$@"
+fi
+
+####################### END Access Token #######################
+
+PYTHONNOUSERSITE=1 exec "$BAZEL_REAL" "$@"
