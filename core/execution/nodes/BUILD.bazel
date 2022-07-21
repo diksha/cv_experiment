@@ -1,4 +1,5 @@
 load("@rules_python//python:defs.bzl", "py_binary", "py_library")
+load("@pip_deps//:requirements.bzl", "requirement")
 
 py_binary(
     name = "video_stream",
@@ -7,5 +8,25 @@ py_binary(
     ],
     visibility = ["//visibility:public"],
     deps = [
+    ],
+)
+
+py_binary(
+    name = "result",
+    srcs = [
+        "result.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("torch"),
+        requirement("opencv-python"),
+        requirement("pandas"),
+        requirement("requests"),
+        requirement("pyyaml"),
+        requirement("pillow"),
+        requirement("tqdm"),
+        requirement("torchvision"),
+        requirement("matplotlib"),
+        requirement("seaborn")
     ],
 )
