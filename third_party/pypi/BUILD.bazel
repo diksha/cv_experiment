@@ -1,0 +1,13 @@
+load("@rules_python//python/pip_install:requirements.bzl", "compile_pip_requirements")
+
+compile_pip_requirements(
+    name = "requirements",
+    # Marks the :requirements_test target as large
+    size = "large",
+    timeout = "long",
+    extra_args = [
+        "--allow-unsafe",
+    ],
+    requirements_in = "//third_party/pypi:requirements.in",
+    requirements_txt = "//third_party/pypi:requirements_lock.txt",
+)
