@@ -1,0 +1,76 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+py_library(
+    name = "registry",
+    srcs = [
+        "registry.py",
+    ],
+    data = [],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("torch"),
+        ":model",
+        ":resources",
+        requirement("torchvision"),
+    ],
+)
+
+py_library(
+    name = "model_training_result",
+    srcs = [
+        "model_training_result.py",
+    ],
+    data = [],
+    visibility = ["//visibility:public"],
+    deps = [
+    ],
+)
+
+py_library(
+    name = "model",
+    srcs = [
+        "classifiermodels.py",
+        "model.py",
+    ],
+    visibility = ["//core/ml/training:__subpackages__"],
+    deps = [
+        requirement("boto3"),
+        requirement("loguru"),
+        requirement("tqdm"),
+        ":model_training_result",
+        "//core/ml/algorithms/image_classification:models",
+        "//core/ml/experiments/tracking:experiment_tracking",
+        "//core/ml/training/metrics:registry",
+        "//core/utils/logging/slack:get_slack_webhooks",
+        "//core/utils/logging/slack:synchronous_webhook_wrapper",
+    ],
+)
+
+py_library(
+    name = "resources",
+    srcs = [
+        "classifiermodels.py",
+        "vanilla_resnet.py",
+        "vit_classifier_model.py",
+        "yolo_model.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("boto3"),
+        requirement("loguru"),
+        requirement("tqdm"),
+        "//core/metaverse/utils:structs",
+        requirement("pytorch_lightning"),
+        "//core/ml/algorithms/image_classification:models",
+        "//core/ml/data/loaders/common:registry",
+        "//core/ml/data/loaders/resources/converters",
+        "//core/ml/experiments/tracking:experiment_tracking",
+        "//core/ml/training/metrics:registry",
+        "//core/ml/training/registry",
+        "//core/perception/inference/lib",
+        "//core/perception/inference/transforms",
+        "//core/utils/logging/slack:get_slack_webhooks",
+        "//core/utils/logging/slack:synchronous_webhook_wrapper",
+    ],
+)

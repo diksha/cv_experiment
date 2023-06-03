@@ -1,0 +1,33 @@
+sh_binary(
+    name = "edge-ssh",
+    srcs = ["edge-ssh.sh"],
+    data = [
+        ":edge-ssm-name",
+        "//third_party/aws/cli:aws_cli",
+        "//third_party/aws/session-manager-plugin",
+        "//third_party/jq",
+    ],
+    deps = ["@bazel_tools//tools/bash/runfiles"],
+)
+
+sh_binary(
+    name = "edge-scp",
+    srcs = ["edge-scp.sh"],
+    data = [
+        ":edge-ssm-name",
+        "//third_party/aws/cli:aws_cli",
+        "//third_party/aws/session-manager-plugin",
+        "//third_party/jq",
+    ],
+    deps = ["@bazel_tools//tools/bash/runfiles"],
+)
+
+sh_binary(
+    name = "edge-ssm-name",
+    srcs = ["edge-ssm-name.sh"],
+    data = [
+        "//third_party/aws/cli:aws_cli",
+        "//third_party/jq",
+    ],
+    deps = ["@bazel_tools//tools/bash/runfiles"],
+)

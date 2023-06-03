@@ -1,0 +1,73 @@
+apiserver:
+  prepopulateEnabled: "false"
+  service:
+    type: ClusterIP
+
+  configuration:
+    additionalConfigs:
+      apiserver.conf: |
+        auth {
+          fixed_users {
+            enabled: true
+            pass_hashed: true
+            users: [
+              {
+                username: "anurag"
+                password: "JDJiJDEyJEVXeFZmRHhwaDVpQ0d3M3N6VXpkMGVKZjY0d2VLQzIyTkJTc0VPMWVFRzhEUnVpTC52VFdD"
+                name: "Anurag Kanungo"
+              },
+              {
+                username: "diksha"
+                password: "JDJhJDEyJDJTa0VjdThDYUF2aFg4R2dvUERoZS5rOXpiUDRDejlhRkxrMXF3d1A5LmJZZC4vbkFsa3hl"
+                name: "Diksha Gohlyan"
+              },
+              {
+                username: "vai"
+                password: "JDJiJDEyJHFOZ1BpVFdRUkVqa1UuOGFUNW0uNWVqa2RsOTAxZFdocnIyQ3I4VEpCYi5zLlZJM3Y4bllT"
+                name: "Vai"
+              },
+              {
+                username: "nasha"
+                password: "JDJiJDEyJEc4cFNCS005L2xJUlBHei9xaG1Oc3UzeG5kUEM3UzZEckRpTU1wcXBYamhJSkxuQWkySkdH"
+                name: "Nasha"
+              },
+              {
+                username: "tim"
+                password: "JDJiJDEyJGJ1a0F5OFJMTEgxZXBSaElEZHIuUE9heTZyei5XbVE4dUU0ZXJKQXNONG5rOVBzdVpuMVBt"
+                name: "Tim"
+              },
+              {
+                username: "gabriel"
+                password: "JDJiJDEyJDRFY1ZDYU9LZEFYekRTRE9LYUdxdC5WejF0cmlGQmpMWUM5Q1N4UktaWGZYMUJiQVVGZ2Zt"
+                name: "Gabriel"
+              },
+              {
+                username: "reza"
+                password: "JDJiJDEyJGZMY1lIcHYuVWhKb1pLUkdLLmhaUXVvTTFtd0dFWDZWMTdYQ2pxOGlJdEJBMmZRRWhmenlT"
+                name: "Mamrez"
+              },
+              {
+                username: "vivek"
+                password: "JDJiJDEyJHk1MjVXazRyL0M0cmlWd3pzSnVjeWVYNFMxNnZodDg4NEpXeDBTWFV1VTdyZEI2SmJtSzZT"
+                name: "Vivek"
+              },
+              {
+                username: "bilal"
+                password: "JDJhJDEyJC9XOFd3MXdLc2NVaW5NbWtYVFlJZGVaUEZFNlcxVVdQL1BmbnRKMUF0M3NpYmJZOEdNTHBL"
+                name: "Bilal"
+              }
+            ]
+          }
+        }
+
+fileserver:
+  service:
+    type: ClusterIP
+  storage:
+    data:
+      class: "gp3-retain"
+      size: 200Gi
+
+webserver:
+  service:
+    type: ClusterIP

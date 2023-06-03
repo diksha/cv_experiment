@@ -1,0 +1,62 @@
+load("@io_bazel_rules_docker//container:container.bzl", "container_push")
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary", "py_library")
+load("//third_party/containers/python3:image.bzl", "py3_image")
+
+package(default_visibility = ["//visibility:public"])
+
+py_binary(
+    name = "train_unet",
+    srcs = ["train_unet.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("torch"),
+        requirement("torchvision"),
+        requirement("numpy"),
+        requirement("matplotlib"),
+        requirement("wandb"),
+        requirement("fastai"),
+        "//experimental/reza/ImageSegmentation:data",
+    ],
+)
+
+py_library(
+    name = "data",
+    srcs = ["data.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("torch"),
+        requirement("numpy"),
+        requirement("pillow"),
+    ],
+)
+
+py_binary(
+    name = "test_floor_segmentation",
+    srcs = ["test_floor_segmentation.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("torch"),
+        requirement("torchvision"),
+        requirement("numpy"),
+        requirement("matplotlib"),
+        requirement("wandb"),
+        requirement("fastai"),
+        "//experimental/reza/ImageSegmentation:data",
+    ],
+)
+
+py3_image(
+    name = "unet_image",
+    binary = ":train_unet",
+)
+
+container_push(
+    name = "unet_push",
+    format = "Docker",
+    image = ":unet_image",
+    registry = "us.gcr.io/sodium-carving-227300",
+    repository = "voxel/experimental",
+    tag = "{BUILD_USER}_{BUILD_TIMESTAMP}",
+    tags = ["manual"],
+)

@@ -1,0 +1,13 @@
+load("//third_party/aws/lambda:defs.bzl", "go_aws_lambda")
+
+go_aws_lambda(
+    name = "states-events-production",
+    function_name = "voxel-kds-extract-partition-key",
+    target = "//services/perception/kds-firehose-lambdas/cmd/kds-extract-camera-uuid",
+)
+
+go_aws_lambda(
+    name = "frame-structs-production",
+    function_name = "voxel-perception-frame-structs-firehose-transform",
+    target = "//services/perception/kds-firehose-lambdas/cmd/kds-extract-camera-uuid",
+)

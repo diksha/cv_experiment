@@ -1,0 +1,79 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+---
+config: &config
+    verbose: 0
+    publisher:
+      enabled: false
+    incident:
+      dry_run: false
+      monitors_requested:
+      - bad_posture
+    max_frame_count: 500
+    perception:
+      pose:
+        enabled: True
+      door_classifier:
+        enabled: false
+    video_writer:
+      only_draw_frames_with_gt: false
+    state:
+      enabled: false
+
+scenarios:
+- video_uuid: uscold/laredo/dock01/cha/20210525_065932_0015
+  camera_uuid: uscold/laredo/dock01/cha
+  config:
+    <<: *config
+
+- video_uuid: uscold/laredo/dock01/cha/20210405_760430_0000
+  camera_uuid: uscold/laredo/dock01/cha
+  config:
+      <<: *config
+
+- video_uuid: uscold/laredo/dock01/cha/20210405_760430_0004
+  camera_uuid: uscold/laredo/dock01/cha
+  config:
+    <<: *config
+
+# Bad bend case
+- video_uuid: uscold/laredo/dock01/cha/20210923_43999
+  camera_uuid: uscold/laredo/dock01/cha
+  config:
+    <<: *config
+
+# Bad bend case
+- video_uuid: uscold/laredo/dock01/cha/20210923_44138
+  camera_uuid: uscold/laredo/dock01/cha
+  config:
+    <<: *config
+
+- video_uuid: uscold/laredo/dock01/cha/20210923_43934
+  camera_uuid: uscold/laredo/dock01/cha
+  config:
+    <<: *config
+
+- video_uuid: uscold/laredo/dock01/cha/20210923_43936
+  camera_uuid: uscold/laredo/dock01/cha
+  config:
+    <<: *config
+
+- video_uuid: uscold/laredo/dock01/cha/20210923_02345
+  camera_uuid: uscold/laredo/dock01/cha
+  config:
+    <<: *config
+
+# Good bend case
+- video_uuid: uscold/laredo/dock01/cha/20210924_45199
+  camera_uuid: uscold/laredo/dock01/cha
+  config:
+    <<: *config

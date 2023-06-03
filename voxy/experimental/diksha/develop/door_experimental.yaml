@@ -1,0 +1,6 @@
+americold/modesto/0011/cha:
+  perception:
+    door_classifier:
+      enabled: true
+      model_path: artifacts_628cf2c8-4677-47e6-9af4-4bc1b098a304/628cf2c8-4677-47e6-9af4-4bc1b098a304.pt
+      model_type: vanilla_resnet

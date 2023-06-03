@@ -1,0 +1,3 @@
+fps: 0
+task_type: DoorClassificationTask
+credentials_arn: "arn:aws:secretsmanager:us-west-2:203670452561:secret:scale_credentials-WHUbar"

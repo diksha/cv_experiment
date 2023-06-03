@@ -1,0 +1,108 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+
+package(default_visibility = ["//visibility:public"])
+
+py_binary(
+    name = "export_overreaching_model",
+    srcs = [
+        "export_overreaching_model.py",
+    ],
+    deps = [
+        requirement("torch"),
+        requirement("torchvision"),
+        "//core/perception/pose:api",
+        "//core/perception/pose:reach_classifier",
+        "//core/utils:yaml_jinja",
+        "//lib/infra/utils:resolve_model_path",
+    ],
+)
+
+py_binary(
+    name = "export_pose_model",
+    srcs = [
+        "export_pose_model.py",
+    ],
+    deps = [
+        requirement("torch"),
+        requirement("torchvision"),
+        "//core/perception/pose:api",
+        "//core/utils:yaml_jinja",
+        "//lib/infra/utils:resolve_model_path",
+    ],
+)
+
+py_binary(
+    name = "export_vit_pose_trt",
+    srcs = [
+        "export_vit_pose_trt.py",
+    ],
+    data = [
+        "@vit_pose_model_b_multi_coco_jit",
+    ],
+    deps = [
+        requirement("torch"),
+        requirement("torchvision"),
+        requirement("nvidia-tensorrt"),
+        requirement("boto3"),
+        requirement("loguru"),
+        requirement("onnx-simplifier"),
+        requirement("onnxruntime"),
+        requirement("onnx"),
+        "//lib/infra/utils:resolve_model_path",
+        "//third_party/vit_pose/configs",
+        "//third_party/vit_pose/models:model",
+        "//third_party/vit_pose/utils",
+    ],
+)
+
+py_binary(
+    name = "export_carry_object_model",
+    srcs = [
+        "export_carry_object_model.py",
+    ],
+    deps = [
+        requirement("torch"),
+        requirement("torchvision"),
+        "//core/perception/carry_object:carry_object_classifier",
+        "//core/utils:yaml_jinja",
+        "//lib/infra/utils:resolve_model_path",
+    ],
+)
+
+py_binary(
+    name = "export_spill_model",
+    srcs = [
+        "export_spill_model.py",
+    ],
+    deps = [
+        requirement("torch"),
+        requirement("torchvision"),
+        "//core/perception/spill:spill_segmenter",
+        "//core/utils:yaml_jinja",
+        "//lib/infra/utils:resolve_model_path",
+    ],
+)
+
+py_binary(
+    name = "export_vit_model",
+    srcs = [
+        "export_vit_model.py",
+    ],
+    data = [
+        "@artifacts_voxel_safetyvest_vit-dixieline_2022-09-16",
+        "@artifacts_voxel_safetyvest_vit-lakeshore-arlington_20022-09-08",
+        "@artifacts_voxel_safetyvest_vit-uscold-laredo_2022-09-15",
+        "@artifacts_voxel_safetyvest_vit_2022-08-30_solana_beach",
+        "@artifacts_voxel_safetyvest_vit_general_2022-09-21",
+        "@artifacts_voxel_safetyvest_vit_quakertown_laredo_2022-08-24",
+        "@artifacts_voxel_safetyvest_vverst-walton_2022-10-06",
+    ],
+    deps = [
+        requirement("torch"),
+        requirement("torchvision"),
+        requirement("transformers"),
+        "//core/utils:yaml_jinja",
+        "//lib/infra/utils:resolve_model_path",
+    ],
+)

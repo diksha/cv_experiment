@@ -1,0 +1,18 @@
+# this rule is horrible, because the session manager uses some awful
+# convoluted mechanism for vendoring with old style GOPATH, but it works
+genrule(
+    name = "session-manager-plugin-build",
+    srcs = ["@com_github_aws_session_manager_plugin//:src"],
+    outs = ["session-manager-plugin"],
+    cmd = """
+mkdir -p $(RULEDIR)/go/src/github.com/aws &&
+ln -sf $$(realpath external/com_github_aws_session_manager_plugin) $(RULEDIR)/go/src/github.com/aws/session-manager-plugin &&
+ln -sf $$(realpath external/com_github_aws_session_manager_plugin) $(RULEDIR)/go/src/github.com/aws/SSMCLI &&
+export GOPATH=$$(realpath $(RULEDIR)/go):$$(realpath external/com_github_aws_session_manager_plugin/vendor) &&
+export GO111MODULE=off &&
+export GOCACHE=$$(realpath $(RULEDIR)/go/cache) &&
+$(location @go_sdk//:bin/go) build -o $@ $(RULEDIR)/go/src/github.com/aws/session-manager-plugin/src/sessionmanagerplugin-main/main.go &&
+rm -rf $(RULEDIR)/go""",
+    tools = ["@go_sdk//:bin/go"],
+    visibility = ["//visibility:public"],
+)

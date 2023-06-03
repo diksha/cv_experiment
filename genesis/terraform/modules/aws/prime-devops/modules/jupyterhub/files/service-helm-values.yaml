@@ -1,0 +1,82 @@
+hub:
+  config:
+    Authenticator:
+      auto_login: true
+    GoogleOAuthenticator:
+      admin_users: 
+        - anurag
+      client_id: ${GOOGLE_CLIENT_ID}
+      client_secret: null
+      oauth_callback_url: https://jupyter.private.voxelplatform.com/hub/oauth_callback
+      hosted_domain:
+        - voxelai.com
+      login_service: Google Workspace
+    JupyterHub:
+      authenticator_class: google
+  db:
+    type: postgres
+  allowNamedServers: true
+  namedServerLimitPerUser: 5
+
+proxy:
+  service:
+    type: ClusterIP
+
+singleuser:
+  uid: 0
+  allowPrivilegeEscalation: true
+  cmd:
+    - jupyterhub-singleuser
+    - --allow-root
+  storage:
+    capacity: 100Gi
+    dynamic:
+      storageClass: gp3-retain
+  image:
+    name: 203670452561.dkr.ecr.us-west-2.amazonaws.com/voxel-ci/ubuntu
+    tag: v1.4_cuda-11.6_ubuntu-20.04
+  profileList:
+    - display_name: "Minimal CPU environment"
+      description: "Basic shared resources environment."
+      default: true
+      kubespawner_override:
+        uid: 0
+    - display_name: "GPU Server"
+      description: "Spawns a notebook server with access to a 7.5CPU/29G and T4 GPU"
+      kubespawner_override:
+        cpu_guarantee: 7
+        cpu_limit: 7
+        mem_limit: "29G"
+        mem_guarantee: "29G"
+        node_selector:
+          beta.kubernetes.io/instance-type: "g4dn.2xlarge"
+        tolerations:
+          - key: "nvidia.com/gpu"
+            operator: "Equal"
+            value: "true"
+            effect: "NoSchedule"
+
+ingress:
+  enabled: true
+  annotations: {}
+  ingressClassName: "nginx"
+  hosts: ["jupyter.private.voxelplatform.com"]
+
+cull:
+  enabled: true
+  users: true
+  adminUsers: true
+  removeNamedServers: false 
+  timeout: 3600 
+  every: 600
+  concurrency: 10
+  maxAge: 0
+
+debug:
+  enabled: false
+
+prePuller:
+  hook:
+    enabled: false
+  continuous:
+    enabled: false

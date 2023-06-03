@@ -1,0 +1,27 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+package(default_visibility = ["//visibility:public"])
+
+voxel_py_test(
+    name = "incident_writer_test",
+    srcs = ["incident_writer_test.py"],
+    deps = [
+        "//core/structs",
+        "//core/utils:incident_writer",
+        requirement("moto"),
+        requirement("boto3"),
+    ],
+)
+
+voxel_py_test(
+    name = "pyav_decoder_test",
+    srcs = ["pyav_decoder_test.py"],
+    data = [
+        "@artifacts_office_cam_mp4",
+    ],
+    deps = [
+        "//core/utils:pyav_decoder",
+        "@rules_python//python/runfiles",
+    ],
+)

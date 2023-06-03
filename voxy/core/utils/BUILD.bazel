@@ -1,0 +1,169 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "constants",
+    srcs = ["constants.py"],
+    visibility = ["//visibility:public"],
+)
+
+py_library(
+    name = "video_utils",
+    srcs = ["video_utils.py"],
+    visibility = ["//visibility:public"],
+)
+
+py_library(
+    name = "bounded_sorted_dict",
+    srcs = ["bounded_sorted_dict.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("sortedcontainers"),
+    ],
+)
+
+py_library(
+    name = "actionable_region_utils",
+    srcs = ["actionable_region_utils.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("opencv-python"),
+        requirement("numpy"),
+        requirement("shapely"),
+        "//core/incidents:utils",
+        "//core/structs",
+    ],
+)
+
+py_library(
+    name = "logger",
+    srcs = ["logger.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+    ],
+)
+
+py_library(
+    name = "yaml_jinja",
+    srcs = ["yaml_jinja.py"],
+    data = [
+        "//experimental/nasha:hyperparams",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("jinja2"),
+        requirement("pyyaml"),
+        requirement("loguru"),
+        ":aws_utils",
+        ":camera_config_utils",
+        "//core/metaverse",
+    ],
+)
+
+py_library(
+    name = "aws_utils",
+    srcs = ["aws_utils.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("boto3"),
+        requirement("boto3-stubs"),
+        requirement("loguru"),
+        requirement("opencv-python"),
+        requirement("pillow"),
+        "//core/infra/cloud:gcs_utils",
+    ],
+)
+
+py_library(
+    name = "print_utils",
+    srcs = ["print_utils.py"],
+)
+
+py_library(
+    name = "incident_writer",
+    srcs = ["incident_writer.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("opencv-python"),
+        requirement("av"),
+        requirement("loguru"),
+        "//core/infra/cloud:kinesis_utils",
+        "//core/structs",
+        "//core/utils:bounded_sorted_dict",
+    ],
+)
+
+py_library(
+    name = "pyav_decoder",
+    srcs = ["pyav_decoder.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("av"),
+        requirement("loguru"),
+        "//core/structs",
+        "//third_party/closeablequeue",
+    ],
+)
+
+py_library(
+    name = "json_utils",
+    srcs = ["json_utils.py"],
+    visibility = ["//visibility:public"],
+)
+
+py_library(
+    name = "video_reader",
+    srcs = ["video_reader.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("av"),
+        "//core/utils:aws_utils",
+    ],
+)
+
+py_library(
+    name = "perception_portal_graphql_session",
+    srcs = ["perception_portal_graphql_session.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/utils:aws_utils",
+        requirement("requests"),
+    ],
+)
+
+py_library(
+    name = "camera_config_utils",
+    srcs = ["camera_config_utils.py"],
+    data = ["//configs"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/structs",
+    ],
+)
+
+py_library(
+    name = "voxel_decorators",
+    srcs = ["voxel_decorators.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+    ],
+)
+
+py_library(
+    name = "type_check",
+    srcs = ["type_check.py"],
+    visibility = ["//visibility:public"],
+)
+
+py_library(
+    name = "subprocess_utils",
+    srcs = ["subprocess_utils.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+    ],
+)

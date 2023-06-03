@@ -1,0 +1,53 @@
+{
+    "actions": {
+        "train": true,
+        "val": true
+    },
+    "experiment": {
+        "name": "config_test",
+        "path": "/tmp/logs/experiments/",
+        "tensorboard_path": "/tmp/logs/tensorboard_logs/"
+    },
+    "data": {
+        "training_data_generator": {
+            "num_workers": 1,
+            "shuffle": false,
+            "batch_size": 4,
+            "sampler": null,
+            "dataset": {
+                "video_uuids": ["e_dock_north_ch22_20201104000155_20201104040203"],
+                "transforms": {}
+            }
+        },
+        "validation_data_generator": {
+            "num_workers": 1,
+            "shuffle": true,
+            "batch_size": 1,
+            "sampler": null,
+            "dataset": {
+                "video_uuids": ["e_dock_north_ch22_20201104000155_20201104040203"],
+                "transforms": {}
+            }
+        }
+    },
+    "model": {
+        "name": "retinanet",
+        "params": {
+            "classes": 1
+        }
+    },
+    "device": "cuda:0",
+    "train": {
+        "start_epoch": 1,
+        "max_epochs": 1,
+        "viz_iter": 1,
+        "val_epoch": 20,
+        "save_epoch": 1,
+        "train_iter": 1,
+        "infer_epoch": 10,
+        "start_learning_rate": 0.0005,
+        "momentum": 0.5,
+        "lr_change_epochs": [110],
+        "lr_multiplier": 0.1
+    }
+}

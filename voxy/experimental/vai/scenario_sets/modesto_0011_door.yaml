@@ -1,0 +1,27 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+
+scenarios:
+  # Positive Scenarios
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: [OPEN_DOOR_DURATION]
+    video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/29d4d941-02fc-47d8-ab4d-5a1162b17dfb_original_video_3620_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: [OPEN_DOOR_DURATION]
+    video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/defe7b7a-dd2a-46d7-8faa-e695cdcd48d9_original_video_390_0000
+  # Negative Scenarios
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/0b1d2af5-f916-4f43-966a-0caaae555ef4_original_video_4600_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/faf15a1c-38ec-4eb0-bd14-8f1be3e23c7f_original_video_1980_0000

@@ -1,0 +1,64 @@
+#
+# Copyright 2023 Voxel Labs, Inc.
+# All rights reserved.
+#
+# This document may not be reproduced, republished, distributed, transmitted,
+# displayed, broadcast or otherwise exploited in any manner without the express
+# prior written permission of Voxel Labs, Inc. The receipt or possession of this
+# document does not convey any rights to reproduce, disclose, or distribute its
+# contents, or to manufacture, use, or sell anything that it may describe, in
+# whole or in part.
+#
+#
+scenario_for_incidents: [OBSTRUCTION]
+scenarios:
+  - camera_uuid: trieagle/ocala/0005/cha
+    incidents: []
+    video_uuid: trieagle/ocala/0005/cha/scenarios/OBSTRUCTION/negative/ff6620dd-b924-40c2-93d1-df187ca54b7c_0000
+  - camera_uuid: trieagle/ocala/0005/cha
+    incidents: [OBSTRUCTION]
+    video_uuid:  trieagle/ocala/0005/cha/scenarios/OBSTRUCTION/positive/237e712d-7b9a-4388-825d-cc6129fa27ad_0000
+  - camera_uuid: trieagle/ocala/0008/cha
+    incidents: [OBSTRUCTION]
+    video_uuid: trieagle/ocala/0008/cha/scenarios/OBSTRUCTION/positive/96f32164-60d5-4157-87fd-1103db06180b_0000
+  - camera_uuid: trieagle/ocala/0005/cha
+    incidents: [OBSTRUCTION]
+    video_uuid: trieagle/ocala/0005/cha/scenarios/BAD_POSTURE/positive/779daa37-d223-4fd1-b070-979464dbf786_0000
+  - camera_uuid: trieagle/ocala/0008/cha
+    incidents: [OBSTRUCTION]
+    video_uuid: trieagle/ocala/0008/cha/scenarios/OVERREACHING/positive/32247441-c35f-422a-aadb-ff06a47bc4ac_0000
+  - camera_uuid: trieagle/ocala/0008/cha
+    incidents: [OBSTRUCTION, OBSTRUCTION]
+    video_uuid: trieagle/ocala/0008/cha/scenarios/PARKING_DURATION/positive/4002f8e3-0baf-4502-891f-c394ef6b3bc8_0000
+  - camera_uuid: trieagle/ocala/0008/cha
+    incidents: []
+    video_uuid: trieagle/ocala/0008/cha/scenarios/NO_STOP_AT_END_OF_AISLE/positive/cc68bff9-8589-4f89-8181-beca3b63e5e3_0000
+  - camera_uuid: trieagle/ocala/0008/cha
+    incidents: []
+    video_uuid: trieagle/ocala/0008/cha/scenarios/NO_STOP_AT_END_OF_AISLE/positive/2a3325fc-344f-4eb8-aa84-d83e9c37e7e5_0000
+  - camera_uuid: trieagle/ocala/0005/cha
+    incidents: []
+    video_uuid: trieagle/ocala/0005/cha/scenarios/OPEN_DOOR_DURATION/positive/adee25b2-98ed-4470-9248-9ee26c882bca_0000
+  - camera_uuid: trieagle/ocala/0005/cha
+    incidents: []
+    video_uuid: trieagle/ocala/0005/cha/scenarios/OPEN_DOOR_DURATION/positive/7a2814b6-84ae-4079-8138-9ad17eb62402_0000
+  - camera_uuid: trieagle/ocala/0005/cha
+    incidents: []
+    video_uuid: trieagle/ocala/0005/cha/scenarios/OBSTRUCTION/negative/44393676-ae01-44de-a709-2fdcb725a9e1_0000
+  - camera_uuid: trieagle/ocala/0008/cha
+    incidents: []
+    video_uuid: trieagle/ocala/0008/cha/scenarios/OBSTRUCTION/negative/76f7e107-b78c-4b7c-a6fa-cc858880862a_0000
+  - camera_uuid: trieagle/ocala/0008/cha
+    incidents: [OBSTRUCTION]
+    video_uuid: trieagle/ocala/0008/cha/scenarios/OBSTRUCTION/positive/badc3c3f-f182-437f-9550-0e4b385cf861_0000
+  - camera_uuid: trieagle/ocala/0008/cha
+    incidents: [OBSTRUCTION,OBSTRUCTION]
+    video_uuid: trieagle/ocala/0008/cha/scenarios/OBSTRUCTION/positive/06ad77e9-d202-4f62-bec7-930cd3d75ab2_0000
+  - camera_uuid: trieagle/ocala/0005/cha
+    incidents: [OBSTRUCTION]
+    video_uuid: trieagle/ocala/0005/cha/scenarios/OBSTRUCTION/positive/429b1725-bcaf-4cd2-9753-9dc125479267_0000
+  - camera_uuid: trieagle/ocala/0005/cha
+    incidents: []
+    video_uuid: trieagle/ocala/0005/cha/scenarios/OBSTRUCTION/negative/ff6620dd-b924-40c2-93d1-df187ca54b7c_0000
+
+

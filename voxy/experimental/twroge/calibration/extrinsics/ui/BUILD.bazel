@@ -1,0 +1,29 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+
+filegroup(
+    name = "static",
+    srcs = glob(["static/*"]),
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "templates",
+    srcs = glob(["templates/*"]),
+    visibility = ["//visibility:public"],
+)
+
+py_binary(
+    name = "main",
+    srcs = [
+        "main.py",
+    ],
+    data = [
+        ":static",
+        ":templates",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("flask"),
+    ],
+)

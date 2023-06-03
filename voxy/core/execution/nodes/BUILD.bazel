@@ -1,0 +1,194 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "abstract",
+    srcs = ["abstract.py"],
+    visibility = ["//visibility:public"],
+)
+
+py_library(
+    name = "annotation",
+    srcs = ["annotation.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("opencv-python"),
+        requirement("loguru"),
+        "//core/execution/nodes:abstract",
+        "//core/labeling/label_store:label_reader",
+        "//core/structs",
+        "//core/utils:aws_utils",
+    ],
+)
+
+py_library(
+    name = "incident",
+    srcs = ["incident.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/execution/nodes:abstract",
+        "//core/execution/utils:graph_config_utils",
+        "//core/incidents:controller",
+    ],
+)
+
+py_library(
+    name = "incident_machine",
+    srcs = ["incident_machine.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/execution/nodes:abstract",
+        "//core/incident_machine:controller",
+    ],
+)
+
+py_library(
+    name = "incident_writer",
+    srcs = ["incident_writer.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        "//core/execution/nodes:abstract",
+        "//core/execution/utils:graph_config_utils",
+        "//core/utils:incident_writer",
+    ],
+)
+
+py_library(
+    name = "perception",
+    srcs = ["perception.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/execution/nodes:abstract",
+        "//core/execution/utils:perception_runner_context",
+        "//core/perception/aisle_end:aisle_perception",
+        "//core/perception/calibration:utils",
+        "//core/perception/calibration:world_perspective_model",
+        "//core/perception/carry_object:carry_object_classifier",
+        "//core/perception/detector_tracker:tracker",
+        "//core/perception/detector_tracker:yolo_detector",
+        "//core/perception/door:state_classifier_vision",
+        "//core/perception/driving_area:driving_area_perception",
+        "//core/perception/hat:hat_classifier",
+        "//core/perception/intersection:intersection_perception",
+        "//core/perception/motion:motion_zone_detector",
+        "//core/perception/no_ped_zone:no_ped_zone_perception",
+        "//core/perception/obstruction:obstruction_segmenter",
+        "//core/perception/pose:activity_classifier",
+        "//core/perception/pose:api",
+        "//core/perception/pose:lift_classifier",
+        "//core/perception/pose:reach_classifier",
+        "//core/perception/pose:vit_pose",
+        "//core/perception/spill:spill_segmenter",
+        "//core/perception/vest:vest_classifier",
+        "//core/structs",
+        "//core/utils:actionable_region_utils",
+        "//core/utils/logging:proto_node",
+        requirement("numpy"),
+        requirement("scikit-learn"),
+        requirement("loguru"),
+    ],
+)
+
+py_library(
+    name = "video_stream",
+    srcs = ["video_stream.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("tqdm"),
+        requirement("loguru"),
+        "//core/execution/nodes:abstract",
+        "//core/execution/utils:frame_queue",
+        "//core/infra/cloud:gcs_utils",
+        "//core/utils:bounded_sorted_dict",
+    ],
+)
+
+py_library(
+    name = "video_writer",
+    srcs = ["video_writer.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("av"),
+        requirement("numpy"),
+        requirement("loguru"),
+        "//core/execution/nodes:abstract",
+        "//core/utils:aws_utils",
+    ],
+)
+
+py_library(
+    name = "publisher",
+    srcs = ["publisher.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        "//core/execution/nodes:abstract",
+        "//core/execution/utils:graph_config_utils",
+        "//core/infra/cloud:gcs_utils",
+        "//core/utils/publisher",
+    ],
+)
+
+py_library(
+    name = "camera_stream",
+    srcs = ["camera_stream.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        requirement("opencv-python"),
+        "//core/execution/nodes:abstract",
+        "//core/execution/utils:frame_queue",
+        "//core/utils:bounded_sorted_dict",
+        "//core/utils:pyav_decoder",
+    ],
+)
+
+py_library(
+    name = "state",
+    srcs = ["state.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/execution/nodes:abstract",
+        "//core/state:controller",
+    ],
+)
+
+py_library(
+    name = "temporal",
+    srcs = ["temporal.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/execution/nodes:abstract",
+        "//core/perception/temporal:controller",
+        "//core/utils/logging:node_logger",
+    ],
+)
+
+py_library(
+    name = "acausal",
+    srcs = ["acausal.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/execution/nodes:abstract",
+        "//core/perception/acausal:controller",
+    ],
+)
+
+py_library(
+    name = "mega",
+    srcs = ["mega.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/execution/nodes:abstract",
+        "//core/execution/nodes:acausal",
+        "//core/execution/nodes:incident",
+        "//core/execution/nodes:incident_machine",
+        "//core/execution/nodes:state",
+        "//core/execution/nodes:temporal",
+        "//core/utils/logging:logger",
+        "//core/utils/logging:node_logger",
+    ],
+)

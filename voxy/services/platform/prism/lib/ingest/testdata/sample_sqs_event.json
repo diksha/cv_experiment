@@ -1,0 +1,24 @@
+{
+  "Records": [
+    {
+      "messageId": "239edb1b-c95f-4300-b246-fbebc7efbfd1",
+      "receiptHandle": "AQEBYXg2Fztm9S9oNlBtzG7uSJkqhbYkK9lh1K1j6dm8V8YhA34SCiNvgjENDRtpeVrBQh0BepTs2QPBnRzK7pqkvbldcKk/ffQg66NF+4gndFTt/cp9gfW/Mp2SoN3KxaUCaQ8ZFAJTv1yE/kS+/RqfV3fSEEkrocwsTe7C3YKzc11kfXPYVawAg9fI3C3nxLIH+abZloiKP9lqHBUU2Wq2vbTATLopMabbuaY5abf3iw8287BAeP3BJAEnDq1SXkCJYjd9mu3CuRCDlhG34WDeq+0xFPykxJIE+erb0SOHIvDFAuGUa+Q8AvUMvsPvBcaM",
+      "body": "{\n  \"Type\" : \"Notification\",\n  \"MessageId\" : \"168b3241-d380-5127-8df5-6e8530e93fe8\",\n  \"SequenceNumber\" : \"10000000000000136000\",\n  \"TopicArn\" : \"arn:aws:sns:us-west-2:115099983231:voxel-staging-prism-incident-ingest.fifo\",\n  \"Message\" : \"{\\\"uuid\\\": \\\"c911a7ca-e53d-11ed-8331-4de4345486cf\\\", \\\"camera_uuid\\\": \\\"americold/ontario/0104/cha\\\", \\\"camera_config_version\\\": null, \\\"organization_key\\\": null, \\\"title\\\": \\\"Open Door duration\\\", \\\"incident_type_id\\\": \\\"OPEN_DOOR_DURATION\\\", \\\"incident_version\\\": \\\"1.0\\\", \\\"priority\\\": \\\"medium\\\", \\\"actor_ids\\\": [\\\"1\\\"], \\\"video_thumbnail_gcs_path\\\": null, \\\"video_thumbnail_s3_path\\\": null, \\\"video_gcs_path\\\": null, \\\"video_s3_path\\\": null, \\\"original_video_gcs_path\\\": null, \\\"original_video_s3_path\\\": null, \\\"annotations_gcs_path\\\": null, \\\"annotations_s3_path\\\": null, \\\"start_frame_relative_ms\\\": 1682628844749, \\\"end_frame_relative_ms\\\": 1682628854749, \\\"incident_group_start_time_ms\\\": null, \\\"pre_start_buffer_ms\\\": 3000, \\\"post_end_buffer_ms\\\": 6000, \\\"docker_image_tag\\\": null, \\\"cooldown_tag\\\": false, \\\"track_uuid\\\": \\\"00735990-f70e-490e-a26f-13d07bd596a2\\\", \\\"sequence_id\\\": 9, \\\"run_uuid\\\": \\\":13f55e59-8a17-48b1-9eb9-e3abdd5a1b58\\\", \\\"kvs_stream_arn\\\": \\\"arn:aws:kinesisvideo:us-west-2:115099983231:stream/walk-test-stream/1680811789506\\\"}\",\n  \"Timestamp\" : \"2023-04-27T20:55:05.030Z\",\n  \"UnsubscribeURL\" : \"https://sns.us-west-2.amazonaws.com/?Action=Unsubscribe&SubscriptionArn=arn:aws:sns:us-west-2:115099983231:voxel-staging-prism-incident-ingest.fifo:2c3955f2-d877-402a-afe4-1c63ce921c24\"\n}",
+      "md5OfBody": "d3627af2494c34154bc73754e92fe203",
+      "md5OfMessageAttributes": "",
+      "attributes": {
+        "ApproximateFirstReceiveTimestamp": "1682629357150",
+        "ApproximateReceiveCount": "4",
+        "MessageDeduplicationId": "c911a7ca-e53d-11ed-8331-4de4345486cf",
+        "MessageGroupId": "test_message_group_id",
+        "SenderId": "test_sender_id",
+        "SentTimestamp": "1682628905053",
+        "SequenceNumber": "18877497073403121152"
+      },
+      "messageAttributes": {},
+      "eventSourceARN": "arn:aws:sqs:us-west-2:115099983231:voxel-staging-prism-incident-ingest.fifo",
+      "eventSource": "aws:sqs",
+      "awsRegion": "us-west-2"
+    }
+  ]
+}

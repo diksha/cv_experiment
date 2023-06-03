@@ -1,0 +1,49 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_binary(
+    name = "train_classifier",
+    srcs = ["train_classifier.py"],
+    data = [
+        "//experimental/nasha/door_classifier:dataset_file",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//experimental/nasha/door_classifier:utils",
+        "//experimental/nasha/door_classifier/lib/datasets:registry",
+        "//experimental/nasha/door_classifier/lib/models:registry",
+        requirement("torch"),
+        requirement("torchvision"),
+        requirement("numpy"),
+        requirement("wandb"),
+        requirement("scikit-learn"),
+    ],
+)
+
+py_library(
+    name = "utils",
+    srcs = ["utils.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("torch"),
+    ],
+)
+
+py_library(
+    name = "metrics",
+    srcs = ["metrics.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("scikit-learn"),
+        requirement("torch"),
+        requirement("numpy"),
+    ],
+)
+
+filegroup(
+    name = "dataset_file",
+    srcs = glob(["experimental/lazhar/dataset/*"]),
+    visibility = ["//visibility:public"],
+)

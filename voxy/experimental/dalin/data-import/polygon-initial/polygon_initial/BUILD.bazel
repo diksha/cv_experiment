@@ -1,0 +1,16 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "polygon_initial",
+    srcs = [
+        "db.go",
+        "models.go",
+        "query.sql.go",
+    ],
+    importpath = "github.com/voxel-ai/voxel/experimental/dalin/data-import/polygon-initial/polygon_initial",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_google_uuid//:uuid",
+        "@com_github_tabbed_pqtype//:pqtype",
+    ],
+)

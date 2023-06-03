@@ -1,0 +1,44 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+apiVersion: v1
+kind: Pod
+metadata:
+  name: google-pub-sub-emulator
+  labels:
+    app: google-pub-sub-emulator
+spec:
+  containers:
+  - name: google-pub-sub-emulator
+    image: gcr.io/google.com/cloudsdktool/cloud-sdk
+    command: ["/bin/bash", "-c"]
+    args:
+      - gcloud --quiet beta emulators pubsub start --project=${PUBSUB_PROJECT_ID} --host-port=0.0.0.0:8085;
+    env:
+    - name: PUBSUB_PROJECT_ID
+      value: local-project
+    ports:
+    - containerPort: 8085
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: google-pub-sub-emulator-svc
+spec:
+  type: NodePort
+  ports:
+  - name: emulator-port
+    nodePort: 31002
+    protocol: "TCP"
+    port: 8085
+    targetPort: 8085
+  selector:
+    app: google-pub-sub-emulator

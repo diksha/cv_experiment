@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package protos.perception.structs.v1;
+option go_package = "github.com/voxel-ai/voxel/protos/perception/structs/v1;structspb";
+
+
+message ResizeTransform {
+  repeated uint64 size = 1;
+};
+
+message ToTensorTransform {
+};
+
+message NormalizeTransform {
+  repeated float mean = 1;
+  repeated float std = 2;
+};
+
+message ViTFeatureExtractorTransform {
+  string pretrained_model = 1;
+}
+
+
+message Transform {
+  oneof transform {
+      ResizeTransform resize_transform = 1;
+      ToTensorTransform to_tensor_transform = 2;
+      NormalizeTransform normalize_transform = 3;
+      ViTFeatureExtractorTransform vit_feature_extractor_transform = 4;
+  };
+}
+
+message TransformList {
+  repeated Transform transforms = 1;
+}
+
+
+message ModelConfiguration {
+  ColorSpace color_space = 1;
+  map<string, int32> class_index_map = 2;
+  TransformList preprocessing_transforms = 3;
+  TransformList postprocessing_transforms = 4;
+}
+
+enum ColorSpace {
+  COLOR_SPACE_UNSPECIFIED = 0;
+  COLOR_SPACE_RGB = 1;
+  COLOR_SPACE_BGR = 2;
+  COLOR_SPACE_GRAYSCALE = 3;
+}

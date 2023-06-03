@@ -1,0 +1,46 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+
+# TODO: update download path. Use get_dataset1.sh instead of manual cmd to download `gs://voxel-users/anurag/yolo/*`
+apiVersion: batch/v1
+kind: Job
+metadata:
+  # Unique key of the Job instance
+  name: jains-yolo-americold-yt8m-m
+spec:
+  template:
+    metadata:
+      name: jains-yolo-americold-yt8m-m
+    spec:
+      serviceAccountName: k8
+      hostIPC: True
+      containers:
+      - name: jains-yolo-americold-yt8m-m
+        image: us.gcr.io/sodium-carving-227300/yolov5:5dec2020_v3
+        command: ["/bin/sh", "-c"]
+        args: ["mkdir /data && gsutil -m cp -r gs://voxel-users/anurag/yolo/* /data/ && ls /data/ && cp /data/.netrc /root/ &&
+        python3 train.py --data /data/jains_kube_dataset.yml --img 480 480 --single-cls --multi-scale --name jains-yolo-americold-yt8m-m --cfg yolov5m.yaml --epochs 500 && gsutil cp -r runs/train/* gs://voxel-users/jains/yolo_exps/"]
+        resources:
+          limits:
+            cpu: 8
+            nvidia.com/gpu: 1
+            memory: "50Gi"
+            ephemeral-storage: "40Gi"
+          requests:
+            cpu: 8
+            memory: "50Gi"
+            nvidia.com/gpu: 1
+            ephemeral-storage: "40Gi"
+      # Do not restart containers after they exit
+      restartPolicy: Never
+  # of retries before marking as failed.
+  backoffLimit: 1

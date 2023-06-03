@@ -1,0 +1,13 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "devcertfakes",
+    srcs = ["fake_fetcher_client.go"],
+    importpath = "github.com/voxel-ai/voxel/services/platform/devcert/devcertfakes",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//protos/platform/devcert/v1:devcert",
+        "//services/platform/devcert",
+        "@org_golang_google_grpc//:go_default_library",
+    ],
+)

@@ -1,0 +1,19 @@
+filegroup(
+    name = "scenario_sets",
+    srcs = glob(["scenario_sets/**"]),
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "configs",
+    srcs = glob(["configs/**"]) + [
+        ":scenario_sets",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "unit_test_resources",
+    srcs = glob(["unit_test_resources/**"]),
+    visibility = ["//visibility:public"],
+)

@@ -1,0 +1,19 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+py_library(
+    name = "train_smp",
+    srcs = ["train_smp.py"],
+    data = [],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("numpy"),
+        requirement("torch"),
+        requirement("pytorch_lightning"),
+        requirement("scikit-learn"),
+        requirement("clearml"),
+        "//core/ml/algorithms/image_segmentation/data:registry",
+        "//core/ml/algorithms/image_segmentation/model:registry",
+        "//core/ml/algorithms/image_segmentation/transforms:registry",
+    ],
+)

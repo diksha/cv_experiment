@@ -1,0 +1,12 @@
+sh_binary(
+    name = "trunk",
+    srcs = select({
+        "@bazel_tools//src/conditions:darwin_arm64": ["@trunk_darwin_arm64//:trunk"],
+        "//conditions:default": ["@trunk_linux_x86_64//:trunk"],
+    }),
+    data = [
+        "//:node_modules",
+        "//protos:python",
+    ],
+    visibility = ["//visibility:public"],
+)

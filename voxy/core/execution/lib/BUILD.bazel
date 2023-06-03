@@ -1,0 +1,22 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+py_library(
+    name = "production_lib",
+    srcs = ["production_lib.py"],
+    data = [
+        "//configs",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        requirement("sentry-sdk"),
+        requirement("boto3"),
+        "//core/execution/graphs:production",
+        "//core/execution/utils:graph_config_builder",
+        "//core/execution/utils:perception_runner_context",
+        "//core/utils:logger",
+        "//core/utils:yaml_jinja",
+        "//services/platform/polygon/lib/proto_schema:validator",
+    ],
+)

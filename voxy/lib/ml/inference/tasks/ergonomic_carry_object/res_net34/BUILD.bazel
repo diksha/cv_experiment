@@ -1,0 +1,30 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "inference_provider",
+    srcs = ["inference_provider.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("numpy"),
+        requirement("torch"),
+        requirement("opencv-python"),
+        "//lib/ml/inference/backends:base",
+        "//lib/ml/inference/provider:interface",
+    ],
+)
+
+py_library(
+    name = "factory",
+    srcs = ["factory.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("torch"),
+        ":inference_provider",
+        "//lib/ml/inference/backends:torchscript",
+        "//lib/ml/inference/backends:triton",
+        "//lib/ml/inference/factory:base",
+    ],
+)

@@ -1,0 +1,53 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+load("//third_party/aws/lambda:defs.bzl", "go_aws_lambda")
+
+go_aws_lambda(
+    name = "production",
+    function_name = "developer-ca-signer",
+    target = "//services/platform/devcert/cmd/developer-ca-signer",
+)
+
+go_library(
+    name = "devcert",
+    srcs = [
+        "client.go",
+        "devcert.go",
+    ],
+    importpath = "github.com/voxel-ai/voxel/services/platform/devcert",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//lib/utils/x509pem",
+        "//protos/platform/devcert/v1:devcert",
+        "@com_github_aws_aws_sdk_go_v2//aws",
+        "@com_github_aws_aws_sdk_go_v2//aws/protocol/restjson",
+        "@com_github_aws_aws_sdk_go_v2//aws/signer/v4:signer",
+        "@com_github_aws_aws_sdk_go_v2_config//:config",
+        "@com_github_aws_aws_sdk_go_v2_service_sts//:sts",
+        "@org_golang_google_grpc//:go_default_library",
+        "@org_golang_google_protobuf//encoding/protojson",
+    ],
+)
+
+go_test(
+    name = "devcert_test",
+    size = "small",
+    srcs = [
+        "client_test.go",
+        "devcert_test.go",
+    ],
+    deps = [
+        ":devcert",
+        "//lib/utils/aws/fake",
+        "//lib/utils/gofakes",
+        "//lib/utils/x509pem",
+        "//protos/platform/devcert/v1:devcert",
+        "//services/platform/devcert/devcertfakes",
+        "@com_github_aws_aws_sdk_go_v2//aws",
+        "@com_github_aws_aws_sdk_go_v2_credentials//:credentials",
+        "@com_github_aws_aws_sdk_go_v2_service_sts//:sts",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+        "@org_golang_google_grpc//:go_default_library",
+        "@org_golang_google_protobuf//encoding/protojson",
+    ],
+)

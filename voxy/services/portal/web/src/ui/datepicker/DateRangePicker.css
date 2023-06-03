@@ -1,0 +1,35 @@
+/*
+Copyright 2020-2021 Voxel Labs, Inc.
+All rights reserved.
+
+This document may not be reproduced, republished, distributed, transmitted,
+displayed, broadcast or otherwise exploited in any manner without the express
+prior written permission of Voxel Labs, Inc. The receipt or possession of this
+document does not convey any rights to reproduce, disclose, or distribute its
+contents, or to manufacture, use, or sell anything that it may describe, in
+whole or in part.
+*/
+.Selectable .DayPicker-Day--selected:not(.DayPicker-Day--start):not(.DayPicker-Day--end):not(.DayPicker-Day--outside) {
+  background-color: #f3f4f6;
+  color: #102532;
+  border-radius: 0;
+}
+
+.Selectable .DayPicker-Day--selected.DayPicker-Day--start,
+.Selectable .DayPicker-Day--selected.DayPicker-Day--end {
+  background-color: #102532;
+  color: #fff;
+  border-radius: 4px;
+}
+
+.Selectable .DayPicker-Day {
+  border-radius: 6px;
+}
+
+.Selectable--center {
+  display: block;
+}
+
+.Selectable--center .DayPicker-Months {
+  flex-wrap: nowrap;
+}

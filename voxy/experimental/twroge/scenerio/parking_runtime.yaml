@@ -1,0 +1,23 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+
+#### PARKING
+scenarios:
+  - camera_uuid: americold/savannah_pooler/0010/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: americold/savannah_pooler/0010/cha/scenarios/PARKING_DURATION/positive/0f8eecb7-3dd0-47ea-bc5e-0213d88c3e75
+  - camera_uuid: americold/savannah_bloomingdale/0001/cha
+    incidents: [NO_STOP_AT_INTERSECTION]
+    video_uuid: americold/savannah_bloomingdale/0001/cha/scenarios/NO_STOP_AT_INTERSECTION/positive/86991029-8987-4f49-95e1-a01e3ee30b6a
+  - camera_uuid: americold/savannah_pooler/0010/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: americold/savannah_bloomingdale/0001/cha/scenarios/PARKING_DURATION/positive/31ee1773-e7ca-4fad-8f5e-d5759e0759c4

@@ -1,0 +1,58 @@
+load(
+    "@io_bazel_rules_docker//container:container.bzl",
+    "container_image",
+    "container_layer",
+)
+load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit_layer")
+
+container_image(
+    name = "flink",
+    base = "@apache_flink_1_16_1//image",
+    entrypoint = "",
+    tags = ["manual"],
+)
+
+container_run_and_commit_layer(
+    name = "packages",
+    commands = [
+        "apt-get -y update",
+        "apt-get -y --no-install-recommends install libgl1-mesa-glx libglib2.0-0",
+        "rm -rf /var/lib/apt/lists/*",
+        "mv /docker-entrypoint.sh /flink-docker-entrypoint.sh",
+    ],
+    env = {
+        "DEBIAN_FRONTEND": "noninteractive",
+    },
+    image = ":flink.tar",
+    tags = ["manual"],
+)
+
+container_layer(
+    name = "boot",
+    files = ["boot.sh"],
+    tags = ["manual"],
+)
+
+container_layer(
+    name = "python",
+    directory = "/opt/voxel/bin",
+    files = ["python.sh"],
+    symlinks = {
+        "/opt/voxel/bin/python": "/opt/voxel/bin/python.sh",
+    },
+)
+
+container_image(
+    name = "baseimage",
+    base = ":flink",
+    layers = [
+        ":boot",
+        ":python",
+        ":packages",
+    ],
+    symlinks = {
+        "/docker-entrypoint.sh": "/boot.sh",
+    },
+    tags = ["manual"],
+    visibility = ["//visibility:public"],
+)

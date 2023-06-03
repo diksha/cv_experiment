@@ -1,0 +1,21 @@
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+voxel_py_test(
+    name = "mkv_element_ids_test",
+    srcs = ["mkv_element_ids_test.py"],
+    deps = [
+        "//core/utils/mkvtagreader",
+    ],
+)
+
+voxel_py_test(
+    name = "mkvtagreader_test",
+    srcs = ["mkvtagreader_test.py"],
+    data = [
+        "@mkvtagreader_testdata",
+    ],
+    deps = [
+        "//core/utils/mkvtagreader",
+        "@rules_python//python/runfiles",
+    ],
+)

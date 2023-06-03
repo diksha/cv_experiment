@@ -1,0 +1,111 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transcoding-camera1
+  labels:
+    app: transcoding-app-camera1
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: transcoding-app-camera1
+  template:
+    metadata:
+      labels:
+        app: transcoding-app-camera1
+    spec:
+      hostNetwork: true
+      volumes:
+        - name: rootca
+          hostPath:
+            path: /greengrass/v2/rootCA.pem
+            type: File
+        - name: privkey
+          hostPath:
+            path: /greengrass/v2/privKey.key
+            type: File
+        - name: thingcert
+          hostPath:
+            path: /greengrass/v2/thingCert.crt
+            type: File
+      containers:
+        - name: camera
+          image: 360054435465.dkr.ecr.us-west-2.amazonaws.com/voxel/edge/transcoding:1648865298
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: NVIDIA_VISIBLE_DEVICES
+              value: "all"
+            - name: AWS_IOT_THING_NAME
+              value: <AWS_IOT_THING_NAME>
+            - name: RTSP_URI
+              value: <RTSP_URI>
+            - name: KINESIS_STREAM_NAME
+              value: <KINESIS_STREAM_NAME>
+          command: ["/bin/bash", "-cx"]
+          args: 
+            - "/usr/bin/timeout 1800 /usr/local/bin/gst-launch-1.0 rtspsrc protocols=tcp location=\"$(RTSP_URI)\" short-header=TRUE ! rtph264depay ! video/x-h264,stream-format=byte-stream ! h264parse ! nvh264dec ! videorate ! 'video/x-raw(memory:CUDAMemory),framerate=5/1' ! cudascale ! 'video/x-raw(memory:CUDAMemory),width=1280,height=720' ! nvh265enc max-bitrate=500 ! video/x-h265,alignment=au ! h265parse ! video/x-h265,stream-format=hvc1,alignment=au ! queue ! kvssink content-type='video/h-265' stream-name=$(KINESIS_STREAM_NAME) storage-size=512 aws-region='us-west-2' iot-certificate='iot-certificate,endpoint=c1phi7okof0xz.credentials.iot.us-west-2.amazonaws.com,cert-path=/greengrass/v2/thingCert.crt,key-path=/greengrass/v2/privKey.key,ca-path=/greengrass/v2/rootCA.pem,role-aliases=GreengrassV2TokenExchangeRoleAlias,iot-thing-name=$(AWS_IOT_THING_NAME)'"
+          volumeMounts:
+          - name: rootca
+            mountPath: /greengrass/v2/rootCA.pem
+          - name: privkey
+            mountPath: /greengrass/v2/privKey.key
+          - name: thingcert
+            mountPath: /greengrass/v2/thingCert.crt
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transcoding-camera2
+  labels:
+    app: transcoding-app-camera2
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: transcoding-app-camera2
+  template:
+    metadata:
+      labels:
+        app: transcoding-app-camera2
+    spec:
+      hostNetwork: true
+      volumes:
+        - name: rootca
+          hostPath:
+            path: /greengrass/v2/rootCA.pem
+            type: File
+        - name: privkey
+          hostPath:
+            path: /greengrass/v2/privKey.key
+            type: File
+        - name: thingcert
+          hostPath:
+            path: /greengrass/v2/thingCert.crt
+            type: File
+      containers:
+        - name: camera
+          image: 360054435465.dkr.ecr.us-west-2.amazonaws.com/voxel/edge/transcoding:1648865298
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: NVIDIA_VISIBLE_DEVICES
+              value: "all"
+            - name: AWS_IOT_THING_NAME
+              value: <AWS_IOT_THING_NAME>
+            - name: RTSP_URI
+              value: <RTSP_URI>
+            - name: KINESIS_STREAM_NAME
+              value: <KINESIS_STREAM_NAME>
+          command: ["/bin/bash", "-cx"]
+          args: 
+            - "/usr/bin/timeout 1800 /usr/local/bin/gst-launch-1.0 rtspsrc protocols=tcp location=\"$(RTSP_URI)\" short-header=TRUE ! rtph264depay ! video/x-h264,stream-format=byte-stream ! h264parse ! nvh264dec ! videorate ! 'video/x-raw(memory:CUDAMemory),framerate=5/1' ! cudascale ! 'video/x-raw(memory:CUDAMemory),width=1280,height=720' ! nvh265enc max-bitrate=500 ! video/x-h265,alignment=au ! h265parse ! video/x-h265,stream-format=hvc1,alignment=au ! queue ! kvssink content-type='video/h-265' stream-name=$(KINESIS_STREAM_NAME) storage-size=512 aws-region='us-west-2' iot-certificate='iot-certificate,endpoint=c1phi7okof0xz.credentials.iot.us-west-2.amazonaws.com,cert-path=/greengrass/v2/thingCert.crt,key-path=/greengrass/v2/privKey.key,ca-path=/greengrass/v2/rootCA.pem,role-aliases=GreengrassV2TokenExchangeRoleAlias,iot-thing-name=$(AWS_IOT_THING_NAME)'"
+          volumeMounts:
+          - name: rootca
+            mountPath: /greengrass/v2/rootCA.pem
+          - name: privkey
+            mountPath: /greengrass/v2/privKey.key
+          - name: thingcert
+            mountPath: /greengrass/v2/thingCert.crt

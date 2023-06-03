@@ -1,0 +1,25 @@
+syntax = "proto3";
+package protos.platform.bowser.v1;
+import "google/protobuf/descriptor.proto";
+option go_package = "github.com/voxel-ai/voxel/protos/platform/bowser/v1";
+
+/* BowserEnv represents configuration objects used to store only technical configuration for Bowser only*/
+
+message BowserEnv {
+    int32 max_parallelism = 1; //Capp the maximum parallelism in a Bowser Processor
+    int32 buffer_timeout_millis = 2; //Capp the maximum millisecond to buffer the result of a Bowser Function
+    BowserEnvMode mode = 3; //Enum use to determine if the Bowser Processor is a BATCH or STREAM
+}
+
+/* This Extension represents the mode variable to access the Enum value*/
+
+extend google.protobuf.EnumValueOptions {
+  int32 mode = 51235; //mode is a integer that will hold the extension enum value
+}
+
+/* BowserEnvMode represents the StreamExecution of the Bowser Processor*/
+
+enum BowserEnvMode {
+    BOWSER_ENV_MODE_STREAM_UNSPECIFIED = 0 [(mode) = 0]; // Enum Stream
+    BOWSER_ENV_MODE_BATCH = 1 [(mode) = 1]; // Enum Batch
+}

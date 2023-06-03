@@ -1,0 +1,124 @@
+load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
+load("@build_stack_rules_proto//rules:proto_compiled_sources.bzl", "proto_compiled_sources")
+load("@build_stack_rules_proto//rules/go:proto_go_library.bzl", "proto_go_library")
+load("@build_stack_rules_proto//rules/py:proto_py_library.bzl", "proto_py_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+go_library(
+    name = "bowser",
+    srcs = [
+        "bowser_config.pb.go",
+        "bowser_config_consumer.pb.go",
+        "bowser_config_function.pb.go",
+        "bowser_config_keys.pb.go",
+        "bowser_config_processor.pb.go",
+        "bowser_config_sink.pb.go",
+        "bowser_config_window.pb.go",
+        "bowser_env_config.pb.go",
+    ],
+    importpath = "github.com/voxel-ai/voxel/protos/platform/bowser/v1",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@org_golang_google_protobuf//reflect/protoreflect",
+        "@org_golang_google_protobuf//runtime/protoimpl",
+        "@org_golang_google_protobuf//types/descriptorpb",
+    ],
+)
+
+proto_library(
+    name = "v1_proto",
+    srcs = [
+        "bowser_config.proto",
+        "bowser_config_consumer.proto",
+        "bowser_config_function.proto",
+        "bowser_config_keys.proto",
+        "bowser_config_processor.proto",
+        "bowser_config_sink.proto",
+        "bowser_config_window.proto",
+        "bowser_env_config.proto",
+    ],
+    visibility = ["//visibility:public"],
+    deps = ["@com_google_protobuf//:descriptor_proto"],
+)
+
+proto_compiled_sources(
+    name = "v1_go_compiled_sources",
+    srcs = [
+        "bowser_config.pb.go",
+        "bowser_config_consumer.pb.go",
+        "bowser_config_function.pb.go",
+        "bowser_config_keys.pb.go",
+        "bowser_config_processor.pb.go",
+        "bowser_config_sink.pb.go",
+        "bowser_config_window.pb.go",
+        "bowser_env_config.pb.go",
+    ],
+    output_mappings = [
+        "bowser_config.pb.go=github.com/voxel-ai/voxel/protos/platform/bowser/v1/bowser_config.pb.go",
+        "bowser_config_consumer.pb.go=github.com/voxel-ai/voxel/protos/platform/bowser/v1/bowser_config_consumer.pb.go",
+        "bowser_config_function.pb.go=github.com/voxel-ai/voxel/protos/platform/bowser/v1/bowser_config_function.pb.go",
+        "bowser_config_keys.pb.go=github.com/voxel-ai/voxel/protos/platform/bowser/v1/bowser_config_keys.pb.go",
+        "bowser_config_processor.pb.go=github.com/voxel-ai/voxel/protos/platform/bowser/v1/bowser_config_processor.pb.go",
+        "bowser_config_sink.pb.go=github.com/voxel-ai/voxel/protos/platform/bowser/v1/bowser_config_sink.pb.go",
+        "bowser_config_window.pb.go=github.com/voxel-ai/voxel/protos/platform/bowser/v1/bowser_config_window.pb.go",
+        "bowser_env_config.pb.go=github.com/voxel-ai/voxel/protos/platform/bowser/v1/bowser_env_config.pb.go",
+    ],
+    plugins = ["@build_stack_rules_proto//plugin/golang/protobuf:protoc-gen-go"],
+    proto = "v1_proto",
+)
+
+proto_go_library(
+    name = "v1_go_proto",
+    srcs = [
+        "bowser_config.pb.go",
+        "bowser_config_consumer.pb.go",
+        "bowser_config_function.pb.go",
+        "bowser_config_keys.pb.go",
+        "bowser_config_processor.pb.go",
+        "bowser_config_sink.pb.go",
+        "bowser_config_window.pb.go",
+        "bowser_env_config.pb.go",
+    ],
+    importpath = "github.com/voxel-ai/voxel/protos/platform/bowser/v1",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@org_golang_google_grpc//:go_default_library",
+        "@org_golang_google_grpc//codes",
+        "@org_golang_google_grpc//status",
+        "@org_golang_google_protobuf//reflect/protoreflect",
+        "@org_golang_google_protobuf//runtime/protoimpl",
+        "@org_golang_google_protobuf//types/descriptorpb",
+    ],
+)
+
+proto_compile(
+    name = "v1_python_compile",
+    outputs = [
+        "bowser_config_consumer_pb2.py",
+        "bowser_config_function_pb2.py",
+        "bowser_config_keys_pb2.py",
+        "bowser_config_pb2.py",
+        "bowser_config_processor_pb2.py",
+        "bowser_config_sink_pb2.py",
+        "bowser_config_window_pb2.py",
+        "bowser_env_config_pb2.py",
+    ],
+    plugins = ["@build_stack_rules_proto//plugin/builtin:python"],
+    proto = "v1_proto",
+)
+
+proto_py_library(
+    name = "v1_py_library",
+    srcs = [
+        "bowser_config_consumer_pb2.py",
+        "bowser_config_function_pb2.py",
+        "bowser_config_keys_pb2.py",
+        "bowser_config_pb2.py",
+        "bowser_config_processor_pb2.py",
+        "bowser_config_sink_pb2.py",
+        "bowser_config_window_pb2.py",
+        "bowser_env_config_pb2.py",
+    ],
+    visibility = ["//visibility:public"],
+)

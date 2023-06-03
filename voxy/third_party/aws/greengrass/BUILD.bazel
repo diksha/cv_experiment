@@ -1,0 +1,15 @@
+filegroup(
+    name = "create-version-src",
+    srcs = ["create-version.sh"],
+    visibility = ["//visibility:public"],
+)
+
+sh_binary(
+    name = "create-version",
+    srcs = [":create-version-src"],
+    data = [
+        "//third_party/jq",
+    ],
+    visibility = ["//visibility:public"],
+    deps = ["@bazel_tools//tools/bash/runfiles"],
+)

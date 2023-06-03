@@ -1,0 +1,95 @@
+#!/bin/bash
+
+##################################################################################
+
+# This scripts allows to upload data to voxel-storage artifactory such that it can be brought in
+# bazel as a data dependecy. Things like ML models and other artifcats should use this.
+# Example
+#
+#  `./tools/upload_artifacts <path/to/tar.gz or zip> <name_of_artifact>`
+#
+# This will print out a bazel rule that should be added to WORKSPACE file in the root of the repository.
+
+# Then in your bazel target you can specify the artifact as
+#
+#    data = [
+#        "@artifacts_<name>",
+#    ],
+#
+
+#    To use these artifacts, follow the information below:
+#
+#    Bash -- https://github.com/bazelbuild/bazel/blob/master/tools/bash/runfiles/runfiles.bash
+#    Python -- https://github.com/bazelbuild/bazel/blob/master/tools/python/runfiles/runfiles.py
+#    Go -- https://pkg.go.dev/github.com/bazelbuild/rules_go/go/tools/bazel
+#
+# Currently only one archive should be uploaded at a time.
+# Command to generate a tar
+#
+# tar -czvf name-of-archive.tar.gz <path/to/files/dir>
+#
+
+##################################################################################
+
+set -euo pipefail
+
+FILEPATH=$(readlink -f "$0")
+BASEDIR=$(dirname "$FILEPATH")
+WORKSPACEDIR=$(dirname "$BASEDIR")
+cd "$WORKSPACEDIR" || exit 1
+
+if [ $# -lt 1 ]; then
+	echo "Path to the archive is required"
+	exit 1
+fi
+
+if [ $# -gt 2 ]; then
+	echo "Only two positional argument i.e. path to the archive, camera_uuid is supported"
+	exit 1
+fi
+
+if [[ $1 != *.zip && $1 != *.tar.gz && $1 != *.tar.xz ]]; then
+	echo "Only tar.gz, tar.xz or .zip are supported"
+	exit 1
+fi
+
+if [ ! -f "$1" ]; then
+	echo "File not found!"
+	exit 1
+fi
+
+if [[ $1 == *.zip ]]; then
+	extension="zip"
+elif [[ $1 == *.tar.gz ]]; then
+	extension="tar.gz"
+fi
+
+sha_value=$(sha256sum "$1" | awk '{ print $1 }')
+filename=$(basename -- "$1")
+name="${filename%.$extension}"
+base_target_path="artifactory/$name/$sha_value/$name.$extension"
+s3_target_path="s3://voxel-storage/$base_target_path"
+./tools/aws s3 cp "$1" "$s3_target_path"
+if [ $# -eq 2 ]; then
+	prefix="$(date +"%m_%d_%Y")_$2"
+else
+	prefix=$(date +"%m_%d_%Y")
+fi
+
+echo
+echo
+echo "#################################################################################################"
+echo "The following has been added to artifacts.bzl to be used as a BUILD.bazel data dependency."
+echo "#################################################################################################"
+
+echo "
+
+    voxel_artifact(
+        name = \"artifacts_$prefix\",
+        url = \"s3://voxel-storage/$base_target_path\",
+        sha256 = \"$sha_value\",
+    )
+
+" | tee -a "$WORKSPACEDIR/artifacts.bzl"
+
+echo "#################################################################################################"

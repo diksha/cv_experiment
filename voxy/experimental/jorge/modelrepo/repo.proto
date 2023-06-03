@@ -1,0 +1,23 @@
+syntax = "proto3";
+// trunk-ignore(buf-lint/PACKAGE_VERSION_SUFFIX): ignore version suffix for experimental code
+package experimental.jorge.modelrepo;
+option go_package = "github.com/voxel-ai/voxel/experimental/jorge/modelrepo";
+
+import "experimental/jorge/modelrepo/third_party/triton/model_config.proto";
+
+message Repository {
+    repeated Model models = 1;
+    repeated Ensemble ensembles = 2;
+}
+
+message Model {
+    repeated string artifact_model_paths = 1;
+    experimental.jorge.modelrepo.third_party.triton.ModelConfig config = 2;
+    bool disable_warmup_generation = 4;
+}
+
+message Ensemble {
+    string primary_model_name = 1;
+    repeated string artifact_model_paths = 2;
+    experimental.jorge.modelrepo.third_party.triton.ModelConfig config = 3;
+}

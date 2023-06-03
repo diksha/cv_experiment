@@ -1,0 +1,3 @@
+#!/bin/bash
+
+exec ./bazel run //third_party/jupyter:jupyter --noexperimental_python_import_all_repositories -- "$@"

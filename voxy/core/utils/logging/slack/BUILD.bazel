@@ -1,0 +1,22 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+py_library(
+    name = "get_slack_webhooks",
+    srcs = ["get_slack_webhooks.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/utils:aws_utils",
+        requirement("slack_sdk"),
+    ],
+)
+
+py_library(
+    name = "synchronous_webhook_wrapper",
+    srcs = ["synchronous_webhook_wrapper.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/utils:aws_utils",
+        requirement("slack_sdk"),
+    ],
+)

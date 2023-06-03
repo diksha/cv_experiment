@@ -1,0 +1,86 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+device: cuda:0
+
+classifier: 
+  name: &classifier_name "safety_vest" # hard_hat
+save_path: /home/reza_voxelsafety_com/voxel/experimental/reza/ppe_classification/models
+data:
+  dataloader_name: image_from_folder
+  dataloader_params:
+    path: /home/reza_voxelsafety_com/experiments/ppe_classifaction/data/v2/vestdataset
+    valid_pct: 0.2
+    bs: 128
+    use_weighted_sampling: 1
+  train_transform:
+    item_tfms:
+      - name: RandomResizedCrop
+        params: 
+          size: [224, 224]
+          scale: [0.7, 1.0]
+      - name: RandomHorizontalFlip
+        params: {}
+      - name: ToTensor
+        params: {}
+      - name: Normalize
+        params: 
+          mean: [0.485, 0.456, 0.406]
+          std: [0.229, 0.224, 0.225]
+  val_transform:
+    item_tfms:
+      - name: Resize
+        params: 
+          size: 256
+      - name: CenterCrop
+        params:
+          size: 224
+      - name: ToTensor
+        params: {}
+      - name: Normalize
+        params: 
+          mean: [0.485, 0.456, 0.406]
+          std: [0.229, 0.224, 0.225]
+
+
+model: 
+  name: &model_name attention_resnet 
+  params:
+    num_classes: 2
+  use_attention: 1
+
+
+loss:
+  name: &loss_name focal_loss
+  params:
+    alpha: 0.25
+    gamma: 1.5
+    reduction: 'mean'
+  use_cross_entropy: 0
+
+optimizer:
+  n_epoch: &nepoch 15
+  lr: &lr 0.01
+
+scheduler:
+  step: &s 7
+  gamma: 0.1
+
+wandb:
+  init_params:
+    project: attention_ppe_classification
+    entity: voxel-wandb
+    config:
+      num_epochs: *nepoch
+      learning_rate: *lr
+      step: *s
+
+    tags: [*classifier_name, *model_name, *loss_name]

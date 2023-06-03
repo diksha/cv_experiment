@@ -1,0 +1,56 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+#
+#
+#door_intersection.yaml
+#door_violation.yaml
+#hard_hat.yaml
+#hard_hat_v2.yaml
+#no_ped_zone.yaml
+#no_stop_at_aisle.yaml
+#no_stop_at_aisle_v2.yaml
+#no_stop_at_intersection.yaml
+#no_stop_at_intersection_v2.yaml
+#open_door.yaml
+#overreaching.yaml
+#overreaching_v2.yaml
+#parking.yaml
+#piggyback.yaml
+#posture.yaml
+#regression_scenarios.yaml
+#safety_vest.yaml
+#v2.yaml
+
+{% set regression_scenarios_path="data/scenario_sets/regression/overreaching_v2.yaml" %}
+{% set cache_key="reza/overreach_ml" %}
+{% set image_tag=GENERATE_UUID_WITH_PREFIX("reza") %}
+{% set develop_runner_job_name=GENERATE_UUID_WITH_PREFIX("reza-overreach-") %}
+{% set experiment_config_path="/home/reza_voxelsafety_com/voxel/experimental/reza/experimental_yaml/ergonomic_overreaching.yaml" %}
+
+buildkite_jobs:
+  -
+    name : develop_graph_container
+    type: bazel
+    command: //core/execution/runners:develop_push_with_tag --define IMAGE_TAG={{image_tag}}
+  -
+    name: {{develop_runner_job_name}}
+    items: {{GENERATE_SCENARIO_VIDEO_UUIDS(regression_scenarios_path)}}
+    type: k8s
+    command: /app/core/execution/runners/develop --cache_key {{cache_key}} --scenarios_config_path {{regression_scenarios_path}} --experiment_config_path {{experiment_config_path}} --video_uuids
+    image: us.gcr.io/sodium-carving-227300/voxel/execution/runners:{{image_tag}}
+    gpus: 1
+    cpus: 3
+    memory_mb: 12000
+    env:
+      CI_TESTING: "true"
+    depends_on:
+      - develop_graph_container

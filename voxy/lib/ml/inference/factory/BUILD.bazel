@@ -1,0 +1,11 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+py_library(
+    name = "base",
+    srcs = ["base.py"],
+    visibility = ["//lib/ml/inference/tasks:__subpackages__"],
+    deps = [
+        requirement("torch"),
+    ],
+)

@@ -1,0 +1,36 @@
+load("@rules_python//python:defs.bzl", "py_library")
+
+py_library(
+    name = "label_reader",
+    srcs = [
+        "label_reader.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/utils:aws_utils",
+    ],
+)
+
+py_library(
+    name = "label_writer",
+    srcs = [
+        "label_writer.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":label_reader",
+        "//core/utils:aws_utils",
+    ],
+)
+
+py_library(
+    name = "labels_backend",
+    srcs = [
+        "labels_backend.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":label_reader",
+        ":label_writer",
+    ],
+)

@@ -1,0 +1,39 @@
+{
+  "fields": [
+    {
+      "type": "category",
+      "field_id": "door_state",
+      "title": "Door State",
+      "required": true,
+      "description": "What is the state of the door?",
+      "choices": [
+        {
+          "label": "open",
+          "value": "FULLY_OPEN"
+        },
+        {
+          "label": "partially_open",
+          "value": "PARTIALLY_OPEN"
+        },
+        {
+          "label": "closed",
+          "value": "FULLY_CLOSED"
+        },
+        {
+          "label": "unknown",
+          "value": "UNKNOWN",
+          "subchoices": [
+            {
+              "label": "corrupt",
+              "value": "CORRUPT"
+            },
+            {
+              "label": "unknown",
+              "value": "unknown"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+".*":
+  incident:
+    dry_run: true
+    state_machine_monitors_requested: [bad_posture]
+  perception:
+    carry_object_classifier:
+      enabled: True
+      min_actor_pixel_area: 2000
+      model_path: artifacts_03_14_2023_carry_object_classifier/carry_classifier.pth

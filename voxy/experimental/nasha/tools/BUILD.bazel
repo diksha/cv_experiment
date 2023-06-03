@@ -1,0 +1,14 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+
+py_binary(
+    name = "merge_coco",
+    srcs = [
+        "merge_coco.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("tqdm"),
+        "//core/infra/cloud:gcs_utils",
+    ],
+)

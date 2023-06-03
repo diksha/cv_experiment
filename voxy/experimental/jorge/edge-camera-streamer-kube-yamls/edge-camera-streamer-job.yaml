@@ -1,0 +1,39 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: edge-transcoder
+spec:
+  template:
+    spec:
+      containers:
+      - name: edge-transcoder
+        image: localhost:32000/edge-transcoder-quicksync
+        command: ["/opt/voxel/bin/edge-transcoder",
+          "-rtsp-url", "rtsps://10.0.0.15:7441/OWsOEjIUmiqbFxxH?enableSrtp",
+          "-kinesis-stream-name", "office-cam-dev-stream",
+          "-iot-thing-name", "jorge-voxel-nuc"]
+        resources:
+          limits:
+            gpu.intel.com/i915: 1
+        volumeMounts:
+        - mountPath: /greengrass/v2/thingCert.crt
+          name: greengrass-cert
+        - mountPath: /greengrass/v2/privKey.key
+          name: greengrass-priv
+        - mountPath: /greengrass/v2/rootCA.pem
+          name: greengrass-root
+      volumes:
+      - name: greengrass-cert
+        hostPath:
+          path: /greengrass/v2/thingCert.crt
+          type: File
+      - name: greengrass-priv
+        hostPath:
+          path: /greengrass/v2/privKey.key
+          type: File
+      - name: greengrass-root
+        hostPath:
+          path: /greengrass/v2/rootCA.pem
+          type: File
+      restartPolicy: Never
+  backoffLimit: 4

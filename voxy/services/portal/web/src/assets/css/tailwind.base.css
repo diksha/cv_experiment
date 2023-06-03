@@ -1,0 +1,14 @@
+@tailwind base;
+
+@layer base {
+  /* Get rid of default Tailwind focus border */
+  [type="text"]:focus {
+    outline: none;
+    border: none;
+    box-shadow: none;
+  }
+
+  h4 {
+    @apply text-lg font-bold;
+  }
+}

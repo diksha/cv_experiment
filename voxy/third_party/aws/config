@@ -1,0 +1,55 @@
+[profile default]
+sso_region = us-west-2
+sso_start_url = https://voxelai.awsapps.com/start#/
+sso_account_id = 203670452561
+sso_role_name = DeveloperAccess
+region = us-west-2
+output = yaml
+
+[profile production]
+role_arn = arn:aws:iam::360054435465:role/developer_access_assumable_role
+source_profile = default
+
+[profile staging]
+role_arn = arn:aws:iam::115099983231:role/developer_access_assumable_role
+source_profile = default
+
+[profile production-admin]
+sso_start_url = https://voxelai.awsapps.com/start#/
+sso_region = us-west-2
+sso_account_id = 360054435465
+sso_role_name = AdministratorAccess
+region = us-west-2
+output = yaml
+
+[profile prime-admin]
+sso_start_url = https://voxelai.awsapps.com/start#/
+sso_region = us-west-2
+sso_account_id = 203670452561
+sso_role_name = AdministratorAccess
+region = us-west-2
+output = yaml
+
+[profile staging-admin]
+sso_start_url = https://voxelai.awsapps.com/start#/
+sso_region = us-west-2
+sso_account_id = 115099983231
+sso_role_name = AdministratorAccess
+region = us-west-2
+output = yaml
+
+[profile development-admin]
+sso_start_url = https://voxelai.awsapps.com/start#/
+sso_region = us-west-2
+sso_account_id = 209075043431
+sso_role_name = AdministratorAccess
+region = us-west-2
+output = yaml
+
+[profile genesis]
+sso_start_url = https://voxelai.awsapps.com/start#/
+sso_region = us-west-2
+sso_account_id = 667031391229
+sso_role_name = AdministratorAccess
+region = us-west-2
+output = yaml

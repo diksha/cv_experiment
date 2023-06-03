@@ -1,0 +1,18 @@
+syntax = "proto3";
+package protos.platform.devcert.v1;
+option go_package = "github.com/voxel-ai/voxel/protos/platform/devcert/v1;devcertpb";
+
+service DevCertService {
+    rpc GetDevCert(GetDevCertRequest) returns (GetDevCertResponse);
+}
+
+message GetDevCertRequest {
+    // Csr is a standard PEM encoded certificate signing request
+    string csr = 1;
+}
+
+message GetDevCertResponse {
+    // Cert is a standard PEM encoded certificate chain
+    string cert = 1;
+    string root_ca = 2;
+}

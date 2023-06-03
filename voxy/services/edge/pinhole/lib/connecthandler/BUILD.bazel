@@ -1,0 +1,23 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "connecthandler",
+    srcs = ["handler.go"],
+    importpath = "github.com/voxel-ai/voxel/services/edge/pinhole/lib/connecthandler",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_rs_zerolog//hlog",
+        "@com_github_rs_zerolog//log",
+    ],
+)
+
+go_test(
+    name = "connecthandler_test",
+    srcs = ["handler_test.go"],
+    deps = [
+        ":connecthandler",
+        "@com_github_rs_zerolog//:zerolog",
+        "@com_github_rs_zerolog//hlog",
+        "@com_github_stretchr_testify//require",
+    ],
+)

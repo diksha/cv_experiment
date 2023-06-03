@@ -1,0 +1,19 @@
+incident:
+  should_generate_on_cooldown : true
+
+camera:
+  fps: 5
+
+state:
+  add_epoch_time: false
+  frames_to_buffer: 1000
+  publisher:
+    batch_max_bytes: 1000000
+    batch_max_latency_seconds: 60
+    batch_max_message: 1000
+    retry_deadline_seconds: 600
+
+temporal:
+  expire_threshold_ms: 120000
+  max_future_frames: 30
+  max_past_frames: 60

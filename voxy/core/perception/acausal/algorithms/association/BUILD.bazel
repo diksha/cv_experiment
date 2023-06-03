@@ -1,0 +1,25 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "base_association_algorithm",
+    srcs = ["base_association_algorithm.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/structs",
+    ],
+)
+
+py_library(
+    name = "pit_person_association",
+    srcs = ["pit_person_association.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":base_association_algorithm",
+        "//core/structs",
+        "//core/utils/struct_utils:utils",
+        requirement("loguru"),
+    ],
+)

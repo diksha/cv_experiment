@@ -1,0 +1,18 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "kds-extract-camera-uuid_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/voxel-ai/voxel/services/perception/kds-firehose-lambdas/cmd/kds-extract-camera-uuid",
+    visibility = ["//visibility:private"],
+    deps = [
+        "@com_github_aws_aws_lambda_go//events",
+        "@com_github_aws_aws_lambda_go//lambda",
+    ],
+)
+
+go_binary(
+    name = "kds-extract-camera-uuid",
+    embed = [":kds-extract-camera-uuid_lib"],
+    visibility = ["//visibility:public"],
+)

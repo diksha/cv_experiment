@@ -1,0 +1,90 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+voxel_py_test(
+    name = "graph_config_builder_test",
+    srcs = [
+        "graph_config_builder_test.py",
+    ],
+    data = [
+        "//data:unit_test_resources",
+    ],
+    deps = [
+        "//core/execution/utils:graph_config_builder",
+    ],
+)
+
+voxel_py_test(
+    name = "graph_config_utils_test",
+    srcs = [
+        "graph_config_utils_test.py",
+    ],
+    data = [
+        "//configs",
+        "//data:unit_test_resources",
+        "//tests/configs/cameras:unit_test_resources",
+    ],
+    deps = [
+        "//core/execution/utils:graph_config_utils",
+        "//core/structs",
+        "//core/utils:yaml_jinja",
+        "//core/utils/logging:list_indented_yaml_dumper",
+        "//lib/utils/test_utils:aws_client_utils",
+    ],
+)
+
+voxel_py_test(
+    name = "fetch_camera_configs_test",
+    srcs = [
+        "fetch_camera_configs_test.py",
+    ],
+    data = [
+        "//configs",
+        "//data:unit_test_resources",
+    ],
+    deps = [
+        "//core/execution/utils:fetch_camera_config_lib",
+        "//core/execution/utils:graph_config_utils",
+    ],
+)
+
+voxel_py_test(
+    name = "fetch_camera_config_smoke_test",
+    srcs = [
+        "fetch_camera_config_smoke_test.py",
+    ],
+    data = [
+        "//configs",
+    ],
+    tags = [
+        "manual",
+        "nightly",
+        "requires-network",
+    ],
+    deps = [
+        "//core/execution/utils:fetch_camera_config_lib",
+        "//core/execution/utils:graph_config_utils",
+    ],
+)
+
+voxel_py_test(
+    name = "frame_queue_test",
+    srcs = [
+        "frame_queue_test.py",
+    ],
+    deps = [
+        requirement("numpy"),
+        "//core/execution/utils:frame_queue",
+        "//core/utils:bounded_sorted_dict",
+    ],
+)
+
+voxel_py_test(
+    name = "perception_runner_context_test",
+    srcs = [
+        "perception_runner_context_test.py",
+    ],
+    deps = [
+        "//core/execution/utils:perception_runner_context",
+    ],
+)

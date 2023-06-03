@@ -1,0 +1,8 @@
+filegroup(
+    name = "files",
+    srcs = [
+        "statefulset-cuda.yaml",
+        "statefulset-quicksync.yaml",
+    ],
+    visibility = ["//visibility:public"],
+)

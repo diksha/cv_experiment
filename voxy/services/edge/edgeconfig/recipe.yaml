@@ -1,0 +1,38 @@
+---
+RecipeFormatVersion: '2020-01-25'
+ComponentName: $$COMPONENT_NAME$$
+ComponentVersion: $$COMPONENT_VERSION$$
+ComponentDescription: Voxel EdgeConfig daemon
+ComponentPublisher: Me
+ComponentConfiguration:
+  DefaultConfiguration:
+    LocalEdgeConfigPath: "/var/voxel/edgeconfig.yaml"
+ComponentDependencies:
+  aws.greengrass.TokenExchangeService:
+    VersionRequirement: ">=2.0.0 <2.1.0"
+    DependencyType: HARD
+  aws.greengrass.Nucleus:
+    VersionRequirement: ">=2.5.4"
+Manifests:
+- Name: Install edgeconfig daemon
+  Platform:
+    os: linux
+  Lifecycle:
+    errorResetTime: 25
+    Install:
+      RequiresPrivilege: true
+      Script: |
+        set -eu
+        mkdir -p /var/voxel
+        chown -R ggc_user:ggc_group /var/voxel
+        chmod +x {artifacts:decompressedPath}/artifact/edgeconfig
+    Run:
+      Script: |
+        set -eux
+        exec {artifacts:decompressedPath}/artifact/edgeconfig \
+          -aws.region {aws.greengrass.Nucleus:configuration:/awsRegion} \
+          -iot.thing_name {iot:thingName} \
+          -local_edge_config_path {configuration:/LocalEdgeConfigPath}
+  Artifacts:
+  - Uri: $$COMPONENT_ARTIFACT_URI$$
+    Unarchive: ZIP

@@ -1,0 +1,492 @@
+#
+# Copyright 2023 Voxel Labs, Inc.
+# All rights reserved.
+#
+# This document may not be reproduced, republished, distributed, transmitted,
+# displayed, broadcast or otherwise exploited in any manner without the express
+# prior written permission of Voxel Labs, Inc. The receipt or possession of this
+# document does not convey any rights to reproduce, disclose, or distribute its
+# contents, or to manufacture, use, or sell anything that it may describe, in
+# whole or in part.
+#
+#
+scenario_for_incidents: [BAD_POSTURE]
+scenarios:
+  # POSITIVE SCENARIOS
+  - camera_uuid: uscold/laredo/dock01/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: uscold/laredo/dock01/cha/d0d6bed5-3082-45b9-9638-4cb6c5167e15_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/modesto/0001/cha/428e5db8-a973-40db-8ef3-c358043a776e_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/modesto/0002/cha/a19dd508-2ad2-466e-828c-e7e9a0a0ed7f_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/modesto/0002/cha/fa132036-05a0-448d-adec-29671d765825_0000
+  - camera_uuid: americold/ontario/0003/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/ontario/0003/cha/f83a3263-0b1b-444e-aeee-afbdea256486_0000
+  - camera_uuid: americold/ontario/0005/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/ontario/0005/cha/58b319f3-9037-4ab9-aec8-07be8566c782_0000
+  - camera_uuid: americold/ontario/0006/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/ontario/0006/cha/bf49adae-6913-4926-a318-debe5fd218fe_0000
+  - camera_uuid: americold/ontario/0009/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/ontario/0009/cha/027359a7-e4a5-4609-9572-ad72f331bd1c_0000
+  - camera_uuid: americold/ontario/0009/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/ontario/0009/cha/1d6ba248-8580-4b64-a170-9886190c1e04_0000
+  - camera_uuid: americold/ontario/0011/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/ontario/0011/cha/e4d75bb0-0c08-44d8-88da-50b85ba87d46_0000
+  - camera_uuid: americold/ontario/0011/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/ontario/0011/cha/746cf4e2-93c1-4d47-92c7-15efbcdb0f72_0000
+  - camera_uuid: americold/ontario/0012/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/ontario/0012/cha/d8637b45-f45b-49d4-b514-48a8ffac37ed_0000
+  - camera_uuid: uscold/quakertown/0003/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: uscold/quakertown/0003/cha/5375eb17-97e1-4cb0-b140-3b19a9752a63_0000
+  - camera_uuid: uscold/quakertown/0003/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: uscold/quakertown/0003/cha/432fa88a-8096-4b0e-857d-7d681de1f7f2_0000
+  - camera_uuid: uscold/quakertown/0006/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: uscold/quakertown/0006/cha/f11d408a-cdde-408e-9f27-329a80cb6c1e_0000
+  - camera_uuid: uscold/quakertown/0006/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: uscold/quakertown/0006/cha/fc711edb-7df2-4742-8bc2-c0034dfb23eb_0000
+  - camera_uuid: uscold/quakertown/0008/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: uscold/quakertown/0008/cha/971c8230-151a-48ed-9983-66eabcb173a2_0000
+  - camera_uuid: buildersfirstsource/solanabeach/0001/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: buildersfirstsource/solanabeach/0001/cha/b3805fa7-7512-4363-9e08-3b5b978f71fd_0000
+  - camera_uuid: buildersfirstsource/solanabeach/0002/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: buildersfirstsource/solanabeach/0002/cha/56ef2c26-9112-4d4c-86d8-928d4d4c3688_0000
+  - camera_uuid: buildersfirstsource/solanabeach/0005/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: buildersfirstsource/solanabeach/0005/cha/644abbf8-4bbc-4489-89c4-a40fb484af0a_0000
+  - camera_uuid: buildersfirstsource/solanabeach/0006/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: buildersfirstsource/solanabeach/0006/cha/e5b935d0-4cbb-436b-a516-11de19f2eb13_0000
+  - camera_uuid: buildersfirstsource/dixieline/0010/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: buildersfirstsource/dixieline/0010/cha/eae44df8-b70d-4551-8f41-fb459a44b517_0000
+  - camera_uuid: trieagle/ocala/0001/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: trieagle/ocala/0001/cha/2b8b0561-fae6-484e-b267-5724826054a6_0000
+  - camera_uuid: trieagle/ocala/0001/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: trieagle/ocala/0001/cha/aeeb3f7b-82b0-4b93-b232-56d39810c57e_0000
+  - camera_uuid: trieagle/ocala/0003/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: trieagle/ocala/0003/cha/4439b733-0cf9-4853-8b76-fe3d0d6b526c_0000
+  - camera_uuid: trieagle/ocala/0004/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: trieagle/ocala/0004/cha/26e57390-2f63-4526-86b9-b96ca7ba3cb1_0000
+  - camera_uuid: trieagle/ocala/0007/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: trieagle/ocala/0007/cha/0d7bc0b8-8a4c-4aa7-a544-f1911242a182_0000
+  - camera_uuid: trieagle/ocala/0008/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: trieagle/ocala/0008/cha/746daaae-eaa6-4263-84bb-b945d50c83d0_0000
+  - camera_uuid: verst/walton/0003/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: verst/walton/0003/cha/e3bbf324-58f9-40e6-a211-c5a81ba67f7a_0000
+  - camera_uuid: verst/walton/0004/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: verst/walton/0004/cha/f5df95b1-4926-4102-904e-45419c6d2545_0000
+  - camera_uuid: verst/walton/0005/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: verst/walton/0005/cha/bcba5067-1f0c-4acc-80e7-b98739e07cff_0000
+  - camera_uuid: verst/walton/0005/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: verst/walton/0005/cha/d6075743-6824-4936-a1f2-38ebd9a57dff_0000
+  - camera_uuid: wn_foods/hayward/0006/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: wn_foods/hayward/0006/cha/fd9d9d3e-9555-4ba7-9e0d-a21031da3eb0_0000
+  - camera_uuid: wn_foods/hayward/0006/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: wn_foods/hayward/0006/cha/1abe0618-dece-42c0-a518-75ae12eaf3e5_0000
+  - camera_uuid: wn_foods/hayward/0007/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: wn_foods/hayward/0007/cha/9f85d7ae-cef7-4ef3-95c0-bb3f296f96a3_0000
+  - camera_uuid: wn_foods/hayward/0009/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: wn_foods/hayward/0009/cha/fff0abdf-b83c-4593-8b89-1c061139395b_0000
+  - camera_uuid: americold/tacoma/0001/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/tacoma/0001/cha/e16d4093-c0cd-4578-9f72-e8551cb62260_0000
+  - camera_uuid: americold/tacoma/0002/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/tacoma/0002/cha/c4bcb6e3-ec5f-40f1-a6c4-da732d640721_0000
+  - camera_uuid: americold/tacoma/0002/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/tacoma/0002/cha/107e3a14-004c-4cfc-a77c-8323831ca42b_0000
+  - camera_uuid: americold/tacoma/0003/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/tacoma/0003/cha/794d8d64-1fbe-4cb4-8b9e-427c1ff68d7b_0000
+  - camera_uuid: americold/tacoma/0003/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/tacoma/0003/cha/8b903052-c629-46e7-8b00-a24364dd41e9_0000
+  - camera_uuid: americold/tacoma/0005/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/tacoma/0005/cha/aaae43f0-9cef-4ec8-a43d-f23d3b12f55b_0000
+  - camera_uuid: americold/tacoma/0006/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/tacoma/0006/cha/40cfba95-5ae2-4c06-8ba8-35906ef67fdf_0000
+  - camera_uuid: americold/tacoma/0007/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/tacoma/0007/cha/1553c06e-9a44-4c17-975a-e10b00c08459_0000
+  - camera_uuid: americold/tacoma/0007/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/tacoma/0007/cha/054127c3-6685-42ac-be1d-d29e969b116e_0000
+  - camera_uuid: ppg/cedar_falls/0004/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: ppg/cedar_falls/0004/cha/6b879b0e-124f-47d8-a142-eea7cedb851c_0000
+  - camera_uuid: ppg/cedar_falls/0007/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: ppg/cedar_falls/0007/cha/452fdc2c-9d82-459e-9b6f-bb2ce913328a_0000
+  - camera_uuid: piston_automotive/marion/0001/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: piston_automotive/marion/0001/cha/42b0fa0d-d90d-4c9f-955d-a29f234866c2_0000
+  - camera_uuid: piston_automotive/marion/0001/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: piston_automotive/marion/0001/cha/60fe1dae-b071-4dc5-9922-fd8f2d9abba2_0000
+  - camera_uuid: piston_automotive/marion/0002/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: piston_automotive/marion/0002/cha/2089ec60-5455-4232-8947-ccae367e1de4_0000
+  - camera_uuid: piston_automotive/marion/0004/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: piston_automotive/marion/0004/cha/4b385286-4c13-45f3-87e9-3daaf2f1f630_0000
+  - camera_uuid: piston_automotive/marion/0004/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: piston_automotive/marion/0004/cha/782ae94d-9585-4b92-a846-a298ead5caf6_0000
+  - camera_uuid: piston_automotive/marion/0007/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: piston_automotive/marion/0007/cha/3f36281d-e1a0-42fc-a7d3-d21d54aa28d5_0000
+  - camera_uuid: innovate_manufacturing/knoxville/0004/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: innovate_manufacturing/knoxville/0004/cha/68abcd5d-dd9d-4b45-ad60-087f884ecddd_0000
+  - camera_uuid: innovate_manufacturing/knoxville/0005/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: innovate_manufacturing/knoxville/0005/cha/0a0b0e09-7887-4101-bec6-9a81a10384f7_0000
+  - camera_uuid: innovate_manufacturing/knoxville/0006/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: innovate_manufacturing/knoxville/0006/cha/8b10e6c5-4d0a-4f27-9135-344687c218a1_0000
+  - camera_uuid: innovate_manufacturing/knoxville/0007/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: innovate_manufacturing/knoxville/0007/cha/f1f9ca4a-ba99-4588-be8e-d724a557148c_0000
+  - camera_uuid: innovate_manufacturing/knoxville/0010/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: innovate_manufacturing/knoxville/0010/cha/f42df378-897c-4a5d-a011-eda932ac6501_0000
+  - camera_uuid: innovate_manufacturing/knoxville/0014/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: innovate_manufacturing/knoxville/0014/cha/f25476d6-49b0-4ceb-a685-aa265343ecc8_0000
+  - camera_uuid: wesco/reno/0001/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: wesco/reno/0001/cha/f7b028c6-7eec-4658-a106-1cdcd6c6cde2_0000
+  - camera_uuid: wesco/reno/0004/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: wesco/reno/0004/cha/04c8260a-0d8b-4fd0-8f6d-1ef2e6fa4984_0000
+  - camera_uuid: wesco/reno/0005/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: wesco/reno/0005/cha/4e927c97-9c87-471f-9576-8d4ccc51725f_0000
+  - camera_uuid: michaels/tracy/0005/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: michaels/tracy/0005/cha/6aec93af-96a9-47d6-a751-4713bc0d8d69_0000
+  - camera_uuid: ulta/dallas/0011/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: ulta/dallas/0011/cha/bb4037a6-9196-4314-94a4-2375a583e504_0000
+  - camera_uuid: ulta/dallas/0011/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: ulta/dallas/0011/cha/ba7a8cf9-73cd-4faf-bcc1-daef7151885d_0000
+  - camera_uuid: ulta/dallas/0012/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: ulta/dallas/0012/cha/b3419a5e-266a-4d63-9e0e-089ace410baf_0000
+  - camera_uuid: ulta/dallas/0012/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: ulta/dallas/0012/cha/ed7ba3e4-5f3e-4e93-8b83-c88726421f68_0000
+  - camera_uuid: ulta/dallas/0015/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: ulta/dallas/0015/cha/f0aabc1f-0396-46b8-9449-a3770bbe696f_0000
+  - camera_uuid: ulta/dallas/0016/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: ulta/dallas/0016/cha/ed58710c-da69-4607-b3c8-9c07dd775e5b_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/modesto/0003/cha/scenarios/BAD_POSTURE/POSITIVE/55480a9d-33b5-4817-a055-d65d6b358fcc_0000
+  - camera_uuid: americold/modesto/0004/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/modesto/0004/cha/scenarios/BAD_POSTURE/POSITIVE/0fbd6d8a-6447-422b-b21b-695ca91485c4_0000
+  - camera_uuid: uscold/quakertown/0001/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: uscold/quakertown/0001/cha/scenarios/BAD_POSTURE/POSITIVE/0f2bd882-b16a-47c4-b8f5-4392b3d88684_0000
+  - camera_uuid: uscold/quakertown/0004/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: uscold/quakertown/0004/cha/2bdac3d3-0150-4d84-9eba-bc9f4c75a79f_0000
+  - camera_uuid: uscold/quakertown/0005/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: uscold/quakertown/0005/cha/scenarios/BAD_POSTURE/POSITIVE/eb84704b-cb1f-4a50-9ba7-4e468196374f_0000
+  - camera_uuid: uscold/quakertown/0007/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: uscold/quakertown/0007/cha/scenarios/BAD_POSTURE/POSITIVE/8be4e309-b69c-4074-991b-827e0996fcfb_0000
+  - camera_uuid: uscold/quakertown/0007/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: uscold/quakertown/0007/cha/scenarios/BAD_POSTURE/POSITIVE/f943d601-d1b4-4dd2-be08-649ff20e56e9_0000
+  - camera_uuid: uscold/quakertown/0009/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: uscold/quakertown/0009/cha/scenarios/BAD_POSTURE/POSITIVE/a0d3b786-0f76-4b34-a4d3-6a2580ab4aaf_0000
+  - camera_uuid: uscold/quakertown/0009/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: uscold/quakertown/0009/cha/scenarios/BAD_POSTURE/POSITIVE/f3ecbe13-6871-473b-aaa4-fd215111012b_0000
+  - camera_uuid: uscold/quakertown/0009/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: uscold/quakertown/0009/cha/scenarios/BAD_POSTURE/POSITIVE/2a4894fb-4823-4436-9cec-a1696b83ce77_0000
+  - camera_uuid: uscold/quakertown/0010/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: uscold/quakertown/0010/cha/scenarios/BAD_POSTURE/POSITIVE/6ef19666-42dd-463e-a812-fae07adbe4df_0000
+  - camera_uuid: trieagle/ocala/0005/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: trieagle/ocala/0005/cha/scenarios/BAD_POSTURE/POSITIVE/4a81708c-c1d0-4e19-87eb-49b4467b5adf_0000
+  - camera_uuid: trieagle/ocala/0009/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: trieagle/ocala/0009/cha/scenarios/BAD_POSTURE/POSITIVE/79a4b49a-8e47-4a6d-aadc-8443c4da870b_0000
+  - camera_uuid: trieagle/ocala/0010/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: trieagle/ocala/0010/cha/scenarios/BAD_POSTURE/POSITIVE/4560b25b-31ef-42e4-9821-2af0af0e60b3_0000
+  - camera_uuid: wn_foods/hayward/0011/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: wn_foods/hayward/0011/cha/scenarios/BAD_POSTURE/POSITIVE/24f99fe4-437a-413b-b8fb-a4d8ce2993fb_0000
+  - camera_uuid: wn_foods/hayward/0008/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: wn_foods/hayward/0008/cha/scenarios/BAD_POSTURE/POSITIVE/e1a162b2-9ee0-4711-86df-51f8441bfdac_0000
+  - camera_uuid: ppg/cedar_falls/0005/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: ppg/cedar_falls/0005/cha/scenarios/BAD_POSTURE/POSITIVE/690b189c-ed3a-4864-873a-8c0bbe7b837a_0000
+  - camera_uuid: ppg/cedar_falls/0004/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: ppg/cedar_falls/0004/cha/scenarios/BAD_POSTURE/POSITIVE/532beee8-2b3f-4ae9-8865-51ccb9493438_0000
+  - camera_uuid: ppg/cedar_falls/0011/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: ppg/cedar_falls/0011/cha/scenarios/BAD_POSTURE/POSITIVE/d9cb6531-0a4f-4ad7-a2b5-055ae3958aa7_0000
+  - camera_uuid: piston_automotive/marion/0003/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: piston_automotive/marion/0003/cha/711600c8-709b-4c76-86e5-0ca8a01efe40_0000
+  - camera_uuid: piston_automotive/marion/0009/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: piston_automotive/marion/0009/cha/scenarios/BAD_POSTURE/POSITIVE/e187ac62-ce7b-47cf-90fa-c7d2e86ef24d_0000
+  - camera_uuid: piston_automotive/marion/0009/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: piston_automotive/marion/0009/cha/scenarios/BAD_POSTURE/POSITIVE/7232e167-44b2-462a-9a0e-2cfe6db79cb0_0000
+  - camera_uuid: innovate_manufacturing/knoxville/0009/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: innovate_manufacturing/knoxville/0009/cha/scenarios/BAD_POSTURE/POSITIVE/0a7ff124-8eaa-4af0-8c4a-6b215fc7077b_0000
+  - camera_uuid: wesco/reno/0002/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: wesco/reno/0002/cha/scenarios/BAD_POSTURE/POSITIVE/e8d4ab78-07fa-4e32-96e4-cb2fab711e9f_0000
+  - camera_uuid: wesco/reno/0002/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: wesco/reno/0002/cha/scenarios/BAD_POSTURE/POSITIVE/c0c6adce-cdb9-4fca-ab56-dafcf2ddee05_0000
+  - camera_uuid: wesco/reno/0003/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: wesco/reno/0003/cha/scenarios/BAD_POSTURE/POSITIVE/dcab9465-7d19-4279-81ca-198f99cd899e_0000
+  - camera_uuid: wesco/reno/0003/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: wesco/reno/0003/cha/scenarios/BAD_POSTURE/POSITIVE/7ee2a564-7407-4ed1-ac3e-d0520042bf8f_0000
+  - camera_uuid: wesco/reno/0009/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: wesco/reno/0009/cha/scenarios/BAD_POSTURE/POSITIVE/7b47a3bc-21b9-432c-9642-ec2053695c1e_0000
+  - camera_uuid: michaels/tracy/0001/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: michaels/tracy/0001/cha/scenarios/BAD_POSTURE/POSITIVE/ab259021-9e84-4d13-a24b-e8992e00300d_0000
+  - camera_uuid: michaels/tracy/0002/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: michaels/tracy/0002/cha/scenarios/BAD_POSTURE/POSITIVE/53b00b9a-a8de-4252-abde-a9e0590887ba_0000
+  - camera_uuid: michaels/tracy/0003/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: michaels/tracy/0003/cha/scenarios/BAD_POSTURE/POSITIVE/016a38c1-fda0-4f59-9160-bcd3d3ce7b2f_0000
+  - camera_uuid: michaels/tracy/0007/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: michaels/tracy/0007/cha/scenarios/BAD_POSTURE/POSITIVE/2495f40e-6631-4601-be43-170c5794e07a_0000
+  - camera_uuid: michaels/tracy/0008/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: michaels/tracy/0008/cha/scenarios/BAD_POSTURE/POSITIVE/09a6623b-ecfd-4164-b8a7-b27a52f3abd1_0000
+  - camera_uuid: michaels/tracy/0008/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: michaels/tracy/0008/cha/scenarios/BAD_POSTURE/POSITIVE/4c7a9ec0-3845-42c3-9553-1ccbdb70d724_0000
+  - camera_uuid: michaels/tracy/0009/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: michaels/tracy/0009/cha/scenarios/BAD_POSTURE/POSITIVE/037af1c3-6285-4aeb-8181-f86e16a1caf5_0000
+  - camera_uuid: michaels/tracy/0010/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: michaels/tracy/0010/cha/scenarios/BAD_POSTURE/POSITIVE/2159d3d1-e798-4700-abb1-013eb940ff13_0000
+  - camera_uuid: office_depot/dallas/0002/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: office_depot/dallas/0002/cha/scenarios/BAD_POSTURE/POSITIVE/dbad9693-4cb5-42f5-9daa-8bee59fbf627_0000
+  - camera_uuid: office_depot/dallas/0003/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: office_depot/dallas/0003/cha/scenarios/BAD_POSTURE/POSITIVE/6c5358ad-ca23-4e19-9cb4-84e09f0f7b9a_0000
+  - camera_uuid: office_depot/dallas/0003/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: office_depot/dallas/0003/cha/scenarios/BAD_POSTURE/POSITIVE/1c60f18e-843c-4d47-94da-81d37c6fd97a_0000
+  - camera_uuid: office_depot/dallas/0004/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: office_depot/dallas/0004/cha/scenarios/BAD_POSTURE/POSITIVE/c7f4bfd5-95d3-4acc-a7bd-22347db543f2_0000
+  - camera_uuid: office_depot/dallas/0005/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: office_depot/dallas/0005/cha/scenarios/BAD_POSTURE/POSITIVE/337b4530-a3b7-4be5-9719-4590b964f55c_0000
+  - camera_uuid: office_depot/dallas/0006/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: office_depot/dallas/0006/cha/scenarios/BAD_POSTURE/POSITIVE/48f7ccf4-104a-4dd8-8489-8645a59ab0af_0000
+  - camera_uuid: ulta/dallas/0001/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: ulta/dallas/0001/cha/scenarios/BAD_POSTURE/POSITIVE/c8d89f9b-15de-4ee1-926a-7ab148102e1d_0000
+  - camera_uuid: ulta/dallas/0004/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: ulta/dallas/0004/cha/scenarios/BAD_POSTURE/POSITIVE/449b0870-5372-4372-af57-d943b1274812_0000
+  - camera_uuid: ulta/dallas/0004/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: ulta/dallas/0004/cha/scenarios/BAD_POSTURE/POSITIVE/c0f8ac99-ef68-4e70-b567-e8d8abd8643c_0000
+  - camera_uuid: ulta/dallas/0005/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: ulta/dallas/0005/cha/scenarios/BAD_POSTURE/POSITIVE/f89a025f-f832-4dc1-8c77-508a328d547d_0000
+  - camera_uuid: ulta/dallas/0005/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: ulta/dallas/0005/cha/scenarios/BAD_POSTURE/POSITIVE/c4f9faef-567d-4980-bdc3-ec25cab0441d_0000
+  - camera_uuid: ulta/dallas/0006/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: ulta/dallas/0006/cha/scenarios/BAD_POSTURE/POSITIVE/1527af99-7067-440a-bd5e-f11f7f6763cc_0000
+  - camera_uuid: ulta/dallas/0006/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: ulta/dallas/0006/cha/scenarios/BAD_POSTURE/POSITIVE/1ab22f66-b212-4c8b-8203-71a24ef76f10_0000
+  - camera_uuid: ulta/dallas/0009/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: ulta/dallas/0009/cha/scenarios/BAD_POSTURE/POSITIVE/d31100f2-ad1b-425f-b02e-8060de9b2756_0000
+  - camera_uuid: americold/ontario/0101/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/ontario/0101/cha/scenarios/BAD_POSTURE/POSITIVE/58e73baa-e522-409c-9587-3a4ef59aabae_0000
+  - camera_uuid: americold/ontario/0103/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/ontario/0103/cha/scenarios/BAD_POSTURE/POSITIVE/f70cefd4-9997-4835-be8e-f33f94b3afab_0000
+  - camera_uuid: americold/ontario/0105/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/ontario/0105/cha/scenarios/BAD_POSTURE/POSITIVE/d67a8277-79b0-44e4-a26c-5f250046ce06_0000
+  - camera_uuid: americold/ontario/0108/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/ontario/0108/cha/scenarios/BAD_POSTURE/POSITIVE/6e6f812a-7fd3-475a-a010-2dc2a4efc568_0000
+  - camera_uuid: americold/ontario/0109/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/ontario/0109/cha/scenarios/BAD_POSTURE/POSITIVE/d49c486b-ec8d-41f1-8d23-7088f53a57a0_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/modesto/0009/cha/b3182dfc-67e1-42be-a8bb-7ee3604ccba2_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/modesto/0009/cha/3f80116f-12d4-45f4-b5f0-8868994d3877_0000
+  - camera_uuid: americold/modesto/0010/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/modesto/0010/cha/a64f4b9b-1ec1-47b6-b86c-689a1198f3f8_0000
+  - camera_uuid: americold/modesto/0010/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/modesto/0010/cha/2a72416a-0963-4a1c-b28d-7f5424e2c4d2_0000
+  - camera_uuid: americold/modesto/0012/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/modesto/0012/cha/2a57a803-1551-4d3b-9531-543ba202bb9b_0000
+  - camera_uuid: americold/modesto/0012/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/modesto/0012/cha/893fab52-bced-425a-9857-60ed5d97052e_0000
+  - camera_uuid: americold/ontario/0003/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/ontario/0003/cha/0d6b743d-e058-4e4e-92f6-e8df8e9b8135_0000
+  - camera_uuid: americold/ontario/0005/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/ontario/0005/cha/4236fee9-a2e9-420c-a9c0-a86052797e92_0000
+  - camera_uuid: verst/walton/0004/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: verst/walton/0004/cha/89ae9955-4468-4e49-83b5-75a82184a730_0000
+  - camera_uuid: verst/walton/0011/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: verst/walton/0011/cha/923074a0-2fd5-4040-8305-be4a3a2ba729_0000
+  - camera_uuid: verst/walton/0011/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: verst/walton/0011/cha/07876c05-88c3-49cc-93dc-d1fcdf32ec4f_0000
+  - camera_uuid: americold/tacoma/0001/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/tacoma/0001/cha/effe5656-7097-41ea-8576-02ba1ac5f38e_0000
+  - camera_uuid: americold/tacoma/0004/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/tacoma/0004/cha/5356a386-99c2-4b1d-874c-ef3d53c2f7f2_0000
+  - camera_uuid: americold/tacoma/0005/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: americold/tacoma/0005/cha/02d27dbf-23a0-40b1-9613-163deb9a12b5_0000
+  - camera_uuid: piston_automotive/marion/0005/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: piston_automotive/marion/0005/cha/e912d336-2ae0-48ad-a59e-1d5446a89e7e_0000
+  - camera_uuid: piston_automotive/marion/0006/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: piston_automotive/marion/0006/cha/95f76e84-b7df-4976-a314-1e544c23cdd3_0000
+  - camera_uuid: wesco/reno/0001/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: wesco/reno/0001/cha/292c350a-afeb-4138-966e-aff832862dd4_0000
+  - camera_uuid: wesco/reno/0005/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: wesco/reno/0005/cha/d09363e0-41e3-4971-a490-1ca3f910cfbb_0000
+  - camera_uuid: wesco/reno/0011/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: wesco/reno/0011/cha/a4928fb7-acc8-41c9-994e-1912419bccf0_0000
+  - camera_uuid: wesco/reno/0015/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: wesco/reno/0015/cha/b4baf119-4eb6-4b58-9813-97b354719a0d_0000
+  - camera_uuid: wesco/reno/0016/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: wesco/reno/0016/cha/680838d0-b818-4b4e-92aa-8324054a0c66_0000
+  - camera_uuid: wesco/reno/0016/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: wesco/reno/0016/cha/570d2491-f3af-4367-b322-252773899124_0000
+  - camera_uuid: ulta/dallas/0010/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: ulta/dallas/0010/cha/578d7fca-c1bc-408e-b150-03002fa4b548_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0003/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: vertical_cold_storage/bolingbrook/0003/cha/c79ec8b6-2060-4717-abc2-aa97136181e7_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0003/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: vertical_cold_storage/bolingbrook/0003/cha/11d63232-2536-4173-803d-e137fbe6b096_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0006/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: vertical_cold_storage/bolingbrook/0006/cha/349b8f26-9479-479d-af7f-668b55aaaac9_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0006/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: vertical_cold_storage/bolingbrook/0006/cha/3ff3e739-cbaa-4c6b-ad01-d0654490027b_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0007/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: vertical_cold_storage/bolingbrook/0007/cha/871f2f4e-434a-4236-82e0-6812c7d81902_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0007/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: vertical_cold_storage/bolingbrook/0007/cha/a0f2c2e8-2565-4080-89c0-f0573b8a39db_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0001/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: vertical_cold_storage/bolingbrook/0001/cha/f7986ef0-8c39-405d-98bf-4b8508dc2e08_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0001/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: vertical_cold_storage/bolingbrook/0001/cha/f92f7c57-2c47-4592-8444-9065125fd66b_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0002/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: vertical_cold_storage/bolingbrook/0002/cha/a063e697-6714-4784-ad0c-c1689704c8ce_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0002/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: vertical_cold_storage/bolingbrook/0002/cha/dfa396cc-d5b7-4b81-b4e3-9f47a3543e94_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0004/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: vertical_cold_storage/bolingbrook/0004/cha/c1b68230-7f65-4dac-897c-869798d1351c_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0004/cha
+    incidents: [BAD_POSTURE]
+    video_uuid: vertical_cold_storage/bolingbrook/0004/cha/6e339926-414b-473f-b966-ea0d99abdd2f_0000

@@ -1,0 +1,13 @@
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+voxel_py_test(
+    name = "production_lib_test",
+    srcs = [
+        "production_lib_test.py",
+    ],
+    data = glob(["testdata/**"]),
+    deps = [
+        "//core/execution/lib:production_lib",
+        "//core/execution/utils:perception_runner_context",
+    ],
+)

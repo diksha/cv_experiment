@@ -1,0 +1,36 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "base_proximity_algorithm",
+    srcs = ["base_proximity_algorithm.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/structs",
+        requirement("numpy"),
+    ],
+)
+
+py_library(
+    name = "pit_person_proximity",
+    srcs = ["pit_person_proximity.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":base_proximity_algorithm",
+        "//core/perception/acausal/algorithms/common:distance_utils",
+        "//core/structs",
+    ],
+)
+
+py_library(
+    name = "pit_pit_proximity",
+    srcs = ["pit_pit_proximity.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":base_proximity_algorithm",
+        "//core/perception/acausal/algorithms/common:distance_utils",
+        "//core/structs",
+    ],
+)

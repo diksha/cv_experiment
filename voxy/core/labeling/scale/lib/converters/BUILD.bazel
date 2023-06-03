@@ -1,0 +1,65 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+py_library(
+    name = "converter_base",
+    srcs = [
+        "batch_task_utils.py",
+        "converter_base.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("boto3"),
+        requirement("boto3-stubs"),
+        requirement("google-api-core"),
+        requirement("loguru"),
+        "//core/utils:aws_utils",
+        "//core/utils:voxel_decorators",
+    ],
+)
+
+py_library(
+    name = "converters",
+    srcs = [
+        "image_collection_annotation_converter.py",
+        "video_playback_annotation_converter.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":converter_base",
+        ":utils",
+        "//core/infra/cloud:firestore_utils",
+        "//core/labeling:video_helper_mixin",
+        "//core/labeling/scale/lib:scale_batch_wrapper",
+        "//core/labeling/scale/lib:scale_task_wrapper",
+        "//core/structs",
+    ],
+)
+
+py_library(
+    name = "scale_voxel_conversion",
+    srcs = [
+        "scale_voxel_conversion.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/infra/sematic/shared:resources",
+        requirement("sematic"),
+        ":utils",
+        "//core/labeling/scale/registry:register_components",
+    ],
+)
+
+py_library(
+    name = "utils",
+    srcs = [
+        "door_actor_utils.py",
+        "polygon_utils.py",
+        "ppe_hat_actor_utils.py",
+        "safety_vest_actor_utils.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/utils:aws_utils",
+    ],
+)

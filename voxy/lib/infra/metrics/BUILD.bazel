@@ -1,0 +1,72 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+py_library(
+    name = "constants",
+    srcs = ["constants.py"],
+    visibility = ["//visibility:public"],
+)
+
+py_library(
+    name = "logger_metric_exporter",
+    srcs = ["logger_metric_exporter.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        requirement("opentelemetry-sdk"),
+    ],
+)
+
+py_library(
+    name = "logger_span_exporter",
+    srcs = ["logger_span_exporter.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        requirement("opentelemetry-sdk"),
+    ],
+)
+
+py_library(
+    name = "metrics_helper",
+    srcs = ["metrics_helper.py"],
+    visibility = ["//visibility:public"],
+    deps = [requirement("opentelemetry-sdk")],
+)
+
+py_library(
+    name = "metrics_trace_resource",
+    srcs = ["metrics_trace_resource.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("opentelemetry-sdk"),
+        "//lib/infra/metrics:constants",
+    ],
+)
+
+py_library(
+    name = "metrics_tracer",
+    srcs = ["metrics_tracer.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("opentelemetry-api"),
+        requirement("opentelemetry-sdk"),
+        requirement("opentelemetry-instrumentation"),
+        requirement("opentelemetry-distro"),
+        "//lib/infra/metrics:constants",
+        "//lib/infra/metrics:logger_metric_exporter",
+        "//lib/infra/metrics:logger_span_exporter",
+    ],
+)
+
+py_library(
+    name = "register_metrics",
+    srcs = ["register_metrics.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//lib/infra/metrics:constants",
+        "//lib/infra/metrics:metrics_helper",
+        "//lib/infra/metrics:metrics_trace_resource",
+        "//lib/infra/metrics:metrics_tracer",
+    ],
+)

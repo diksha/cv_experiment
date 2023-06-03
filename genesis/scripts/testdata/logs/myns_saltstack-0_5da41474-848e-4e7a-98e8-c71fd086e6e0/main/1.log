@@ -1,0 +1,6 @@
+{"log": "{\"message\": \"hello\", \"source\": \"MyClassName\", \"random_attr\": \"nothing\"}","time": "2022-06-22T14:34:45Z"}
+{"log": "{\"msg\": \"abc\"}","time": "2022-06-22T14:35:45Z"}
+{"log": "{}","time": "2022-06-22T14:35:45Z"}
+2022-06-22T14:35:45Z stderr my-service-logtag containerd
+{"log": "{ hello world message }","time": "2022-06-22T14:35:45Z"}
+{"log": "{ "hello message" }","time": "2022-06-22T14:35:45Z"}

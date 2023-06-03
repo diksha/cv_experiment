@@ -1,0 +1,45 @@
+#
+# Copyright 2020-2021 Voxel Labs, Inc.
+# All rights reserved.
+#
+# This document may not be reproduced, republished, distributed, transmitted,
+# displayed, broadcast or otherwise exploited in any manner without the express
+# prior written permission of Voxel Labs, Inc. The receipt or possession of this
+# document does not convey any rights to reproduce, disclose, or distribute its
+# contents, or to manufacture, use, or sell anything that it may describe, in
+# whole or in part.
+#
+
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary", "py_library")
+
+py_library(
+    name = "k8s_client",
+    srcs = ["k8s_client.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("kubernetes"),
+        requirement("google-auth"),
+        requirement("google-cloud-container"),
+        "//third_party/google/gcloud",
+    ],
+)
+
+py_library(
+    name = "config",
+    srcs = ["config.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("google-cloud-firestore"),
+        "//core/infra/symphony/structs:job",
+        requirement("graphlib-backport"),
+    ],
+)
+
+py_binary(
+    name = "test",
+    srcs = ["test.py"],
+    deps = [
+        ":k8s_client",
+    ],
+)

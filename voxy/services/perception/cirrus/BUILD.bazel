@@ -1,0 +1,47 @@
+load(":defs.bzl", "triton_model_repository")
+
+triton_model_repository(
+    name = "americold_modesto_local",
+    config = "configs/prod/americold_prod.yaml",
+    data = [
+        "//configs",
+        "@artifacts_02_05_2023_spill_generalized_jit",
+        "@artifacts_02_27_2023_michaels_wesco_office_yolo",
+        "@artifacts_03_05_2023_americold_modesto_0011_cha",
+        "@artifacts_03_21_2023_pose_0630_jit_update",
+        "@artifacts_03_23_2023_overreaching_model_jit",
+        "@artifacts_2021-12-06-00-00-00-0000-yolo",
+        "@artifacts_2022-10-26_americold_modesto_0001_cha",
+        "@artifacts_2022-10-26_americold_modesto_0002_cha",
+        "@artifacts_2022-10-26_americold_modesto_0003_cha",
+        "@artifacts_2022-10-26_americold_modesto_0005_cha",
+        "@artifacts_2022-10-26_americold_modesto_0009_cha",
+        "@artifacts_yolo_v5_post_processing_04_11_2023",
+        "@artifacts_yolo_v5_pre_processing_04_11_2023",
+        "@artifacts_yolo_v5_pre_processing_04_13_2023",
+    ],
+    repo_path = "/tmp/modelrepos/americold_modesto_local",
+)
+
+triton_model_repository(
+    name = "americold_modesto_s3",
+    config = "configs/prod/americold_prod.yaml",
+    data = [
+        "//configs",
+        "@artifacts_02_05_2023_spill_generalized_jit",
+        "@artifacts_02_27_2023_michaels_wesco_office_yolo",
+        "@artifacts_03_05_2023_americold_modesto_0011_cha",
+        "@artifacts_03_21_2023_pose_0630_jit_update",
+        "@artifacts_03_23_2023_overreaching_model_jit",
+        "@artifacts_2021-12-06-00-00-00-0000-yolo",
+        "@artifacts_2022-10-26_americold_modesto_0001_cha",
+        "@artifacts_2022-10-26_americold_modesto_0002_cha",
+        "@artifacts_2022-10-26_americold_modesto_0003_cha",
+        "@artifacts_2022-10-26_americold_modesto_0005_cha",
+        "@artifacts_2022-10-26_americold_modesto_0009_cha",
+        "@artifacts_yolo_v5_post_processing_04_11_2023",
+        "@artifacts_yolo_v5_pre_processing_04_11_2023",
+        "@artifacts_yolo_v5_pre_processing_04_13_2023",
+    ],
+    repo_path = "s3://voxel-experimental-triton-models/americold_modesto_s3",
+)

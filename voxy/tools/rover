@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -euo pipefail
+
+FILEPATH=$(readlink -f "$0")
+BASEDIR=$(dirname "$FILEPATH")
+WORKSPACEDIR=$(dirname "$BASEDIR")
+cd "$WORKSPACEDIR" || exit 1
+
+BINARY="$WORKSPACEDIR/bazel-bin/external/rover/rover_bin"
+
+if ! test -f "$BINARY"; then
+	"$WORKSPACEDIR"/bazel build @rover//:rover_bin
+fi
+
+# Setting APOLLO_ELV2_LICENSE per the Apollo documentation:
+# https://www.apollographql.com/docs/rover/commands/supergraphs#federation-2-elv2-license
+
+exec env APOLLO_ELV2_LICENSE=accept "$BINARY" "$@"

@@ -1,0 +1,17 @@
+load("@io_bazel_rules_docker//container:container.bzl", "container_push")
+load("@io_bazel_rules_docker//go:image.bzl", "go_image")
+
+go_image(
+    name = "polygon",
+    binary = "//services/platform/polygon/cmd/polygon",
+)
+
+container_push(
+    name = "staging",
+    format = "Docker",
+    image = ":polygon",
+    registry = "115099983231.dkr.ecr.us-west-2.amazonaws.com",
+    repository = "staging/service/polygon",
+    tag_file = "polygon.json.sha256",
+    tags = ["manual"],
+)

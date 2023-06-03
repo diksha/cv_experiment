@@ -1,0 +1,81 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+---
+config: &config
+    verbose: 0
+    publisher:
+      enabled: true
+    state:
+      enabled: false
+
+    incident:
+      dry_run: false
+      monitors_requested:
+      - ergo2_bad_posture
+    max_frame_count: 500
+    perception:
+      detector_tracker:
+        categories_to_keep:
+        - PERSON
+      pose:
+        enabled: True
+        model_path: artifacts_03_21_2023_pose_0630_jit_update/fast_res50_256x192.pt
+      lift_classifier:
+        enabled: True
+        model_path: artifacts_lift_classifier_01282022/lift_classifer_01282022.sav
+      door_classifier:
+        enabled: false
+    video_writer:
+      only_draw_frames_with_gt: false
+scenarios:
+
+
+# - video_uuid: uscold/laredo/dock01/cha/20210525_065932_0015
+#   camera_uuid: uscold/laredo/dock01/cha
+#   config:
+#     <<: *config
+
+
+- video_uuid: simulated/real/ergo/ergo/bad_lift_fp
+  camera_uuid: simulated/real/ergo/ergo
+  config:
+      <<: *config
+
+# - video_uuid: uscold/laredo/dock01/cha/20210405_760430_0000
+#   camera_uuid: uscold/laredo/dock01/cha
+#   config:
+#       <<: *config
+
+# - video_uuid: uscold/laredo/dock01/cha/20210405_760430_0004
+#   camera_uuid: uscold/laredo/dock01/cha
+#   <config:
+#     <<: *config
+# - video_uuid: americold/modesto/e_dock_north/ch04_1/2021-04-16_15-37-21_0004
+#   camera_uuid: americold/modesto/e_dock_north/ch04_1
+#   <config:
+#     <<: *config
+# - video_uuid: americold/modesto/e_dock_north/ch04_1/2021-04-16_15-37-21_0004
+#   camera_uuid: americold/modesto/e_dock_north/ch04_1
+#   <config:
+#     <<: *config
+# - video_uuid: americold/modesto/e_dock_north/ch04_1/2021-04-16_15-37-21_0003
+#   camera_uuid: americold/modesto/e_dock_north/ch04_1
+#   <config:
+#     <<: *config
+# - video_uuid: americold/modesto/e_dock_north/ch04_1/2021-04-16_15-37-21_0002
+#   camera_uuid: americold/modesto/e_dock_north/ch04_1
+#   <config:
+#     <<: *config
+# - video_uuid: americold/modesto/e_dock_north/ch04_1/2021-04-16_15-37-21_0002
+#   camera_uuid: americold/modesto/e_dock_north/ch04_1
+#   <config:
+#     <<: *config

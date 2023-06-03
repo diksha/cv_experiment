@@ -1,0 +1,13 @@
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//core/ml/data/generation:__subpackages__"])
+
+py_library(
+    name = "logset_generators",
+    srcs = [
+        "logset_generators.py",
+        "logset_task_utils.py",
+    ],
+    deps = [
+    ],
+)

@@ -1,0 +1,45 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+
+camera:
+  min_frame_difference_ms: 85
+
+perception:
+  enabled: True
+
+incident:
+  dry_run: True
+  # This directory must be bind-mounted from Docker host
+  temp_directory: /var/tmp/voxel/incidents
+  generate_temp_subdirs: True
+
+# TODO: remove once we have strategies around scenario sets
+temporal:
+  max_past_frames: 60
+  max_future_frames: 10
+
+publisher:
+  enabled: False
+  portal_host: https://app.voxelai.com
+  auth_token: 6bdeb3310546f9cae57c87604f80ece37ba6da43
+  organization_key: VOXEL_SANDBOX
+
+state:
+  enabled: False
+  add_epoch_time: False
+  publisher:
+    state_topic: projects/sodium-carving-227300/topics/voxel-internal-state-messages
+    event_topic: projects/sodium-carving-227300/topics/voxel-internal-event-messages
+    emulator_host: null
+
+video_stream:
+  video_source_bucket: voxel-logs

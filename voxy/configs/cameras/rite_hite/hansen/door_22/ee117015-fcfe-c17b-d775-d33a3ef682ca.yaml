@@ -1,0 +1,82 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+
+camera_uuid: rite_hite/hanson/door_22/ee117015-fcfe-c17b-d775-d33a3ef682ca
+
+camera:
+  arn: arn:aws:kinesisvideo:us-west-2:667031391229:stream/edge_hansen_1_cam2/1638480874465
+  fps: 3
+  version: 7
+
+perception:
+  detector_tracker:
+    vest_model_path: "artifacts_vest_classifier-9-19/vest_classifier_resnet18_traced_model.pth"
+    model_path: artifacts_2021-12-06-00-00-00-0000-yolo/best_608_1024.engine
+    width: 1024
+    height: 608
+    actor2class: { PERSON: 0, PIT: 1 }
+    should_do_temporal_propagation: 0
+  pose:
+    enabled: True
+    model_path: artifacts_03_21_2023_pose_0630_jit_update/fast_res50_256x192.pt
+  lift_classifier:
+    enabled: False
+    model_path: artifacts_lift_classifier_01282022/lift_classifer_01282022.sav
+  reach_classifier:
+    enabled: True
+    model_type: DL ##DT (DL: Deep learning based, DT: Decision Tree based, HM: Heuristic Model)
+    model_path: artifacts_03_23_2023_overreaching_model_jit/voxel_ergo_ml_overreaching_2022-05-23-jit.pt
+  door_classifier:
+    enabled: False
+    model_path: artifacts_door_classifier_resnet50_20211129/door_classifier_resample_resnet50_traced_model.pth
+  vest_classifier:
+    enabled: False
+    model_type: Transformers ##ConvNet Detection
+    model_path: artifacts_vit_vest/voxel_safetyvest_vit_2022-04-18.pth # artifacts_attention_vestclassifier/voxel_safety_vest_classifier_attention_resnet_focal_loss_gamma1.5_WS_2022-03-03.pth
+  hat_classifier:
+    enabled: False
+
+temporal:
+  max_past_frames: 60
+  max_future_frames: 30
+  expire_threshold_ms: 120000
+
+incident:
+  incident_enabled: True
+  monitors_requested: [bad_posture]
+  incident_machine_enabled: True
+  state_machine_monitors_requested:
+    [no_stop_at_aisle_end, overreaching, parking]
+  dry_run: False
+  # This directory must be bind-mounted from Docker host
+  temp_directory: /var/tmp/voxel/incidents
+  generate_temp_subdirs: True
+
+publisher:
+  enabled: True
+  # These values will send data to the sandbox organization in production
+  portal_host: https://app.voxelai.com
+  auth_token: 5b836ddf875b2292880293255b7802ff82541751
+  organization_key: HANSEN
+
+state:
+  enabled: True
+  frames_to_buffer: 1000
+  add_epoch_time: False
+  publisher:
+    batch_max_latency_seconds: 60
+    retry_deadline_seconds: 600
+    batch_max_message: 1000
+    batch_max_bytes: 1000000
+    state_topic: projects/sodium-carving-227300/topics/voxel-production-state-messages
+    event_topic: projects/sodium-carving-227300/topics/voxel-production-event-messages
+    emulator_host: null

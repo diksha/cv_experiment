@@ -1,0 +1,61 @@
+{
+  "geometries": {
+    "box": {
+      "objects_to_annotate": [],
+      "min_height": 10,
+      "min_width": 10
+    },
+    "polygon": {
+      "objects_to_annotate": [
+        "actionable_region",
+        "end_of_aisle",
+        "motion_detection_zone",
+        "driving_area",
+        "no_pedestrian_zone",
+        "door",
+        "intersection",
+        "no_obstruction_region"
+      ]
+    }
+  },
+  "annotation_attributes": {
+    "zone_id": {
+      "type": "number",
+      "description": "Id for the motion detection zone",
+      "conditions": {
+        "label_condition": {
+          "label": ["motion_detection_zone"]
+        }
+      }
+    },
+    "door_id": {
+      "type": "number",
+      "description": "Id for the door",
+      "conditions": {
+        "label_condition": {
+          "label": ["door"]
+        }
+      }
+    },
+    "type": {
+      "type": "category",
+      "description": "Type of the door",
+      "choices": ["FREEZER", "DOCK", "EXIT"],
+      "conditions": {
+        "label_condition": {
+          "label": ["door"]
+        }
+      }
+    },
+    "orientation": {
+      "type": "category",
+      "description": "Orientation of the door",
+      "choices": ["SIDE_DOOR", "FRONT_DOOR"],
+      "conditions": {
+        "label_condition": {
+          "label": ["door"]
+        }
+      }
+    }
+  }
+}

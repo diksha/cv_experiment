@@ -1,0 +1,213 @@
+#
+# Copyright 2023 Voxel Labs, Inc.
+# All rights reserved.
+#
+# This document may not be reproduced, republished, distributed, transmitted,
+# displayed, broadcast or otherwise exploited in any manner without the express
+# prior written permission of Voxel Labs, Inc. The receipt or possession of this
+# document does not convey any rights to reproduce, disclose, or distribute its
+# contents, or to manufacture, use, or sell anything that it may describe, in
+# whole or in part.
+#
+#
+scenario_for_incidents: [PARKING_DURATION]
+scenarios:
+  # POSITIVE SCENARIOS
+  - camera_uuid: americold/ontario/0002/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: americold/ontario/0002/cha/scenarios/PARKING_DURATION/POSITIVE/fccb8bc1-8549-4bce-8e38-07e76d08af5b_0000
+  - camera_uuid: americold/ontario/0009/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: americold/ontario/0009/cha/scenarios/PARKING_DURATION/POSITIVE/606212d5-d6dc-4672-97c6-b9b6e3337aee_0000
+  - camera_uuid: uscold/quakertown/0001/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: uscold/quakertown/0001/cha/scenarios/PARKING_DURATION/POSITIVE/1ec0b073-6429-4f4c-b8fa-1848dad85c49_0000
+  - camera_uuid: uscold/quakertown/0003/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: uscold/quakertown/0003/cha/scenarios/PARKING_DURATION/POSITIVE/022dea2d-b3e8-4d92-a15e-5944bbf9d36d_0000
+  - camera_uuid: uscold/quakertown/0004/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: uscold/quakertown/0004/cha/scenarios/PARKING_DURATION/POSITIVE/24099caa-d039-4f50-ac4b-9754783b5a99_0000
+  - camera_uuid: uscold/quakertown/0005/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: uscold/quakertown/0005/cha/scenarios/PARKING_DURATION/POSITIVE/00bf7561-f41b-4f71-998f-0aaf4b9e5fcf_0000
+  - camera_uuid: uscold/quakertown/0007/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: uscold/quakertown/0007/cha/scenarios/PARKING_DURATION/POSITIVE/ad61faa1-e995-43db-9c81-05dd48cd7811_0000
+  - camera_uuid: uscold/quakertown/0008/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: uscold/quakertown/0008/cha/scenarios/PARKING_DURATION/POSITIVE/3fd0991b-939d-48df-ab1b-8f89747274b0_0000
+  - camera_uuid: trieagle/ocala/0008/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: trieagle/ocala/0008/cha/scenarios/PARKING_DURATION/POSITIVE/4db15a06-fd44-4b6e-a7e7-e714cae0733a_0000
+  - camera_uuid: trieagle/ocala/0009/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: trieagle/ocala/0009/cha/scenarios/PARKING_DURATION/POSITIVE/60e18ef2-d485-4e9d-b0da-525529dc9d97_0000
+  - camera_uuid: trieagle/ocala/0010/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: trieagle/ocala/0010/cha/scenarios/PARKING_DURATION/POSITIVE/54f777e5-28cd-4539-b727-a31d7c7c1804_0000
+  - camera_uuid: wn_foods/hayward/0009/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: wn_foods/hayward/0009/cha/scenarios/PARKING_DURATION/POSITIVE/20dbab14-122d-448e-90ee-ad7dc791fad6_0000
+  - camera_uuid: americold/tacoma/0001/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: americold/tacoma/0001/cha/scenarios/PARKING_DURATION/POSITIVE/786091f4-d413-47fe-94da-abe5e441daff_0000
+  - camera_uuid: americold/tacoma/0003/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: americold/tacoma/0003/cha/scenarios/PARKING_DURATION/POSITIVE/0aa45429-9575-4a50-8efb-0c7f298411fe_0000
+  - camera_uuid: americold/tacoma/0006/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: americold/tacoma/0006/cha/scenarios/PARKING_DURATION/POSITIVE/56ee6924-4c62-40db-944a-7c5d16e28777_0000
+  - camera_uuid: piston_automotive/marion/0003/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: piston_automotive/marion/0003/cha/scenarios/PARKING_DURATION/POSITIVE/8f823b42-2f44-4cc9-afda-ef9012c30481_0000
+  - camera_uuid: piston_automotive/marion/0005/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: piston_automotive/marion/0005/cha/scenarios/PARKING_DURATION/POSITIVE/916ebdee-9b37-43e0-acf8-7808e64d3b78_0000
+  - camera_uuid: piston_automotive/marion/0007/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: piston_automotive/marion/0007/cha/scenarios/PARKING_DURATION/POSITIVE/597ab543-a9ba-4152-92cf-d7d993df3278_0000
+  - camera_uuid: piston_automotive/marion/0009/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: piston_automotive/marion/0009/cha/scenarios/PARKING_DURATION/POSITIVE/5f7646eb-02b2-4a05-8cf5-528fd117c55e_0000
+  - camera_uuid: innovate_manufacturing/knoxville/0013/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: innovate_manufacturing/knoxville/0013/cha/scenarios/PARKING_DURATION/POSITIVE/8fef075b-f0ea-44c4-b2d5-046db4002a7e_0000
+  - camera_uuid: wesco/reno/0002/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: wesco/reno/0002/cha/scenarios/PARKING_DURATION/POSITIVE/16303030-3777-4d14-b9e4-23de2597abd9_0000
+  - camera_uuid: wesco/reno/0003/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: wesco/reno/0003/cha/scenarios/PARKING_DURATION/POSITIVE/ca108e6a-832e-457f-8e14-1bab2c3ba478_0000
+  - camera_uuid: wesco/reno/0007/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: wesco/reno/0007/cha/scenarios/PARKING_DURATION/POSITIVE/14f0b176-5d43-49ca-8428-3fe46f9b58b5_0000
+  - camera_uuid: wesco/reno/0008/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: wesco/reno/0008/cha/scenarios/PARKING_DURATION/POSITIVE/056298a5-8fe2-4c66-b82e-78ab409893db_0000
+  - camera_uuid: wesco/reno/0010/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: wesco/reno/0010/cha/scenarios/PARKING_DURATION/POSITIVE/e62ff393-9a8c-4c86-9952-1b5ddb94e517_0000
+  - camera_uuid: wesco/reno/0012/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: wesco/reno/0012/cha/scenarios/PARKING_DURATION/POSITIVE/46e25b11-a819-4ea0-91a1-4f6c0fff393e_0000
+  - camera_uuid: wesco/reno/0013/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: wesco/reno/0013/cha/scenarios/PARKING_DURATION/POSITIVE/551ff9eb-0b1e-458b-9563-df1a92608ed1_0000
+  - camera_uuid: wesco/reno/0014/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: wesco/reno/0014/cha/scenarios/PARKING_DURATION/POSITIVE/f6327775-da1e-4bdc-8405-bd765198739c_0000
+  - camera_uuid: wesco/reno/0015/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: wesco/reno/0015/cha/scenarios/PARKING_DURATION/POSITIVE/3e7fe90d-cbab-4497-90b0-e48e764c2217_0000
+  - camera_uuid: office_depot/dallas/0002/cha
+    incidents: [PARKING_DURATION, PARKING_DURATION, PARKING_DURATION]
+    video_uuid: office_depot/dallas/0002/cha/scenarios/PARKING_DURATION/POSITIVE/5a203959-a6be-452c-a829-3038cf421a2c_0000
+  - camera_uuid: ulta/dallas/0002/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: ulta/dallas/0002/cha/scenarios/PARKING_DURATION/POSITIVE/a9c07057-3ec5-41f2-bf30-d97b2a8f8ac7_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: americold/modesto/0001/cha/scenarios/PARKING_DURATION/POSITIVE/630dc85a-1a74-46a8-8d68-04b95efaa046_0000
+  - camera_uuid: americold/modesto/0010/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: americold/modesto/0010/cha/scenarios/PARKING_DURATION/POSITIVE/b8dfd21a-6e9d-46b7-b029-13b53d2e9204_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: americold/modesto/0011/cha/scenarios/PARKING_DURATION/POSITIVE/f5bd4580-3f32-45fb-97ce-f69f210e89a9_0000
+  - camera_uuid: americold/ontario/0004/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: americold/ontario/0004/cha/scenarios/PARKING_DURATION/POSITIVE/7b87db9a-8760-41e1-a3e8-ff0b03ac6cce_0000
+  - camera_uuid: americold/ontario/0006/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: americold/ontario/0006/cha/scenarios/PARKING_DURATION/POSITIVE/bbca9684-ddd6-4b84-9f39-9e51bf00b11b_0000
+  - camera_uuid: americold/ontario/0012/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: americold/ontario/0012/cha/scenarios/PARKING_DURATION/POSITIVE/4b627e7c-fe3e-47c6-9e9a-6106336df330_0000
+  - camera_uuid: americold/tacoma/0007/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: americold/tacoma/0007/cha/scenarios/PARKING_DURATION/POSITIVE/e0bf894a-4128-4c27-817a-c5bddeb79b11_0000
+  - camera_uuid: americold/tacoma/0007/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: americold/tacoma/0007/cha/scenarios/PARKING_DURATION/POSITIVE/75d94d3b-ab08-46b6-a18a-50202cdcbfcf_0000
+  - camera_uuid: americold/tacoma/0007/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: americold/tacoma/0007/cha/scenarios/PARKING_DURATION/POSITIVE/a2a3211f-f4d2-48d5-a78e-f65ed037dc0d_0000
+  - camera_uuid: wesco/reno/0006/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: wesco/reno/0006/cha/scenarios/PARKING_DURATION/POSITIVE/d57331fd-4e54-45d6-b974-1c69f979fb18_0000
+  - camera_uuid: wesco/reno/0011/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: wesco/reno/0011/cha/scenarios/PARKING_DURATION/POSITIVE/b5e0cb9c-b999-4c7f-8ad9-70e5586a3f4e_0000
+  - camera_uuid: wesco/reno/0016/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: wesco/reno/0016/cha/scenarios/PARKING_DURATION/POSITIVE/07223b01-876f-402e-bbeb-b3bd144ff1a0_0000
+  - camera_uuid: ulta/dallas/0004/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: ulta/dallas/0004/cha/scenarios/PARKING_DURATION/POSITIVE/7df0f3fe-bd4f-4776-afd4-280ec0df7b87_0000
+  - camera_uuid: ulta/dallas/0004/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: ulta/dallas/0004/cha/scenarios/PARKING_DURATION/POSITIVE/39357251-c2c1-4546-9a24-cff839383b14_0000
+  - camera_uuid: ulta/dallas/0006/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: ulta/dallas/0006/cha/scenarios/PARKING_DURATION/POSITIVE/43bd85d7-dbe4-460c-8467-7288349fe143_0000
+  - camera_uuid: ulta/dallas/0011/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: ulta/dallas/0011/cha/scenarios/PARKING_DURATION/POSITIVE/f1aae424-6fc6-45cf-9371-b9a013694e94_0000
+  - camera_uuid: ulta/dallas/0011/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: ulta/dallas/0011/cha/scenarios/PARKING_DURATION/POSITIVE/38e8bf05-cbd9-490b-a2f7-a5cc93163769_0000
+  - camera_uuid: ulta/dallas/0014/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: ulta/dallas/0014/cha/scenarios/PARKING_DURATION/POSITIVE/e2ba7d32-e8b8-49cf-8e6e-587ebce5d9d9_0000
+  - camera_uuid: ulta/dallas/0016/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: ulta/dallas/0016/cha/scenarios/PARKING_DURATION/POSITIVE/ec02dca6-3787-4653-bd67-65ec7f59f1ce_0000
+  - camera_uuid: ulta/dallas/0016/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: ulta/dallas/0016/cha/scenarios/PARKING_DURATION/POSITIVE/86aba07f-a930-4ce7-bf76-518ea1d000bc_0000
+  - camera_uuid: americold/ontario/0101/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: americold/ontario/0101/cha/scenarios/PARKING_DURATION/POSITIVE/f4d49817-488f-4a93-8de7-b4a9b7675798_0000
+  - camera_uuid: americold/ontario/0108/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: americold/ontario/0108/cha/scenarios/PARKING_DURATION/POSITIVE/cd1ea0c3-8cb8-4a0a-9671-a4e0d6dc69ae_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0001/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: vertical_cold_storage/bolingbrook/0001/cha/93fab6bb-d46a-4979-bb5f-a56149412a67_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0002/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: vertical_cold_storage/bolingbrook/0002/cha/3ac7ba92-02e6-46fa-b18d-e62139854cfe_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0002/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: vertical_cold_storage/bolingbrook/0002/cha/641c62e2-6308-46dc-9ae3-51becb497da8_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0003/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: vertical_cold_storage/bolingbrook/0003/cha/2fdd5900-3b0c-49f6-92fa-17b889c59eb4_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0003/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: vertical_cold_storage/bolingbrook/0003/cha/7bc40c59-4b5b-4d6b-8b55-edafec7591fb_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0004/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: vertical_cold_storage/bolingbrook/0004/cha/0468610e-9ea9-4fde-8b74-3da2f6cb7fda_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0004/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: vertical_cold_storage/bolingbrook/0004/cha/84490f0f-961a-484b-9d36-e4298e729e89_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0005/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: vertical_cold_storage/bolingbrook/0005/cha/1aa67c90-2b26-459d-87a9-63ca17e1980f_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0005/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: vertical_cold_storage/bolingbrook/0005/cha/5d113b35-2a8f-4cc7-b811-3ef5ce23792c_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0006/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: vertical_cold_storage/bolingbrook/0006/cha/11c836a9-fd85-49df-b2bd-0b2c22f878eb_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0006/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: vertical_cold_storage/bolingbrook/0006/cha/cf215252-c46a-49db-9a11-529b61b01adc_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0007/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: vertical_cold_storage/bolingbrook/0007/cha/8e4fdd1b-6cc6-4819-9a99-b317c21da1fc_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0007/cha
+    incidents: [PARKING_DURATION]
+    video_uuid: vertical_cold_storage/bolingbrook/0007/cha/d7406441-a5e6-47c3-bb27-a2a3e8b849dc_0000

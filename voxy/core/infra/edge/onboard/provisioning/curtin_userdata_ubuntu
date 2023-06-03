@@ -1,0 +1,189 @@
+#cloud-config
+debconf_selections:
+ maas: |
+  {{for line in str(curtin_preseed).splitlines()}}
+  {{line}}
+  {{endfor}}
+early_commands:
+{{if third_party_drivers and driver}}
+  {{py: key_string = ''.join(['\\x%x' % x for x in driver['key_binary']])}}
+  {{if driver['key_binary'] and driver['repository'] and driver['package']}}
+  driver_00_get_key: /bin/echo -en '{{key_string}}' > /tmp/maas-{{driver['package']}}.gpg
+  driver_01_add_key: ["apt-key", "add", "/tmp/maas-{{driver['package']}}.gpg"]
+  {{endif}}
+  {{if driver['repository']}}
+  driver_02_add: ["add-apt-repository", "-y", "deb {{driver['repository']}} {{node.get_distro_series()}} main"]
+  {{endif}}
+  {{if driver['package']}}
+  driver_03_update_install: ["sh", "-c", "apt-get update --quiet && apt-get --assume-yes install {{driver['package']}}"]
+  {{endif}}
+  {{if driver['module']}}
+  driver_04_load: ["sh", "-c", "depmod && modprobe {{driver['module']}} || echo 'Warning: Failed to load module: {{driver['module']}}'"]
+  {{endif}}
+{{else}}
+  driver_00: ["sh", "-c", "echo third party drivers not installed or necessary."]
+{{endif}}
+late_commands:
+  maas: [wget, '--no-proxy', {{node_disable_pxe_url|escape.json}}, '--post-data', {{node_disable_pxe_data|escape.json}}, '-O', '/dev/null']
+{{if third_party_drivers and driver}}
+  {{if driver['key_binary'] and driver['repository'] and driver['package']}}
+  driver_00_key_get: curtin in-target -- sh -c "/bin/echo -en '{{key_string}}' > /tmp/maas-{{driver['package']}}.gpg"
+  driver_02_key_add: ["curtin", "in-target", "--", "apt-key", "add", "/tmp/maas-{{driver['package']}}.gpg"]
+  {{endif}}
+  {{if driver['repository']}}
+  driver_03_add: ["curtin", "in-target", "--", "add-apt-repository", "-y", "deb {{driver['repository']}} {{node.get_distro_series()}} main"]
+  {{endif}}
+  driver_04_update_install: ["curtin", "in-target", "--", "apt-get", "update", "--quiet"]
+  {{if driver['package']}}
+  driver_05_install: ["curtin", "in-target", "--", "apt-get", "-y", "install", "{{driver['package']}}"]
+  {{endif}}
+  driver_06_depmod: ["curtin", "in-target", "--", "depmod"]
+  driver_07_update_initramfs: ["curtin", "in-target", "--", "update-initramfs", "-u"]
+{{endif}}
+storage:
+  version: 1
+  config:
+  - id: nvme0n1
+    model: Samsung SSD
+    name: nvme0n1
+    ptable: gpt
+    path: /dev/nvme0n1
+    type: disk
+    grub_device: true
+    wipe: superblock
+  - id: nvme0n1-part1
+    device: nvme0n1
+    flag: boot
+    name: nvme0n1-part1
+    number: 1
+    offset: 4MB
+    size: 500MB
+    type: partition
+    wipe: superblock
+  - id: nvme0n1-part2
+    device: nvme0n1
+    name: nvme0n1-part2
+    number: 2
+    size: 450GB
+    type: partition
+    wipe: superblock
+  - id: vgroot
+    devices:
+      - nvme0n1-part2
+    name: vgroot
+    type: lvm_volgroup
+  - id: vgroot-lv01
+    name: lv01
+    size: 100GB
+    type: lvm_partition
+    volgroup: vgroot
+  - id: vgroot-lv01
+    name: lv01
+    size: 100GB
+    type: lvm_partition
+    volgroup: vgroot
+  - id: vgroot-lv02
+    name: lv02
+    size: 100GB
+    type: lvm_partition
+    volgroup: vgroot
+  - id: vgroot-lv03
+    name: lv03
+    size: 100GB
+    type: lvm_partition
+    volgroup: vgroot
+  - id: vgroot-lv04
+    name: lv04
+    size: 100GB
+    type: lvm_partition
+    volgroup: vgroot
+  - id: vgroot-lv05
+    name: lv05
+    size: 30GB
+    type: lvm_partition
+    volgroup: vgroot
+  - id: vgroot-lv06
+    name: lv06
+    size: 10GB
+    type: lvm_partition
+    volgroup: vgroot
+  - id: vgroot-lv07
+    name: lv07
+    size: 5GB
+    type: lvm_partition
+    volgroup: vgroot
+  - id: nvme0n1-part1_format
+    fstype: fat32
+    label: efi
+    type: format
+    volume: nvme0n1-part1
+  - id: vgroot-lv01_format
+    fstype: ext4
+    label: root
+    type: format
+    volume: vgroot-lv01
+  - id: vgroot-lv02_format
+    fstype: ext4
+    label: root
+    type: format
+    volume: vgroot-lv02
+  - id: vgroot-lv03_format
+    fstype: ext4
+    label: root
+    type: format
+    volume: vgroot-lv03
+  - id: vgroot-lv04_format
+    fstype: ext4
+    label: root
+    type: format
+    volume: vgroot-lv04
+  - id: vgroot-lv05_format
+    fstype: ext4
+    label: root
+    type: format
+    volume: vgroot-lv05
+  - id: vgroot-lv06_format
+    fstype: ext4
+    label: root
+    type: format
+    volume: vgroot-lv06
+  - id: vgroot-lv07_format
+    fstype: ext4
+    label: root
+    type: format
+    volume: vgroot-lv07
+  - id: nvme0n1-part1_mount 
+    device: nvme0n1-part1_format
+    path: /boot/efi
+    type: mount
+  - id: vgroot-lv01_mount
+    device: vgroot-lv01_format
+    path: /
+    type: mount
+  - id: vgroot-lv02_mount
+    device: vgroot-lv02_format
+    path: /home
+    type: mount
+    options: defaults,nodev
+  - id: vgroot-lv03_mount
+    device: vgroot-lv03_format
+    path: /var
+    type: mount
+  - id: vgroot-lv04_mount
+    device: vgroot-lv04_format
+    path: /tmp
+    type: mount
+    options: rw,nosuid,nodev,noexec,relatime
+  - id: vgroot-lv05_mount
+    device: vgroot-lv05_format
+    path: /var/tmp
+    type: mount
+    options: rw,nosuid,nodev,noexec,relatime
+  - id: vgroot-lv06_mount
+    device: vgroot-lv06_format
+    path: /var/log
+    type: mount
+  - id: vgroot-lv07_mount
+    device: vgroot-lv07_format
+    path: /var/log/audit
+    type: mount

@@ -1,0 +1,27 @@
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "registry",
+    srcs = [
+        "registry.py",
+    ],
+    deps = [
+        "//core/common/utils:registry",
+        "//core/labeling/scale/lib/converters:converter_base",
+        "//core/labeling/scale/task_creation:task_creation_base",
+    ],
+)
+
+py_library(
+    name = "register_components",
+    srcs = [
+        "register_components.py",
+    ],
+    deps = [
+        ":registry",
+        "//core/labeling/scale/lib/converters",
+        "//core/labeling/scale/task_creation",
+    ],
+)

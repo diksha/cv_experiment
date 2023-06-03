@@ -1,0 +1,15 @@
+state_prefix: aws-dev-perc-infra-v1
+variables:
+  perception_vpc_cidr_root: "10"
+  environment: development
+  subdomain: aws-dev
+  observability_identifier: development
+  portal_vpc_cidr_root: "11"
+  portal_RDS_replica_cidr_root: "12"
+  portal_RDS_replica_region: "us-east-1"
+  db_instance_size: db.t4g.micro
+  redis_instance_type: cache.t2.micro
+  redis_cluster_size: 1
+  perception_eks_gpu_instance_types_comma_separated: g4dn.xlarge
+  perception_eks_cpu_instance_types_comma_separated: t3.large
+  portal_eks_cpu_instance_types_comma_separated: t3.large

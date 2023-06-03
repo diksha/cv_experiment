@@ -1,0 +1,24 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "edgeconfig_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/voxel-ai/voxel/services/edge/edgeconfig/cmd/edgeconfig",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//lib/infra/edge/edgeconfig",
+        "@com_github_aws_aws_sdk_go_v2//aws",
+        "@com_github_aws_aws_sdk_go_v2_config//:config",
+        "@com_github_aws_aws_sdk_go_v2_service_secretsmanager//:secretsmanager",
+        "@com_github_aws_aws_sdk_go_v2_service_secretsmanager//types",
+        "@com_github_cristalhq_aconfig//:aconfig",
+        "@com_github_cristalhq_aconfig_aconfigyaml//:aconfigyaml",
+        "@com_github_davecgh_go_spew//spew",
+    ],
+)
+
+go_binary(
+    name = "edgeconfig",
+    embed = [":edgeconfig_lib"],
+    visibility = ["//visibility:public"],
+)

@@ -1,0 +1,52 @@
+load("@io_bazel_rules_docker//container:container.bzl", "container_push")
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+load("//third_party/containers/python3:image.bzl", "py3_image")
+
+package(default_visibility = ["//visibility:public"])
+
+py_binary(
+    name = "test_ppe_classifier",
+    srcs = ["test_ppe_classifier.py"],
+    data = [
+        "@artifacts_vest_classifier-10-26",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("wandb"),
+        requirement("torch"),
+        requirement("torchvision"),
+        requirement("numpy"),
+        requirement("scikit-learn"),
+    ],
+)
+
+py_binary(
+    name = "scenario_set_testing",
+    srcs = ["scenario_set_testing.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("opencv-python"),
+        "//core/datasets/generators:association",
+        "//core/infra/cloud:gcs_utils",
+        "//core/labeling/label_store:label_reader",
+        "//core/structs",
+        "//experimental/nasha:scale_dataset",
+        "//experimental/shared/ppe:test_ppe_classifier",
+    ],
+)
+
+py3_image(
+    name = "test_scenario_image",
+    binary = ":scenario_set_testing",
+)
+
+container_push(
+    name = "test_scenario_push",
+    format = "Docker",
+    image = ":test_scenario_image",
+    registry = "us.gcr.io/sodium-carving-227300",
+    repository = "voxel/experimental",
+    tag = "$(IMAGE_TAG)",
+    tags = ["manual"],
+)

@@ -1,0 +1,94 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "base",
+    srcs = ["base.py"],
+    visibility = ["//visibility:public"],
+)
+
+py_library(
+    name = "door",
+    srcs = ["door.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":base",
+        "//core/structs",
+    ],
+)
+
+py_library(
+    name = "pit",
+    srcs = ["pit.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":base",
+        "//core/structs",
+        requirement("attrs"),
+        requirement("shapely"),
+    ],
+)
+
+py_library(
+    name = "person",
+    srcs = ["person.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":base",
+        "//core/structs",
+    ],
+)
+
+py_library(
+    name = "actor",
+    srcs = ["actor.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":base",
+        "//core/structs",
+    ],
+)
+
+py_library(
+    name = "spill",
+    srcs = ["spill.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":base",
+        "//core/structs",
+        requirement("numpy"),
+    ],
+)
+
+py_library(
+    name = "motion_detection_zones",
+    srcs = ["motion_detection_zones.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":base",
+        "//core/structs",
+    ],
+)
+
+py_library(
+    name = "no_ped_zone",
+    srcs = ["no_ped_zone.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":base",
+        "//core/structs",
+    ],
+)
+
+py_library(
+    name = "obstruction",
+    srcs = ["obstruction.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":base",
+        "//core/structs",
+        requirement("numpy"),
+    ],
+)

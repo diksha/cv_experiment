@@ -1,0 +1,39 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+load("//third_party/sematic:defs.bzl", "voxel_sematic_pipeline")
+
+voxel_sematic_pipeline(
+    name = "main",
+    bases = {
+        "default": "//third_party/sematic:no_cuda_base_image",
+        "lightly-image": "//third_party/sematic:lightly_sematic_base",
+    },
+    env = {
+        "NVIDIA_DRIVER_CAPABILITIES": "compute,utility",
+        "NVIDIA_VISIBLE_DEVICES": "all",
+    },
+    deps = [
+        ":pipeline",
+        "//core/infra/sematic/shared:utils",
+        "//core/ml/common:utils",
+        "//core/structs",
+    ],
+)
+
+py_library(
+    name = "pipeline",
+    srcs = ["pipeline.py"],
+    data = [
+        "//core/infra/sematic/perception/data_ingestion/dataflywheel/configs",
+        "//core/ml/data/curation/configs",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        "//core/ml/common:utils",
+        requirement("sematic"),
+        "//core/metaverse/api",
+        "//core/ml/data/flywheel/lib:dataflywheel",
+        "//core/structs",
+    ],
+)

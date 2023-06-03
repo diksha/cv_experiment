@@ -1,0 +1,31 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "clipsynth",
+    srcs = ["clipsynth.go"],
+    importpath = "github.com/voxel-ai/voxel/services/platform/prism/lib/clipsynth",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//go/core/utils/ffmpeg",
+        "//lib/utils/go/timeutil",
+        "//services/platform/prism/lib/fragarchive",
+        "//services/platform/prism/lib/fragarchive/key",
+        "@com_github_rs_zerolog//log",
+    ],
+)
+
+go_test(
+    name = "clipsynth_test",
+    srcs = ["clipsynth_test.go"],
+    data = [
+        "@artifacts_05_17_2023_clipsynth_testdata_fragments//:preload",  # 1681431215.mkv, 1681431231.mkv, 1681431223.mkv, 1681431207.mkv],
+    ],
+    deps = [
+        ":clipsynth",
+        "//go/core/utils/ffmpeg",
+        "@com_github_davecgh_go_spew//spew",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+        "@io_bazel_rules_go//go/runfiles:go_default_library",
+    ],
+)

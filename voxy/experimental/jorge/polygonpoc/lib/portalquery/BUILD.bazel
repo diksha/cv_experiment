@@ -1,0 +1,21 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "portalquery",
+    srcs = [
+        "db.sqlc.go",
+        "models.sqlc.go",
+        "portalquery.go",
+        "queries.sql.go",
+    ],
+    importpath = "github.com/voxel-ai/voxel/experimental/jorge/polygonpoc/lib/portalquery",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_google_uuid//:uuid",
+        "@com_github_tabbed_pqtype//:pqtype",
+    ],
+)
+
+exports_files(
+    ["portal.sql"],
+)

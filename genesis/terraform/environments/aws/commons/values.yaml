@@ -1,0 +1,3 @@
+state_prefix: aws-commons-v1
+variables:
+  environment: development

@@ -1,0 +1,68 @@
+cd ~/voxel
+./bin/python experimental/ramin/data_generator.py 
+
+cd ~/voxel/experimental/ramin/
+gsutil -m cp -r gs://voxel-users/ramin/yolo/hardhat_dataset/* data/
+
+cd ~/yolov5/
+python3.7 train.py --epochs 300 --data ~/voxel/experimental/ramin/data/hardhat.yaml  --img 480 480 --name yolo-ramin-hardhat --cfg yolov5m.yaml
+
+
+
+cd ~/voxel/experimental/ramin/
+kubectl apply -f kuber.yaml
+
+        args: ["mkdir /data && gsutil -m cp -r gs://voxel-users/ramin/yolo/hardhat_dataset/* /data/ && ls /data/ && gsutil cp gs://voxel-users/common/WandB/.netrc /root/ && python3 -m torch.distributed.launch --nproc_per_node 2 --device 0,1 train.py --epochs 300 --data /data/hardhat.yaml --img 1024 1024 --cache --name yolo-ramin-hardhat-kube-1024 --cfg yolov5m.yaml && gsutil cp -r runs/train/* gs://voxel-users/ramin/experiments/yolo/hardhat"]
+
+
+
+
+# exporting the model
+cd ~/yolov5$ 
+python3.7 export.py --weights ~/voxel/artifacts/run_xpqaq1my_model\:v0/best.pt --img-size 608 1024 --device 0 
+cp /home/ramin_voxelsafety_com/voxel/artifacts/run_xpqaq1my_model:v0/best.torchscript.pt ~/voxel/data/artifacts/ramin/
+
+./bin/python experimental/ramin/ramin_demo.py --visualize_labels
+
+
+
+wget http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda_10.2.89_440.33.01_linux.run
+sudo sh cuda_10.2.89_440.33.01_linux.run
+
+
+./bazel run //core/scenarios:main -- --scenarios_config_path /home/ramin_voxelsafety_com/voxel/data/scenario_sets/temporary/ramin_hat_vest.json --config_path /home/ramin_voxelsafety_com/voxel/configs/main.yaml
+
+./tools/ray -- debug
+
+import ray; ray.util.pdb.set_trace()
+
+
+sudo service autoshutdown stop
+
+
+~/voxel/bazel run :push
+sudo docker run -it --entrypoint=/bin/bash  us.gcr.io/sodium-carving-227300/voxel/experimental:ramin_voxelsafety_com_1627501435
+
+
+./bazel run //third_party/pypi:requirements.update
+
+./bazel run //core/execution/runners:develop -- --scenarios_config_path data/scenario_sets/temporary/americold.json  --cache_key ramin_8_3_b
+
+
+## if kubectl complains about access token
+./tools/gcloud container clusters get-credentials east1 --region=us-east1-d
+
+
+./tools/gsutil -m rsync -r gs://voxel-users/ramin/coco/uscold_fitness_overlapped_9_3/ gs://voxel-users/ramin/coco/uscold_americold_fitness_9_3/
+
+
+benchmarking
+        start = torch.cuda.Event(enable_timing=True)
+        end = torch.cuda.Event(enable_timing=True)
+        start.record()
+
+        # process to measure
+        
+        end.record()
+        torch.cuda.synchronize()
+        print(f'inference time: {start.elapsed_time(end)}')

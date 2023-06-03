@@ -1,0 +1,71 @@
+/*
+Copyright 2020-2021 Voxel Labs, Inc.
+All rights reserved.
+
+This document may not be reproduced, republished, distributed, transmitted,
+displayed, broadcast or otherwise exploited in any manner without the express
+prior written permission of Voxel Labs, Inc. The receipt or possession of this
+document does not convey any rights to reproduce, disclose, or distribute its
+contents, or to manufacture, use, or sell anything that it may describe, in
+whole or in part.
+*/
+.wrapper {
+  height: 2em;
+  width: 2em;
+  overflow: hidden;
+  display: inline-block;
+  text-align: center;
+}
+
+.spinner {
+  height: 2em;
+  width: 2em;
+  margin: 0;
+  display: inline-block;
+  border-radius: 50%;
+  animation: circ-anim 0.7s linear infinite;
+  border: 3px solid var(--brand-gray-500);
+  position: relative;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  text-align: center;
+}
+
+.white {
+  border-color: white;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+}
+
+.spinner::after {
+  position: absolute;
+  content: "";
+  width: 80%;
+  height: 80%;
+  background: transparent;
+  top: 50%;
+  left: 50;
+  margin-left: -40%;
+  margin-top: -40%;
+  border-radius: 50%;
+  border: 2px solid var(--brand-gray-500);
+  box-sizing: border-box;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  animation: circ-anim 0.35s reverse linear infinite;
+}
+
+.white::after {
+  border-color: white;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+}
+
+@keyframes circ-anim {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

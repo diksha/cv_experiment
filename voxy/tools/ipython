@@ -1,0 +1,3 @@
+#!/bin/bash
+
+exec ./bazel run //third_party/ipython:ipython --noexperimental_python_import_all_repositories -- "$@"

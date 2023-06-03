@@ -1,0 +1,161 @@
+load("//experimental/jorge/modelrepo:defs.bzl", "triton_model_repository")
+
+triton_model_repository(
+    name = "americold_ontario",
+    config = "americold_ontario_model_repo.yaml",
+    data = [
+        "@artifacts_02_05_2023_spill_generalized_jit",
+        "@artifacts_02_15_2023_americold_ontario_0005_cha",
+        "@artifacts_02_15_2023_americold_ontario_0006_cha",
+        "@artifacts_02_24_2023_americold_ontario_0004_cha",
+        "@artifacts_02_27_2023_michaels_wesco_office_yolo",
+        "@artifacts_03_04_2023_generalized_freezer_door",
+        "@artifacts_03_13_2023_americold_ontario_0104_fine_tuned_freezer_generalized_model",
+        "@artifacts_03_21_2023_pose_0630_jit_update",
+        "@artifacts_03_23_2023_overreaching_model_jit",
+        "@artifacts_03_24_2023_carry_classifier_jit",
+        "@artifacts_2022-10-26_americold_ontario_0003_cha",
+        "@artifacts_2022-10-26_americold_ontario_0009_cha",
+        "@artifacts_2022-10-26_americold_ontario_0011_cha",
+        "@artifacts_2022-10-26_americold_ontario_0012_cha",
+        "@artifacts_2022-10-31_americold_ontario_0001_cha",
+        "@artifacts_yolo_v5_post_processing_04_11_2023",
+        "@artifacts_yolo_v5_pre_processing_04_13_2023",
+    ],
+    repo_path = "s3://voxel-experimental-triton-models/ensemble-experiment",
+)
+
+triton_model_repository(
+    name = "americold_tacoma",
+    config = "americold_tacoma_model_repo.yaml",
+    data = [
+        "@artifacts_02_05_2023_spill_generalized_jit",
+        "@artifacts_02_15_2023_americold_tacoma_0005_cha",
+        "@artifacts_02_27_2023_michaels_wesco_office_yolo",
+        "@artifacts_03_21_2023_pose_0630_jit_update",
+        "@artifacts_03_23_2023_overreaching_model_jit",
+        "@artifacts_03_24_2023_carry_classifier_jit",
+        "@artifacts_2022-10-25-T19-22americold_tacoma_0004_cha",
+        "@artifacts_yolo_v5_post_processing_04_11_2023",
+        "@artifacts_yolo_v5_pre_processing_04_13_2023",
+    ],
+    repo_path = "s3://voxel-experimental-triton-models/ensemble-experiment",
+)
+
+triton_model_repository(
+    name = "innovate_manufacturing_knoxville",
+    config = "innovate_manufacturing_knoxville.yaml",
+    data = [
+        "@artifacts_01_18_2023_generalized-front-door",
+        "@artifacts_01_18_2023_piston-automotive-yolo",
+        "@artifacts_02_15_2023_innovate_manufacturing_knoxville_0004_cha",
+        "@artifacts_03_21_2023_pose_0630_jit_update",
+        "@artifacts_03_23_2023_overreaching_model_jit",
+        "@artifacts_03_24_2023_carry_classifier_jit",
+        "@artifacts_yolo_v5_post_processing_04_11_2023",
+        "@artifacts_yolo_v5_pre_processing_04_13_2023",
+    ],
+    repo_path = "s3://voxel-experimental-triton-models/ensemble-experiment",
+)
+
+triton_model_repository(
+    name = "jfe_shoji_burlington",
+    config = "jfe_shoji_burlington.yaml",
+    data = [
+        "@artifacts_02_09_2023_old_generalized_side_door",
+        "@artifacts_02_27_2023_michaels_wesco_office_yolo",
+        "@artifacts_03_21_2023_pose_0630_jit_update",
+        "@artifacts_03_23_2023_overreaching_model_jit",
+        "@artifacts_03_24_2023_carry_classifier_jit",
+        "@artifacts_04_05_2023_jfe_shoji_burlington_0011_cha",
+        "@artifacts_04_18_2023_voxel_safetyvest_vit_general_2022-09-21-jit",
+        "@artifacts_04_18_2023_voxel_safetyvest_vit_laredo_walton_2022-10-05-jit",
+        "@artifacts_05_02_2023_jfe_shoji_burlington_0010_cha",
+        "@artifacts_bumpcap_vit_99_46_34k_2022-12-20-jit",
+        "@artifacts_yolo_v5_post_processing_04_11_2023",
+        "@artifacts_yolo_v5_pre_processing_04_13_2023",
+    ],
+    repo_path = "s3://voxel-experimental-triton-models/ensemble-experiment",
+)
+
+triton_model_repository(
+    name = "michaels_tracy",
+    config = "michaels_tracy.yaml",
+    data = [
+        "@artifacts_02_06_2023_generalized_EXIT_Door_new",
+        "@artifacts_02_27_2023_michaels_wesco_office_yolo",
+        "@artifacts_03_21_2023_pose_0630_jit_update",
+        "@artifacts_03_23_2023_overreaching_model_jit",
+        "@artifacts_03_24_2023_carry_classifier_jit",
+        "@artifacts_yolo_v5_post_processing_04_11_2023",
+        "@artifacts_yolo_v5_pre_processing_04_13_2023",
+    ],
+    repo_path = "s3://voxel-experimental-triton-models/ensemble-experiment",
+)
+
+triton_model_repository(
+    name = "office_depot_dallas",
+    config = "office_depot_dallas.yaml",
+    data = [
+        "@artifacts_02_27_2023_michaels_wesco_office_yolo",
+        "@artifacts_03_21_2023_pose_0630_jit_update",
+        "@artifacts_03_23_2023_overreaching_model_jit",
+        "@artifacts_03_24_2023_carry_classifier_jit",
+        "@artifacts_yolo_v5_post_processing_04_11_2023",
+        "@artifacts_yolo_v5_pre_processing_04_13_2023",
+    ],
+    repo_path = "s3://voxel-experimental-triton-models/ensemble-experiment",
+)
+
+triton_model_repository(
+    name = "vertical_cold_bolingbrook",
+    config = "vertical_cold_bolingbrook.yaml",
+    data = [
+        "@artifacts_01_18_2023_generalized-front-door",
+        "@artifacts_02_06_2023_generalized_EXIT_Door_new",
+        "@artifacts_02_27_2023_michaels_wesco_office_yolo",
+        "@artifacts_03_04_2023_generalized_freezer_door",
+        "@artifacts_03_21_2023_pose_0630_jit_update",
+        "@artifacts_03_23_2023_overreaching_model_jit",
+        "@artifacts_03_24_2023_carry_classifier_jit",
+        "@artifacts_yolo_v5_post_processing_04_11_2023",
+        "@artifacts_yolo_v5_pre_processing_04_13_2023",
+    ],
+    repo_path = "s3://voxel-experimental-triton-models/ensemble-experiment",
+)
+
+triton_model_repository(
+    name = "uscold_syracuse",
+    config = "uscold_syracuse.yaml",
+    data = [
+        "@artifacts_01_18_2023_generalized-front-door",
+        "@artifacts_02_06_2023_generalized_EXIT_Door_new",
+        "@artifacts_02_27_2023_michaels_wesco_office_yolo",
+        "@artifacts_03_04_2023_generalized_freezer_door",
+        "@artifacts_03_21_2023_pose_0630_jit_update",
+        "@artifacts_03_23_2023_overreaching_model_jit",
+        "@artifacts_04_18_2023_voxel_safetyvest_vit_quakertown_laredo_2022_08_24_jit",
+        "@artifacts_hard_hat_occlusion_vit_v4_2022-11-18-jit",
+        "@artifacts_yolo_v5_post_processing_04_11_2023",
+        "@artifacts_yolo_v5_pre_processing_04_13_2023",
+    ],
+    repo_path = "s3://voxel-experimental-triton-models/ensemble-experiment",
+)
+
+triton_model_repository(
+    name = "uscold_laredo",
+    config = "uscold_laredo_model_repo.yaml",
+    data = [
+        "@artifacts_02_05_2023_spill_generalized_jit",
+        "@artifacts_03_21_2023_pose_0630_jit_update",
+        "@artifacts_03_23_2023_overreaching_model_jit",
+        "@artifacts_03_24_2023_carry_classifier_jit",
+        "@artifacts_04_18_2023_voxel_safetyvest_vit_laredo-2_laredo_2022-09-15-jit",
+        "@artifacts_2021-12-06-00-00-00-0000-yolo",
+        "@artifacts_door_classifier_resnet50_dataset4",
+        "@artifacts_hard_hat_occlusion_vit_v4_2022-11-18-jit",
+        "@artifacts_yolo_v5_post_processing_04_11_2023",
+        "@artifacts_yolo_v5_pre_processing_04_13_2023",
+    ],
+    repo_path = "s3://voxel-experimental-triton-models/ensemble-experiment",
+)

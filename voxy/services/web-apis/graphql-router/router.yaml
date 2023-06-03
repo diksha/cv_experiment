@@ -1,0 +1,13 @@
+server:
+  listen: 0.0.0.0:4000
+  endpoint: /graphql/
+  cors:
+    allow_any_origin: true
+  introspection: true
+headers:
+  all:
+    - propagate:
+        matching: .*
+plugins:
+  experimental.include_subgraph_errors:
+    all: true

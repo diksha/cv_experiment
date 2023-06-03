@@ -1,0 +1,14 @@
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "publisher",
+    srcs = ["publisher.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/structs",
+        "//core/utils:aws_utils",
+        "//services/perception/incidents/aggregation:controller",
+    ],
+)

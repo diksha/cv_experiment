@@ -1,0 +1,10 @@
+state_prefix: aws-platform-v1
+variables:
+  vpc_cidr_root: "1"
+  observability_identifier: platform-primary
+  root_domain: voxelplatform.com
+  subdomain: platform
+  smtp_user: AKIAZWTRLJP65DDA7244
+  smtp_host: email-smtp.us-west-2.amazonaws.com
+  smtp_port: 587
+  environment: dev

@@ -1,0 +1,29 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "utils",
+    srcs = ["utils.py"],
+    data = ["//configs"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/incidents/monitors",
+        "//core/structs",
+    ],
+)
+
+py_library(
+    name = "controller",
+    srcs = ["controller.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("shapely"),
+        ":utils",
+        "//core/incidents/monitors",
+        "//core/structs",
+        "//core/utils:bounded_sorted_dict",
+        "//core/utils:incident_writer",
+    ],
+)

@@ -1,0 +1,86 @@
+load("@io_bazel_rules_docker//container:container.bzl", "container_push")
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary", "py_library")
+load("//third_party/containers/python3:image.bzl", "py3_image")
+
+py_library(
+    name = "extract_images_lib",
+    srcs = ["extract_images.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/infra/sematic/shared:resources",
+        "//core/labeling/label_store:label_reader",
+        "//core/ml/data/extraction/extractors:image_extractor",
+        "//core/ml/data/extraction/writers:image_writer",
+        "//core/ml/data/extraction/writers:status_writer",
+        "//core/utils:video_reader",
+        requirement("loguru"),
+        requirement("sematic"),
+    ],
+)
+
+py_binary(
+    name = "extract_images",
+    srcs = ["extract_images.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":extract_images_lib",
+    ],
+)
+
+py3_image(
+    name = "extract_images_img",
+    base = "@voxel_ubuntu_20_04//image",
+    binary = ":extract_images",
+)
+
+container_push(
+    name = "extract_images_img_push",
+    format = "Docker",
+    image = ":extract_images_img",
+    registry = "us.gcr.io/sodium-carving-227300",
+    repository = "voxel/ml/data/extraction/runners",
+    tag = "$(IMAGE_TAG)",
+    tags = ["manual"],
+)
+
+py_library(
+    name = "extract_yolo_labels_lib",
+    srcs = ["extract_yolo_labels.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/infra/sematic/shared:resources",
+        "//core/labeling/label_store:label_reader",
+        "//core/ml/data/extraction/extractors:label_extractor",
+        "//core/ml/data/extraction/label_generation:yolo_label_generator",
+        "//core/ml/data/extraction/writers:label_writer",
+        "//core/ml/data/extraction/writers:status_writer",
+        requirement("loguru"),
+        requirement("sematic"),
+    ],
+)
+
+py_binary(
+    name = "extract_yolo_labels",
+    srcs = ["extract_yolo_labels.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":extract_yolo_labels_lib",
+    ],
+)
+
+py3_image(
+    name = "extract_yolo_labels_img",
+    base = "@voxel_ubuntu_20_04//image",
+    binary = ":extract_yolo_labels",
+)
+
+container_push(
+    name = "extract_yolo_labels_img_push",
+    format = "Docker",
+    image = ":extract_yolo_labels_img",
+    registry = "us.gcr.io/sodium-carving-227300",
+    repository = "voxel/ml/data/extraction/runners",
+    tag = "$(IMAGE_TAG)",
+    tags = ["manual"],
+)

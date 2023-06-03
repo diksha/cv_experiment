@@ -1,0 +1,117 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "base",
+    srcs = ["base.py"],
+    visibility = ["//visibility:public"],
+)
+
+py_library(
+    name = "is_stationary",
+    srcs = ["is_stationary.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":base",
+        requirement("scikit-image"),
+        "//core/structs",
+    ],
+)
+
+py_library(
+    name = "ppe_smoothening",
+    srcs = ["ppe_smoothening.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":base",
+        "//core/structs",
+        "//core/utils:actionable_region_utils",
+        requirement("loguru"),
+    ],
+)
+
+py_library(
+    name = "ergonomics_smoothing",
+    srcs = ["ergonomics_smoothing.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":base",
+        "//core/structs",
+        "//core/utils:actionable_region_utils",
+        requirement("loguru"),
+    ],
+)
+
+py_library(
+    name = "velocity_estimation",
+    srcs = ["velocity_estimation.py"],
+    data = ["//configs"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":base",
+        "//core/perception/calibration:camera_model",
+        "//core/perception/calibration:utils",
+        "//core/structs",
+        requirement("pyyaml"),
+        requirement("shapely"),
+        requirement("loguru"),
+    ],
+)
+
+py_library(
+    name = "discrete_bayes",
+    srcs = ["discrete_bayes.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":base",
+        "//core/structs",
+        requirement("filterpy"),
+    ],
+)
+
+py_library(
+    name = "motion_zone_smoothing",
+    srcs = ["motion_zone_smoothing.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":base",
+        "//core/structs",
+        requirement("loguru"),
+    ],
+)
+
+py_library(
+    name = "track_smoothing",
+    srcs = ["track_smoothing.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":base",
+        "//core/structs",
+    ],
+)
+
+py_library(
+    name = "association_controller",
+    srcs = ["association_controller.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":base",
+        "//core/perception/acausal/algorithms/association:pit_person_association",
+        "//core/structs",
+    ],
+)
+
+py_library(
+    name = "proximity_controller",
+    srcs = ["proximity_controller.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":base",
+        "//core/perception/acausal/algorithms/proximity:pit_person_proximity",
+        "//core/perception/acausal/algorithms/proximity:pit_pit_proximity",
+        "//core/structs",
+        requirement("numpy"),
+    ],
+)

@@ -1,0 +1,48 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "controller",
+    srcs = ["controller.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":publisher",
+        "//core/state/generators:actor",
+        "//core/state/generators:door",
+        "//core/state/generators:motion_detection_zones",
+        "//core/state/generators:no_ped_zone",
+        "//core/state/generators:obstruction",
+        "//core/state/generators:person",
+        "//core/state/generators:pit",
+        "//core/state/generators:spill",
+        requirement("rx"),
+    ],
+)
+
+py_library(
+    name = "utils",
+    srcs = ["utils.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("google-api-core"),
+        requirement("google-cloud-pubsub"),
+    ],
+)
+
+py_library(
+    name = "publisher",
+    srcs = ["publisher.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("google-api-core"),
+        requirement("google-cloud-pubsub"),
+        requirement("attrs"),
+        requirement("boto3"),
+        requirement("botocore"),
+        "//core/state:utils",
+        "//core/structs",
+        "//lib/publisher:kinesis",
+    ],
+)

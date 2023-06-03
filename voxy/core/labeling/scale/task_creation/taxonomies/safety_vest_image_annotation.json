@@ -1,0 +1,51 @@
+{
+  "geometries": {
+    "box": {
+      "objects_to_annotate": ["PERSON_V2", "SAFETY_VEST", "BARE_CHEST"],
+      "min_width": 0,
+      "min_height": 0
+    }
+  },
+  "annotation_attributes": {
+    "safety_vest": {
+      "description": "Safetyvest for the person",
+      "type": "linked",
+      "allowed_labels": ["SAFETY_VEST"],
+      "conditions": {
+        "label_condition": {
+          "label": ["PERSON_V2"]
+        }
+      }
+    },
+    "bare_chest": {
+      "description": "bare chest for the person",
+      "type": "linked",
+      "allowed_labels": ["BARE_CHEST"],
+      "conditions": {
+        "label_condition": {
+          "label": ["PERSON_V2"]
+        }
+      }
+    },
+    "occluded_degree": {
+      "description": "Degree of occlusion",
+      "conditions": {
+        "label_condition": {
+          "label": ["SAFETY_VEST", "BARE_CHEST", "PERSON_V2"]
+        }
+      },
+      "choices": ["NONE", "Occluded", "HeavilyOccluded", "FullyOccluded"],
+      "type": "category"
+    },
+    "truncated": {
+      "description": "Object is truncated or not",
+      "conditions": {
+        "label_condition": {
+          "label": ["PERSON_V2", "SAFETY_VEST", "BARE_CHEST"]
+        }
+      },
+      "choices": ["True", "False"],
+      "type": "category"
+    }
+  }
+}

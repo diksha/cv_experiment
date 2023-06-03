@@ -1,0 +1,69 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "byte_tracker",
+    srcs = ["byte_tracker.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":basetrack",
+        ":kalman_filter",
+        ":matching",
+        requirement("opencv-python"),
+        requirement("numpy"),
+    ],
+)
+
+py_library(
+    name = "basetrack",
+    srcs = [
+        "basetrack.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("opencv-python"),
+        requirement("numpy"),
+    ],
+)
+
+py_library(
+    name = "kalman_filter",
+    srcs = [
+        "kalman_filter.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("opencv-python"),
+        requirement("numpy"),
+    ],
+)
+
+py_library(
+    name = "matching",
+    srcs = [
+        "matching.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":kalman_filter",
+        requirement("opencv-python"),
+        requirement("numpy"),
+        requirement("lap"),
+        requirement("cython_bbox"),
+    ],
+)
+
+py_library(
+    name = "utils",
+    srcs = [
+        "utils.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("numpy"),
+        requirement("torchvision"),
+        requirement("torch"),
+    ],
+)

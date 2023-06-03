@@ -1,0 +1,75 @@
+load("@io_bazel_rules_docker//container:container.bzl", "container_push")
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+load("//third_party/containers/python3:image.bzl", "py3_image")
+
+package(default_visibility = ["//visibility:public"])
+
+py3_image(
+    name = "unet_image",
+    binary = ":train_unet",
+)
+
+container_push(
+    name = "push_unet_image",
+    format = "Docker",
+    image = ":unet_image",
+    registry = "us.gcr.io/sodium-carving-227300",
+    repository = "voxel/experimental",
+    tag = "$(IMAGE_TAG)",
+    tags = ["manual"],
+)
+
+py_binary(
+    name = "train_unet",
+    srcs = ["train_unet.py"],
+    data = [],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("fastai"),
+        requirement("numpy"),
+        requirement("torch"),
+        requirement("pillow"),
+        requirement("torchvision"),
+        requirement("scikit-image"),
+        requirement("opencv-python"),
+        requirement("keras"),
+        requirement("tensorflow"),
+        requirement("wandb"),
+        "//experimental/nasha/spill_segmentation/loss:registry",
+        "//experimental/nasha/spill_segmentation/model:registry",
+        "//experimental/nasha/spill_segmentation/optimizer:registry",
+    ],
+)
+
+py_binary(
+    name = "train_smp",
+    srcs = ["train_smp.py"],
+    data = [],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("numpy"),
+        requirement("torch"),
+        requirement("pytorch_lightning"),
+        requirement("scikit-learn"),
+        requirement("wandb"),
+        "//experimental/nasha/spill_segmentation/data:registry",
+        "//experimental/nasha/spill_segmentation/model:registry",
+        "//experimental/nasha/spill_segmentation/transforms:registry",
+    ],
+)
+
+py3_image(
+    name = "smp_image",
+    binary = ":train_smp",
+)
+
+container_push(
+    name = "push_smp_image",
+    format = "Docker",
+    image = ":smp_image",
+    registry = "us.gcr.io/sodium-carving-227300",
+    repository = "voxel/experimental",
+    tag = "$(IMAGE_TAG)",
+    tags = ["manual"],
+)

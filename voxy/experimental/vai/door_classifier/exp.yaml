@@ -1,0 +1,46 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+apiVersion: batch/v1
+kind: Job
+metadata:
+  # Unique key of the Job instance
+  name: door-classifier-exp6
+spec:
+  template:
+    metadata:
+      name: door-classifier-exp6
+    spec:
+      serviceAccountName: k8
+      hostIPC: True
+      containers:
+      - name: resnet
+        image: us.gcr.io/sodium-carving-227300/voxel/experimental:vai_voxelsafety_com_1637710443
+        command: ["/bin/sh", "-c"]
+        args: ["mkdir /data && gsutil -m cp -r gs://voxel-users/vai/door_state_classification/dataset2/* /data/ && ls /data/ && mkdir /models && cd experimental/vai/door_classifier && ls && python3 train_resnet50 &&  gsutil cp -r /models/* gs://voxel-users/vai/experiments/door_state_classifier/models/"]
+        resources:
+          limits:
+            cpu: 8
+            nvidia.com/gpu: 1
+            memory: "50Gi"
+            ephemeral-storage: "40Gi"
+          requests:
+            cpu: 8
+            memory: "50Gi"
+            nvidia.com/gpu: 1
+            ephemeral-storage: "40Gi"
+      # Do not restart containers after they exit
+      restartPolicy: Never
+  # of retries before marking as failed.
+  backoffLimit: 1
+     
+ 
+ 

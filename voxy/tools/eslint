@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -euo pipefail
+
+./bazel build //third_party/eslint:eslint
+exec ./bazel-bin/third_party/eslint/eslint.sh "$@" --max-warnings 0

@@ -1,0 +1,44 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+apiVersion: batch/v1
+kind: Job
+metadata:
+  # Unique key of the Job instance
+  name: detectron-local-weights-uscold-small-anchor
+spec:
+  template:
+    metadata:
+      name: detectron-local-weights-uscold-small-anchor
+    spec:
+      serviceAccountName: k8
+      hostIPC: True
+      containers:
+      - name: detectron2
+        image: us.gcr.io/sodium-carving-227300/voxel/experimental:ramin_voxelsafety_com_1630705752
+        command: ["/bin/sh", "-c"]
+        args: ["apt update && mkdir /data && gsutil -m cp -r gs://voxel-users/ramin/coco/uscold_fitness_full_8_24/* /data/ && ls /data/ && gsutil cp gs://voxel-users/common/WandB/.netrc ~/ && /usr/bin/python3 /app/experimental/ramin/detectron2/train -lr 0.02 -epochs 30 -out_dir /data/output -data_dir /data -use_local_weights 1 -wandb_name localWeights_uscold_small_anchor -num_gpus 1
+ && gsutil cp -r /data/output/* gs://voxel-users/ramin/experiments/detectron/localWeights-uscold-small-anchor"]
+        resources:
+          limits:
+            cpu: 8
+            nvidia.com/gpu: 1
+            memory: "50Gi"
+            ephemeral-storage: "40Gi"
+          requests:
+            cpu: 8
+            memory: "50Gi"
+            nvidia.com/gpu: 1
+            ephemeral-storage: "40Gi"
+      # Do not restart containers after they exit
+      restartPolicy: Never
+  # of retries before marking as failed.
+  backoffLimit: 1

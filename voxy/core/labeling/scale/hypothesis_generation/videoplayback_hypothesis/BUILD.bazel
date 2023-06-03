@@ -1,0 +1,27 @@
+load("@rules_python//python:defs.bzl", "py_binary", "py_library")
+
+py_library(
+    name = "hypothesis_base",
+    srcs = [
+        "hypothesis_base.py",
+    ],
+    data = ["//core/labeling/scale/task_creation:scale_taxonomies"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/structs",
+    ],
+)
+
+py_binary(
+    name = "annotations_hypothesis",
+    srcs = [
+        "annotations_hypothesis.py",
+    ],
+    data = ["//core/labeling/scale/task_creation:scale_taxonomies"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":hypothesis_base",
+        "//core/structs",
+        "//core/utils:aws_utils",
+    ],
+)

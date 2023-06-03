@@ -1,0 +1,19 @@
+syntax = "proto3";
+package protos.platform.bowser.v1;
+option go_package = "github.com/voxel-ai/voxel/protos/platform/bowser/v1";
+
+
+import "protos/platform/bowser/v1/bowser_env_config.proto";
+import "protos/platform/bowser/v1/bowser_config_processor.proto";
+
+
+/* Config represents configuration objects used to execute a bowser Processor */
+
+message Config {
+    BowserEnv bowser_env = 1; //Use to store no business oriented configurations
+    Processor processor = 2; // Use to store business oriented configuration
+}
+
+
+
+

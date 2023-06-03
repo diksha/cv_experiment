@@ -1,0 +1,27 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+py_library(
+    name = "scenario_generator",
+    srcs = [
+        "scenario_generator.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/infra/cloud:gcs_utils",
+    ],
+)
+
+py_library(
+    name = "evaluate_performance",
+    srcs = [
+        "evaluate_performance.py",
+        "evaluation_metrics.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/structs",
+        requirement("sqlalchemy"),
+        requirement("psycopg2-binary"),
+    ],
+)

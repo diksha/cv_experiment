@@ -1,0 +1,13 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+py_library(
+    name = "video_transcoding",
+    srcs = ["video_transcoding.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("ffmpeg-python"),
+        requirement("loguru"),
+        "//core/infra/cloud:gcs_utils",
+    ],
+)

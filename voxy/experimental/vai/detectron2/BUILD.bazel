@@ -1,0 +1,36 @@
+load("@io_bazel_rules_docker//container:container.bzl", "container_push")
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+load("//third_party/containers/python3:image.bzl", "py3_image")
+
+package(default_visibility = ["//visibility:public"])
+
+py_binary(
+    name = "train_detectron",
+    srcs = ["train_detectron.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("opencv-python"),
+        requirement("torch"),
+        requirement("torchvision"),
+        requirement("numpy"),
+        requirement("matplotlib"),
+        requirement("detectron2"),
+        requirement("wandb"),
+    ],
+)
+
+py3_image(
+    name = "train_image",
+    binary = ":train_detectron",
+)
+
+container_push(
+    name = "train_push",
+    format = "Docker",
+    image = ":train_push",
+    registry = "us.gcr.io/sodium-carving-227300",
+    repository = "voxel/experimental",
+    tag = "{BUILD_USER}_{BUILD_TIMESTAMP}",
+    tags = ["manual"],
+)

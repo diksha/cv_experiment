@@ -1,0 +1,5 @@
+#!/bin/bash
+
+set -euo pipefail
+
+exec ./bazel run --run_under="cd \$BUILD_WORKING_DIRECTORY && exec" //third_party/codecov -- "$@"

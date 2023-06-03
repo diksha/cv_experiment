@@ -1,0 +1,72 @@
+load("@io_bazel_rules_docker//container:container.bzl", "container_push")
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary", "py_library")
+load("//third_party/containers/python3:image.bzl", "py3_image")
+
+package(default_visibility = ["//visibility:public"])
+
+py_binary(
+    name = "video_logset",
+    srcs = ["video_logset.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/infra/symphony/api:firestore",
+        "//core/metaverse",
+    ],
+)
+
+py_binary(
+    name = "generate_logset",
+    srcs = ["generate_logset.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/metaverse",
+    ],
+)
+
+py_library(
+    name = "person_pose_classification",
+    srcs = [
+        "person_pose_classification.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("torchvision"),
+        "//core/metaverse",
+        requirement("opencv-python"),
+        "//core/datasets/generators:association",
+        "//core/infra/cloud:gcs_utils",
+        "//core/labeling/label_store:label_reader",
+        "//core/perception/pose:api",
+        "//core/perception/pose:pose_embedder",
+        "//core/structs",
+    ],
+)
+
+py_binary(
+    name = "dataset_generation",
+    srcs = ["dataset_generation.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":person_pose_classification",
+        "//core/infra/cloud:gcs_utils",
+        "//core/metaverse",
+        "//core/structs",
+        requirement("pyyaml"),
+    ],
+)
+
+py3_image(
+    name = "dataset_image",
+    binary = ":dataset_generation",
+)
+
+container_push(
+    name = "dataset_push",
+    format = "Docker",
+    image = ":dataset_image",
+    registry = "us.gcr.io/sodium-carving-227300",
+    repository = "voxel/experimental",
+    tag = "$(IMAGE_TAG)",
+    tags = ["manual"],
+)

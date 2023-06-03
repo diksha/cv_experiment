@@ -1,0 +1,48 @@
+load("@rules_pkg//:pkg.bzl", "pkg_zip")
+load("//third_party/aws/greengrass:defs.bzl", "greengrass_component")
+
+pkg_zip(
+    name = "artifact",
+    srcs = [
+        "//services/edge/edgeconfig/cmd/edgeconfig",
+    ],
+)
+
+pkg_zip(
+    name = "deptest_artifact",
+    srcs = [],
+)
+
+greengrass_component(
+    name = "prod",
+    artifact = "artifact.zip",
+    component_name = "voxel.edge.EdgeConfig",
+    recipe_template = "recipe.yaml",
+    version = "0.0.2",
+)
+
+greengrass_component(
+    name = "dev",
+    artifact = "artifact.zip",
+    component_name = "voxel.edge.EdgeConfigDev",
+    recipe_template = "recipe.yaml",
+    version = "0.0.18",
+)
+
+greengrass_component(
+    name = "deptest",
+    artifact = "deptest_artifact.zip",
+    component_name = "voxel.edge.EdgeConfigDeptest",
+    recipe_template = "deptest-recipe.yaml",
+    version = "0.0.2",
+)
+
+alias(
+    name = "prod.release",
+    actual = ":prod.create-version",
+)
+
+alias(
+    name = "dev.release",
+    actual = ":dev.create-version",
+)

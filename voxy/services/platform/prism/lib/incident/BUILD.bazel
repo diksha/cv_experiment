@@ -1,0 +1,18 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "incident",
+    srcs = ["incident.go"],
+    importpath = "github.com/voxel-ai/voxel/services/platform/prism/lib/incident",
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "incident_test",
+    srcs = ["incident_test.go"],
+    deps = [
+        ":incident",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+    ],
+)

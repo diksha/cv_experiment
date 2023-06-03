@@ -1,0 +1,102 @@
+#
+# Copyright 2023 Voxel Labs, Inc.
+# All rights reserved.
+#
+# This document may not be reproduced, republished, distributed, transmitted,
+# displayed, broadcast or otherwise exploited in any manner without the express
+# prior written permission of Voxel Labs, Inc. The receipt or possession of this
+# document does not convey any rights to reproduce, disclose, or distribute its
+# contents, or to manufacture, use, or sell anything that it may describe, in
+# whole or in part.
+#
+#
+scenario_for_incidents: [OPEN_DOOR_DURATION]
+scenarios:
+  # POSITIVE SCENARIOS
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: [OPEN_DOOR_DURATION]
+    video_uuid: americold/modesto/0001/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/b7b4847e-5fcd-4576-a3b1-a8efadb53d66_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: [OPEN_DOOR_DURATION]
+    video_uuid: americold/modesto/0002/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/e835a338-d544-411f-9fd6-34402089e3ed_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: [OPEN_DOOR_DURATION]
+    video_uuid: americold/modesto/0003/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/18e5fe9b-4f45-4121-baca-b8fe26f631a7_0000
+  - camera_uuid: americold/modesto/0005/cha
+    incidents: [OPEN_DOOR_DURATION]
+    video_uuid: americold/modesto/0005/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/4469def5-9746-4312-9df6-d0f2260c9af5_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: [OPEN_DOOR_DURATION]
+    video_uuid: americold/modesto/0009/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/0617afef-c072-42b8-a901-fb54c2269091_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: [OPEN_DOOR_DURATION]
+    video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/da00ac7c-cc2b-4cb1-acf7-6a2d022ab48c_0000
+  - camera_uuid: americold/ontario/0003/cha
+    incidents: [OPEN_DOOR_DURATION]
+    video_uuid: americold/ontario/0003/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/6071fada-2475-4841-9137-187c7b084e09_0000
+  - camera_uuid: americold/ontario/0004/cha
+    incidents: [OPEN_DOOR_DURATION]
+    video_uuid: americold/ontario/0004/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/56d595b0-57c4-4a2b-a49c-ccd818de5b00_0000
+  - camera_uuid: americold/ontario/0006/cha
+    incidents: [OPEN_DOOR_DURATION]
+    video_uuid: americold/ontario/0006/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/77ec7808-b359-4721-a055-b919a3d01035_0000
+  - camera_uuid: americold/ontario/0009/cha
+    incidents: [OPEN_DOOR_DURATION]
+    video_uuid: americold/ontario/0009/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/0957ad46-f10f-457a-8a71-59083e939b0e_0000
+  - camera_uuid: americold/ontario/0011/cha
+    incidents: [OPEN_DOOR_DURATION]
+    video_uuid: americold/ontario/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/da7a19aa-805b-4d56-8ac7-be1eaa17439f_0000
+  - camera_uuid: americold/ontario/0012/cha
+    incidents: [OPEN_DOOR_DURATION]
+    video_uuid: americold/ontario/0012/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/9cf3102f-5542-4fe2-8590-0d9993b36446_0000
+  - camera_uuid: trieagle/ocala/0001/cha
+    incidents: [OPEN_DOOR_DURATION]
+    video_uuid: trieagle/ocala/0001/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/53b014db-195c-4796-9e61-0031997f605c_0000
+  - camera_uuid: trieagle/ocala/0005/cha
+    incidents: [OPEN_DOOR_DURATION]
+    video_uuid: trieagle/ocala/0005/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/576b98b7-d38a-482a-bf0c-6c289621cd2a_0000
+  - camera_uuid: wn_foods/hayward/0009/cha
+    incidents: [OPEN_DOOR_DURATION]
+    video_uuid: wn_foods/hayward/0009/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/4ec212d8-3946-413a-869b-e25472317cc3_0000
+  - camera_uuid: wn_foods/hayward/0011/cha
+    incidents: [OPEN_DOOR_DURATION]
+    video_uuid: wn_foods/hayward/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/6b200917-cecd-4077-b7fe-5c2ecf416e19_0000
+  - camera_uuid: americold/tacoma/0004/cha
+    incidents: [OPEN_DOOR_DURATION]
+    video_uuid: americold/tacoma/0004/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/ea377611-b8b3-41f8-bae7-c3a851a41e01_0000
+  - camera_uuid: americold/tacoma/0005/cha
+    incidents: [OPEN_DOOR_DURATION]
+    video_uuid: americold/tacoma/0005/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/c16271e7-0b49-4623-87c2-a43659f3053b_0000
+  - camera_uuid: innovate_manufacturing/knoxville/0004/cha
+    incidents: [OPEN_DOOR_DURATION]
+    video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/5556bafb-021c-40ba-815a-10b51d505d40_0000
+  - camera_uuid: innovate_manufacturing/knoxville/0005/cha
+    incidents: [OPEN_DOOR_DURATION]
+    video_uuid: innovate_manufacturing/knoxville/0005/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/839e89c9-0f04-4b87-9ac7-44874dacf52e_0000
+  - camera_uuid: ulta/dallas/0004/cha
+    incidents: [OPEN_DOOR_DURATION]
+    video_uuid: ulta/dallas/0004/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/de33b415-3e06-4028-a5bc-8075637875b9_0000
+  - camera_uuid: americold/ontario/0104/cha
+    incidents: [OPEN_DOOR_DURATION]
+    video_uuid: americold/ontario/0104/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/33f6b1a4-9097-413c-b545-b323420b3c1e_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0001/cha
+    incidents: [OPEN_DOOR_DURATION]
+    video_uuid: vertical_cold_storage/bolingbrook/0001/cha/924cbd60-f2b8-4db8-afec-270b14c9dc88_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0001/cha
+    incidents: [OPEN_DOOR_DURATION]
+    video_uuid: vertical_cold_storage/bolingbrook/0001/cha/4a07a69b-d7cd-473e-9f2b-1c7b207b500d_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0003/cha
+    incidents: [OPEN_DOOR_DURATION]
+    video_uuid: vertical_cold_storage/bolingbrook/0003/cha/3fe3850d-8e3e-48c3-9431-70d451593e20_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0003/cha
+    incidents: [OPEN_DOOR_DURATION]
+    video_uuid: vertical_cold_storage/bolingbrook/0003/cha/4d596fa2-ae05-4e41-8ebf-051fb34a48e0_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0004/cha
+    incidents: [OPEN_DOOR_DURATION]
+    video_uuid: vertical_cold_storage/bolingbrook/0004/cha/6f0ac94e-a57c-4ce6-a3b9-ed803cbe9e80_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0004/cha
+    incidents: [OPEN_DOOR_DURATION]
+    video_uuid: vertical_cold_storage/bolingbrook/0004/cha/3ec018df-4933-4089-b64d-a64522b2fe78_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0005/cha
+    incidents: [OPEN_DOOR_DURATION]
+    video_uuid: vertical_cold_storage/bolingbrook/0005/cha/f706169d-aeee-43b5-aa03-13f707bfc9bf_0000

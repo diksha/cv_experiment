@@ -1,0 +1,37 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "edgeconfig",
+    srcs = [
+        "fetch.go",
+        "parse.go",
+    ],
+    importpath = "github.com/voxel-ai/voxel/lib/infra/edge/edgeconfig",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//protos/edge/edgeconfig/v1:edgeconfig",
+        "@com_github_aws_aws_sdk_go_v2//aws",
+        "@com_github_aws_aws_sdk_go_v2_service_secretsmanager//:secretsmanager",
+        "@com_github_aws_aws_sdk_go_v2_service_secretsmanager//types",
+        "@io_k8s_sigs_yaml//:yaml",
+        "@org_golang_google_protobuf//encoding/protojson",
+    ],
+)
+
+go_test(
+    name = "edgeconfig_test",
+    srcs = [
+        "fetch_test.go",
+        "parse_test.go",
+    ],
+    data = glob(["testdata/**"]),
+    deps = [
+        ":edgeconfig",
+        "//lib/utils/aws/fake",
+        "@com_github_aws_aws_sdk_go_v2//aws",
+        "@com_github_aws_aws_sdk_go_v2_service_secretsmanager//:secretsmanager",
+        "@com_github_aws_aws_sdk_go_v2_service_secretsmanager//types",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+    ],
+)

@@ -1,0 +1,20 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "key",
+    srcs = ["fragkey.go"],
+    importpath = "github.com/voxel-ai/voxel/services/platform/prism/lib/fragarchive/key",
+    visibility = ["//visibility:public"],
+    deps = ["@com_github_aws_aws_sdk_go_v2_service_kinesisvideoarchivedmedia//types"],
+)
+
+go_test(
+    name = "key_test",
+    srcs = ["fragkey_test.go"],
+    deps = [
+        ":key",
+        "@com_github_aws_aws_sdk_go_v2_service_kinesisvideoarchivedmedia//types",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+    ],
+)

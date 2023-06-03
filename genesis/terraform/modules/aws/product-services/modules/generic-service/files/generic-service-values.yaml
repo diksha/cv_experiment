@@ -1,0 +1,91 @@
+enabled: true
+environment: ${ENVIRONMENT}
+image:
+  repository: ${IMAGE_REPO}
+  pullPolicy: Always
+  tag: ${IMAGE_TAG}
+
+nameOverride: ${NAME}
+fullnameOverride: ${FULL_NAME}
+
+serviceAccount:
+  name: ${SERVICE_ACCOUNT_NAME}
+  create: false
+
+secrets:
+  name: secret-store
+  mountPath: /mnt/secrets-store
+  secretProviderClass: ${SECRET_PROVIDER_NAME}
+
+service:
+  type: ClusterIP
+  port: 443
+  containerPort: 8443
+
+strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 0
+
+podLabels:
+  autocert.step.sm/name: ${TLS_COMMON_NAME}
+podAnnotations:
+  autocert.step.sm/name: ${TLS_COMMON_NAME}
+  %{~ if TLS_SANS != "" ~}
+  autocert.step.sm/sans: ${TLS_SANS}
+  %{~ endif ~}
+
+# lifecycle:
+#   preStop:
+#     exec:
+#       command: ["/bin/sh", "-c", "sleep 150"]
+
+ingress:
+  enabled: false
+
+resources:
+  requests:
+    cpu: 512m
+    memory: 256Mi
+  limits:
+    cpu: 512m
+    memory: 256Mi
+
+terminationGracePeriodSeconds: 60
+
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 4
+  targetCPUUtilizationPercentage: 80
+
+livenessProbe:
+  failureThreshold: 6
+  httpGet:
+    path: /health
+    port: 8081
+    scheme: HTTP
+  initialDelaySeconds: 60
+  periodSeconds: 5
+  successThreshold: 1
+  timeoutSeconds: 30
+
+readinessProbe:
+  failureThreshold: 6
+  httpGet:
+    path: /health
+    port: 8081
+    scheme: HTTP
+  initialDelaySeconds: 60
+  periodSeconds: 5
+  successThreshold: 1
+  timeoutSeconds: 30
+
+
+env:
+  config:
+    SECRETS_FILEPATH: /mnt/secrets-store/${SM_NAME}
+    DEPLOYMENT_PROVIDER: eks
+    HEALTH_PORT: 8081
+    SERVICE_PORT: 8443

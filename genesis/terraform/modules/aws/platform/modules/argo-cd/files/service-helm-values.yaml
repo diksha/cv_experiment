@@ -1,0 +1,128 @@
+redis-ha:
+  enabled: true
+
+controller:
+  enableStatefulSet: true
+  metrics:
+    enabled: true
+    applicationLabels:
+      enabled: true
+    service:
+      servicePort: 8082
+      portName: http-metrics
+    serviceMonitor:
+      enabled: true
+      namespace: observability
+      interval: 30s
+      selector:
+        prometheus: default
+
+dex:
+  extraVolumeMounts:
+    - mountPath: /extra-secrets
+      name: extra-secrets
+      readOnly: true
+  extraVolumes:
+    - name: extra-secrets
+      secret:
+        defaultMode: 420
+        secretName: extra-secrets
+
+server:
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+  service:
+    type: LoadBalancer
+    annotations:
+      service.beta.kubernetes.io/aws-load-balancer-scheme: internal
+      service.beta.kubernetes.io/aws-load-balancer-type: "external"
+      service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "instance"
+      service.beta.kubernetes.io/load-balancer-source-ranges: 10.0.0.0/8
+      service.beta.kubernetes.io/aws-load-balancer-additional-resource-tags: map-migrated=d-server-00swbp99drezfh
+  rbacConfig:
+    policy.csv: |
+      p, role:members, repositories, get, genesis, allow 
+
+      p, role:perception-user, applications, *, cameras-development/*, allow
+      p, role:perception-owner, applications, *, cameras-development/*, allow
+      p, role:perception-owner, applications, *, cameras-staging/*, allow
+      p, role:perception-owner, applications, *, cameras-production/*, allow
+
+      p, role:perception-user, logs, get, cameras-development/*, allow
+      p, role:perception-owner, logs, get, cameras-development/*, allow
+      p, role:perception-owner, logs, get, cameras-staging/*, allow
+      p, role:perception-owner, logs, get, cameras-production/*, allow
+
+      p, role:perception-user, exec, create, cameras-development/*, allow
+      p, role:perception-owner, exec, create, cameras-development/*, allow
+      p, role:perception-owner, exec, create, cameras-staging/*, allow
+      p, role:perception-owner, exec, create, cameras-production/*, allow
+      
+      p, role:platform-all-all, *, *, *, allow
+      p, role:development-all-all, *, *, cameras-development/*, allow
+      p, role:staging-all-all, *, *, cameras-staging/*, allow
+      p, role:production-all-all, *, *, cameras-production/*, allow
+      
+      p, role:development-all-all, *, *, portal-development/*, allow
+      p, role:staging-all-all, *, *, portal-staging/*, allow
+      p, role:production-all-all, *, *, portal-production/*, allow
+
+      p, role:perception-owner, clusters, get, *, allow
+      p, role:perception-user, clusters, get, *, allow
+      p, role:development-all-all, clusters, get, *, allow
+      p, role:staging-all-all, clusters, get, *, allow
+      p, role:production-all-all, clusters, get, *, allow
+      p, role:platform-all-all, clusters, get, *, allow
+
+      g, argo-perception-users@voxelai.com, role:perception-user
+      g, argo-perception-production@voxelai.com, role:perception-owner
+
+      g, prime-development, role:development-all-all
+      g, prime-staging, role:staging-all-all
+      g, prime-production, role:production-all-all
+      g, prime-platform, role:admin
+      
+      g, argo-platform-admins@voxelai.com, role:admin
+    policy.default: role:members
+  config:
+    url: https://${DOMAIN}
+    accounts.prime-platform: apiKey
+    accounts.prime-development: apiKey
+    accounts.prime-staging: apiKey
+    accounts.prime-production: apiKey
+
+  metrics:
+    enabled: true
+    applicationLabels:
+      enabled: true
+    service:
+      servicePort: 8083
+      portName: http-metrics
+    serviceMonitor:
+      enabled: true
+      namespace: observability
+      interval: 30s
+      selector:
+        prometheus: default
+
+repoServer:
+  autoscaling:
+    enabled: true
+    minReplicas: 1
+
+
+applicationSet:
+  metrics:
+    enabled: true
+    applicationLabels:
+      enabled: true
+    service:
+      servicePort: 8085
+      portName: http-metrics
+    serviceMonitor:
+      enabled: true
+      namespace: observability
+      interval: 30s
+      selector:
+        prometheus: default

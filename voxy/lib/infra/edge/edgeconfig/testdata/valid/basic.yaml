@@ -1,0 +1,4 @@
+version: 1
+streams:
+  - rtsp_uri: test-uri
+    kinesis_video_stream: test-stream

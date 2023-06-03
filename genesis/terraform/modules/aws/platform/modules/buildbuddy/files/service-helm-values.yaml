@@ -1,0 +1,13 @@
+disk:
+  data:
+    size: 100Gi
+service:
+  type: ClusterIP
+mysql:
+  mysqlUser: voxel
+  mysqlDatabase: buildbuddy
+config:
+  app:
+    build_buddy_url: "https://buildbuddy.private.voxelplatform.com"
+    events_api_url: "grpc://buildbuddy.private.voxelplatform.com:1985"
+    cache_api_url: "grpc://buildbuddy.private.voxelplatform.com:1985"

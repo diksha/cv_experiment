@@ -1,0 +1,18 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "devcert_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/voxel-ai/voxel/services/platform/devcert/cmd/devcert",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//lib/utils/x509pem",
+        "//services/platform/devcert",
+    ],
+)
+
+go_binary(
+    name = "devcert",
+    embed = [":devcert_lib"],
+    visibility = ["//visibility:public"],
+)

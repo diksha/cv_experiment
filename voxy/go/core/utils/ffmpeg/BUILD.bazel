@@ -1,0 +1,34 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "ffmpeg",
+    srcs = [
+        "ffmpeg.go",
+        "ffprobe.go",
+        "finder.go",
+        "input.go",
+    ],
+    importpath = "github.com/voxel-ai/voxel/go/core/utils/ffmpeg",
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "ffmpeg_test",
+    srcs = [
+        "ffmpeg_test.go",
+        "ffprobe_test.go",
+        "finder_test.go",
+    ],
+    data = [
+        "@artifacts_05_19_2023_example_incident_mp4//:preload",
+        "@artifacts_ffmpeg_static_binary",
+        "@artifacts_office_cam_720p_mkv",
+    ],
+    deps = [
+        ":ffmpeg",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+        "@io_bazel_rules_go//go/runfiles:go_default_library",
+        "@io_bazel_rules_go//go/tools/bazel:go_default_library",
+    ],
+)

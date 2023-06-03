@@ -1,0 +1,26 @@
+syntax = "proto3";
+// trunk-ignore(buf-lint/PACKAGE_VERSION_SUFFIX)
+package experimental.jorge.polygonpoc;
+option go_package = "github.com/voxel-ai/voxel/experimental/jorge/polygonpoc;polygonpoc";
+import "google/protobuf/timestamp.proto";
+
+service PolygonService {
+  rpc GetCameras(GetCamerasRequest) returns (GetCamerasResponse) {}
+}
+
+message GetCamerasRequest {}
+
+message GetCamerasResponse {
+repeated Camera cameras = 1;
+}
+
+message Camera {
+  int64 id = 1;
+  google.protobuf.Timestamp created_at = 2;
+  optional google.protobuf.Timestamp deleted_at = 3;
+  google.protobuf.Timestamp updated_at = 4;
+  string uuid = 5;
+  string name = 6;
+  optional int64 organization_id = 7;
+  optional int64 zone_id = 8;
+}

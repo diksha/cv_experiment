@@ -1,0 +1,95 @@
+#
+# Copyright 2023 Voxel Labs, Inc.
+# All rights reserved.
+#
+# This document may not be reproduced, republished, distributed, transmitted,
+# displayed, broadcast or otherwise exploited in any manner without the express
+# prior written permission of Voxel Labs, Inc. The receipt or possession of this
+# document does not convey any rights to reproduce, disclose, or distribute its
+# contents, or to manufacture, use, or sell anything that it may describe, in
+# whole or in part.
+#
+#
+scenario_for_incidents: [OBSTRUCTION]
+scenarios:
+  # POSITIVE SCENARIOS
+  - camera_uuid: americold/modesto/0012/cha
+    incidents: [OBSTRUCTION]
+    video_uuid: americold/modesto/0012/cha/scenarios/OVERREACHING/positive/74ff5a13-3123-4cc6-9981-4c49a7866e7f_0000
+  - camera_uuid: americold/modesto/0012/cha
+    incidents: [OBSTRUCTION]
+    video_uuid: americold/modesto/0012/cha/scenarios/BAD_POSTURE/positive/f456fef1-ac3e-4231-be72-a1fa23199629_0000
+  - camera_uuid: americold/ontario/0104/cha
+    incidents: [OBSTRUCTION]
+    video_uuid: americold/ontario/0104/cha/scenarios/PARKING_DURATION/positive/b7792206-bacf-48c0-bf96-fd315ea2cc08_0000
+  - camera_uuid: americold/ontario/0104/cha
+    incidents: [OBSTRUCTION]
+    video_uuid: americold/ontario/0104/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/positive/ad913a18-f89c-4db2-85e1-266ef262f10a_0000
+  - camera_uuid: americold/tacoma/0004/cha
+    incidents: [OBSTRUCTION]
+    video_uuid: americold/tacoma/0004/cha/scenarios/BAD_POSTURE/positive/902d2bdd-70dd-42ff-83c6-42958fd5e3b9_0000
+  - camera_uuid: americold/tacoma/0007/cha
+    incidents: [OBSTRUCTION]
+    video_uuid: americold/tacoma/0007/cha/scenarios/BAD_POSTURE/positive/9e1e74bb-b8cc-403b-b079-b7d8fd11845c_0000
+  - camera_uuid: hensley/phoenix/0003/cha
+    incidents: [OBSTRUCTION]
+    video_uuid: hensley/phoenix/0003/cha/scenarios/SPILL/positive/2a7dadbc-8c2b-4279-8d62-7b511224ac12_0000
+  - camera_uuid: hensley/phoenix/0003/cha
+    incidents: [OBSTRUCTION]
+    video_uuid: hensley/phoenix/0003/cha/scenarios/BAD_POSTURE/positive/3c18c5ba-9a0a-4a14-95e4-18dbf65d903b_0000
+  - camera_uuid: hensley/phoenix/0003/cha
+    incidents: [OBSTRUCTION]
+    video_uuid: hensley/phoenix/0003/cha/scenarios/OVERREACHING/positive/3fdb58fe-4240-47f3-9f81-c25970edbe53_0000
+  - camera_uuid: michaels/tracy/0003/cha
+    incidents: [OBSTRUCTION]
+    video_uuid: michaels/tracy/0003/cha/scenarios/OVERREACHING/positive/7e676326-b27a-46a6-8cb9-72031dccc7bd_0000
+  - camera_uuid: trieagle/ocala/0005/cha
+    incidents: [OBSTRUCTION]
+    video_uuid: trieagle/ocala/0005/cha/scenarios/BAD_POSTURE/positive/779daa37-d223-4fd1-b070-979464dbf786_0000
+  - camera_uuid: trieagle/ocala/0005/cha
+    incidents: [OBSTRUCTION]
+    video_uuid: trieagle/ocala/0008/cha/scenarios/OVERREACHING/positive/32247441-c35f-422a-aadb-ff06a47bc4ac_0000
+  - camera_uuid: trieagle/ocala/0008/cha
+    incidents: [OBSTRUCTION]
+    video_uuid: trieagle/ocala/0008/cha/scenarios/PARKING_DURATION/positive/4002f8e3-0baf-4502-891f-c394ef6b3bc8_0000
+  - camera_uuid: uscold/quakertown/0005/cha
+    incidents: [OBSTRUCTION]
+    video_uuid: uscold/quakertown/0005/cha/scenarios/BAD_POSTURE/positive/fbc5c32c-2fcb-43a0-9529-9b56bfcf66f6_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0005/cha
+    incidents: [OBSTRUCTION]
+    video_uuid: vertical_cold_storage/bolingbrook/0005/cha/scenarios/PARKING_DURATION/positive/1050bf3f-cefc-4246-b7cf-d5d0fec0a6b8_0000
+  - camera_uuid: wn_foods/hayward/0009/cha
+    incidents: [OBSTRUCTION]
+    video_uuid: wn_foods/hayward/0009/cha/scenarios/DOOR_VIOLATION/positive/d321e311-1644-4f63-a771-8b7ff00b1e16_0000
+  - camera_uuid: wn_foods/hayward/0011/cha
+    incidents: [OBSTRUCTION]
+    video_uuid: wn_foods/hayward/0011/cha/scenarios/BAD_POSTURE/positive/6499895d-ca7b-47de-a2b6-dcd241559974_0000
+
+  # NEGATIVE SCENARIOS
+  - camera_uuid: americold/modesto/0012/cha
+    incidents: []
+    video_uuid: americold/modesto/0012/cha/scenarios/OVERREACHING/positive/a8d02c1a-d555-4eb7-95ef-02d6a9193efb_0000
+  - camera_uuid: americold/ontario/0104/cha
+    incidents: []
+    video_uuid: americold/ontario/0104/cha/scenarios/DOOR_VIOLATION/positive/03869fa5-5f5e-4d4c-8269-368ead94f980_0000
+  - camera_uuid: americold/tacoma/0004/cha
+    incidents: []
+    video_uuid: americold/tacoma/0004/cha/scenarios/OVERREACHING/positive/dcf70733-c983-403f-9dd1-39e489c22ef3_0000
+  - camera_uuid: trieagle/ocala/0008/cha
+    incidents: []
+    video_uuid: trieagle/ocala/0008/cha/scenarios/NO_STOP_AT_END_OF_AISLE/positive/cc68bff9-8589-4f89-8181-beca3b63e5e3_0000
+  - camera_uuid: trieagle/ocala/0008/cha
+    incidents: []
+    video_uuid: trieagle/ocala/0008/cha/scenarios/NO_STOP_AT_END_OF_AISLE/positive/2a3325fc-344f-4eb8-aa84-d83e9c37e7e5_0000
+  - camera_uuid: trieagle/ocala/0005/cha
+    incidents: []
+    video_uuid: trieagle/ocala/0005/cha/scenarios/OPEN_DOOR_DURATION/positive/adee25b2-98ed-4470-9248-9ee26c882bca_0000
+  - camera_uuid: trieagle/ocala/0005/cha
+    incidents: []
+    video_uuid: trieagle/ocala/0005/cha/scenarios/OPEN_DOOR_DURATION/positive/7a2814b6-84ae-4079-8138-9ad17eb62402_0000
+  - camera_uuid: uscold/quakertown/0005/cha
+    incidents: []
+    video_uuid: uscold/quakertown/0005/cha/scenarios/SPILL/positive/f0f045fa-3a0a-4899-8bc5-0e9db23edbba_0000
+  - camera_uuid: wn_foods/hayward/0009/cha
+    incidents: []
+    video_uuid: wn_foods/hayward/0009/cha/scenarios/OPEN_DOOR_DURATION/positive/5b13e762-4d1c-48c6-b231-21c4aac76bfa_0000

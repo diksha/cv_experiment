@@ -1,0 +1,7 @@
+profiles:
+  default:
+    scopes: {}
+    settings:
+      sematic.config.server_settings.ServerSettings: {}
+      sematic.config.user_settings.UserSettings: {}
+version: 1

@@ -1,0 +1,24 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "interpolation",
+    srcs = ["interpolation.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("sympy"),
+        requirement("scipy"),
+    ],
+)
+
+py_library(
+    name = "convolution",
+    srcs = ["convolution.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":interpolation",
+        requirement("scipy"),
+    ],
+)

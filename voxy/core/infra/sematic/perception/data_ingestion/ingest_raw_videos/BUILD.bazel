@@ -1,0 +1,38 @@
+#
+# Copyright 2022 Voxel Labs, Inc.
+# All rights reserved.
+#
+# This document may not be reproduced, republished, distributed, transmitted,
+# displayed, broadcast or otherwise exploited in any manner without the express
+# prior written permission of Voxel Labs, Inc. The receipt or possession of this
+# document does not convey any rights to reproduce, disclose, or distribute its
+# contents, or to manufacture, use, or sell anything that it may describe, in
+# whole or in part.
+#
+
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+load("//third_party/sematic:defs.bzl", "voxel_sematic_pipeline")
+
+voxel_sematic_pipeline(
+    name = "main",
+    deps = [
+        ":pipeline",
+        "//core/infra/sematic/shared:utils",
+        "//core/utils:aws_utils",
+    ],
+)
+
+py_library(
+    name = "pipeline",
+    srcs = ["pipeline.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        requirement("sematic"),
+        "//core/labeling/logs_store:chunk_and_upload_video_logs",
+        "//core/labeling/logs_store:ingest_data_collection_metaverse",
+        "//core/labeling/scale/runners:create_scale_tasks",
+        "//core/structs",
+    ],
+)

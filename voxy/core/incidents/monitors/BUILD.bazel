@@ -1,0 +1,18 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "monitors",
+    srcs = glob(["*.py"]),
+    data = [
+        "@artifacts_doors_0630",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("shapely"),
+        requirement("loguru"),
+        "//core/structs",
+    ],
+)

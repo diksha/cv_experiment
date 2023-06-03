@@ -1,0 +1,25 @@
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//core/ml/data/generation:__subpackages__"])
+
+py_library(
+    name = "lib",
+    srcs = [],
+    deps = [
+        "//core/common/functional/lib:compose",
+        "//core/common/functional/lib:transform",
+        "//core/common/functional/lib:utils",
+        "//core/common/functional/transforms",
+        "//core/common/utils:registry",
+        "//core/incidents:utils",
+        "//core/ml/data/generation/common:metadata",
+        "//core/ml/data/generation/common:pipeline",
+        "//core/ml/data/generation/common:stream",
+        "//core/ml/data/generation/common:writer",
+        "//core/ml/data/generation/resources/logset_generators",
+        "//core/ml/data/generation/resources/streams:metaverse_stream",
+        "//core/ml/data/generation/resources/streams:synchronized_readers",
+        "//core/ml/data/generation/resources/writers:csv_writer",
+        "//core/ml/data/generation/resources/writers:yolo_writer",
+    ],
+)

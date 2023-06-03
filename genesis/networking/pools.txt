@@ -1,0 +1,20 @@
+# Platform Account
+10.1.0.0/16       Platform Account        'primary' vpc
+
+# Prime Account
+10.9.0.0/16       Prime Account           'devops' vpc
+
+# Development Account
+10.16.0.0/16      Development Account     'perception' vpc
+
+# Galileo Account
+10.24.0.0/16      Galileo Account         'galileo' vpc
+
+# Staging Account
+10.32.0.0/16      Staging Account         'perception' vpc
+10.33.0.0/16      Staging Account         'portal' vpc
+
+# Production Account
+10.64.0.0/16      Production Account      'perception' vpc
+10.65.0.0/16      Production Account      'portal' vpc
+10.66.0.0/16      Production Account      'sales-marketing' vpc

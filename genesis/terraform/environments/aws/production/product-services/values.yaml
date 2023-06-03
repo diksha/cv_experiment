@@ -1,0 +1,18 @@
+state_prefix: aws-prod-portal-svc-v1
+variables:
+  perception_vpc_cidr_root: "64"
+  portal_vpc_cidr_root: "65"
+  portal_RDS_replica_cidr_root: "65"
+  portal_RDS_replica_region: "us-east-1"
+  environment: production
+  subdomain: aws-production
+  observability_identifier: production
+  db_instance_size: db.m6g.large
+  redis_instance_type: cache.t4g.micro
+  redis_cluster_size: 2
+  eks_default_max_instance_count: 50
+  perception_eks_gpu_instance_types_comma_separated: g4dn.2xlarge
+  perception_eks_cpu_instance_types_comma_separated: m5.large
+  portal_eks_cpu_instance_types_comma_separated: m5.large
+  portal_starting_image_tag: 561403b9fece84dd593663c06a6d882227f0add6
+  portal_domain: app.voxelai.com

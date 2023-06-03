@@ -1,0 +1,3 @@
+state_prefix: aws-production-nucleus-v1
+variables:
+  environment: production

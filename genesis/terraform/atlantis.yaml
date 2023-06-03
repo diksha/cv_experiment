@@ -1,0 +1,15 @@
+version: 3
+automerge: false
+parallel_apply: false
+parallel_plan: false
+projects:
+  - name: prime
+    dir: terraform/environments/aws/prime/devops
+  - name: staging-product-services
+    dir: terraform/environments/aws/staging/product-services
+  - name: production-perception-services
+    dir: terraform/environments/aws/production/perception-services
+  - name: production-perception-infra
+    dir: terraform/environments/aws/production/perception-infra
+  - name: production-product-services
+    dir: terraform/environments/aws/production/product-services

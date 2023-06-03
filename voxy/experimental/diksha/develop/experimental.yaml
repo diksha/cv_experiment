@@ -1,0 +1,8 @@
+".*":
+  incident:
+        dry_run: true
+americold/*:
+  perception:
+      detector_tracker:
+        model_path: artifacts_2021-12-06-00-00-00-0000-yolo/best_480_960.engine
+        

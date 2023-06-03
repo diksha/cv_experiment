@@ -1,0 +1,32 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//core/ml/data/generation:__subpackages__"])
+
+py_library(
+    name = "metaverse_stream",
+    srcs = [
+        "metaverse_stream.py",
+    ],
+    deps = [
+        "//core/metaverse",
+        "//core/structs",
+        requirement("neomodel"),
+        requirement("loguru"),
+    ],
+)
+
+py_library(
+    name = "synchronized_readers",
+    srcs = [
+        "synchronized_readers.py",
+    ],
+    deps = [
+        "//core/ml/data/generation/common:metadata",
+        "//core/ml/data/generation/common:registry",
+        "//core/ml/data/generation/common:stream",
+        "//core/utils:video_reader",
+        requirement("numpy"),
+        requirement("sortedcontainers"),
+    ],
+)

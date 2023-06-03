@@ -1,0 +1,7 @@
+genrule(
+    name = "docker-credential-ecr-login-bin",
+    srcs = ["@docker_credential_ecr_login_linux_amd64//file"],
+    outs = ["docker-credential-ecr-login"],
+    cmd = "cp $< $@",
+    executable = 1,
+)

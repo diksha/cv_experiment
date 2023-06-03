@@ -1,0 +1,57 @@
+#
+# Copyright 2023 Voxel Labs, Inc.
+# All rights reserved.
+#
+# This document may not be reproduced, republished, distributed, transmitted,
+# displayed, broadcast or otherwise exploited in any manner without the express
+# prior written permission of Voxel Labs, Inc. The receipt or possession of this
+# document does not convey any rights to reproduce, disclose, or distribute its
+# contents, or to manufacture, use, or sell anything that it may describe, in
+# whole or in part.
+#
+#
+scenario_for_incidents: [NO_STOP_AT_DOOR_INTERSECTION]
+scenarios:
+  # POSITIVE SCENARIOS
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: [NO_STOP_AT_DOOR_INTERSECTION]
+    video_uuid: americold/modesto/0001/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/9ba2912c-1596-4c85-adbe-f2a087f200ba_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: [NO_STOP_AT_DOOR_INTERSECTION]
+    video_uuid: americold/modesto/0002/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/15d66c9d-175a-4af6-a9d6-3ed0733ae953_0000
+  - camera_uuid: americold/modesto/0005/cha
+    incidents: [NO_STOP_AT_DOOR_INTERSECTION]
+    video_uuid: americold/modesto/0005/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/125d3232-9101-4d67-a33e-9a0563437a42_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: [NO_STOP_AT_DOOR_INTERSECTION]
+    video_uuid: americold/modesto/0009/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/8d95db99-3884-4fb3-8b8e-99bd33cfb5aa_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: [NO_STOP_AT_DOOR_INTERSECTION]
+    video_uuid: americold/modesto/0011/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/53429e1d-93a0-4794-a4ac-d98d82797ca5_0000
+  - camera_uuid: americold/ontario/0004/cha
+    incidents: [NO_STOP_AT_DOOR_INTERSECTION]
+    video_uuid: americold/ontario/0004/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/3e82b5f1-b0d1-409f-bbd8-6c516e3460ef_0000
+  - camera_uuid: americold/ontario/0011/cha
+    incidents: [NO_STOP_AT_DOOR_INTERSECTION]
+    video_uuid: americold/ontario/0011/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/f6db941f-45c0-47d7-9d90-c664b373ec69_0000
+  - camera_uuid: americold/tacoma/0005/cha
+    incidents: [NO_STOP_AT_DOOR_INTERSECTION]
+    video_uuid: americold/tacoma/0005/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/cab97f19-76c8-462e-8738-8460d06e0208_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: [NO_STOP_AT_DOOR_INTERSECTION]
+    video_uuid: americold/modesto/0003/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/7303dd62-6056-4750-8e7a-678f8187d4c2_0000
+  - camera_uuid: americold/ontario/0003/cha
+    incidents: [NO_STOP_AT_DOOR_INTERSECTION]
+    video_uuid: americold/ontario/0003/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/729d12a7-f80b-4312-9e5b-6a5fd9ae481d_0000
+  - camera_uuid: americold/ontario/0012/cha
+    incidents: [NO_STOP_AT_DOOR_INTERSECTION]
+    video_uuid: americold/ontario/0012/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/3264556b-7c4d-4fc6-bb98-134a716efb63_0000
+  - camera_uuid: americold/ontario/0104/cha
+    incidents: [NO_STOP_AT_DOOR_INTERSECTION]
+    video_uuid: americold/ontario/0104/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/f9793ad4-d08a-465c-9ffd-0514e6bbec90_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0001/cha
+    incidents: [NO_STOP_AT_DOOR_INTERSECTION]
+    video_uuid: vertical_cold_storage/bolingbrook/0001/cha/bd49bb0f-83b5-4f67-8e5a-bbc1320363d7_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0001/cha
+    incidents: [NO_STOP_AT_DOOR_INTERSECTION]
+    video_uuid: vertical_cold_storage/bolingbrook/0001/cha/48b0a325-d833-4858-97f6-5e67641fa24b_0000

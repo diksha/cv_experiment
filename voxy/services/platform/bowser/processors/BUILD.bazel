@@ -1,0 +1,27 @@
+load("@io_bazel_rules_docker//container:container.bzl", "container_push")
+load("//:services/platform/bowser/defs.bzl", "py_bowser_processor")
+
+py_bowser_processor(
+    name = "bowser_processor",
+    main_src = "count_rich_incident_from_s3_bucket_30_days_sink_local.py",
+)
+
+container_push(
+    name = "push",
+    format = "Docker",
+    image = ":bowser_processor.image",
+    registry = "docker.local:5000",
+    repository = "services/platform/bowser/processors",
+    stamp = "@io_bazel_rules_docker//stamp:always",
+    tag = "{GIT_COMMIT}",
+)
+
+container_push(
+    name = "push_minikube_local",
+    format = "Docker",
+    image = ":bowser_processor.image",
+    registry = "docker.local:5000",
+    repository = "services/platform/bowser",
+    stamp = "@io_bazel_rules_docker//stamp:always",
+    tag = "latest",
+)

@@ -1,0 +1,44 @@
+".*":
+  incident:
+    state_machine_monitors_requested:
+      - bad_posture
+      - intersection
+      - parking
+      - overreaching
+      - door_intersection
+      - door_violation
+      - open_door
+      - piggyback
+    incident_machine_params:
+      parking:
+        max_parked_duration_s: 300
+  perception:
+    detector_tracker:
+      actor2class:
+        PERSON: 0
+        PIT: 1
+      height: 480
+      model_path: artifacts_2021-12-06-00-00-00-0000-yolo/best_480_960.engine
+      width: 960
+    door_classifier:
+      enabled: true
+      model_path: artifacts_2022-10-26_americold_modesto_0001_cha/2022-10-26_americold_modesto_0001_cha.pt
+      model_type: vanilla_resnet
+    hat_classifier:
+      enabled: false
+    lift_classifier:
+      enabled: true
+      model_type: HM ##( HM: Heuristic Model, DT : Decision Tree based)
+      model_path: artifacts_lift_classifier_01282022/lift_classifer_01282022.sav
+    pose:
+      enabled: true
+      model_path: artifacts_03_21_2023_pose_0630_jit_update/fast_res50_256x192.pt
+    reach_classifier:
+      enabled: true
+      model_path: artifacts_03_23_2023_overreaching_model_jit/voxel_ergo_ml_overreaching_2022-05-23-jit.pt
+      model_type: DL
+    vest_classifier:
+      enabled: false
+      incident_machine_params:
+        n_person_ped_zone:
+          max_ped_zone_duration_s: 0.01

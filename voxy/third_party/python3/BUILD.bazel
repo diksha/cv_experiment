@@ -1,0 +1,5 @@
+sh_binary(
+    name = "python3",
+    srcs = ["@python//:python3"],
+    visibility = ["//visibility:public"],
+)

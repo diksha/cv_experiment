@@ -1,0 +1,7 @@
+".*":
+  incident:
+    dry_run: true
+    state_machine_monitors_requested: [pit_near_miss]
+  temporal:
+    max_past_frames: 60
+    max_future_frames: 0

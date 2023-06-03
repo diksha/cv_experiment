@@ -1,0 +1,16 @@
+load("@com_github_ash2k_bazel_tools//multirun:def.bzl", "command")
+
+exports_files(["config"])
+
+command(
+    name = "aws",
+    command = "//third_party/aws/cli:aws_cli",
+    data = [
+        "//third_party/aws:config",
+        "//third_party/aws/cli:aws_cli",
+    ],
+    environment = {
+        "AWS_CONFIG_FILE": "$(location //third_party/aws:config)",
+    },
+    visibility = ["//visibility:public"],
+)

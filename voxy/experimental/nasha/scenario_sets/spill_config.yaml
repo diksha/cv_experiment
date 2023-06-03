@@ -1,0 +1,14 @@
+".*":
+  incident:
+    dry_run: true
+    state_machine_monitors_requested: [spill]
+  temporal:
+    max_past_frames: 60
+    max_future_frames: 0
+    max_frame_segments : 10
+    
+  perception:
+    spill:
+      max_consecutive_runs: 3
+      min_pixel_size: 200
+      min_run_time_difference_ms: 1000

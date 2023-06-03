@@ -1,0 +1,484 @@
+---
+- name: Network
+  hosts: all
+  become: true
+  become_user: root
+  tasks:
+    - name: Update repositories cache and Install Network Manager
+      apt:
+        name: network-manager
+        state: present
+        update_cache: true
+    - name: Install FFMpeg
+      apt:
+        name: ffmpeg
+        state: present
+    - name: Install NMap
+      apt:
+        name: nmap
+        state: present
+    - name: Remove cloud config depends on MAAS such that box can be used without MAAS
+      shell: |
+        rm -rf /etc/cloud/cloud.cfg.d/90_dpkg*
+        rm -rf /etc/cloud/cloud.cfg.d/50-curtin-networking.cfg
+        rm -rf  /etc/netplan/*
+    - name: Make Netplan use Network Manager
+      copy:
+        dest: /etc/netplan/00-installer-config.yaml
+        content: |
+          # This file describes the network interfaces available on your system
+          # For more information, see netplan(5).
+          network:
+            version: 2
+            renderer: NetworkManager
+    - name: Netplan Generate and Apply to use Network Manager
+      shell: |
+        netplan generate
+        netplan apply
+    - name: Netplan Generate and Apply to use Network Manager
+      shell: |
+        netplan generate
+        netplan apply
+    - name: Set config for Network Manager spefically for it use dhclient
+      # We want to use dhclient because NM's inbuilt dhcp resolver doesn't work well.
+      copy:
+        dest: /etc/NetworkManager/NetworkManager.conf
+        content: |
+          [main]
+          plugins=ifupdown,keyfile
+          dhcp=dhclient
+
+          [ifupdown]
+          managed=false
+
+          [device]
+          wifi.scan-rand-mac-address=no
+    - name: Restart NetworkManager and enable on boot
+      ansible.builtin.systemd:
+        state: restarted
+        daemon_reload: true
+        enabled: true
+        name: NetworkManager
+    - name: Restart Resolvd and enable on boot for DNS Management
+      ansible.builtin.systemd:
+        state: restarted
+        daemon_reload: true
+        enabled: true
+        name: systemd-resolved
+
+- name: User Management
+  hosts: all
+  become: true
+  become_user: root
+  tasks:
+    - name: Include variables
+      include_vars: variables.yaml
+    - name: Update root password
+      ansible.builtin.user:
+        name: root
+        password: "{{ROOT_ENCRYPTED_PASS}}"
+
+- name: OEM Kernel
+  hosts: all
+  become: true
+  become_user: root
+  tasks:
+    - name: Install OEM Kernel
+      apt:
+        name: linux-oem-20.04
+        state: present
+        update_cache: true
+    - name: Remove Generic Kernel
+      apt:
+        name: linux-generic
+        state: absent
+        update_cache: true
+        autoremove: yes
+    - name: Remove Generic Kernel Image
+      apt:
+        name: linux-image-generic
+        state: absent
+        update_cache: true
+        autoremove: yes
+
+- name: Reboot
+  hosts: all
+  become: true
+  become_user: root
+  tasks:
+    - name: Reboot the machine
+      reboot:
+        reboot_timeout: 300
+
+- name: Unattended Upgrades
+  hosts: all
+  become: true
+  become_user: root
+  tasks:
+    - name: Unattended Upgrades
+      shell: |
+        unattended-upgrades
+
+- name: Reboot
+  hosts: all
+  become: true
+  become_user: root
+  tasks:
+    - name: Reboot the machine
+      reboot:
+        reboot_timeout: 300
+
+- name: Intel Driver
+  hosts: all
+  become: true
+  become_user: root
+  tasks:
+    - name: Install Intel Driver
+      apt:
+        name: intel-media-va-driver-non-free
+        state: present
+        update_cache: true
+
+- name: Prepare resources for MicroK8s and Greengrass
+  hosts: all
+  become: true
+  become_user: root
+  tasks:
+    - name: Ensure group "microk8s" exists
+      ansible.builtin.group:
+        name: microk8s
+        state: present
+    - name: Ensure group "ggc_group" exists
+      ansible.builtin.group:
+        name: ggc_group
+        state: present
+    - name: Create custom temp directory
+      file:
+        path: /voxel/runtime
+        state: directory
+        owner: root
+        group: ggc_group
+        mode: 760
+    - name: Use this temp directory in Java
+      ansible.builtin.lineinfile:
+        path: /etc/environment
+        regexp: "^_JAVA_OPTIONS="
+        line: _JAVA_OPTIONS=-Djava.io.tmpdir=/voxel/runtime
+    - name: Install libpam-pwquality
+      apt:
+        name:
+          - libpam-pwquality
+        state: present
+        update_cache: true
+
+- name: Install Greengrass
+  hosts: all
+  become: true
+  become_user: root
+  tasks:
+    - name: Verify Java is using new temp directory
+      ansible.builtin.command: java -XshowSettings
+      ignore_errors: true
+    - name: Mount
+      command: mount -t tmpfs -o exec tmpfs /tmp
+    - name: Update repositories cache and Install unzip
+      apt:
+        name: unzip
+        state: present
+        update_cache: true
+    - name: Copy file with owner and permissions
+      ansible.builtin.copy:
+        src: /home/voxel/ansible/greengrass-nucleus-latest.zip
+        dest: /tmp/greengrass-nucleus-latest.zip
+        owner: root
+        group: root
+        mode: 0700
+    - name: Create greengrass directory
+      file:
+        path: /var/lib/GreengrassCore
+        state: directory
+    - name: Unzip Greengrass
+      ansible.builtin.unarchive:
+        src: /tmp/greengrass-nucleus-latest.zip
+        dest: /var/lib/GreengrassCore
+        # We download the file to remote machine as I am not sure where ansible copies it.
+        remote_src: true
+
+- name: Install Docker
+  hosts: all
+  become: true
+  become_user: root
+  tasks:
+    - name: Update repositories cache and install required packages
+      apt:
+        name:
+          - default-jre
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - gnupg
+          - lsb-release
+          - python3-pip
+        state: present
+        update_cache: true
+    - name: Add Docker apt signing key to a specific keyring file
+      ansible.builtin.apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        keyring: /usr/share/keyrings/docker-archive-keyring.gpg
+        state: present
+    - name: Add Docker Repository
+      ansible.builtin.apt_repository:
+        repo: deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release | lower }} stable
+        state: present
+        filename: docker
+    - name: Update repositories cache and Install Docker
+      apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+        state: present
+        update_cache: true
+    - name: Restart Docker and enable on boot
+      ansible.builtin.systemd:
+        state: restarted
+        daemon_reload: true
+        enabled: true
+        name: docker
+
+- name: Setup Ubuntu Advantage and Landscape
+  hosts: all
+  become: true
+  become_user: root
+  tasks:
+    - name: Include variables
+      include_vars: variables.yaml
+    - name: Apt Install Packages
+      apt:
+        name:
+          - apparmor-utils
+          - landscape-client
+          - ubuntu-advantage-tools
+        state: present
+        update_cache: true
+    - name: Attach Machine to Ubuntu Advantage
+      command: ua attach "{{UA_TOKEN}}"
+    - name: Enroll into Landscape
+      command: landscape-config --computer-title {{ansible_hostname}} --account-name "{{LANDSCAPE_ACCOUNT_NAME}}" --registration-key "{{LANDSCAPE_REGISTRATION_KEY}}" --silent --script-users=ubuntu
+    - name: Enable USG
+      command: ua enable usg
+    - name: Apt Install Packages - usg needs to be installed after ua attach
+      apt:
+        name:
+          - usg
+        state: present
+        update_cache: true
+
+- name: Set up Greengrass
+  hosts: all
+  become: true
+  become_user: root
+  tasks:
+    - name: Include variables
+      include_vars: variables.yaml
+    - name: Install
+      shell: |
+        java -Droot="/greengrass/v2" -Dlog.store=FILE -Djava.io.tmpdir=/voxel/runtime \
+        -jar /var/lib/GreengrassCore/lib/Greengrass.jar \
+        --aws-region us-west-2 \
+        --thing-name {{ansible_hostname}} \
+        --thing-group-name all-edge-servers \
+        --component-default-user ggc_user:ggc_group \
+        --provision true \
+        --setup-system-service true
+      environment:
+        AWS_ACCESS_KEY_ID: "{{AWS_ACCESS_KEY_ID}}"
+        AWS_SECRET_ACCESS_KEY: "{{AWS_SECRET_ACCESS_KEY}}"
+    - name: Add ggc_user to docker
+      command: usermod -aG docker ggc_user
+    - name: Add ggc_user to microk8s
+      command: usermod -aG microk8s ggc_user
+
+- name: Setup CIS (part 1)
+  hosts: all
+  become: true
+  become_user: root
+  tasks:
+    - name: Create motd
+      command: touch /etc/motd
+    - name: Update log permissions
+      shell: find /var/log -type f -exec chmod g-wx,o-rwx {} +
+    - name: Remove vulnerable permissions
+      shell: |
+        rm -rf /etc/logrotate.d/alternatives
+        rm -rf /etc/logrotate.d/btmp
+        rm -rf /etc/logrotate.d/dpkg
+        rm -rf /etc/logrotate.d/wtmp
+    - name: Add AllowUsers to sshd
+      lineinfile:
+        line: AllowUsers ubuntu
+        dest: /etc/ssh/sshd_config
+    - name: Reload SSHD
+      ansible.builtin.systemd:
+        state: reloaded
+        daemon_reload: true
+        enabled: true
+        name: sshd
+    - name: Enfoce App Armor
+      command: aa-enforce /etc/apparmor.d/*
+
+- name: Setup CIS (part 2)
+  hosts: all
+  become: true
+  become_user: root
+  tasks:
+    - name: Install usg
+      apt:
+        name: usg
+        state: present
+    - name: Mount
+      command: mount -t tmpfs -o exec tmpfs /tmp
+    - name: Generate USG CIS Fixes
+      command: usg generate-fix cis_level2_server --output /tmp/fix.sh
+    - name: Comment out Aide
+      shell: sed -e '/^\/usr\/sbin\/aideinit -y -f/s/^/#/' -i /tmp/fix.sh
+    - name: Run USG CIS Fixes
+      shell: bash /tmp/fix.sh
+    - name: Uninstall Aide
+      apt:
+        name: aide
+        state: absent
+        autoremove: true
+    - name: Remove Aide cron jobs
+      command: rm -rf /etc/cron.daily/aide
+
+- name: Set up fsck repair on boot
+  hosts: all
+  become: true
+  become_user: root
+  tasks:
+    - name: Update grub config
+      ansible.builtin.lineinfile:
+        path: /etc/default/grub
+        regexp: "^GRUB_CMDLINE_LINUX="
+        line: GRUB_CMDLINE_LINUX="audit=1 audit_backlog_limit=8192 apparmor=1 security=apparmor fsck.mode=force fsck.repair=yes"
+    - name: Apply new grub config
+      command: update-grub
+
+- name: Reboot
+  hosts: all
+  become: true
+  become_user: root
+  tasks:
+    - name: Reboot the machine
+      reboot:
+        reboot_timeout: 300
+
+- name: Install Tailscale
+  hosts: all
+  become: true
+  become_user: root
+  tasks:
+    - name: Include variables
+      include_vars: variables.yaml
+    - name: Add Tailscale's package signing key and repository
+      shell: |
+        curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.gpg | apt-key add -
+        curl -fsSL https://pkgs.tailscale.com/stable/ubuntu/focal.list | tee /etc/apt/sources.list.d/tailscale.list
+    - name: Install Tailscale
+      apt:
+        name: tailscale
+        state: present
+        update_cache: true
+
+- name: Install MicroK8s
+  hosts: all
+  become: true
+  become_user: root
+  tasks:
+    - name: Uninstall existing MicroK8s
+      community.general.snap:
+        name: microk8s
+        state: absent
+    - name: Install MicroK8s
+      community.general.snap:
+        name: microk8s
+        classic: yes
+        channel: 1.22/stable
+    - name: Symlink microk8s and docker configs
+      ansible.builtin.file:
+        src: /root/.docker/config.json
+        dest: /var/snap/microk8s/common/var/lib/kubelet/config.json
+        owner: root
+        group: root
+        state: link
+        force: yes
+    - name: Copy intel daemonset yaml
+      ansible.builtin.copy:
+        src: /home/voxel/ansible/intel_daemonset.yaml
+        dest: /var/local/intel_daemonset.yaml
+        owner: root
+        group: root
+        mode: 0700
+    - name: Apply intel daemonset
+      shell: |
+        microk8s kubectl apply -f /var/local/intel_daemonset.yaml
+
+- name: Install Tmux
+  hosts: all
+  become: true
+  become_user: root
+  tasks:
+    - name: Install tmux
+      apt:
+        name: tmux
+        state: present
+
+- name: Remove provisioning SSH key
+  hosts: all
+  tasks:
+    - name: Remove provisioning public key from authorized_keys
+      ansible.posix.authorized_key:
+        user: ubuntu
+        state: absent
+        key: "{{ lookup('file', '/home/voxel/.ssh/edge-provisioning.pub') }}"
+
+- name: Remove curtin files from apt config
+  hosts: all
+  become: true
+  become_user: root
+  tasks:
+    - name: Find files
+      find:
+        paths: /etc/apt/apt.conf.d
+        patterns: "^.*curtin.*"
+        use_regex: yes
+      register: found_files
+    - name: Remove files
+      file:
+        path: "{{ item.path }}"
+        state: absent
+      with_items: "{{ found_files.files }}"
+    - name: Remove Proxy
+      shell: |
+        snap set system proxy.https=""
+        snap set system proxy.http=""
+
+- name: Start tailscale
+  hosts: all
+  become: true
+  become_user: root
+  tasks:
+    - name: Include variables
+      include_vars: variables.yaml
+    - name: Start Tailscale
+      command: tailscale up --auth-key {{TAILSCALE_AUTH_KEY}}
+
+- name: Shutdown
+  hosts: all
+  become: true
+  become_user: root
+  tasks:
+    - name: Shut down the machine
+      community.general.shutdown:
+        delay: 10

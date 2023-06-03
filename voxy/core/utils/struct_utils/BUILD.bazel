@@ -1,0 +1,23 @@
+load("@rules_python//python:defs.bzl", "py_library")
+
+py_library(
+    name = "utils",
+    srcs = [
+        "utils.py",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+py_library(
+    name = "scenario_utils",
+    srcs = ["scenario_utils.py"],
+    data = [
+        "//configs",
+        "//data:scenario_sets",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/structs",
+        "//core/utils:yaml_jinja",
+    ],
+)

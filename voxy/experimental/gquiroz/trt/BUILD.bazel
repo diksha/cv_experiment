@@ -1,0 +1,16 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+
+py_binary(
+    name = "export_door_trt",
+    srcs = ["export_door_trt.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        requirement("onnx"),
+        requirement("onnx-simplifier"),
+        requirement("onnxruntime"),
+        requirement("nvidia-tensorrt"),
+        requirement("torch"),
+    ],
+)

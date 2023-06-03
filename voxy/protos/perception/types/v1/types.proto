@@ -1,0 +1,95 @@
+// Copyright 2020-2021 Voxel Labs, Inc.
+// All rights reserved.
+//
+// This document may not be reproduced, republished, distributed, transmitted,
+// displayed, broadcast or otherwise exploited in any manner without the express
+// prior written permission of Voxel Labs, Inc. The receipt or possession of this
+// document does not convey any rights to reproduce, disclose, or distribute its
+// contents, or to manufacture, use, or sell anything that it may describe, in
+// whole or in part.
+
+syntax = "proto3";
+
+package protos.perception.types.v1;
+option go_package = "github.com/voxel-ai/voxel/protos/perception/types/v1;typespb";
+
+// Standard Types
+message Uuid {
+  string value = 1;
+}
+
+// Measurement Types
+message Timestamp {
+  uint64 epoch_timestamp_ms = 1;
+  uint64 relative_timestamp_ms = 2;
+}
+
+message Position3DMeters {
+  float x_position_meters = 1;
+  float y_position_meters = 2;
+  float z_position_meters = 3;
+}
+
+message Velocity2DMetersPerSecond {
+  float x_velocity_meters_per_second = 1;
+  float y_velocity_meters_per_second = 2;
+}
+
+message VelocityPixelsPerSecond {
+  float x_velocity_pixels_per_second = 1; 
+  float y_velocity_pixels_per_second = 2;
+}
+
+// Geometric Types
+message Vertex {
+  optional float x = 1;
+  optional float y = 2;
+  optional float z = 3;
+}
+
+message KeyPoint {
+  float x = 1;
+  float y = 2;
+  optional float z = 3;
+  float confidence_probability = 4;
+}
+
+// Make sure to update PoseKeypointType in actor.proto
+message Pose {
+    optional KeyPoint nose_keypoint = 1;
+    optional KeyPoint neck_keypoint = 2;
+    optional KeyPoint right_shoulder_keypoint = 3;
+    optional KeyPoint right_elbow_keypoint = 4;
+    optional KeyPoint right_wrist_keypoint = 5;
+    optional KeyPoint left_shoulder_keypoint = 6;
+    optional KeyPoint left_elbow_keypoint = 7;
+    optional KeyPoint left_wrist_keypoint = 8;
+    optional KeyPoint mid_hip_keypoint = 9;
+    optional KeyPoint right_hip_keypoint = 10;
+    optional KeyPoint right_knee_keypoint = 11;
+    optional KeyPoint right_ankle_keypoint = 12;
+    optional KeyPoint left_hip_keypoint = 13;
+    optional KeyPoint left_knee_keypoint = 14;
+    optional KeyPoint left_ankle_keypoint = 15;
+    optional KeyPoint right_eye_keypoint = 16;
+    optional KeyPoint left_eye_keypoint = 17;
+    optional KeyPoint right_ear_keypoint = 18;
+    optional KeyPoint left_ear_keypoint = 19;
+    optional KeyPoint left_big_toe_keypoint = 20;
+    optional KeyPoint left_small_toe_keypoint = 21;
+    optional KeyPoint left_heel_keypoint = 22;
+    optional KeyPoint right_big_toe_keypoint = 23;
+    optional KeyPoint right_small_toe_keypoint = 24;
+    optional KeyPoint right_heel_keypoint = 25;
+}
+
+message Polygon {
+  repeated Vertex vertices = 1;
+}
+
+message RectangleXYWH {
+  float x = 1;
+  float y = 2;
+  float width = 3;
+  float height = 4;
+}

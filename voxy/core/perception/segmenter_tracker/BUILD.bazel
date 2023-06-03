@@ -1,0 +1,22 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "tracker",
+    srcs = [
+        "tracker.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("opencv-python"),
+        requirement("numpy"),
+        requirement("torch"),
+        requirement("torchvision"),
+        requirement("loguru"),
+        "//core/perception/utils:segmentation_utils",
+        "//core/structs",
+        "//third_party/byte_track:byte_tracker",
+    ],
+)

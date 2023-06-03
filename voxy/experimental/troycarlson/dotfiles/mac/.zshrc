@@ -1,0 +1,2 @@
+# SSH to devbox with iTerm tmux integration and portal port forwarding
+alias devbox="ssh -A -X -Y -L 9000:localhost:9000 -L 9001:localhost:9001 -L 6006:localhost:6006 troy@troy.devbox.voxelplatform.com tmux -CC new -As0"

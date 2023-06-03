@@ -1,0 +1,11 @@
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+voxel_py_test(
+    name = "yolo_writer_test",
+    srcs = ["yolo_writer_test.py"],
+    tags = ["manual"],
+    deps = [
+        "//core/ml/data/generation/resources/writers:yolo_writer",
+        "//core/utils:yaml_jinja",
+    ],
+)

@@ -1,0 +1,10 @@
+".*":
+  incident:
+        dry_run: true
+        monitors_requested: []
+        state_machine_monitors_requested: [overreaching]
+  perception:
+    reach_classifier:
+      enabled: True
+      model_type: DL ##DT (DL: Deep learning based, DT: Decision Tree based, HM: Heuristic Model)
+      model_path: artifacts_03_23_2023_overreaching_model_jit/voxel_ergo_ml_overreaching_2022-05-23-jit.pt

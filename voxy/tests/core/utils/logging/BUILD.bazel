@@ -1,0 +1,19 @@
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+package(default_visibility = ["//visibility:public"])
+
+voxel_py_test(
+    name = "logger_test",
+    srcs = ["logger_test.py"],
+    deps = [
+        "//core/utils/logging:logger",
+    ],
+)
+
+voxel_py_test(
+    name = "node_logger_test",
+    srcs = ["node_logger_test.py"],
+    deps = [
+        "//core/utils/logging:node_logger",
+    ],
+)

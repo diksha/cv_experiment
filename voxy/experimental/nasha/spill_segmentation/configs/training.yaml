@@ -1,0 +1,43 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+
+# ./bazel run core/infra/symphony:runner -- --config_path ~/voxel/experimental/nasha/spill_segmentation/configs/training.yaml
+
+{% set train_name=GENERATE_UUID_WITH_PREFIX("spills-unet-") %}
+{% set image_tag=GENERATE_UUID_WITH_PREFIX("spills-unet-") %}
+{% set download_dir="/data" %}
+{% set model_dir="/model" %}
+{% set gs_val_data_path="gs://voxel-users/reza/GC_Backup/experiments/segmentation/data/spill_segmentation/realdata/validation_spill.txt" %} #UPDATE VALIDATION DATA
+{% set gs_img_path="gs://voxel-users/reza/spill_segmentation/synthetic_data/voxel_spills_v8.1_new_clutter_roomf1/img" %} #UPDATE TRAINING IMAGE DATA
+{% set gs_label_path="gs://voxel-users/reza/spill_segmentation/synthetic_data/voxel_spills_v8.1_new_clutter_roomf1/annotation" %} #UPDATE TRAINING LABEL DATA
+{% set gs_config_path="gs://voxel-users/nasha/spill_segmentation/config/unet_training.yaml" %} #UPDATE AND UPLOAD CONFIG
+{% set gs_wandb_config_path="gs://voxel-users/common/WandB/.netrc" %}
+{% set gs_out_dir="gs://voxel-users/nasha/spill_segmentation/models/" %}
+
+buildkite_jobs:
+-
+  name : unet-container
+  type: bazel
+  command: //experimental/nasha/spill_segmentation/tools:push_unet_image --define IMAGE_TAG={{image_tag}}
+-
+  name: {{train_name}}
+  type: k8s
+  command: mkdir {{download_dir}} && mkdir {{model_dir}} && mkdir {{download_dir}}/img && mkdir {{download_dir}}/annotation && gsutil -D cp {{gs_val_data_path}} {{download_dir}} && gsutil -D -m rsync -r {{gs_img_path}} {{download_dir}}/img && gsutil -D -m rsync -r {{gs_label_path}} {{download_dir}}/annotation && gsutil -D cp {{gs_config_path}} ~/unet_training.yaml && gsutil -D cp {{gs_wandb_config_path}} ~/ && /app/experimental/nasha/spill_segmentation/tools/train_unet --config_path ~/unet_training.yaml --model_name {{train_name}} && gsutil -D cp -r {{model_dir}}/* {{gs_out_dir}}
+  image: us.gcr.io/sodium-carving-227300/voxel/experimental:{{image_tag}}
+  gpus: 1
+  cpus: 7
+  memory_mb: 25000
+  node_pool_name: "one-gpu-pool"
+  active_deadline_seconds: 345600
+  host_ipc: True
+  depends_on:
+      - unet-container

@@ -1,0 +1,19 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+py_library(
+    name = "graphql",
+    srcs = glob(
+        include = [
+            "*.py",
+            "**/*.py",
+        ],
+    ),
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("graphene"),
+        requirement("loguru"),
+        "//core/metaverse/models",
+        "//core/structs",
+    ],
+)

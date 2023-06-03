@@ -1,0 +1,194 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+package(default_visibility = ["//visibility:public"])
+
+voxel_py_test(
+    name = "base_test",
+    srcs = ["base_test.py"],
+    deps = [
+        "//core/incident_machine/machines",
+        "//core/structs",
+        requirement("pyyaml"),
+    ],
+)
+
+voxel_py_test(
+    name = "no_ped_zone_test",
+    srcs = ["no_ped_zone_test.py"],
+    deps = [
+        "//core/incident_machine/machines",
+        "//core/structs",
+        requirement("pyyaml"),
+    ],
+)
+
+voxel_py_test(
+    name = "hard_hat_test",
+    srcs = ["hard_hat_test.py"],
+    deps = [
+        "//core/incident_machine/machines",
+        "//core/structs",
+        requirement("pyyaml"),
+    ],
+)
+
+voxel_py_test(
+    name = "bumpcap_test",
+    srcs = ["bumpcap_test.py"],
+    deps = [
+        "//core/incident_machine/machines",
+        "//core/structs",
+        requirement("pyyaml"),
+    ],
+)
+
+voxel_py_test(
+    name = "safetyvest_test",
+    srcs = ["safetyvest_test.py"],
+    deps = [
+        "//core/incident_machine/machines",
+        "//core/structs",
+        requirement("pyyaml"),
+    ],
+)
+
+voxel_py_test(
+    name = "high_vis_hat_or_vest_test",
+    srcs = ["high_vis_hat_or_vest_test.py"],
+    deps = [
+        "//core/incident_machine/machines",
+        "//core/structs",
+        requirement("pyyaml"),
+    ],
+)
+
+voxel_py_test(
+    name = "bad_lifting_test",
+    srcs = ["bad_lifting_test.py"],
+    deps = [
+        "//core/incident_machine/machines",
+        "//core/structs",
+        requirement("pyyaml"),
+    ],
+)
+
+voxel_py_test(
+    name = "bad_lifting_with_safetyuniform_test",
+    srcs = ["bad_lifting_with_safetyuniform_test.py"],
+    deps = [
+        "//core/incident_machine/machines",
+        "//core/structs",
+        requirement("pyyaml"),
+    ],
+)
+
+voxel_py_test(
+    name = "open_door_test",
+    srcs = ["open_door_test.py"],
+    deps = [
+        "//core/incident_machine/machines",
+        "//core/structs",
+        requirement("pyyaml"),
+    ],
+)
+
+voxel_py_test(
+    name = "overreaching_test",
+    srcs = ["overreaching_test.py"],
+    deps = [
+        "//core/incident_machine/machines",
+        "//core/structs",
+        requirement("pyyaml"),
+    ],
+)
+
+voxel_py_test(
+    name = "overreaching_with_safetyuniform_test",
+    srcs = ["overreaching_with_safetyuniform_test.py"],
+    deps = [
+        "//core/incident_machine/machines",
+        "//core/structs",
+        requirement("pyyaml"),
+    ],
+)
+
+voxel_py_test(
+    name = "parking_test",
+    srcs = ["parking_test.py"],
+    deps = [
+        "//core/incident_machine/machines",
+        "//core/structs",
+        requirement("pyyaml"),
+    ],
+)
+
+voxel_py_test(
+    name = "obstruction_test",
+    srcs = ["obstruction_test.py"],
+    deps = [
+        "//core/incident_machine/machines",
+        "//core/structs",
+        requirement("pyyaml"),
+    ],
+)
+
+voxel_py_test(
+    name = "door_intersection_test",
+    srcs = ["door_intersection_test.py"],
+    deps = [
+        "//core/incident_machine/machines",
+        "//core/structs",
+        requirement("pyyaml"),
+    ],
+)
+
+voxel_py_test(
+    name = "intersection_test",
+    srcs = ["intersection_test.py"],
+    deps = [
+        "//core/incident_machine/machines",
+        "//core/structs",
+        requirement("pyyaml"),
+    ],
+)
+
+voxel_py_test(
+    name = "no_stop_at_aisle_end_test",
+    srcs = ["no_stop_at_aisle_end_test.py"],
+    deps = [
+        "//core/incident_machine/machines",
+        "//core/structs",
+        requirement("pyyaml"),
+    ],
+)
+
+voxel_py_test(
+    name = "spill_test",
+    srcs = ["spill_test.py"],
+    deps = [
+        "//core/incident_machine/machines",
+        "//core/structs",
+        requirement("pyyaml"),
+    ],
+)
+
+voxel_py_test(
+    name = "motion_detection_test",
+    srcs = ["motion_detection_test.py"],
+    deps = [
+        "//core/incident_machine/machines",
+        "//core/structs",
+        requirement("pyyaml"),
+    ],
+)
+
+voxel_py_test(
+    name = "n_person_ped_zone_test",
+    srcs = ["n_person_ped_zone_test.py"],
+    deps = [
+        "//core/incident_machine/machines",
+        "//core/structs",
+        requirement("pyyaml"),
+    ],
+)

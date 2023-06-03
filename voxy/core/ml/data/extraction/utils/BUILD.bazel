@@ -1,0 +1,79 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary", "py_library")
+
+py_library(
+    name = "data_extraction_helpers",
+    srcs = [
+        "data_extraction_helpers.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/structs",
+    ],
+)
+
+py_library(
+    name = "get_labels_to_extract_with_actors_lib",
+    srcs = ["get_labels_to_extract_with_actors.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        requirement("sematic"),
+        "//core/infra/sematic/shared:resources",
+        "//core/labeling/label_store:label_reader",
+        "//core/metaverse",
+        "//core/ml/data/extraction/utils:data_extraction_helpers",
+        "//core/utils:aws_utils",
+    ],
+)
+
+py_binary(
+    name = "get_labels_to_extract_with_actors",
+    srcs = ["get_labels_to_extract_with_actors.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":get_labels_to_extract_with_actors_lib",
+    ],
+)
+
+py_library(
+    name = "get_images_to_extract_lib",
+    srcs = ["get_images_to_extract.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/infra/sematic/shared:resources",
+        "//core/utils:aws_utils",
+        requirement("loguru"),
+        requirement("sematic"),
+    ],
+)
+
+py_binary(
+    name = "get_images_to_extract",
+    srcs = ["get_images_to_extract.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":get_images_to_extract_lib",
+    ],
+)
+
+py_library(
+    name = "validate_extraction_lib",
+    srcs = ["validate_extraction.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        requirement("sematic"),
+        "//core/infra/sematic/shared:resources",
+        "//core/utils:aws_utils",
+    ],
+)
+
+py_binary(
+    name = "validate_extraction",
+    srcs = ["validate_extraction.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":validate_extraction_lib",
+    ],
+)

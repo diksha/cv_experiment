@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "iotcredentials",
+    srcs = ["credentialprovider.go"],
+    importpath = "github.com/voxel-ai/voxel/go/core/aws/iotcredentials",
+    visibility = ["//visibility:public"],
+    deps = ["@com_github_aws_aws_sdk_go_v2//aws"],
+)
+
+go_test(
+    name = "iotcredentials_test",
+    srcs = ["credentialprovider_test.go"],
+    deps = [
+        ":iotcredentials",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+    ],
+)

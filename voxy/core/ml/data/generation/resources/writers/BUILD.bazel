@@ -1,0 +1,33 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = [
+    "//core/ml/data/generation:__subpackages__",
+    "//tests:__subpackages__",
+])
+
+py_library(
+    name = "csv_writer",
+    srcs = [
+        "csv_writer.py",
+    ],
+    deps = [
+        "//core/ml/data/generation/common:writer",
+        requirement("pandas"),
+    ],
+)
+
+py_library(
+    name = "yolo_writer",
+    srcs = [
+        "yolo_writer.py",
+    ],
+    deps = [
+        "//core/infra/sematic/perception/yolo:yolo_options",
+        "//core/ml/data/generation/common:writer",
+        "//core/ml/data/generation/resources/streams:synchronized_readers",
+        requirement("pyyaml"),
+        requirement("loguru"),
+        requirement("scikit-learn"),
+    ],
+)

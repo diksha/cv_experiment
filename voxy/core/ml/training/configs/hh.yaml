@@ -1,0 +1,42 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+device: cuda:0
+
+data:
+  dataloader_name: image_from_folder
+  dataloader_params:
+    path: /data/hh
+    valid_pct: 0.1
+    bs: 4
+    valid_bs: 4
+    item_tfms:
+      - name: Resize
+        params: 
+          size: [100, 80]
+      - name: FlipItem
+        params: {}
+
+model:
+  name: resnet50_classification
+  params:
+    num_classes: 2
+
+loss:
+  name: cross_entropy
+  params: {}
+
+learner:
+  init_params:
+    metrics: [accuracy]
+  fit_params:
+    n_epoch: 10
+    lr: 0.01

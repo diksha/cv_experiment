@@ -1,0 +1,36 @@
+load("@rules_python//python:defs.bzl", "py_library")
+
+py_library(
+    name = "label_generator",
+    srcs = [
+        "label_generator.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [],
+)
+
+py_library(
+    name = "coco_label_generator",
+    srcs = [
+        "coco_label_generator.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":label_generator",
+        "//core/ml/data/extraction/utils:data_extraction_helpers",
+        "//core/utils:aws_utils",
+    ],
+)
+
+py_library(
+    name = "yolo_label_generator",
+    srcs = [
+        "yolo_label_generator.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":label_generator",
+        "//core/ml/data/extraction/utils:data_extraction_helpers",
+        "//core/utils:aws_utils",
+    ],
+)

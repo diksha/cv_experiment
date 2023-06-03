@@ -1,0 +1,13 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "clipsynthfakes",
+    srcs = ["fake_frag_archive_api.go"],
+    importpath = "github.com/voxel-ai/voxel/services/platform/prism/lib/clipsynth/clipsynthfakes",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//services/platform/prism/lib/clipsynth",
+        "//services/platform/prism/lib/fragarchive",
+        "//services/platform/prism/lib/fragarchive/key",
+    ],
+)

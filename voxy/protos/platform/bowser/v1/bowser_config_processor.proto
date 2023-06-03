@@ -1,0 +1,23 @@
+syntax = "proto3";
+package protos.platform.bowser.v1;
+option go_package = "github.com/voxel-ai/voxel/protos/platform/bowser/v1";
+
+import "protos/platform/bowser/v1/bowser_config_consumer.proto";
+import "protos/platform/bowser/v1/bowser_config_function.proto";
+import "protos/platform/bowser/v1/bowser_config_keys.proto";
+import "protos/platform/bowser/v1/bowser_config_window.proto";
+import "protos/platform/bowser/v1/bowser_config_sink.proto";
+
+
+/* Processor represents the business configuration objects used to execute a Bowser Processor */
+
+message Processor {
+    string name = 1; //Bowser allow the Processor to have a name
+    string description = 2; // Not showed on Bowser Web UI , this field is purely for human
+    ProcessorConsumer consumer = 3; // Configuration dedicated to the Bowser Processor Consumer
+    ProcessorKeys key = 4;// Configuration dedicated to the Bowser Processor Key binding
+    ProcessorWindow window = 5;// Configuration dedicated to the Bowser Processor Window buffering
+    ProcessorFunction function = 6; // Configuration dedicated to the Bowser Processor Function Aggrate/Reduce/etc..
+    ProcessorSink sink = 7;// Configuration dedicated to the Bowser Processor Sink
+}
+

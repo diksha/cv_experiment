@@ -1,0 +1,34 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary", "py_library")
+
+py_binary(
+    name = "constraints",
+    srcs = ["constraints.py"],
+    deps = [
+        "//core/metaverse",
+        requirement("neomodel"),
+    ],
+)
+
+py_library(
+    name = "door_dataset_utils",
+    srcs = ["door_dataset_utils.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/incidents:utils",
+        "//core/metaverse",
+        "//core/structs",
+        requirement("neomodel"),
+        requirement("loguru"),
+    ],
+)
+
+py_library(
+    name = "structs",
+    srcs = ["structs.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/structs",
+        "//core/utils:aws_utils",
+    ],
+)

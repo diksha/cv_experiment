@@ -1,0 +1,31 @@
+# This configures a runner in such a way that publishing is fully disabled
+# To test publisher functionality, adjust the configuration of the fields marked below as indicated
+
+incident:
+  # set to false to test incident publishing
+  dry_run: true
+  generate_temp_subdirs: true
+  temp_directory: /var/tmp/voxel/incidents
+  publisher: # Prism publisher (currently in development)
+    enabled: false
+
+publisher:
+  # set to true to test incident+state/event publishing
+  enabled: false
+  kinesis_frame_structs_stream: dev-perception-frame-structs
+  auth_token: 30affa3f8bcf19ce8ec84be40b028ec89e219c62
+  portal_host: https://app.staging.voxelplatform.com
+  organization_key: VOXEL_SANDBOX
+
+state:
+  enabled: true
+  publisher:
+    kinesis_data_stream: dev-perception-states-events
+    # set to localhost:8085 and run `gcloud beta emulators pubsub start` to test google pubsub publishing
+    emulator_host: null
+    event_topic: projects/sodium-carving-227300/topics/voxel-internal-event-messages
+    state_topic: projects/sodium-carving-227300/topics/voxel-internal-state-messages
+
+assume_role:
+  default_role_arn: arn:aws:iam::209075043431:role/developer_access_assumable_role
+  read_kvs_arn: arn:aws:iam::360054435465:role/developer_access_assumable_role

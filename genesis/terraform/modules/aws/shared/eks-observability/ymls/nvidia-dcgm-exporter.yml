@@ -1,0 +1,26 @@
+serviceMonitor:
+  additionalLabels:
+    prometheus: default
+  honorLabels: true
+arguments: ["-f", "/etc/dcgm-exporter/dcp-metrics-included.csv", "-d", "g"]
+
+
+selector:
+  nvidia.com/gpu: "true"
+nodeSelector:
+  nvidia.com/gpu: "true"
+tolerations:
+  - key: nvidia.com/gpu
+    operator: Equal
+    value: "true" # Toleration alone doesn't matter as the node selector is set to true or false as per requirements
+    effect: NoSchedule
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: nvidia.com/gpu
+              operator: Exists
+extraEnv:
+- name: "DCGM_EXPORTER_INTERVAL"
+  value: "5000"

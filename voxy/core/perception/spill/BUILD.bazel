@@ -1,0 +1,30 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "spill_segmenter",
+    srcs = [
+        "spill_segmenter.py",
+    ],
+    data = [
+        "@artifacts_02_05_2023_spill_generalized",
+        "@artifacts_02_05_2023_spill_generalized_jit",
+        "@artifacts_resnet18_uscold_laredo_dock_smp_binary",
+        "@artifacts_resnet18_uscold_laredo_room_smp_binary",
+        "@artifacts_smp-spills-smp-all-dock-845d3bb3-1296-49",
+        "@artifacts_smp-spills-smp-b908a959-1880-45",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/execution/utils:perception_runner_context",
+        "//core/perception/segmenter_tracker:tracker",
+        "//core/perception/utils:segmentation_utils",
+        "//lib/ml/inference/tasks/segmentation/unet_v1:factory",
+        "//protos/perception/graph_config/v1:graphconfigpb_py_library",
+        requirement("torch"),
+        requirement("torchvision"),
+        requirement("segmentation_models_pytorch"),
+    ],
+)

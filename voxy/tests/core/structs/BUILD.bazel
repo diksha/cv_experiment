@@ -1,0 +1,92 @@
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+package(default_visibility = ["//visibility:public"])
+
+voxel_py_test(
+    name = "actor_test",
+    srcs = ["actor_test.py"],
+    deps = [
+        "//core/structs",
+    ],
+)
+
+voxel_py_test(
+    name = "incident_test",
+    srcs = ["incident_test.py"],
+    deps = [
+        "//core/structs",
+    ],
+)
+
+voxel_py_test(
+    name = "data_collection_test",
+    srcs = ["data_collection_test.py"],
+    deps = [
+        "//core/structs",
+    ],
+)
+
+voxel_py_test(
+    name = "intrinsics_test",
+    srcs = ["intrinsics_test.py"],
+    deps = [
+        "//core/structs",
+    ],
+)
+
+voxel_py_test(
+    name = "extrinsics_test",
+    srcs = ["extrinsics_test.py"],
+    deps = [
+        "//core/structs",
+    ],
+)
+
+voxel_py_test(
+    name = "tracklet_test",
+    srcs = ["tracklet_test.py"],
+    deps = [
+        "//core/structs",
+    ],
+)
+
+voxel_py_test(
+    name = "vignette_test",
+    srcs = ["vignette_test.py"],
+    deps = [
+        "//core/structs",
+    ],
+)
+
+voxel_py_test(
+    name = "state_test",
+    srcs = ["state_test.py"],
+    deps = [
+        "//core/structs",
+    ],
+)
+
+voxel_py_test(
+    name = "event_test",
+    srcs = ["event_test.py"],
+    deps = [
+        "//core/structs",
+    ],
+)
+
+voxel_py_test(
+    name = "model_test",
+    srcs = ["model_test.py"],
+    deps = [
+        "//core/structs",
+    ],
+)
+
+voxel_py_test(
+    name = "attributes_test",
+    srcs = ["attributes_test.py"],
+    deps = [
+        "//core/structs",
+        "//protos/perception/types/v1:typespb_py_library",
+    ],
+)

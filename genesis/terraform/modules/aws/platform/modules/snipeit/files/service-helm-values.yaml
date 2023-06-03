@@ -1,0 +1,54 @@
+replicaCount: 1
+revisionHistoryLimit: 0
+deploymentStrategy:
+  type: RollingUpdate
+
+image:
+  repository: snipe/snipe-it
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+
+config:
+  snipeit:
+    env: production
+    debug: false
+    url: http://snipeit.voxelplatform.com
+    timezone: America/Los_Angeles
+    locale: en
+    envConfig:
+      MAIL_HOST: email-smtp.us-west-2.amazonaws.com
+      MAIL_PORT: 587
+      MAIL_FROM_ADDR: it@voxelai.com
+      MAIL_FROM_NAME: Voxel IT
+
+
+mysql:
+  enabled: true
+  mysqlUser: snipeit
+  mysqlDatabase: db-snipeit
+
+  persistence:
+    enabled: true
+    storageClass: gp3-retain
+    accessMode: ReadWriteOnce
+    size: 8Gi
+
+persistence:
+  enabled: true
+  accessMode: ReadWriteOnce
+  size: 2Gi
+  storageClass: gp3-retain
+
+  www:
+    mountPath: /var/lib/snipeit
+    subPath: www
+  sessions:
+    mountPath: /var/www/html/storage/framework/sessions
+    subPath: sessions
+
+ingress:
+  enabled: true
+  ingressClassName: "nginx"
+  hosts: ["snipeit.voxelplatform.com"]

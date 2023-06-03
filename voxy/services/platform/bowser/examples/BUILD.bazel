@@ -1,0 +1,16 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("//:services/platform/bowser/defs.bzl", "py_bowser_processor")
+
+py_bowser_processor(
+    name = "test",
+    main_src = "opentelemetry_test_counter.py",
+    deps = [
+        requirement("boto3"),
+        requirement("loguru"),
+        "//core/execution/graphs:metrics_constants",
+        "//core/execution/nodes:incident_machine",
+        "//core/structs:protobufs",
+        "//core/utils:yaml_jinja",
+        "//lib/infra/metrics:register_metrics",
+    ],
+)

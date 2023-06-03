@@ -1,0 +1,4 @@
+FROM 203670452561.dkr.ecr.us-west-2.amazonaws.com/voxel/ci-cd-base:11.4.1-cudnn8-devel-ubuntu20.04_voxel_v1
+COPY devbox.sh /custom-utils/
+RUN chmod +x /custom-utils/devbox.sh && /custom-utils/devbox.sh bootstrap
+ENTRYPOINT [ "/custom-utils/devbox.sh" ]

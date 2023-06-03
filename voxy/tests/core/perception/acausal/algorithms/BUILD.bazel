@@ -1,0 +1,32 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+package(default_visibility = ["//visibility:public"])
+
+voxel_py_test(
+    name = "velocity_estimation_test",
+    srcs = ["velocity_estimation_test.py"],
+    deps = [
+        "//core/perception/acausal/algorithms:velocity_estimation",
+    ],
+)
+
+voxel_py_test(
+    name = "proximity_controller_test",
+    srcs = ["proximity_controller_test.py"],
+    deps = [
+        "core/structs",
+        "//core/perception/acausal/algorithms:proximity_controller",
+        requirement("numpy"),
+    ],
+)
+
+voxel_py_test(
+    name = "is_stationary_test",
+    srcs = ["is_stationary_test.py"],
+    deps = [
+        "//core/perception/acausal/algorithms:is_stationary",
+        "//core/structs",
+        requirement("numpy"),
+    ],
+)

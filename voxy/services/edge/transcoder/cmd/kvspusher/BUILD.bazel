@@ -1,0 +1,26 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "kvspusher_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/voxel-ai/voxel/services/edge/transcoder/cmd/kvspusher",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//go/core/utils/ffmpeg",
+        "//services/edge/transcoder/lib/kvspusher",
+        "@com_github_aws_aws_sdk_go_v2//aws",
+        "@com_github_aws_aws_sdk_go_v2_config//:config",
+        "@com_github_aws_aws_sdk_go_v2_service_kinesisvideo//:kinesisvideo",
+        "@com_github_aws_aws_sdk_go_v2_service_kinesisvideo//types",
+        "@com_github_aws_aws_sdk_go_v2_service_kinesisvideomedia//:kinesisvideomedia",
+        "@com_github_aws_aws_sdk_go_v2_service_kinesisvideomedia//types",
+        "@io_goji//:goji.io",
+        "@io_goji//pat",
+    ],
+)
+
+go_binary(
+    name = "kvspusher",
+    embed = [":kvspusher_lib"],
+    visibility = ["//visibility:public"],
+)

@@ -1,0 +1,17 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+
+package(default_visibility = ["//visibility:public"])
+
+py_binary(
+    name = "validate",
+    srcs = ["validate.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("opencv-contrib-python"),
+        requirement("pyyaml"),
+        requirement("matplotlib"),
+        "//core/perception/calibration:camera_model",
+        "//core/perception/calibration:utils",
+    ],
+)

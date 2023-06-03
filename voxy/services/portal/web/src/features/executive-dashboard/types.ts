@@ -1,0 +1,9 @@
+import {
+  GetExecutiveDashboardData_currentUser_organization_sites,
+  GetExecutiveDashboardData_currentUser_organization_sessionCount_sites,
+  GetExecutiveDashboardData_currentUser_organization_sessionCount_users,
+} from "__generated__/GetExecutiveDashboardData";
+
+export type OrgSite = GetExecutiveDashboardData_currentUser_organization_sites;
+export type SiteSession = GetExecutiveDashboardData_currentUser_organization_sessionCount_sites;
+export type UserSession = GetExecutiveDashboardData_currentUser_organization_sessionCount_users;

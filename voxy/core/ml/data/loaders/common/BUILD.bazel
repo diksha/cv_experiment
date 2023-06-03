@@ -1,0 +1,32 @@
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "converter",
+    srcs = [
+        "converter.py",
+    ],
+    deps = [
+        ":dataloader",
+    ],
+)
+
+py_library(
+    name = "dataloader",
+    srcs = [
+        "dataloader.py",
+    ],
+    deps = [
+    ],
+)
+
+py_library(
+    name = "registry",
+    srcs = [
+        "registry.py",
+    ],
+    deps = [
+        "//core/common/utils:registry",
+    ],
+)

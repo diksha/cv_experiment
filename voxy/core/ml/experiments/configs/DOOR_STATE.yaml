@@ -1,0 +1,5 @@
+task_purpose: DOOR_STATE
+service_category: IMAGE_CLASSIFICATION
+model_config: core/ml/training/configs/DOOR_STATE.yaml
+dataset_config: core/ml/data/generation/configs/datasets/DOOR_STATE.yaml
+logset_config: core/ml/data/generation/configs/logsets/DOOR_STATE.yaml

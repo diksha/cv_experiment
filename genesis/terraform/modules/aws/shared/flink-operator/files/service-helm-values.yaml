@@ -1,0 +1,3 @@
+watchNamespaces:
+ - ${NAMESPACE_TO_WATCH}
+replicas: 1

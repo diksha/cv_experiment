@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# darglint doesn't provide a flag for excluding files, so we use a
+# combination of find/grep/xargs to pass a filtered file list to darglint
+
+# We are using --no-exit-code until we have dealt with existing violations,
+# at which point we can remove --no-exit-code and have this command fail
+# during CI/pre-commit.
+
+set -euo pipefail
+
+FILEPATH=$(readlink -f "$0")
+BASEDIR=$(dirname "$FILEPATH")
+WORKSPACEDIR=$(dirname "$BASEDIR")
+cd "$WORKSPACEDIR" || exit 1
+
+BINARY="$WORKSPACEDIR/bazel-bin/third_party/darglint/darglint"
+
+if ! test -f "$BINARY"; then
+	"$WORKSPACEDIR"/bazel build //third_party/darglint:darglint
+fi
+
+# TODO(troycarlson): Remove --ignore-regex after violations are addressed
+find . -name "*.py" |
+	grep -v ./portal/api/venv |
+	grep -v ./experimental |
+	grep -v ./third_party/npm/node_modules |
+	grep -v ./third_party/closeablequeue |
+	xargs bazel-bin/third_party/darglint/darglint \
+		--strictness=short \
+		--ignore-regex='^_.*$|non_max_suppression|__call__|update|associate_detections_to_trackers|convert_bbox_to_z|convert_x_to_bbox|im_to_torch|p_merge|p_merge_fast|pose_nms|transform_line_segments_with_angular_displacement|transform_line_segements_with_x_displacement|get_parallel_line_segment_originating_at_point|get_linesegment_with_angle_displacement'

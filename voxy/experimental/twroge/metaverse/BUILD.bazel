@@ -1,0 +1,32 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+
+py_binary(
+    name = "migrate_to_data_collection",
+    srcs = ["migrate_to_data_collection.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/metaverse/migrations/lib:neomodel_context",
+        requirement("tqdm"),
+    ],
+)
+
+py_binary(
+    name = "clean_up_duplicate_nodes",
+    srcs = ["clean_up_duplicate_nodes.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/metaverse/migrations/lib:neomodel_context",
+        requirement("tqdm"),
+    ],
+)
+
+py_binary(
+    name = "ingest_uningested_items",
+    srcs = ["ingest_uningested_items.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/infra/sematic/shared:utils",
+        "//core/ml/data/flywheel/lib:dataflywheel",
+    ],
+)

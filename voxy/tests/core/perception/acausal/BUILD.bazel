@@ -1,0 +1,19 @@
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+package(default_visibility = ["//visibility:public"])
+
+voxel_py_test(
+    name = "track_smoothing_test",
+    srcs = ["track_smoothing_test.py"],
+    deps = [
+        "//core/perception/acausal/algorithms:track_smoothing",
+    ],
+)
+
+voxel_py_test(
+    name = "pit_person_association_tests",
+    srcs = ["pit_person_association_tests.py"],
+    deps = [
+        "//core/perception/acausal/algorithms:association_controller",
+    ],
+)

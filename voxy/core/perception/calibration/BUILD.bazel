@@ -1,0 +1,32 @@
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "camera_model",
+    srcs = ["camera_model.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/perception/calibration/models",
+        "//core/structs",
+    ],
+)
+
+py_library(
+    name = "utils",
+    srcs = ["utils.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/perception/calibration:camera_model",
+    ],
+)
+
+py_library(
+    name = "world_perspective_model",
+    srcs = ["world_perspective_model.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/perception/calibration:camera_model",
+        "//core/perception/calibration:utils",
+    ],
+)

@@ -1,0 +1,10 @@
+".*":
+  incident:
+        dry_run: true
+        monitors_requested: []
+        state_machine_monitors_requested: [safety_vest]
+  perception:
+    enabled: True
+    acausal_layer:
+      PPESmoothener:
+        time_interval_ms: 10000

@@ -1,0 +1,28 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+
+# To run this job run:
+# bazel run -- //core/infra/symphony:runner --config_path experimental/diksha/symphony/example.yaml --dummy_arg arg
+
+{% set image_tag=GENERATE_UUID_WITH_PREFIX("diksha_print_") %}
+
+buildkite_jobs:
+  -
+    name : print_container
+    type: bazel
+    command: //experimental/diksha/symphony:print_image_image_push --define IMAGE_TAG={{image_tag}}
+  -
+    name : print-k8
+    type: k8s
+    items: ["abc"]
+    image: us.gcr.io/sodium-carving-227300/voxel/experimental:{{image_tag}}
+    command:  /app/experimental/diksha/symphony/print

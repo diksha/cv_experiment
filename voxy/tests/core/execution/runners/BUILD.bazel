@@ -1,0 +1,9 @@
+sh_test(
+    name = "develop_smoke_test",
+    srcs = ["develop_smoke_test.sh"],
+    data = ["//core/execution/runners:develop"],
+    tags = [
+        "requires-gpu",
+        "requires-network",
+    ],
+)

@@ -1,0 +1,52 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+filegroup(
+    name = "scale_taxonomies",
+    srcs = glob(["taxonomies/*"]),
+    visibility = ["//visibility:public"],
+)
+
+py_library(
+    name = "task_creation_base",
+    srcs = [
+        "task_creation_base.py",
+    ],
+    data = [":scale_taxonomies"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("scaleapi"),
+        requirement("loguru"),
+        "//core/labeling/scale/lib:scale_client",
+        "//core/labeling/scale/lib:utils",
+        "//core/structs",
+    ],
+)
+
+py_library(
+    name = "task_creation",
+    srcs = [
+        "door_classification_task.py",
+        "image_segmentation_task.py",
+        "ppe_hat_image_annotation_task.py",
+        "safety_gloves_image_annotation_task.py",
+        "safety_vest_image_annotation_task.py",
+        "video_playback_annotation_task.py",
+    ],
+    data = [":scale_taxonomies"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":task_creation_base",
+        "//core/incidents:utils",
+        "//core/labeling/scale/lib:scale_task_retry",
+        requirement("av"),
+        "//core/labeling:constants",
+        "//core/labeling/scale/hypothesis_generation/videoplayback_hypothesis:annotations_hypothesis",
+        "//core/labeling/scale/lib:scale_task_wrapper",
+        "//core/structs",
+        "//core/utils:aws_utils",
+        "//core/utils:video_reader",
+        "//core/utils:video_utils",
+        "//core/utils/video:video_transcoding",
+    ],
+)

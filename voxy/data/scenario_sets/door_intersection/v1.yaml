@@ -1,0 +1,51 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+scenarios:
+- camera_uuid: americold/modesto/e_dock_north/ch12
+  incidents: [NO_STOP_AT_DOOR_INTERSECTION]
+  video_uuid: americold/modesto/e_dock_north/ch12/scenarios_regression_set/no_stop_at_door_intersection_pos_scenario_1
+- camera_uuid: americold/modesto/e_dock_north/ch12
+  incidents: [NO_STOP_AT_DOOR_INTERSECTION]
+  video_uuid: americold/modesto/e_dock_north/ch12/scenarios_regression_set/no_stop_at_door_intersection_pos_scenario_2
+- camera_uuid: americold/modesto/e_dock_north/ch12
+  incidents: [NO_STOP_AT_DOOR_INTERSECTION]
+  video_uuid: americold/modesto/e_dock_north/ch12/scenarios_regression_set/no_stop_at_door_intersection_pos_scenario_3
+- camera_uuid: americold/modesto/e_dock_north/ch22_1
+  incidents: [NO_STOP_AT_DOOR_INTERSECTION]
+  video_uuid: americold/modesto/e_dock_north/ch22_1/scenarios_regression_set/no_stop_at_door_intersection_pos_scenario_1
+- camera_uuid: americold/modesto/e_dock_north/ch22_1
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch22_1/scenarios_regression_set/no_stop_at_door_intersection_neg_scenario_1
+- camera_uuid: americold/modesto/e_dock_north/ch22_1
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch22_1/scenarios_regression_set/no_stop_at_door_intersection_neg_scenario_2
+- camera_uuid: americold/modesto/e_dock_north/ch22_1
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch22_1/scenarios_regression_set/no_stop_at_door_intersection_neg_scenario_3
+- camera_uuid: americold/modesto/e_dock_north/ch12
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch12/scenarios_regression_set/no_stop_at_door_intersection_neg_scenario_1
+- camera_uuid: americold/modesto/e_dock_north/ch12
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch12/scenarios_regression_set/no_stop_at_door_intersection_neg_scenario_2
+- camera_uuid: americold/modesto/e_dock_north/ch22
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch22/scenarios_regression_set/no_stop_at_door_intersection_neg_scenario_1
+- camera_uuid: americold/modesto/e_dock_north/ch22
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch22/scenarios_regression_set/no_stop_at_door_intersection_neg_scenario_2
+- camera_uuid: americold/modesto/e_dock_north/ch22
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch22/scenarios_regression_set/no_stop_at_door_intersection_neg_scenario_3
+- camera_uuid: americold/modesto/e_dock_north/ch12
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch12/scenarios_regression_set/no_stop_at_door_intersection_neg_scenario_3

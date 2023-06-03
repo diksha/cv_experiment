@@ -1,0 +1,68 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "pipeline",
+    srcs = [
+        "pipeline.py",
+    ],
+    deps = [
+        requirement("tqdm"),
+    ],
+)
+
+py_library(
+    name = "stream",
+    srcs = [
+        "stream.py",
+    ],
+)
+
+py_library(
+    name = "writer",
+    srcs = [
+        "writer.py",
+    ],
+    deps = [
+        "//core/ml/data/generation/common:metadata",
+    ],
+)
+
+py_library(
+    name = "logset_generator",
+    srcs = [
+        "logset_generator.py",
+    ],
+    deps = [
+        "//core/metaverse/utils:structs",
+    ],
+)
+
+py_library(
+    name = "metadata",
+    srcs = [
+        "metadata.py",
+    ],
+)
+
+py_library(
+    name = "utils",
+    srcs = [
+        "utils.py",
+    ],
+)
+
+py_library(
+    name = "registry",
+    srcs = [
+        "registry.py",
+    ],
+    deps = [
+        ":logset_generator",
+        ":stream",
+        ":writer",
+        "//core/common/utils:registry",
+    ],
+)

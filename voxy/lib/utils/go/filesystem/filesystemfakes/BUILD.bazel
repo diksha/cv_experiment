@@ -1,0 +1,9 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "filesystemfakes",
+    srcs = ["fake_directory_operations_interface.go"],
+    importpath = "github.com/voxel-ai/voxel/lib/utils/go/filesystem/filesystemfakes",
+    visibility = ["//visibility:public"],
+    deps = ["//lib/utils/go/filesystem"],
+)

@@ -1,0 +1,22 @@
+state_prefix: aws-account-mgmt-v1
+variables:
+  root_account_id: 667031391229
+  production:
+    account_name: Production
+    admin_email: cloudadmin+production@voxelai.com
+  staging:
+    account_name: Staging
+    admin_email: cloudadmin+staging_aws@voxelai.com
+  development:
+    account_name: Development
+    admin_email: cloudadmin+dev_aws@voxelai.com
+  prime:
+    account_name: Prime
+    admin_email: cloudadmin+prime_aws@voxelai.com
+  platform:
+    account_name: Platform
+    admin_email: cloudadmin+platform_aws@voxelai.com
+  galileo:
+    account_name: Galileo
+    admin_email: cloudadmin+galileo_aws@voxelai.com
+  environment: development

@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: edge-transcoder
+spec:
+  serviceName: edge-transcoder
+  replicas: 0
+  selector:
+    matchLabels:
+      app: edge-transcoder
+  template:
+    metadata:
+      labels:
+        app: edge-transcoder
+    spec:
+      hostNetwork: true
+      containers:
+      - name: edge-transcoder
+        image: edge-transcoder
+        imagePullPolicy: IfNotPresent
+        command: ["/bin/bash"]
+        args: ["-c", "exec /opt/voxel/bin/transcoder -stream_config /etc/voxel/${POD_NAME}.json"]
+        env:
+        - name: NVIDIA_VISIBLE_DEVICES
+          value: "all"
+        - name: NVIDIA_DRIVER_CAPABILITIES
+          value: "all"
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: IOT_CERT
+          value: /greengrass/v2/thingCert.crt
+        - name: IOT_PRIV_KEY
+          value: /greengrass/v2/privKey.key
+        - name: IOT_ROOT_CA
+          value: /greengrass/v2/rootCA.pem
+        resources:
+          requests:
+            memory: "128Mi"
+          limits:
+            memory: "512Mi"
+        volumeMounts:
+        - name: rootca
+          mountPath: /greengrass/v2/rootCA.pem
+        - name: privkey
+          mountPath: /greengrass/v2/privKey.key
+        - name: thingcert
+          mountPath: /greengrass/v2/thingCert.crt
+        - name: edge-transcoder-configs
+          mountPath: /etc/voxel
+      volumes:
+      - name: rootca
+        hostPath:
+          path: /greengrass/v2/rootCA.pem
+          type: File
+      - name: privkey
+        hostPath:
+          path: /greengrass/v2/privKey.key
+          type: File
+      - name: thingcert
+        hostPath:
+          path: /greengrass/v2/thingCert.crt
+          type: File
+      - name: edge-transcoder-configs
+        configMap:
+          name: edge-transcoder-configs

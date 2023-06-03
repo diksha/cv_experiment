@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "strict": true,
+    "target": "ES2020",
+    "module": "commonjs",
+    "declaration": true,
+    "paths": {
+      "@voxel/*": ["../*"]
+    },
+    "types": ["node", "jest"]
+  }
+}

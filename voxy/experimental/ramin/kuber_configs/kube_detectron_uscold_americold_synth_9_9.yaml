@@ -1,0 +1,41 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+apiVersion: batch/v1
+kind: Job
+metadata:
+  # Unique key of the Job instance
+  name: local-weights-uscold-americold-synth-hybrid-anchor-9-9
+spec:
+  template:
+    metadata:
+      name: local-weights-uscold-americold-synth-hybrid-anchor-9-9
+    spec:
+      serviceAccountName: k8
+      hostIPC: True
+      containers:
+      - name: detectron2
+        image: us.gcr.io/sodium-carving-227300/voxel/experimental:ramin_voxelsafety_com_1631233481
+        command: ["/bin/sh", "-c"]
+        args: ["apt update && mkdir /data && mkdir /data/synth && gsutil -m cp -r gs://voxel-users/ramin/coco/uscold_americold_fitness_9_7/* /data/ && gsutil -m cp -r gs://voxel-users/common/ppe_synthetic_data_derived_5k/* /data/synth/ && ls /data/ && gsutil cp gs://voxel-users/common/WandB/.netrc ~/ && /usr/bin/python3 /app/experimental/ramin/detectron2/train -lr 0.0001 -epochs 10 -out_dir /data/output -data_dir /data -use_local_weights 1 -gamma 0.5 -wandb_name localWeights_uscold_americold_synth_hybrid_anchor_9_9 -num_gpus 4
+ && gsutil cp -r /data/output/* gs://voxel-users/ramin/experiments/detectron/localWeights-uscold-americold-synth-hybrid-anchor-new-val-lr0005-9-9"]
+        resources:
+          limits:
+            cpu: 30
+            nvidia.com/gpu: 4
+            memory: "100Gi"
+          requests:
+            cpu: 30
+            nvidia.com/gpu: 4
+            memory: "100Gi"
+      restartPolicy: Never
+  # of retries before marking as failed.
+  backoffLimit: 0

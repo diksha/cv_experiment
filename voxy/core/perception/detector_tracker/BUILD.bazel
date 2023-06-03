@@ -1,0 +1,102 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "utils",
+    srcs = [
+        "utils.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("opencv-python"),
+        requirement("numpy"),
+        requirement("torchvision"),
+    ],
+)
+
+py_library(
+    name = "yolo_detector",
+    srcs = [
+        "yolo_detector.py",
+    ],
+    data = [
+        "@artifacts_01_18_2023_piston-automotive-yolo",  # ppg/cedar_falls, western_carriers/north_bergen, piston_automotive/marion, and innovate_manufacturing/knoxville
+        "@artifacts_02_27_2023_michaels_wesco_office_yolo",  # wesco/reno, michaels/tracy, and office_depot
+        "@artifacts_05_02_2023_jfe_shoji_burlington",
+        "@artifacts_05_18_2023_vertical_cold_storage_bolingbrook_yolo",
+        "@artifacts_05_28_2023_vertical_cold_storage_richardson_uscold_syracuse_yolo",
+        "@artifacts_05_31_2023_verst_hebron_yolo",
+        "@artifacts_2021-12-06-00-00-00-0000-yolo",  # americold/modesto
+        "@artifacts_2022-08-31-01-26-05-aa61-yolo",  # americold/sanford
+        "@artifacts_2022-08-31-01-26-05-aa61-yolo-torchscript",
+        "@artifacts_2022-09-19-01-24-03-8682-yolo",  # americold/savannah_pooler
+        "@artifacts_2022-09-19-01-24-03-8682-yolo-torchscript",
+        "@artifacts_2022-10-04-18-20-08-f6eb-yolo",  # uscold/quakertown & verst/walton
+        "@artifacts_2022-10-04-18-20-08-f6eb-yolo-torchscript",
+        "@artifacts_2022-10-07-20-23-21-2564-yolo",  # hensley/chandler & americold/savannah_bloomingdale
+        "@artifacts_2022-10-07-20-23-21-2564-yolo-torchscript",
+        "@artifacts_2022-11-01-06-31-22-ef98-yolo",  # lakeshore_beverage/arlington_heights & feb_distributing/biloxi
+        "@artifacts_2022-11-09-22-58-28-2d35-yolo",  # americold/tacoma (& lot of sites)
+        "@artifacts_2022-11-15-03-38-16-91db-yolo",  # wn_foods/hayward
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("opencv-python"),
+        requirement("numpy"),
+        requirement("torch"),
+        requirement("torchvision"),
+        ":utils",
+        "//core/execution/utils:perception_runner_context",
+        "//core/structs",
+        "//lib/ml/inference/tasks/object_detection_2d/yolov5:factory",
+        "//protos/perception/graph_config/v1:graphconfigpb_py_library",
+        "//third_party/byte_track:utils",
+    ],
+)
+
+py_library(
+    name = "tracker",
+    srcs = [
+        "tracker.py",
+    ],
+    data = [
+        "@artifacts_04_18_2023_voxel_safetyvest_vit_arlington_2022-09-08-jit",
+        "@artifacts_04_18_2023_voxel_safetyvest_vit_general_2022-09-21-jit",
+        "@artifacts_04_18_2023_voxel_safetyvest_vit_laredo-2_laredo_2022-09-15-jit",
+        "@artifacts_04_18_2023_voxel_safetyvest_vit_laredo_walton_2022-10-05-jit",
+        "@artifacts_04_18_2023_voxel_safetyvest_vit_quakertown_laredo_2022_08_24_jit",
+        "@artifacts_04_19_2023_voxel_safetyvest_vit_2022-08-30_solana_beach-jit",
+        "@artifacts_04_19_2023_voxel_safetyvest_vit_dixieline_2022-09-16-jit",
+        "@artifacts_americold_model",
+        "@artifacts_attention_vestclassifier",
+        "@artifacts_bumpcap_vit_99_46_34k_2022-12-20-jit",
+        "@artifacts_hard_hat_occlusion_vit_v4_2022-11-18-jit",
+        "@artifacts_hat_classifier_01192022",
+        "@artifacts_vest_classifier-10-26",
+        "@artifacts_vest_classifier-9-19",
+        "@artifacts_vit_vest",
+        "@artifacts_voxel_safety_vest_synthetic_classifier_attention_resnet_focal_loss_gamma1.5_WS_2022-04-01",
+        "@artifacts_voxel_safetyvest_vit-dixieline_2022-09-16",
+        "@artifacts_voxel_safetyvest_vit-lakeshore-arlington_20022-09-08",
+        "@artifacts_voxel_safetyvest_vit-uscold-laredo_2022-09-15",
+        "@artifacts_voxel_safetyvest_vit_2022-08-30_solana_beach",
+        "@artifacts_voxel_safetyvest_vit_general_2022-09-21",
+        "@artifacts_voxel_safetyvest_vit_quakertown_laredo_2022-08-24",
+        "@artifacts_voxel_safetyvest_vverst-walton_2022-10-06",
+        "@artifacts_yolo-person-pit-exp2-dataset3",
+        "@artifacts_yolo_20220502_generic_v1",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("opencv-python"),
+        requirement("numpy"),
+        requirement("torch"),
+        requirement("torchvision"),
+        requirement("loguru"),
+        ":utils",
+        "//core/structs",
+        "//third_party/byte_track:byte_tracker",
+    ],
+)

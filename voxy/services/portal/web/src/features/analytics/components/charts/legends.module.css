@@ -1,0 +1,49 @@
+/*
+Copyright 2020-2021 Voxel Labs, Inc.
+All rights reserved.
+
+This document may not be reproduced, republished, distributed, transmitted,
+displayed, broadcast or otherwise exploited in any manner without the express
+prior written permission of Voxel Labs, Inc. The receipt or possession of this
+document does not convey any rights to reproduce, disclose, or distribute its
+contents, or to manufacture, use, or sell anything that it may describe, in
+whole or in part.
+*/
+
+/* <Legend> */
+.legend {
+  font-size: 0.875rem;
+  color: var(--brand-gray-500);
+  padding: 10px;
+}
+
+.legend > div {
+  display: inline-block;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.legend > div > span {
+  width: 17px;
+  height: 17px;
+  display: inline-block;
+  border-radius: 5px;
+}
+
+.legend > .highPriority > span {
+  background-color: var(--brand-red-500);
+}
+.legend > .mediumPriority > span {
+  background-color: var(--brand-orange-400);
+}
+.legend > .lowPriority > span {
+  background-color: var(--brand-yellow-500);
+}
+/* </Legend> */
+
+.selection {
+  flex-direction: row;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 5px;
+}

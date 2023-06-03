@@ -1,0 +1,14 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+
+py_binary(
+    name = "get_camera_frames",
+    srcs = [
+        "get_camera_frames.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//lib/utils:fetch_camera_frames",
+        requirement("pytz"),
+    ],
+)

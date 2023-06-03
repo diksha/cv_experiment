@@ -1,0 +1,102 @@
+fullnameOverride: default-collector
+resources:
+  requests:
+    cpu: 50m
+    memory: 128Mi
+  limits:
+    cpu: 256m
+    memory: 512Mi
+mode: deployment
+presets:
+  logsCollection:
+    enabled: false
+    includeCollectorLogs: false
+  kubernetesAttributes:
+    enabled: true
+  hostMetrics:
+    enabled: false
+serviceAccount:
+  create: true
+clusterRole:
+  create: true
+  rules:
+  - apiGroups: [""]
+    resources: ["pods", "namespaces", "nodes"]
+    verbs: ["get", "watch", "list"]
+extraEnvs:
+  - name: CLUSTER_NAME
+    value: ${CLUSTER_NAME}
+ports:
+  metrics:
+    enabled: true
+  jaeger-compact:
+    enabled: false
+  jaeger-thrift:
+    enabled: false
+  jaeger-grpc:
+    enabled: false
+  zipkin:
+    enabled: false  
+podMonitor:
+  enabled: true
+serviceMonitor:
+  enabled: true
+  extraLabels:
+    prometheus: default
+
+config:
+  extensions:
+    health_check: {}
+    memory_ballast: {}
+  exporters:
+    prometheus:
+      endpoint: "0.0.0.0:8889"
+      send_timestamps: true
+      metric_expiration: 180m
+      resource_to_telemetry_conversion:
+        enabled: true
+    otlp:
+      endpoint: ${OTLP_TRACING_ENDPOINT}
+      tls:
+        insecure: true
+  processors:
+    spanmetrics:
+      metrics_exporter: prometheus
+      latency_histogram_buckets:
+        [100us, 1ms, 10ms, 250ms, 2s]
+      dimensions:
+        - name: http.method
+          default: GET
+        - name: http.status_code
+        - name: k8s_cloud_zone
+        - name: k8s_cluster
+        - name: resource_name
+        - name: k8s.pod.name
+        - name: k8s.deployment.name
+        - name: k8s.namespace.name
+      dimensions_cache_size: 1000
+      aggregation_temporality: "AGGREGATION_TEMPORALITY_CUMULATIVE"
+    batch:
+      send_batch_size: 100
+      timeout: 5s
+    attributes:
+      actions:
+        - key: k8s_cloud_zone
+          value: "${AWS_REGION}"
+          action: upsert
+        - key: k8s_cluster
+          value: "${CLUSTER_NAME}"
+          action: upsert
+  service:
+    telemetry:
+      metrics:
+        address: 0.0.0.0:8888
+    pipelines:
+      traces:
+        receivers: [otlp]
+        processors: [k8sattributes, attributes, spanmetrics, batch]
+        exporters: [otlp]
+      metrics:
+        receivers: [otlp]
+        processors: [k8sattributes, attributes, batch]
+        exporters: [prometheus]

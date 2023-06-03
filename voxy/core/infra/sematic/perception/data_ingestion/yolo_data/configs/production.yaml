@@ -1,0 +1,31 @@
+#
+# Copyright 2023 Voxel Labs, Inc.
+# All rights reserved.
+#
+# This document may not be reproduced, republished, distributed, transmitted,
+# displayed, broadcast or otherwise exploited in any manner without the express
+# prior written permission of Voxel Labs, Inc. The receipt or possession of this
+# document does not convey any rights to reproduce, disclose, or distribute its
+# contents, or to manufacture, use, or sell anything that it may describe, in
+# whole or in part.
+#
+pull_kinesis_feed_site:
+   hours: 24
+   chunk_size: 10
+   max_videos: 0
+   max_fragment_failures: 5
+   bucket: "voxel-lightly-input"
+
+prepare_lightly_run:
+   output_bucket: "voxel-lightly-output"
+
+trim_lightly_clips:
+    output_bucket: "voxel-lightly-output"
+    task: "detector"
+    remove_task_name: False
+    use_epoch_time: True
+  
+create_scale_tasks:
+    fps: 0
+    task_type: "VideoPlaybackAnnotationTask"
+    credentials_arn: "arn:aws:secretsmanager:us-west-2:203670452561:secret:scale_credentials-WHUbar"

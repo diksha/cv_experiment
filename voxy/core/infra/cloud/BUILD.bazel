@@ -1,0 +1,62 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "utils",
+    srcs = [
+        "utils.py",
+    ],
+    deps = [
+        requirement("google-auth"),
+    ],
+)
+
+py_library(
+    name = "kinesis_utils",
+    srcs = [
+        "kinesis_utils.py",
+    ],
+    data = [
+        "@kinesis_utils_testdata",
+    ],
+    deps = [
+        requirement("opencv-python"),
+        requirement("boto3"),
+        requirement("av"),
+        requirement("loguru"),
+        "//core/utils:pyav_decoder",
+        "//core/utils/mkvtagreader",
+        "@rules_python//python/runfiles",
+    ],
+)
+
+py_library(
+    name = "gcs_utils",
+    srcs = [
+        "gcs_cv2_utils.py",
+        "gcs_utils.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":utils",
+        requirement("google-cloud-storage"),
+        requirement("google-auth-httplib2"),
+        requirement("google-auth"),
+        requirement("opencv-python"),
+        requirement("google-cloud-secret-manager"),
+    ],
+)
+
+py_library(
+    name = "firestore_utils",
+    srcs = [
+        "firestore_utils.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("google-api-core"),
+        requirement("google-cloud-firestore"),
+    ],
+)

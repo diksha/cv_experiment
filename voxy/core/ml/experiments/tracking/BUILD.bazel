@@ -1,0 +1,16 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+py_library(
+    name = "experiment_tracking",
+    srcs = [
+        "base_experiment_tracker.py",
+        "clearml_tracker.py",
+        "experiment_tracking.py",
+    ],
+    visibility = ["//core/ml:__subpackages__"],
+    deps = [
+        requirement("clearml"),
+        requirement("retry"),
+    ],
+)

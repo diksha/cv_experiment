@@ -1,0 +1,15 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+
+py_binary(
+    name = "get_media",
+    srcs = [
+        "get_media.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/infra/cloud:kinesis_utils",
+        requirement("loguru"),
+        requirement("pytz"),
+    ],
+)

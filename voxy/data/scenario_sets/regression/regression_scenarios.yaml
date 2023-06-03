@@ -1,0 +1,33 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+
+scenarios:
+  {{ EXTRACT_SCENARIOS_FROM_FILES([
+    "data/scenario_sets/regression/bad_posture.yaml",
+    "data/scenario_sets/regression/door_violation.yaml",
+    "data/scenario_sets/regression/hard_hat.yaml",
+    "data/scenario_sets/regression/n_person_ped_zone.yaml",
+    "data/scenario_sets/regression/no_ped_zone.yaml",
+    "data/scenario_sets/regression/no_stop_at_door_intersection.yaml",
+    "data/scenario_sets/regression/no_stop_at_end_of_aisle.yaml",
+    "data/scenario_sets/regression/no_stop_at_intersection.yaml",
+    "data/scenario_sets/regression/open_door_duration.yaml",
+    "data/scenario_sets/regression/overreaching.yaml",
+    "data/scenario_sets/regression/parking_duration.yaml",
+    "data/scenario_sets/regression/piggyback.yaml",
+    "data/scenario_sets/regression/production_line_down.yaml",
+    "data/scenario_sets/regression/safety_vest.yaml",
+    "data/scenario_sets/regression/spill.yaml"])
+  }}
+
+
+

@@ -1,0 +1,162 @@
+receivers:
+  filelog:
+    include:
+      - /data/*/*/*.log
+    exclude:
+      # Exclude logs from all containers named otel-collector
+      # - /var/log/*.log
+    start_at: beginning
+    include_file_path: true
+    include_file_name: false
+    operators:
+      ####################################################################################
+      # Pre-formatter. Find base container runtime format and forward logs
+      - type: router
+        id: pre-process-router
+        routes:
+          - output: parser-docker
+            expr: 'body matches "^\\{"'
+          - output: parser-crio
+            expr: 'body matches "^[^ Z]+ "'
+          - output: parser-containerd
+            expr: 'body matches "^[^ Z]+Z"'
+
+      # Parse CRI-O format
+      - type: regex_parser
+        id: parser-crio
+        regex: "^(?P<time>[^ Z]+) (?:<stream>stdout|stderr) (?P<source>[^ ]*) ?(?P<log>.*)$"
+        output: process-router
+        timestamp:
+          parse_from: attributes.time
+          layout_type: gotime
+          layout: "2006-01-02T15:04:05.000000000-07:00"
+
+      # Parse CRI-Containerd format
+      - type: regex_parser
+        id: parser-containerd
+        regex: "^(?P<time>[^ ^Z]+Z) (?:<stream>stdout|stderr) (?P<source>[^ ]*) ?(?P<log>.*)$"
+        output: process-router
+        timestamp:
+          parse_from: attributes.time
+          layout: "%Y-%m-%dT%H:%M:%S.%LZ"
+
+      # Parse Docker format
+      - type: json_parser
+        id: parser-docker
+        output: process-router
+        timestamp:
+          parse_from: attributes.time
+          layout: "%Y-%m-%dT%H:%M:%S.%LZ"
+      ####################################################################################
+      # Parse actual log message and route accodingly
+      - type: router
+        id: process-router
+        routes:
+          - output: process-json-log
+            expr: body matches "^\\{[ \t \n][^*\"].*[^*\"]\\}$"
+        default: set-attribute-log-as-body
+
+      - type: json_parser
+        id: process-json-log
+        parse_from: attributes.log
+        parse_to: attributes.data
+        output: find-message-field-in-attributes
+        on_error: send
+      - type: move
+        id: set-attribute-log-as-body
+        from: attributes.log
+        to: body
+        output: extract_metadata_from_filepath
+      # All parsing done. Now set all expected fields
+      - type: router
+        id: find-message-field-in-attributes
+        routes:
+          - expr: "attributes.data != nil && attributes.data.msg != nil"
+            output: set-message-field-from-msg
+          - expr: "attributes.data != nil && attributes.data.message != nil"
+            output: set-message-field-from-message
+        default: set-attribute-log-as-body
+      - type: move
+        id: set-message-field-from-msg
+        from: attributes.data.msg
+        to: body
+        output: extract_metadata_from_filepath
+      - type: move
+        id: set-message-field-from-message
+        from: attributes.data.message
+        to: body
+        output: extract_metadata_from_filepath
+      - type: add
+        id: set-default-message
+        field: body
+        value: "-"
+        output: set-default-source
+
+      - type: add
+        id: set-default-source
+        field: attributes.source
+        value: "-"
+        output: extract_metadata_from_filepath
+      ####################################################################################
+      # Post processing
+      # Extract metadata from file path
+      - type: regex_parser
+        id: extract_metadata_from_filepath
+        regex: '^.*\/(?P<f_namespace>[^_]+)_(?P<f_pod_name>[^_]+)_(?P<f_pod_uid>[a-f0-9\-]{36})\/(?P<f_container>[^\._]+)\/(?P<f_c_restart_count>\d+)\.log$'
+        parse_from: attributes["log.file.path"]
+      - type: remove
+        id: remove-attributes-log
+        field: attributes.log
+        if: "attributes.log != nil"
+      - type: remove
+        id: remove-attributes-time
+        field: attributes.time
+        if: "attributes.time != nil"
+      - type: remove
+        id: remove-attributes-log-file-path
+        field: attributes["log.file.path"]
+        if: 'attributes["log.file.path"] != nil'
+      - type: move
+        id: move-attributes-ns
+        from: attributes.f_namespace
+        to: attributes["k8s.namespace.name"]
+      - type: move
+        id: move-attributes-pod-name
+        from: attributes.f_pod_name
+        to: attributes["k8s.pod.name"]
+      - type: move
+        id: move-attributes-pod-uid
+        from: attributes.f_pod_uid
+        to: attributes["k8s.pod.uid"]
+      - type: move
+        id: move-attributes-container
+        from: attributes.f_container
+        to: attributes["k8s.container.name"]
+      - type: move
+        id: move-attributes-restart-count
+        from: attributes.f_c_restart_count
+        to: attributes["k8s.container.restart_count"]
+          ####################################################################################
+
+  otlp:
+    protocols:
+      grpc:
+exporters:
+  logging:
+    loglevel: debug
+processors:
+  batch:
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      exporters: [logging]
+      processors: [batch]
+    logs:
+      receivers: [otlp, filelog]
+      exporters: [logging]
+      processors: [batch]
+    metrics:
+      receivers: [otlp]
+      exporters: [logging]
+      processors: [batch]

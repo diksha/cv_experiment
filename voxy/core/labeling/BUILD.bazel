@@ -1,0 +1,22 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+py_library(
+    name = "video_helper_mixin",
+    srcs = [
+        "video_helper_mixin.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("av"),
+        ":constants",
+        "//core/infra/cloud:gcs_utils",
+        "//core/utils:video_reader",
+    ],
+)
+
+py_library(
+    name = "constants",
+    srcs = ["constants.py"],
+    visibility = ["//visibility:public"],
+)

@@ -1,0 +1,77 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary", "py_library")
+
+py_library(
+    name = "create_scale_tasks_lib",
+    srcs = ["create_scale_tasks.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/labeling/scale/task_creation",
+        requirement("scaleapi"),
+        requirement("sematic"),
+        requirement("loguru"),
+        "//core/infra/sematic/shared:resources",
+        "//core/labeling/logs_store:ingest_data_collection_metaverse_lib",
+        "//core/labeling/scale/lib:scale_batch_wrapper",
+        "//core/labeling/scale/registry:register_components",
+        "//core/structs",
+    ],
+)
+
+py_binary(
+    name = "camera_config_scale_task",
+    srcs = ["camera_config_scale_task.py"],
+    data = [
+        "//core/labeling/scale/task_creation:scale_taxonomies",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("scaleapi"),
+        "//core/labeling/tools:pull_kinesis_feed_lib",
+        requirement("loguru"),
+        "//core/labeling/scale/lib:scale_batch_wrapper",
+        "//core/labeling/scale/lib:scale_task_retry",
+        "//core/labeling/scale/lib:scale_task_wrapper",
+        "//core/utils:aws_utils",
+        requirement("shortuuid"),
+    ],
+)
+
+py_binary(
+    name = "create_scale_tasks",
+    srcs = [
+        "create_scale_tasks.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":create_scale_tasks_lib",
+    ],
+)
+
+py_binary(
+    name = "cancel_scale_tasks_runner",
+    srcs = ["cancel_scale_tasks_runner.py"],
+    deps = [
+        "//core/labeling/scale/lib:scale_batch_wrapper",
+    ],
+)
+
+py_binary(
+    name = "scale_voxel_converter",
+    srcs = ["scale_voxel_converter.py"],
+    deps = [
+        "//core/labeling/scale/lib/converters:scale_voxel_conversion",
+    ],
+)
+
+py_binary(
+    name = "camera_config_raw_labels",
+    srcs = ["camera_config_raw_labels.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/labeling/scale/lib:scale_task_wrapper",
+        "//core/utils:aws_utils",
+        requirement("opencv-python"),
+        requirement("loguru"),
+    ],
+)

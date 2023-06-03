@@ -1,0 +1,29 @@
+non_web_app: true
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+
+image:
+  repository: "cloudflare/cloudflared"
+  tag: "2023.2.1"
+
+service:
+  containerPort: 8080
+
+args: ["tunnel", "--no-autoupdate", "--compression-quality", "1", "--name", "${DEPLOYMENT_IDENTIFIER}", "run"]
+
+env:
+  config:
+    TUNNEL_METRICS: "localhost:8080"
+
+affinity:
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+            - key: "app.kubernetes.io/instance"
+              operator: In
+              values:
+                - ${DEPLOYMENT_IDENTIFIER}
+        topologyKey: "kubernetes.io/hostname"

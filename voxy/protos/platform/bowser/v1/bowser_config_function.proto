@@ -1,0 +1,20 @@
+syntax = "proto3";
+package protos.platform.bowser.v1;
+option go_package = "github.com/voxel-ai/voxel/protos/platform/bowser/v1";
+
+
+/* ProcessorFunction represents the business configuration objects used to execute a Bowser Processor Function */
+
+message ProcessorFunction {
+    string name =1; // Bowser is not allowing to name a function - this field is purely for human
+    ProcessorFunctionAggregate aggregate = 2; // Aggregate configuration
+    ProcessorFunctionReduce reduce = 3; // Reduce configuration
+}
+
+message ProcessorFunctionAggregate {
+}
+
+message ProcessorFunctionReduce {
+}
+
+

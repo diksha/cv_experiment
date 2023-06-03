@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hansen-door-22-one
+  namespace: argo-cd
+spec:
+  project: default
+  source:
+    repoURL: git@github.com:voxel-ai/genesis.git
+    targetRevision: HEAD
+    path: k8s/gpu-multi-svc/
+    helm:
+      # Extra parameters to set (same as setting through values.yaml, but these take precedence)
+      parameters:
+        - name: env.config.CONFIG_FILE
+          value: configs/cameras/rite_hite/hansen/door_22/ee117015-fcfe-c17b-d775-d33a3ef682ca.yaml
+        - name: image.tag # For repo: 360054435465.dkr.ecr.us-west-2.amazonaws.com/voxel/production:
+          value: siddharth_voxelai_com_1652192902_0fd9b9bb
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: runners-production
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true

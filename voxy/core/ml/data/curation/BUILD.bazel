@@ -1,0 +1,169 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary", "py_library")
+
+py_library(
+    name = "voxel_lightly_utils",
+    srcs = [
+        "voxel_lightly_utils.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("lightly"),
+        requirement("loguru"),
+        requirement("pandas"),
+        "//core/utils:aws_utils",
+        "//core/utils/logging/slack:get_slack_webhooks",
+        "//core/utils/logging/slack:synchronous_webhook_wrapper",
+    ],
+)
+
+py_library(
+    name = "check_camera_uuid_lib",
+    srcs = [
+        "check_camera_uuid.py",
+    ],
+    data = ["//configs"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/incidents:utils",
+        requirement("loguru"),
+    ],
+)
+
+py_binary(
+    name = "check_camera_uuid",
+    srcs = [
+        "check_camera_uuid.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":check_camera_uuid_lib",
+    ],
+)
+
+py_binary(
+    name = "check_location_site",
+    srcs = [
+        "check_location_site.py",
+    ],
+    data = ["//configs"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":check_camera_uuid_lib",
+        "//core/labeling/tools:pull_kinesis_feed_site",
+        requirement("loguru"),
+        requirement("pyyaml"),
+    ],
+)
+
+py_library(
+    name = "crop_video_lib",
+    srcs = [
+        "crop_video.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("av"),
+        requirement("ffmpeg-python"),
+    ],
+)
+
+py_binary(
+    name = "crop_video",
+    srcs = [
+        "crop_video.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":crop_video_lib",
+    ],
+)
+
+py_library(
+    name = "crop_s3_videos_lib",
+    srcs = ["crop_s3_videos.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":crop_video_lib",
+        "//core/incidents:utils",
+        "//core/infra/sematic/shared:resources",
+        "//core/utils:aws_utils",
+        requirement("loguru"),
+        requirement("sematic"),
+        requirement("tqdm"),
+        requirement("av"),
+        requirement("ffmpeg-python"),
+    ],
+)
+
+py_binary(
+    name = "crop_s3_videos",
+    srcs = [
+        "crop_s3_videos.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":crop_s3_videos_lib",
+    ],
+)
+
+py_library(
+    name = "trim_lightly_clips_lib",
+    srcs = ["trim_lightly_clips.py"],
+    data = ["//configs"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        requirement("sematic"),
+        requirement("tqdm"),
+        requirement("boto3"),
+        requirement("ffmpeg-python"),
+        requirement("google-cloud-firestore"),
+        requirement("scikit-learn"),
+        requirement("lightly"),
+        "//core/infra/sematic/shared:resources",
+        "//core/labeling/logs_store:ingest_data_collection_metaverse_lib",
+        "//core/ml/data/curation:voxel_lightly_utils",
+        "//core/ml/data/curation/lib",
+        "//core/structs",
+        "//core/utils:aws_utils",
+    ],
+)
+
+py_binary(
+    name = "trim_lightly_clips",
+    srcs = [
+        "trim_lightly_clips.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":trim_lightly_clips_lib",
+    ],
+)
+
+py_library(
+    name = "prepare_lightly_run_lib",
+    srcs = ["prepare_lightly_run.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":voxel_lightly_utils",
+        requirement("loguru"),
+        requirement("lightly"),
+        requirement("sematic"),
+        "//core/infra/sematic/shared:resources",
+        "//core/utils:aws_utils",
+        "//core/utils/logging/slack:get_slack_webhooks",
+        "//core/utils/logging/slack:synchronous_webhook_wrapper",
+    ],
+)
+
+py_binary(
+    name = "prepare_lightly_run",
+    srcs = [
+        "prepare_lightly_run.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":prepare_lightly_run_lib",
+    ],
+)

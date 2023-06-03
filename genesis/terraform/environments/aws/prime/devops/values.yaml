@@ -1,0 +1,7 @@
+state_prefix: aws-prime-devops-v1
+variables:
+  devops_vpc_cidr_root: "9"
+  environment: dev
+  subdomain: platform
+  observability_identifier: prime
+  

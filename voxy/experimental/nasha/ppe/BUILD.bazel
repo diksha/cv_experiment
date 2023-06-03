@@ -1,0 +1,35 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+
+package(default_visibility = ["//visibility:public"])
+
+py_binary(
+    name = "test_ppe_classifier",
+    srcs = ["test_ppe_classifier.py"],
+    data = [
+        "@artifacts_vest_classifier-10-26",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("wandb"),
+        requirement("torch"),
+        requirement("torchvision"),
+        requirement("numpy"),
+        requirement("scikit-learn"),
+    ],
+)
+
+py_binary(
+    name = "train_vit",
+    srcs = ["train_vit.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("wandb"),
+        requirement("torch"),
+        requirement("torchvision"),
+        requirement("numpy"),
+        requirement("scikit-learn"),
+        requirement("transformers"),
+        requirement("loguru"),
+    ],
+)

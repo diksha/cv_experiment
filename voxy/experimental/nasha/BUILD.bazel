@@ -1,0 +1,43 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+
+package(default_visibility = ["//visibility:public"])
+
+py_binary(
+    name = "scale_dataset",
+    srcs = ["scale_dataset.py"],
+    data = ["@artifacts_vest_classifier-10-26"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("scale-nucleus"),
+        requirement("torch"),
+        requirement("torchvision"),
+        requirement("opencv-python"),
+        requirement("scikit-learn"),
+    ],
+)
+
+py_binary(
+    name = "train_lift",
+    srcs = ["train_lift.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("pandas"),
+        requirement("scikit-learn"),
+    ],
+)
+
+py_binary(
+    name = "sample_dataset",
+    srcs = ["sample_dataset.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("pandas"),
+    ],
+)
+
+filegroup(
+    name = "hyperparams",
+    srcs = ["data/hyper_parameter_sweep"],
+    visibility = ["//visibility:public"],
+)

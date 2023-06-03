@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# Custom Bazel shim to ensure dependencies, auth, etc. are in place.
+
+FILEPATH=$(readlink -f "$0")
+TOOLSDIR=$(dirname "$FILEPATH")
+WORKSPACE=$(dirname "$TOOLSDIR")
+
+######################### Bazel tools #####################
+#
+# More info here:
+# https://github.com/bazelbuild/bazel/blob/5.2.0/scripts/packages/bazel.sh#L34
+
+if [ -z "$BAZEL_REAL" ]; then
+	# bazel-real is not set, run bazelisk
+	# (happens when ./bazel is invoked directly)
+	exec "$TOOLSDIR/bazelisk" "$@"
+fi
+
+######################## Startup flags ####################
+#
+# it is better to configure startup flags in .bazelrc
+# with startup directives, but in some cases that is either
+# difficult or impossible like when you need interpolation
+
+BAZEL_STARTUP_FLAGS=()
+
+# LOCALCACHE_KEY can be bumped to bust the local build cache
+# in the event that a change needs to be made which does not
+# properly trigger a refetch/rebuild/etc. An example of
+# this is when changing --incompatible_default_to_explicit_init_py
+LOCAL_CACHE_KEY="2"
+
+if [ -n "$BUILDKITE" ]; then
+	# buildkite uses a shared temp folder for caching so we set it here
+	BAZEL_STARTUP_FLAGS+=("--bazelrc=$WORKSPACE/.buildkite/bazel.rc" "--output_base=/tmp/voxel/cache/bazel/$LOCAL_CACHE_KEY/output_base/$BUILDKITE_AGENT_NAME/")
+fi
+
+################### Docker ecr-login tool #################
+#
+# rules_docker has support for ecr-login but does not
+# include the tool, so we need to put it on the path
+
+if [ ! -x "$WORKSPACE/.voxelcache/bin/docker-credential-ecr-login" ]; then
+	"$BAZEL_REAL" "${BAZEL_STARTUP_FLAGS[@]}" build //third_party/docker:docker-credential-ecr-login 1>/dev/null
+	mkdir -p "$WORKSPACE/.voxelcache/bin" 1>/dev/null
+	cp -a "$WORKSPACE/bazel-bin/third_party/docker/docker-credential-ecr-login" "$WORKSPACE/.voxelcache/bin" 1>/dev/null
+fi
+
+###################### exec ###############################
+
+PATH="$WORKSPACE/.voxelcache/bin:/opt/local/bin:/usr/local/cuda/bin:$PATH" PYTHONNOUSERSITE=1 exec "$BAZEL_REAL" "${BAZEL_STARTUP_FLAGS[@]}" "$@"

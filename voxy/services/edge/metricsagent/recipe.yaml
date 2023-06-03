@@ -1,0 +1,32 @@
+---
+RecipeFormatVersion: '2020-01-25'
+ComponentName: $$COMPONENT_NAME$$
+ComponentVersion: $$COMPONENT_VERSION$$
+ComponentDescription: Voxel edge metrics agent
+ComponentPublisher: Me
+ComponentConfiguration:
+  DefaultConfiguration:
+    EdgeType: quicksync
+ComponentDependencies:
+  aws.greengrass.TokenExchangeService:
+    VersionRequirement: ">=2.0.0 <2.1.0"
+    DependencyType: HARD
+Manifests:
+- Name: Run metrics agent
+  Platform:
+    os: linux
+  Lifecycle:
+    Install:
+      RequiresPrivilege: true
+      Skipif: onpath intel_gpu_top
+      Script: |
+        DEBIAN_FRONTEND=noninteractive sudo apt-get -y update &&
+        DEBIAN_FRONTEND=noninteractive sudo apt-get -y install intel-gpu-tools
+    Run:
+      RequiresPrivilege: true
+      Script: |
+        chmod +x {artifacts:decompressedPath}/artifact/metricsagent 
+        exec {artifacts:decompressedPath}/artifact/metricsagent -edge-uuid {iot:thingName} -edge-type {configuration:/EdgeType}
+  Artifacts:
+  - Uri: $$COMPONENT_ARTIFACT_URI$$
+    Unarchive: ZIP

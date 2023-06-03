@@ -1,0 +1,51 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+
+package(default_visibility = ["//core/portal:__subpackages__"])
+
+py_binary(
+    name = "message_processor",
+    srcs = [
+        "message_processor.py",
+    ],
+    env = {
+        "DJANGO_SETTINGS_MODULE": "core.portal.voxel.settings",
+    },
+    deps = [
+        "//core/portal:app_lib",
+    ],
+)
+
+py_binary(
+    name = "sync_cameras",
+    srcs = [
+        "sync_cameras.py",
+    ],
+    data = ["//configs"],
+    env = {
+        "DJANGO_SETTINGS_MODULE": "core.portal.voxel.settings",
+    },
+    deps = [
+        requirement("termcolor"),
+        "//core/portal:app_lib",
+        "@rules_python//python/runfiles",
+    ],
+)
+
+py_binary(
+    name = "uber_data_cronjob",
+    srcs = [
+        "uber_data_cronjob.py",
+    ],
+    data = ["//configs"],
+    env = {
+        "DJANGO_SETTINGS_MODULE": "core.portal.voxel.settings",
+    },
+    deps = [
+        requirement("boto3"),
+        requirement("botocore"),
+        requirement("aws-lambda-powertools"),
+        "//core/portal:app_lib",
+        "@rules_python//python/runfiles",
+    ],
+)

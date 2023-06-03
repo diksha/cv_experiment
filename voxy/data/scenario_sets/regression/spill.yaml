@@ -1,0 +1,129 @@
+#
+# Copyright 2023 Voxel Labs, Inc.
+# All rights reserved.
+#
+# This document may not be reproduced, republished, distributed, transmitted,
+# displayed, broadcast or otherwise exploited in any manner without the express
+# prior written permission of Voxel Labs, Inc. The receipt or possession of this
+# document does not convey any rights to reproduce, disclose, or distribute its
+# contents, or to manufacture, use, or sell anything that it may describe, in
+# whole or in part.
+#
+#
+scenario_for_incidents: [SPILL]
+scenarios:
+  # POSITIVE SCENARIOS
+  - camera_uuid: uscold/laredo/dock01/cha
+    incidents: [SPILL]
+    video_uuid: uscold/laredo/dock01/cha/33269097-ef9a-4061-9dec-03ae76946546_0000
+  - camera_uuid: uscold/laredo/dock01/cha
+    incidents: [SPILL]
+    video_uuid: uscold/laredo/dock01/cha/23dc083b-edba-41c0-944c-76ae19131e56_0000
+  - camera_uuid: uscold/laredo/room_d2/cha
+    incidents: [SPILL]
+    video_uuid: uscold/laredo/room_d2/cha/ca9499a4-649f-49f2-be1b-eaf80ef5b314_0000
+  - camera_uuid: uscold/laredo/doors_14_20/cha
+    incidents: [SPILL]
+    video_uuid: uscold/laredo/doors_14_20/cha/c5c2a92e-9789-49b9-becb-19ec3442d12d_0000
+  - camera_uuid: uscold/laredo/doors_14_20/cha
+    incidents: [SPILL]
+    video_uuid: uscold/laredo/doors_14_20/cha/2aced1a2-dbc6-4a22-8e19-bcd3adec6261_0000
+  - camera_uuid: uscold/laredo/dock03/cha
+    incidents: [SPILL]
+    video_uuid: uscold/laredo/dock03/cha/cfd55b5c-0f1c-440a-b257-33fa1ba47732_0000
+  - camera_uuid: uscold/quakertown/0001/cha
+    incidents: [SPILL]
+    video_uuid: uscold/quakertown/0001/cha/5943bf96-a81f-45fc-ab96-295e625ca39d_0000
+  - camera_uuid: uscold/quakertown/0008/cha
+    incidents: [SPILL]
+    video_uuid: uscold/quakertown/0008/cha/c00cc99b-cdf4-45c0-b26c-f186b18aaa4b_0000
+  - camera_uuid: uscold/quakertown/0008/cha
+    incidents: [SPILL]
+    video_uuid: uscold/quakertown/0008/cha/c444ab55-51d5-4fb5-bba8-25c2ec9e4cba_0000
+  - camera_uuid: uscold/quakertown/0010/cha
+    incidents: [SPILL]
+    video_uuid: uscold/quakertown/0010/cha/81e0febe-4288-48c5-b8a2-e0a2cc34dd03_0000
+  - camera_uuid: trieagle/ocala/0007/cha
+    incidents: [SPILL]
+    video_uuid: trieagle/ocala/0007/cha/a7390d8c-2e05-4e93-bb79-6662225a8726_0000
+  - camera_uuid: trieagle/ocala/0008/cha
+    incidents: [SPILL]
+    video_uuid: trieagle/ocala/0008/cha/98031062-532f-4128-851a-6810b29282a4_0000
+  - camera_uuid: trieagle/ocala/0009/cha
+    incidents: [SPILL]
+    video_uuid: trieagle/ocala/0009/cha/d8238c35-97c2-4e8d-bc52-7d5ae91dce15_0000
+  - camera_uuid: trieagle/ocala/0009/cha
+    incidents: [SPILL]
+    video_uuid: trieagle/ocala/0009/cha/d1690f49-08cd-4f4f-b275-b1239557cbda_0000
+  - camera_uuid: trieagle/ocala/0010/cha
+    incidents: [SPILL]
+    video_uuid: trieagle/ocala/0010/cha/dcedb10b-ce33-49af-85f2-52631253e735_0000
+  - camera_uuid: trieagle/ocala/0010/cha
+    incidents: [SPILL]
+    video_uuid: trieagle/ocala/0010/cha/60edfcca-2ce6-4519-913c-1385240a9c9a_0000
+  - camera_uuid: wn_foods/hayward/0008/cha
+    incidents: [SPILL]
+    video_uuid: wn_foods/hayward/0008/cha/60a6c333-79a6-4ec0-92e4-5ea0f5d57e24_0000
+  - camera_uuid: wn_foods/hayward/0008/cha
+    incidents: [SPILL]
+    video_uuid: wn_foods/hayward/0008/cha/90c40a6f-f3b8-4864-939f-68c880b7cbd1_0000
+  - camera_uuid: wn_foods/hayward/0011/cha
+    incidents: [SPILL]
+    video_uuid: wn_foods/hayward/0011/cha/cfebc4f9-2cea-43ed-a7b6-6e1d20c1bd3d_0000
+  - camera_uuid: americold/tacoma/0001/cha
+    incidents: [SPILL]
+    video_uuid: americold/tacoma/0001/cha/e50ee9c4-9c94-4293-833b-d4e2a5bcbe46_0000
+  - camera_uuid: americold/tacoma/0001/cha
+    incidents: [SPILL]
+    video_uuid: americold/tacoma/0001/cha/d29ffc64-a942-452d-a6e1-ccf0be76abc2_0000
+  - camera_uuid: americold/tacoma/0002/cha
+    incidents: [SPILL]
+    video_uuid: americold/tacoma/0002/cha/a841e4a2-75ec-44de-b981-cdd4cd02884b_0000
+  - camera_uuid: americold/tacoma/0004/cha
+    incidents: [SPILL]
+    video_uuid: americold/tacoma/0004/cha/e73bfeb3-089d-49fb-b0aa-a6434eafa6a0_0000
+  - camera_uuid: americold/tacoma/0004/cha
+    incidents: [SPILL]
+    video_uuid: americold/tacoma/0004/cha/83d24b86-e4ee-4111-9c9c-b70638ca5f19_0000
+  - camera_uuid: americold/tacoma/0005/cha
+    incidents: [SPILL]
+    video_uuid: americold/tacoma/0005/cha/fe431eb1-cffa-4b32-b5c9-10db6d6f003b_0000
+  - camera_uuid: americold/tacoma/0006/cha
+    incidents: [SPILL]
+    video_uuid: americold/tacoma/0006/cha/61f1a547-3c22-495a-bac7-0af2cee36b3f_0000
+  - camera_uuid: americold/tacoma/0007/cha
+    incidents: [SPILL]
+    video_uuid: americold/tacoma/0007/cha/db4c9851-8285-4944-ae6c-e93eba45006d_0000
+  - camera_uuid: ppg/cedar_falls/0005/cha
+    incidents: [SPILL]
+    video_uuid: ppg/cedar_falls/0005/cha/a835728f-1eba-4929-8429-ded7dd789fe9_0000
+  - camera_uuid: ppg/cedar_falls/0007/cha
+    incidents: [SPILL]
+    video_uuid: ppg/cedar_falls/0007/cha/55e1aa8f-e30d-4131-87e0-f1dc1753fcd0_0000
+  - camera_uuid: uscold/laredo/room_f1/cha
+    incidents: [SPILL]
+    video_uuid: uscold/laredo/room_f1/cha/scenarios/SPILL/POSITIVE/05541380-2ac8-4606-9f4d-3d9bffa4d563_0000
+  - camera_uuid: uscold/quakertown/0006/cha
+    incidents: [SPILL]
+    video_uuid: uscold/quakertown/0006/cha/scenarios/SPILL/POSITIVE/43a24ccb-a7d8-4739-ae22-c8a0c7ce2a52_0000
+  - camera_uuid: americold/tacoma/0003/cha
+    incidents: [SPILL]
+    video_uuid: americold/tacoma/0003/cha/scenarios/SPILL/POSITIVE/f4a56511-9005-459a-8b32-c0b471af0bb2_0000
+  - camera_uuid: ppg/cedar_falls/0010/cha
+    incidents: [SPILL]
+    video_uuid: ppg/cedar_falls/0010/cha/scenarios/SPILL/POSITIVE/4e152a32-1ee5-4a04-91f9-f20d760f00a4_0000
+  - camera_uuid: ppg/cedar_falls/0011/cha
+    incidents: [SPILL]
+    video_uuid: ppg/cedar_falls/0011/cha/scenarios/SPILL/POSITIVE/70cec724-4180-46d2-8ba7-d681e1670fb5_0000
+  - camera_uuid: uscold/quakertown/0007/cha
+    incidents: [SPILL]
+    video_uuid: uscold/quakertown/0007/cha/scenarios/SPILL/POSITIVE/19d6f868-1f95-42e4-9e21-65826afe4cb0_0000
+  - camera_uuid: americold/ontario/0103/cha
+    incidents: [SPILL]
+    video_uuid: americold/ontario/0103/cha/scenarios/SPILL/POSITIVE/8bcd71cf-d3dd-4c55-a5b5-66f47d5cba9c_0000
+  - camera_uuid: americold/ontario/0104/cha
+    incidents: [SPILL]
+    video_uuid: americold/ontario/0104/cha/scenarios/SPILL/POSITIVE/c001abe7-29f5-488e-abce-1dc73e45e38c_0000
+  - camera_uuid: americold/ontario/0110/cha
+    incidents: [SPILL]
+    video_uuid: americold/ontario/0110/cha/scenarios/SPILL/POSITIVE/e6ecf101-32bf-4075-ab19-5430d8089c05_0000

@@ -1,0 +1,8 @@
+load("@rules_python//python:defs.bzl", "py_library")
+load(":python_targets.bzl", "PROTO_PY_LIBRARIES")
+
+py_library(
+    name = "python",
+    visibility = ["//visibility:public"],
+    deps = PROTO_PY_LIBRARIES,
+)

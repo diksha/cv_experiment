@@ -1,0 +1,17 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+py_library(
+    name = "serial_numbers",
+    srcs = ["serial_numbers.py"],
+)
+
+voxel_py_test(
+    name = "serial_numbers_test",
+    srcs = ["serial_numbers_test.py"],
+    deps = [
+        requirement("parameterized"),
+        ":serial_numbers",
+    ],
+)

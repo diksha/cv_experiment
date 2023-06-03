@@ -1,0 +1,159 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "devbox.fullname" . }}
+  labels:
+    application: devbox
+    {{- include "devbox.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "devbox.selectorLabels" . | nindent 6 }}
+  serviceName: devbox
+  
+  volumeClaimTemplates:
+  - metadata:
+      name: home
+    spec:
+      storageClassName: "gp2"
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 200Gi
+  - metadata:
+      name: data
+    spec:
+      storageClassName: "gp2"
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 10Gi
+  template:
+    metadata:
+      annotations:
+        checksum/config_map: {{ include (print $.Template.BasePath "/config_map.yaml") . | sha256sum }}
+        checksum/secrets: {{ include (print $.Template.BasePath "/secrets.yaml") . | sha256sum }}
+        {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      labels:
+        {{- include "devbox.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "devbox.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      volumes:
+      - name: docker-graph-store
+        emptyDir: {}
+      - name: sys-fs-cgroup
+        hostPath:
+          path: /sys/fs/cgroup
+          type: Directory
+      containers:
+        # - name: dind-daemon
+        #   image: docker:stable-dind
+        #   env:
+        #     - name: DOCKER_TLS_CERTDIR
+        #       value: ""
+        #   resources:
+        #     requests: {}
+        #   securityContext:
+        #     privileged: true
+        #   volumeMounts:
+        #     - name: docker-graph-store
+        #       mountPath: /var/lib/docker
+        - name: main
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: [{{ .Values.command }}]
+          args: {{- range .Values.args }}
+          - {{. | quote}}
+          {{- end }}
+          volumeMounts:
+          - name: home
+            mountPath: /home/
+          - name: data
+            mountPath: /data/
+          - name: docker-graph-store
+            mountPath: /var/lib/docker
+          - name: sys-fs-cgroup
+            mountPath: /sys/fs/cgroup/
+            readOnly: true
+          env:
+          - name:  HELM_RELEASE_NAME
+            value: {{ .Release.Name }}
+          - name:  IMAGE_REPO
+            value: "{{ .Values.image.repository }}"
+          - name:  IMAGE_TAG
+            value: {{ .Values.image.tag | default .Chart.AppVersion }}
+          - name:  DEVBOX_USER
+            value: {{ .Values.devbox.user }}
+          - name:  DEVBOX_USER_ID
+            value: {{ .Values.devbox.uid | quote }}
+          - name: DEVBOX_GROUP
+            value: {{ .Values.devbox.group }}
+          - name: DEVBOX_GROUP_ID
+            value: {{ .Values.devbox.gid | quote }}
+          - name: DOCKER_HOST
+            value: tcp://localhost:2375
+          envFrom:
+            - secretRef:
+                name: {{ include "devbox.fullname" . }}
+
+          {{- range .Values.env.secret_refs }}
+
+            - secretRef:
+                name: {{ . | quote }}
+
+          {{- end }}
+
+            - configMapRef:
+                name: {{ include "devbox.fullname" . }}
+
+          {{- range .Values.env.config_refs }}
+
+            - configMapRef:
+                name: {{ . | quote }}
+
+          {{- end }}
+          ports:
+            - name: ssh
+              containerPort: 22
+              protocol: TCP
+          readinessProbe:
+            tcpSocket:
+              port: 22
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            tcpSocket:
+              port: 22
+            initialDelaySeconds: 30
+            periodSeconds: 20
+
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+    
+      nodeSelector:
+        nvidia.com/gpu: {{ .Values.use_gpu | quote }}
+      {{- with .Values.nodeSelector }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      
+      tolerations:
+      {{- with .Values.tolerations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+

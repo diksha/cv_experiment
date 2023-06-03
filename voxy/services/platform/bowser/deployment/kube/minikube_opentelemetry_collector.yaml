@@ -1,0 +1,70 @@
+#TRACE
+# ENABLE TRACE WITH JEAGER
+#  ADD to config:service:pipeline
+# traces:
+#   receivers: [otlp] 
+#   processors: [batch]
+#   exporters: [logging]
+
+#LOGING
+# to see it -> kubectl logs -f deployment/bowser-minikube-opentelemetry-collector
+# logs:
+#   receivers: [otlp]
+#   processors: []
+#   exporters: [logging]
+
+#PROMETHEUS
+# OTCOL allow to scrape other prometheus url like :
+# - Flink system metric turning on
+# - A PushGateway Prometheus URL
+# ADD to config:receivers
+# prometheus:
+#   config:
+#     scrape_configs:
+#     - job_name: 'otel-collector'
+#       scrape_interval: DURATION (10 ms/s/m/h/d)
+#       static_configs:
+#       - targets: ['URL_AND_PORT']
+
+#Exporter Prometheus, if you put localhost in front of the port , it's doesn't not work.
+# -> Prometheus podmonitor  can't connect to otcol
+#BATCH https://github.com/open-telemetry/opentelemetry-collector/blob/main/processor/batchprocessor/README.md
+apiVersion: opentelemetry.io/v1alpha1
+kind: OpenTelemetryCollector
+metadata:
+  name: bowser-minikube-opentelemetry
+spec:
+  ports: #create prometheus url scrapping on otcol pod or sidecar ( see mode)
+    - name: metrics
+      port: 8889 # should match with config:exporters:prometheus:endpoint
+  config: |
+    # Read more about receivers here:
+    receivers:
+      otlp:
+        protocols:
+          grpc: 
+            endpoint : "localhost:4317"
+    
+    processors:
+      memory_limiter:
+        check_interval: 1s
+        limit_percentage: 75
+        spike_limit_percentage: 15
+      batch:
+        send_batch_size: 10000
+        timeout: 1s
+
+    exporters:
+      prometheus:
+        endpoint: :8889
+        namespace: bowser
+
+    service:
+      pipelines:
+        metrics:
+          receivers: [otlp]
+          processors: [batch]
+          exporters: [prometheus]
+  mode: deployment #you also can use sidecar mode
+    #Howvever for bowser better to have a dedicated pod rather than having OTCOL in the flink taskmanager
+

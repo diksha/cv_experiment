@@ -1,0 +1,31 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+{% set image_tag=GENERATE_UUID_WITH_PREFIX("dataset_") %}
+local_jobs:
+  -
+    name : video_logset
+    type: bazel
+    command: //experimental/nasha/dataset_gen:video_logset -- --logset_name lifting
+  -
+    name : dataset_generator_container
+    type: bazel
+    command: experimental/nasha/dataset_gen:dataset_push --define IMAGE_TAG={{image_tag}}
+  -
+    name: {{GENERATE_UUID_WITH_PREFIX("dataset")}}
+    type: k8s 
+    items_from_store_key: logset_videos
+    command: /app/experimental/nasha/dataset_gen/dataset_generation --customer test --dataset_version 3 --video_reference 
+    image: us.gcr.io/sodium-carving-227300/voxel/experimental:{{image_tag}}
+    depends_on:
+      - video_logset
+      - dataset_generator_container
+

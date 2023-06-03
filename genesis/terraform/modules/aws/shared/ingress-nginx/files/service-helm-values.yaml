@@ -1,0 +1,40 @@
+controller:
+  config:
+    use-proxy-protocol: true
+    server-snippet: 'real_ip_header CF-Connecting-IP;'
+    proxy-body-size: '16m'
+  ingressClassResource:
+    default: true
+  resources:
+    requests:
+      cpu: 100m
+      memory: 400M
+    limits:
+      cpu: 100m
+      memory: 400M
+  autoscaling:
+    enabled: true
+    minReplicas: 3
+  admissionWebhooks:
+    enabled: false
+  service:
+    targetPorts:
+      http: http
+      https: http
+    external:
+      enabled: false
+    internal:
+      enabled: true
+      annotations:
+        service.beta.kubernetes.io/aws-load-balancer-internal: "true"
+        service.beta.kubernetes.io/aws-load-balancer-scheme: internal
+        service.beta.kubernetes.io/aws-load-balancer-type: "external"
+        service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "ip"
+        service.beta.kubernetes.io/load-balancer-source-ranges: 10.0.0.0/8
+        service.beta.kubernetes.io/aws-load-balancer-additional-resource-tags: map-migrated=d-server-00swbp99drezfh
+        service.beta.kubernetes.io/aws-load-balancer-private-ipv4-addresses: ${STATIC_IPv4s}
+        service.beta.kubernetes.io/aws-load-balancer-subnets: ${SUBNET_IDS}
+        service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
+        service.beta.kubernetes.io/aws-load-balancer-ssl-cert: ${CERTIFICATE_ARN}
+        service.beta.kubernetes.io/aws-load-balancer-ssl-ports: ${SSL_PORTS}
+        service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "tcp"

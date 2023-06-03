@@ -1,0 +1,26 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+calibration:
+    version: 0.0
+    intrinsics:
+        # focal length in pixels based on a 299x299 image
+        focal_length_pixels: 350.58514082431793
+        # distortion using the unified spherical model
+        distortion_usm: 1.082045316696167
+        width_pixels:  2688.0
+        height_pixels: 1520.0
+        cx_pixels: 1344.0
+        cy_pixels: 760.0
+    extrinsics:
+        z_m: 5.799999999999994
+        roll_radians: -0.2512
+        pitch_radians: 0.0

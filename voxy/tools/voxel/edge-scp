@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -eou pipefail
+
+FILEPATH=$(readlink -f "$0")
+VOXEL_TOOLSDIR=$(dirname "$FILEPATH")
+TOOLSDIR=$(dirname "$VOXEL_TOOLSDIR")
+
+# trunk-ignore(shellcheck/SC2016): we intentionally do not want this to expand
+exec "$TOOLSDIR"/bazel run --run_under='cd "$BUILD_WORKING_DIRECTORY" && exec' //tools/voxel:edge-scp -- "$@"

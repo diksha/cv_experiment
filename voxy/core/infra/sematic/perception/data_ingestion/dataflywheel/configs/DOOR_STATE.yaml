@@ -1,0 +1,3 @@
+data_collection_config_file: core/ml/data/collection/configs/DOOR_STATE.yaml
+lightly_config_file: core/ml/data/curation/configs/DOOR_STATE_DATAFLYWHEEL.yaml
+ingestion_config_file: core/labeling/configs/DOOR_STATE.yaml

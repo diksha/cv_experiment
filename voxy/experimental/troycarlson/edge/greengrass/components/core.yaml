@@ -1,0 +1,31 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+---
+RecipeFormatVersion: '2020-01-25'
+ComponentName: voxel.core
+ComponentVersion: '1.0.0'
+ComponentDescription: 'A component that runs containerized Voxel core system(s).'
+ComponentPublisher: Voxel Labs Inc
+ComponentDependencies:
+  aws.greengrass.DockerApplicationManager:
+    VersionRequirement: ~2.0.0
+  aws.greengrass.TokenExchangeService:
+    VersionRequirement: ~2.0.0
+Manifests:
+  - Platform:
+      os: all
+    Lifecycle:
+        Run: docker-compose -f {artifacts:path}/docker-compose.yaml up
+    Artifacts:
+      - URI: "docker:public.ecr.aws/cloudwatch-agent/cloudwatch-agent:latest"
+      - URI: "docker:mysql:8.0"
+      - URI: "s3://DOC-EXAMPLE-BUCKET/folder/docker-compose.yaml"

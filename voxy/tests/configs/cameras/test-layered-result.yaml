@@ -1,0 +1,75 @@
+#
+# Copyright 2020-2021 Voxel Labs, Inc.
+# All rights reserved.
+#
+# This document may not be reproduced, republished, distributed, transmitted,
+# displayed, broadcast or otherwise exploited in any manner without the express
+# prior written permission of Voxel Labs, Inc. The receipt or possession of this
+# document does not convey any rights to reproduce, disclose, or distribute its
+# contents, or to manufacture, use, or sell anything that it may describe, in
+# whole or in part.
+#
+#
+camera:
+  arn: arn:aws:kinesisvideo:us-west-2:360054435465:stream/americold-modesto-0001/1652139618645
+  version: 3
+camera_uuid: americold/modesto/0001/cha
+incident:
+  #TODO(delorean): remove this when the experiment is over
+  should_generate_on_cooldown: True
+  incident_machine_params:
+    parking:
+      max_parked_duration_s: 1234
+  monitors_requested: []
+  state_machine_monitors_requested:
+    - bad_posture
+    - intersection
+    - parking
+    - overreaching
+    - door_intersection
+    - door_violation
+    - open_door
+    - piggyback
+    - random_spill
+    - spill
+
+perception:
+  detector_tracker:
+    actor2class:
+      PERSON: 0
+      PIT: 1
+    height: 480
+    model_path: artifacts_2021-12-06-00-00-00-0000-yolo/best_480_960.engine
+    width: 960
+  door_classifier:
+    enabled: true
+    model_path: artifacts_2022-10-26_americold_modesto_0001_cha/2022-10-26_americold_modesto_0001_cha.pt
+    model_type: vanilla_resnet
+  hat_classifier:
+    enabled: false
+  lift_classifier:
+    enabled: true
+    model_type: HM ##( HM: Heuristic Model, DT : Decision Tree based)
+    model_path: artifacts_lift_classifier_01282022/lift_classifer_01282022.sav
+  pose:
+    enabled: true
+    model_path: artifacts_03_21_2023_pose_0630_jit_update/fast_res50_256x192.pt
+  reach_classifier:
+    enabled: true
+    model_path: artifacts_03_23_2023_overreaching_model_jit/voxel_ergo_ml_overreaching_2022-05-23-jit.pt
+    model_type: DL
+  vest_classifier:
+    enabled: false
+  spill:
+    enabled: True
+    model_path: artifacts_02_05_2023_spill_generalized_jit/smp-bd6b62dfd5b64dcfb4970102e2c9b2aa-jit.pt
+    min_run_time_difference_ms: 15000
+    min_pixel_size: 200
+    # The max_consequitive_runs do not have any effect unless the max_frame_segments in temporal also has the same value to store the results from these consecutive runs.
+    max_consecutive_runs: 1
+    post_process_enabled: True
+    frame_segment2class: {UNKNOWN: 0, SPILL: 1}
+publisher:
+  organization_key: AMERICOLD
+temporal:
+  max_frame_segments: 9

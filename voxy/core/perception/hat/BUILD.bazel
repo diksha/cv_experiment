@@ -1,0 +1,18 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "hat_classifier",
+    srcs = ["hat_classifier.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/structs",
+        requirement("torch"),
+        requirement("opencv-python"),
+        requirement("numpy"),
+        requirement("torchvision"),
+        requirement("pytorch_lightning"),
+    ],
+)

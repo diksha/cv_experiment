@@ -1,0 +1,96 @@
+load("@fisheye_pip_deps//:requirements.bzl", "requirement")
+load("@io_bazel_rules_docker//container:container.bzl", "container_image", "container_push")
+load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit_layer")
+load("@io_bazel_rules_docker//lang:image.bzl", "app_layer")
+load("@rules_python//python:defs.bzl", "py_binary")
+load("@rules_python//python/pip_install:requirements.bzl", "compile_pip_requirements")
+
+LIBS = [
+    requirement("streamlit"),
+    requirement("pyyaml"),
+    requirement("streamlit-cropper"),
+]
+
+compile_pip_requirements(
+    name = "requirements",
+    # Marks the :requirements_test target as large
+    size = "large",
+    timeout = "long",
+    extra_args = [
+        "--allow-unsafe",
+    ],
+    requirements_in = ":requirements.in",
+    requirements_txt = ":requirements.txt",
+    tags = ["requires-network"],
+)
+
+filegroup(
+    name = "fisheye_gui_src",
+    srcs = ["fisheye_gui.py"],
+)
+
+py_binary(
+    name = "streamlit_runner",
+    srcs = [
+        "streamlit_runner.py",
+    ],
+    deps = LIBS,
+)
+
+sh_binary(
+    name = "fisheye",
+    srcs = ["fisheye.sh"],
+    data = [
+        ":fisheye_gui_src",
+        ":streamlit_runner_zip",
+        "//third_party/fish2persp",
+    ],
+    toolchains = ["@rules_python//python:current_py_toolchain"],
+    deps = [
+        "@bazel_tools//tools/bash/runfiles",
+    ],
+)
+
+filegroup(
+    name = "streamlit_runner_zip",
+    srcs = [":streamlit_runner"],
+    output_group = "python_zip_file",
+)
+
+app_layer(
+    name = "image",
+    base = ":baseimage",
+    binary = ":fisheye",
+    tags = ["manual"],
+)
+
+container_run_and_commit_layer(
+    name = "python3_baseimage",
+    commands = [
+        "apt-get -y update",
+        "apt-get -y --no-install-recommends install ca-certificates python-is-python3",
+    ],
+    env = {
+        "DEBIAN_FRONTEND": "noninteractive",
+    },
+    image = "@ubuntu_20_04//image",
+    tags = ["manual"],
+)
+
+container_image(
+    name = "baseimage",
+    base = "@ubuntu_20_04//image",
+    layers = [":python3_baseimage"],
+    tags = ["manual"],
+)
+
+container_push(
+    name = "production_push",
+    format = "Docker",
+    image = ":image",
+    registry = "360054435465.dkr.ecr.us-west-2.amazonaws.com",
+    repository = "perception/fisheye",
+    stamp = "@io_bazel_rules_docker//stamp:always",
+    tag = "{BUILD_USER}_{BUILD_TIMESTAMP}",
+    tags = ["manual"],
+)

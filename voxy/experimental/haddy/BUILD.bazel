@@ -1,0 +1,14 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+
+py_binary(
+    name = "test_dataset_sources",
+    srcs = [
+        "test_dataset_sources.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("tqdm"),
+        "//core/datasets/converters/dataset_sources:yolo",
+    ],
+)

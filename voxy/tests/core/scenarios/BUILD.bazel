@@ -1,0 +1,12 @@
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+package(default_visibility = ["//visibility:public"])
+
+voxel_py_test(
+    name = "evaluate_performance_test",
+    srcs = ["evaluate_performance_test.py"],
+    deps = [
+        "//core/scenarios:evaluate_performance",
+        "//core/structs",
+    ],
+)

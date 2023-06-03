@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -euo pipefail
+
+source "$(dirname "$0")/_utils.sh"
+run_bazel_binary_from_working_directory //third_party/semantic-release:semantic-release -- "$@"

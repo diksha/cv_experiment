@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# The build target for http_file is @repo_name//file:file
+# but the executable file is bazel-voxel/external/repo_name/file/downloaded
+# `bazel run` doesn't seem to work (target not executable)
+
+set -euo pipefail
+
+FILEPATH=$(readlink -f "$0")
+BASEDIR=$(dirname "$FILEPATH")
+WORKSPACEDIR=$(dirname "$BASEDIR")
+cd "$WORKSPACEDIR" || exit 1
+
+BINARY="$WORKSPACEDIR/bazel-bin/third_party/kubectl/kubectl"
+
+if ! test -f "$BINARY"; then
+	"$WORKSPACEDIR/bazel" build //third_party/kubectl:kubectl
+fi
+
+exec "$BINARY" "$@"

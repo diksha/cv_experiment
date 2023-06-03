@@ -1,0 +1,314 @@
+{
+  "geometries": {
+    "box": {
+      "objects_to_annotate": [
+        "SAFETY_VEST",
+        "BARE_HEAD",
+        "BARE_CHEST",
+        "HARD_HAT",
+        "COVERED_HEAD",
+        "BARE_HAND",
+        "SAFETY_GLOVE",
+        "PIT_V2",
+        "PERSON_V2",
+        "SIE",
+        "TRUCK",
+        "BIKE",
+        "TRAILER",
+        "VEHICLE",
+        "BUS",
+        "PALLET",
+        "PALLET_STACK",
+        "BOX",
+        "LOAD"
+      ],
+      "min_width": 0,
+      "min_height": 0
+    },
+    "polygon": {
+      "objects_to_annotate": []
+    }
+  },
+  "events_to_annotate": ["LIFTING_GOOD", "LIFTING_BAD", "REACHING_GOOD", "REACHING_BAD"],
+  "annotation_attributes": {
+    "object": {
+      "description": "object the event belongs to",
+      "type": "linked",
+      "allowed_labels": ["PERSON_V2"],
+      "conditions": {
+        "label_condition": {
+          "label": ["LIFTING_GOOD", "LIFTING_BAD", "REACHING_GOOD", "REACHING_BAD"]
+        }
+      }
+    },
+    "attached_to": {
+      "description": "Object the trailer is attached to",
+      "type": "linked",
+      "allowed_labels": ["TRUCK", "VEHICLE"],
+      "conditions": {
+        "label_condition": {
+          "label": ["TRAILER"]
+        }
+      }
+    },
+    "forklift": {
+      "description": "Object is a forklift",
+      "conditions": {
+        "label_condition": {
+          "label": ["PIT_V2"]
+        }
+      },
+      "choices": ["True", "False"],
+      "global": true,
+      "type": "category"
+    },
+    "bend": {
+      "description": "Person is bending",
+      "conditions": {
+        "label_condition": {
+          "label": ["PERSON_V2"]
+        }
+      },
+      "choices": ["None", "Good", "Bad"],
+      "type": "category"
+    },
+    "reach": {
+      "description": "Person is reaching",
+      "conditions": {
+        "label_condition": {
+          "label": ["PERSON_V2"]
+        }
+      },
+      "choices": ["None", "Good", "Bad"],
+      "type": "category"
+    },
+    "lift": {
+      "description": "Person is lifting",
+      "conditions": {
+        "label_condition": {
+          "label": ["PERSON_V2"]
+        }
+      },
+      "choices": ["None", "Good", "Bad"],
+      "type": "category"
+    },
+    "loaded": {
+      "description": "PIT is loaded",
+      "conditions": {
+        "label_condition": {
+          "label": ["PIT_V2"]
+        }
+      },
+      "choices": ["True", "False"],
+      "type": "category"
+    },
+    "human_operating": {
+      "description": "Human is operating the pit.",
+      "conditions": {
+        "label_condition": {
+          "label": ["PIT_V2", "SIE", "TRUCK", "BIKE", "VEHICLE", "BUS"]
+        }
+      },
+      "choices": ["True", "False"],
+      "type": "category"
+    },
+    "head_covered_state": {
+      "description": "What type of head covering does the person have, if any",
+      "type": "linked",
+      "allowed_labels": ["BARE_HEAD", "COVERED_HEAD", "HARD_HAT"],
+      "conditions": {
+        "label_condition": {
+          "label": ["PERSON_V2"]
+        }
+      }
+    },
+    "safety_vest": {
+      "description": "Safetyvest for the person",
+      "type": "linked",
+      "allowed_labels": ["SAFETY_VEST"],
+      "conditions": {
+        "label_condition": {
+          "label": ["PERSON_V2"]
+        }
+      }
+    },
+    "bare_chest": {
+      "description": "bare chest for the person",
+      "type": "linked",
+      "allowed_labels": ["BARE_CHEST"],
+      "conditions": {
+        "label_condition": {
+          "label": ["PERSON_V2"]
+        }
+      }
+    },
+    "safety_glove1": {
+      "description": "One safety glove for associating with a person",
+      "type": "linked",
+      "allowed_labels": ["SAFETY_GLOVE"],
+      "conditions": {
+        "label_condition": {
+          "label": ["PERSON_V2"]
+        }
+      }
+    },
+    "safety_glove2": {
+      "description": "One safety glove for associating with a person",
+      "type": "linked",
+      "allowed_labels": ["SAFETY_GLOVE"],
+      "conditions": {
+        "label_condition": {
+          "label": ["PERSON_V2"]
+        }
+      }
+    },
+    "bare_hand1": {
+      "description": "One bare hand for associating with a person",
+      "type": "linked",
+      "allowed_labels": ["BARE_HAND"],
+      "conditions": {
+        "label_condition": {
+          "label": ["PERSON_V2"]
+        }
+      }
+    },
+    "bare_hand2": {
+      "description": "One bare hand for associating with a person",
+      "type": "linked",
+      "allowed_labels": ["BARE_HAND"],
+      "conditions": {
+        "label_condition": {
+          "label": ["PERSON_V2"]
+        }
+      }
+    },
+    "is_van": {
+      "description": "Whether vehicle is a van",
+      "conditions": {
+        "label_condition": {
+          "label": ["VEHICLE"]
+        }
+      },
+      "choices": ["True", "False"],
+      "type": "category"
+    },
+    "is_motorized": {
+      "description": "Whether the bike is motorized",
+      "conditions": {
+        "label_condition": {
+          "label": ["BIKE"]
+        }
+      },
+      "choices": ["True", "False"],
+      "type": "category"
+    },
+    "is_pickup": {
+      "description": "Whether the truck is pickup truck",
+      "conditions": {
+        "label_condition": {
+          "label": ["TRUCK"]
+        }
+      },
+      "choices": ["True", "False"],
+      "type": "category"
+    },
+    "operating_object": {
+      "description": "Person is operating the pit",
+      "conditions": {
+        "label_condition": {
+          "label": ["PERSON_V2"]
+        }
+      },
+      "choices": ["NONE", "PIT", "TRUCK", "VEHICLE", "BIKE", "BUS"],
+      "type": "category"
+    },
+    "load_type": {
+      "description": "Type of load",
+      "conditions": {
+        "label_condition": {
+          "label": ["LOAD"]
+        }
+      },
+      "choices": ["BOX_STACK", "GENERIC"],
+      "type": "category"
+    },
+    "forks_raised": {
+      "description": "Forks are raised or not",
+      "conditions": {
+        "label_condition": {
+          "label": ["PIT_V2"]
+        }
+      },
+      "choices": ["True", "False"],
+      "type": "category"
+    },
+    "occluded_degree": {
+      "description": "Degree of occlusion",
+      "conditions": {
+        "label_condition": {
+          "label": [
+            "SAFETY_VEST",
+            "BARE_HEAD",
+            "BARE_CHEST",
+            "COVERED_HEAD",
+            "BARE_HAND",
+            "SAFETY_GLOVE",
+            "PIT_V2",
+            "PERSON_V2",
+            "SIE",
+            "TRUCK",
+            "BIKE",
+            "TRAILER",
+            "VEHICLE",
+            "BUS",
+            "PALLET",
+            "PALLET_STACK",
+            "BOX",
+            "LOAD"
+          ]
+        }
+      },
+      "choices": ["NONE", "Occluded", "HeavilyOccluded", "FullyOccluded"],
+      "type": "category"
+    },
+    "activity": {
+      "description": "activity of the person",
+      "conditions": {
+        "label_condition": {
+          "label": ["PERSON"]
+        }
+      },
+      "choices": ["UNKNOWN", "LIFTING", "REACHING"],
+      "type": "category"
+    },
+    "truncated": {
+      "description": "Object is truncated or not",
+      "conditions": {
+        "label_condition": {
+          "label": [
+            "SAFETY_VEST",
+            "BARE_HEAD",
+            "BARE_CHEST",
+            "COVERED_HEAD",
+            "BARE_HAND",
+            "SAFETY_GLOVE",
+            "PIT_V2",
+            "PERSON_V2",
+            "SIE",
+            "TRUCK",
+            "BIKE",
+            "TRAILER",
+            "VEHICLE",
+            "BUS",
+            "PALLET",
+            "PALLET_STACK",
+            "BOX",
+            "LOAD"
+          ]
+        }
+      },
+      "choices": ["True", "False"],
+      "type": "category"
+    }
+  }
+}

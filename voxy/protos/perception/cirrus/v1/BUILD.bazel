@@ -1,0 +1,90 @@
+load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
+load("@build_stack_rules_proto//rules:proto_compiled_sources.bzl", "proto_compiled_sources")
+load("@build_stack_rules_proto//rules/go:proto_go_library.bzl", "proto_go_library")
+load("@build_stack_rules_proto//rules/py:proto_py_library.bzl", "proto_py_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+go_library(
+    name = "cirrus",
+    srcs = [
+        "cirrus_deployment.pb.go",
+        "repo.pb.go",
+        "triton_compose.pb.go",
+    ],
+    importpath = "github.com/voxel-ai/voxel/protos/perception/cirrus/v1",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//protos/third_party/triton",
+        "@org_golang_google_protobuf//reflect/protoreflect",
+        "@org_golang_google_protobuf//runtime/protoimpl",
+    ],
+)
+
+proto_library(
+    name = "cirruspb_proto",
+    srcs = [
+        "cirrus_deployment.proto",
+        "repo.proto",
+        "triton_compose.proto",
+    ],
+    visibility = ["//visibility:public"],
+    deps = ["//protos/third_party/triton:tritonpb_proto"],
+)
+
+proto_compiled_sources(
+    name = "cirruspb_go_compiled_sources",
+    srcs = [
+        "cirrus_deployment.pb.go",
+        "repo.pb.go",
+        "triton_compose.pb.go",
+    ],
+    output_mappings = [
+        "repo.pb.go=github.com/voxel-ai/voxel/protos/perception/cirrus/v1/repo.pb.go",
+        "triton_compose.pb.go=github.com/voxel-ai/voxel/protos/perception/cirrus/v1/triton_compose.pb.go",
+        "cirrus_deployment.pb.go=github.com/voxel-ai/voxel/protos/perception/cirrus/v1/cirrus_deployment.pb.go",
+    ],
+    plugins = ["@build_stack_rules_proto//plugin/golang/protobuf:protoc-gen-go"],
+    proto = "cirruspb_proto",
+)
+
+proto_go_library(
+    name = "cirruspb_go_proto",
+    srcs = [
+        "cirrus_deployment.pb.go",
+        "repo.pb.go",
+        "triton_compose.pb.go",
+    ],
+    importpath = "github.com/voxel-ai/voxel/protos/perception/cirrus/v1",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//protos/third_party/triton:tritonpb_go_proto",
+        "@org_golang_google_grpc//:go_default_library",
+        "@org_golang_google_grpc//codes",
+        "@org_golang_google_grpc//status",
+        "@org_golang_google_protobuf//reflect/protoreflect",
+        "@org_golang_google_protobuf//runtime/protoimpl",
+    ],
+)
+
+proto_compile(
+    name = "cirruspb_python_compile",
+    outputs = [
+        "repo_pb2.py",
+        "triton_compose_pb2.py",
+        "cirrus_deployment_pb2.py",
+    ],
+    plugins = ["@build_stack_rules_proto//plugin/builtin:python"],
+    proto = "cirruspb_proto",
+)
+
+proto_py_library(
+    name = "cirruspb_py_library",
+    srcs = [
+        "cirrus_deployment_pb2.py",
+        "repo_pb2.py",
+        "triton_compose_pb2.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = ["//protos/third_party/triton:tritonpb_py_library"],
+)

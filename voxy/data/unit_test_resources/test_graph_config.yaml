@@ -1,0 +1,96 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+
+camera_uuid: test_uuid
+
+ray:
+  dashboard:
+    port: 5001
+
+camera:
+  arn: test_arn
+  fps: 5
+  version: 1
+
+perception:
+  enabled: True
+  acausal_layer:
+    PPESmoothener:
+      hard_hat_time_interval_ms: 100
+      safety_vest_time_interval_ms: 100
+      pose_points_min_confidence_threshold: 0.5
+  detector_tracker:
+    model_path: test_model_path
+    height: 608
+    width: 1024
+    actor2class: { PERSON: 0, PIT: 1, HARD_HAT: 2, SAFETY_VEST: 3 }
+  pose:
+    enabled: True
+    model_path: test_pose_model_path
+  lift_classifier:
+    enabled: True
+    model_path: test_lift_model_path
+  reach_classifier:
+    enabled: True
+    model_path: test_reach_model_path
+  door_classifier:
+    enabled: False
+    model_path: test_door_model_path
+  vest_classifier:
+    enabled: True
+    model_path: test_vest_model_path
+    is_classification_by_detection: False
+    detr_model_path: test_detr_model_path
+  hat_classifier:
+    enabled: True
+    model_path: test_pose_model_path
+    is_classification_by_detection: False
+    detr_model_path: test_pose_model_path
+
+temporal:
+  max_past_frames: 60
+  max_future_frames: 30
+  expire_threshold_ms: 120000
+
+incident:
+  monitors_requested: [bad_posture]
+  dry_run: False
+  incident_machine_enabled: False
+  state_machine_monitors_requested:
+    [safety_vest, overreaching, hard_hat, bad_posture]
+  # This directory must be bind-mounted from Docker host
+  temp_directory: /var/tmp/voxel/incidents
+  generate_temp_subdirs: True
+
+publisher:
+  enabled: True
+  portal_host: test
+  auth_token: test
+  organization_key: test_org
+
+state:
+  enabled: True
+  frames_to_buffer: 1000
+  add_epoch_time: False
+  publisher:
+    batch_max_latency_seconds: 60
+    retry_deadline_seconds: 600
+    batch_max_message: 1000
+    batch_max_bytes: 1000000
+    state_topic: test
+    event_topic: test
+    emulator_host: null
+
+  influx_url: test
+  influx_token: test
+  influx_bucket: test
+  influx_measurement: test

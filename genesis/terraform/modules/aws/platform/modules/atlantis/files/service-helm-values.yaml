@@ -1,0 +1,107 @@
+orgAllowlist: github.com/voxel-ai/genesis
+logLevel: "debug"
+
+githubApp:
+  id: 293237
+  slug: atlantisvoxel
+
+image:
+  repository: 448273619612.dkr.ecr.us-west-2.amazonaws.com/atlantis
+  pullPolicy: IfNotPresent
+  tag: 18df5094b4b1
+
+repoConfig: |
+  ---
+  repos:
+    - id: github.com/voxel-ai/genesis
+      branch: /main/
+      repo_config_file: terraform/atlantis.yaml
+      apply_requirements: [approved, mergeable, undiverged]
+      import_requirements: [approved, mergeable, undiverged]
+      workflow: terragrunt
+      allowed_overrides: []
+      allowed_workflows: [terragrunt]
+      allow_custom_workflows: false
+      delete_source_branch_on_merge: true
+      repo_locking: true
+      pre_workflow_hooks:
+        - run: echo "workaround"
+      post_workflow_hooks: []
+  workflows:
+    terragrunt:
+      plan:
+        steps:
+        - run: terragrunt init -input=false -no-color
+        - run: terragrunt plan -input=false -no-color -out $PLANFILE
+      apply:
+        steps:
+        - run: terragrunt apply -input=false -no-color $PLANFILE
+
+allowForkPRs: false
+allowDraftPRs: false
+hidePrevPlanComments: false
+# defaultTFVersion: 0.12.0
+disableApply: false
+disableApplyAll: false
+disableRepoLocking: false
+enableDiffMarkdownFormat: false
+
+service:
+  type: ClusterIP
+  port: 80
+
+# It is not recommended to run atlantis as root
+statefulSet:
+  annotations: {}
+  labels: {}
+  securityContext:
+    fsGroup: 1000
+    runAsUser: 100
+    fsGroupChangePolicy: "OnRootMismatch"
+  priorityClassName: ""
+  updateStrategy: {}
+  shareProcessNamespace: false
+
+
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  annotations: {}
+  path: /
+  pathType: ImplementationSpecific
+  host: atlantis.voxelplatform.com
+
+resources:
+  requests:
+    memory: 2Gi
+    cpu: 500m
+  limits:
+    memory: 2Gi
+    cpu: 500m
+
+volumeClaim:
+  enabled: true
+  dataStorage: 8Gi
+  storageClassName: gp3-retain
+
+replicaCount: 1
+
+## test container details
+test:
+  enabled: false
+
+serviceAccount:
+  create: true
+  mount: true
+  name: ${SERVICE_ACCOUNT_NAME}
+  annotations:
+    "eks.amazonaws.com/role-arn" : ${IRSA_ARN}
+
+
+googleServiceAccountSecrets:
+  - name: gcp-creds
+    secretName: gcp-sa-json
+
+environment:
+  GOOGLE_APPLICATION_CREDENTIALS: /var/secrets/gcp-creds/service-account.json
+  TERRAGRUNT_DOWNLOAD: /home/atlantis/.terragrunt-cache

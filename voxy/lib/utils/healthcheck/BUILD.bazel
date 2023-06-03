@@ -1,0 +1,24 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "healthcheck",
+    srcs = ["healthcheck.go"],
+    importpath = "github.com/voxel-ai/voxel/lib/utils/healthcheck",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_rs_zerolog//hlog",
+        "@com_github_rs_zerolog//log",
+        "@io_goji//:goji.io",
+        "@io_goji//pat",
+    ],
+)
+
+go_test(
+    name = "healthcheck_test",
+    srcs = ["healthcheck_test.go"],
+    deps = [
+        ":healthcheck",
+        "@com_github_rs_zerolog//:zerolog",
+        "@com_github_stretchr_testify//require",
+    ],
+)

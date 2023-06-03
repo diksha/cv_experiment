@@ -1,0 +1,16 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "buildtritonfakes",
+    srcs = [
+        "fake_model_repo_interface.go",
+        "fake_triton_config_interface.go",
+    ],
+    importpath = "github.com/voxel-ai/voxel/services/perception/cirrus/cmd/buildtriton/buildtritonfakes",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//protos/perception/cirrus/v1:cirrus",
+        "//protos/perception/graph_config/v1:graph_config",
+        "//services/perception/cirrus/cmd/buildtriton",
+    ],
+)

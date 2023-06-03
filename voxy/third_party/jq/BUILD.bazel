@@ -1,0 +1,9 @@
+genrule(
+    name = "jq_bin",
+    srcs = [],
+    outs = ["jq"],
+    cmd = "cp $(JQ_BIN) $@",
+    executable = 1,
+    toolchains = ["@jq_toolchains//:resolved_toolchain"],
+    visibility = ["//visibility:public"],
+)

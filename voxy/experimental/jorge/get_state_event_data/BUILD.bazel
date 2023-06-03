@@ -1,0 +1,19 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+load("//third_party/aws/lambda:defs.bzl", "py_aws_lambda")
+
+py_binary(
+    name = "get_state_event_data",
+    srcs = ["get_state_event_data.py"],
+    deps = [
+        requirement("boto3"),
+        requirement("loguru"),
+        "//core/structs:protobufs",
+    ],
+)
+
+py_aws_lambda(
+    name = "lambda",
+    function_name = "jorge-py-lambda-tester",
+    target = ":get_state_event_data",
+)

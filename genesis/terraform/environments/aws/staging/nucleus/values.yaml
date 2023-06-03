@@ -1,0 +1,3 @@
+state_prefix: aws-staging-nucleus-v1
+variables:
+  environment: staging

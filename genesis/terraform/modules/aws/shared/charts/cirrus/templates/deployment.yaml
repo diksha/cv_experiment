@@ -1,0 +1,146 @@
+{{- range .Values.deployment.names }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ . }}
+  labels:
+    application: runner
+    {{- include "generic.labels" . | nindent 4 }}
+spec:
+  {{- with .Values.strategy }}
+  strategy:
+    {{- . | toYaml | nindent 4 }}
+  {{- end }}
+{{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+{{- end }}
+  selector:
+    matchLabels:
+      {{- include "generic.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "generic.selectorLabels" . | nindent 8 }}
+    spec:
+      terminationGracePeriodSeconds: {{ default 30 .Values.terminationGracePeriodSeconds }}
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "generic.serviceAccountName" . }}
+      {{- with .Values.secrets }}
+      volumes:
+      - name: {{ .name }}
+        csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: {{ .secretProviderClass }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: main
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: [{{ .Values.command }}]
+          args: {{- range .Values.args }}
+          - {{. | quote}}
+          {{- end }}
+          {{- with .Values.secrets }}
+          volumeMounts:
+          - name: {{ .name }}
+            mountPath: {{ .mountPath }}
+            readOnly: true
+          {{- end }}
+          env:
+          - name:  HELM_RELEASE_NAME
+            value: {{ .Release.Name }}
+          - name:  IMAGE_REPO
+            value: "{{ .Values.image.repository }}"
+          - name:  IMAGE_TAG
+            value: {{ .Values.image.tag | default .Chart.AppVersion }}
+          - name: POD_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.podIP
+          - name: HOST_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.hostIP
+        {{ if .Values.environment }}
+          - name: ENVIRONMENT
+            value: {{ .Values.environment }}
+        {{ end }}
+          envFrom:
+            - secretRef:
+                name: {{ include "generic.fullname" . }}
+          
+          {{- range .Values.env.secret_refs }}
+
+            - secretRef:
+                name: {{ . | quote }}
+
+          {{- end }}
+
+            - configMapRef:
+                name: {{ include "generic.fullname" . }}
+
+          {{- range .Values.env.config_refs }}
+
+            - configMapRef:
+                name: {{ . | quote }}
+
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: {{ default 80 .Values.service.containerPort }}
+              protocol: TCP
+
+          livenessProbe:
+{{ if .Values.livenessProbe }}
+          {{- toYaml .Values.livenessProbe | nindent 12 }}
+{{ else }}
+            successThreshold: 1
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 6
+            httpGet:
+              path: {{ default "/" .Values.healthcheck_path }}
+              port: http
+{{ end }}
+          readinessProbe:
+{{ if .Values.readinessProbe }}
+          {{- toYaml .Values.readinessProbe | nindent 12 }}
+{{else}}
+            successThreshold: 1
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 6
+            httpGet:
+              path: {{ default "/" .Values.healthcheck_path }}
+              port: http
+{{ end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          lifecycle:
+            {{ toYaml .Values.lifecycle | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- end }}

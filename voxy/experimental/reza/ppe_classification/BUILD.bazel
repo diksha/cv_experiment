@@ -1,0 +1,23 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+
+package(default_visibility = ["//visibility:public"])
+
+py_binary(
+    name = "train_ppe",
+    srcs = ["train_ppe.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//experimental/reza/ppe_classification/lib/datasets:registry",
+        "//experimental/reza/ppe_classification/lib/models:registry",
+        requirement("torch"),
+        requirement("torchvision"),
+        requirement("numpy"),
+        requirement("scikit-learn"),
+        requirement("matplotlib"),
+        requirement("wandb"),
+        "//core/infra/cloud:gcs_utils",
+        "//core/utils:aws_utils",
+        "//third_party/autoaugment",
+    ],
+)

@@ -1,0 +1,84 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+device: cuda:0
+seed : 1234
+mode : train #lr_find
+classifier: 
+  name: &classifier_name "door_classifier"
+model_path: /home/nasha_voxelsafety_com/voxel/experimental/nasha/models/door_classifier
+data:
+  dataloader_name: image_from_folder
+  dataloader_params:
+    data_path: /home/nasha_voxelsafety_com/datasets/pooler
+    valid_pct: 0.1
+    batch_size: 128
+  normalize: {}
+    # mean: [0.485, 0.456, 0.406]
+    # std: [0.229, 0.224, 0.225]
+  train_transform:
+    item_tfms:
+      - name: RandomResizedCrop
+        params: 
+          size: [224, 224]
+          scale: [0.7, 1.0]
+      - name: RandomHorizontalFlip
+        params: {}
+      - name: ToTensor
+        params: {}
+  test_transform:
+    item_tfms:
+      - name: Resize
+        params: 
+          size: 256
+      - name: CenterCrop
+        params:
+          size: 224
+      - name: ToTensor
+        params: {}
+
+model: 
+  name: &model_name resnet_ema 
+  params:
+    num_classes: 3
+  type : vanilla_resnet_deprecated
+
+
+loss:
+  name: &loss_name ema
+  params:
+    alpha: 0.25
+    gamma: 1.5
+    reduction: 'mean'
+  use_cross_entropy: 0
+  label_smooth: 0
+
+optimizer:
+  n_epoch: &nepoch 24
+  lr: &lr 0.001
+
+scheduler:
+  step: &s 7
+  gamma: 0.1
+
+test:
+  model_path: /home/nasha_voxelsafety_com/voxel/experimental/nasha/models/door_classifier/door_classifier_best-2022-04-28-pooler-model-base-EMA.pt
+
+wandb:
+  init_params:
+    project: door_classifier
+    entity: voxel-wandb
+    config:
+      num_epochs: *nepoch
+      learning_rate: *lr
+      step: *s
+
+    tags: [*classifier_name, *model_name, *loss_name]

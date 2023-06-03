@@ -1,0 +1,33 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary", "py_library")
+
+py_library(
+    name = "data_collector_lib",
+    srcs = [
+        "data_collector.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/common:queries",
+        "//core/metaverse/api",
+        "//core/utils:aws_utils",
+        "//core/utils:perception_portal_graphql_session",
+        "//core/utils:yaml_jinja",
+        requirement("loguru"),
+        requirement("boto3"),
+        requirement("sematic"),
+        requirement("tqdm"),
+    ],
+)
+
+py_binary(
+    name = "data_collector",
+    srcs = [
+        "data_collector.py",
+    ],
+    data = ["//configs"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":data_collector_lib",
+    ],
+)

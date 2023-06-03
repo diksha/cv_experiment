@@ -1,0 +1,16 @@
+load("@rules_pkg//:pkg.bzl", "pkg_zip")
+load("//third_party/aws/greengrass:defs.bzl", "greengrass_component")
+
+# the greengrass component tooling requires an artifact zip so we just make an empty one
+pkg_zip(
+    name = "artifact",
+    srcs = [],
+)
+
+greengrass_component(
+    name = "production",
+    artifact = "artifact.zip",
+    component_name = "voxel.edge.HAProxy",
+    recipe_template = "recipe.yaml",
+    version = "0.0.2",
+)

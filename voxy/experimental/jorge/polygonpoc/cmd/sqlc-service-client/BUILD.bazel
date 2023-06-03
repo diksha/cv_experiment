@@ -1,0 +1,21 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "sqlc-service-client_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/voxel-ai/voxel/experimental/jorge/polygonpoc/cmd/sqlc-service-client",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//experimental/jorge/polygonpoc",
+        "@com_github_davecgh_go_spew//spew",
+        "@com_github_lib_pq//:pq",
+        "@org_golang_google_grpc//:go_default_library",
+        "@org_golang_google_grpc//credentials/insecure",
+    ],
+)
+
+go_binary(
+    name = "sqlc-service-client",
+    embed = [":sqlc-service-client_lib"],
+    visibility = ["//visibility:public"],
+)

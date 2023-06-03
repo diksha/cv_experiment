@@ -1,0 +1,5 @@
+scan:
+  skip-dirs:
+    node_modules/
+    third_party/npm/node_modules/
+    services/portal/web/node_modules/

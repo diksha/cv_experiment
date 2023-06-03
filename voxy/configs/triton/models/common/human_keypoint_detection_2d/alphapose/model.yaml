@@ -1,0 +1,16 @@
+model:
+# Human Keypoint Detection Configs
+  artifact_model_paths:
+      - artifacts_03_21_2023_pose_0630_jit_update/fast_res50_256x192.pt
+  config:
+    platform: pytorch_libtorch
+    max_batch_size: 128
+    input:
+      - name: images
+        data_type: TYPE_FP32
+        format: FORMAT_NCHW
+        dims: [3, 256, 192]
+    output:
+      - name: output0
+        data_type: TYPE_FP32
+        dims: [17, 64, 48]

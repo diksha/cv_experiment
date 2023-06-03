@@ -1,0 +1,14 @@
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "lib",
+    srcs = [
+        "inference.py",
+        "vanilla_resnet_inference.py",
+    ],
+    deps = [
+        "//core/perception/inference/transforms",
+    ],
+)

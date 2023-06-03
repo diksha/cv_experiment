@@ -1,0 +1,15 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_py//py:defs.bzl", "py_library")
+
+py_library(
+    name = "galileo",
+    srcs = [],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@pip_deps_vaex_core//:wheel",
+        "@pip_deps_vaex_hdf5//:wheel",
+        requirement("dataquality"),
+        requirement("setuptools"),
+        "//:voxel_base_import",
+    ],
+)

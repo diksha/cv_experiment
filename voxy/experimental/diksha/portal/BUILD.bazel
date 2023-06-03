@@ -1,0 +1,22 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+
+package(default_visibility = ["//core/portal:__subpackages__"])
+
+py_binary(
+    name = "create_staff_user",
+    srcs = [
+        "create_staff_user.py",
+    ],
+    env = {
+        "DJANGO_SETTINGS_MODULE": "core.portal.voxel.settings",
+    },
+    deps = [
+        requirement("django"),
+        "//core/portal/accounts/clients:auth0",
+        # We import the entire app so we have access to all of the Django context, settings, etc.
+        "//core/portal/voxel:app",
+        "//core/portal/accounts:roles",
+        "//core/portal/accounts/tools:create_staff_user_lib",
+    ],
+)

@@ -1,0 +1,88 @@
+/*
+Copyright 2020-2021 Voxel Labs, Inc.
+All rights reserved.
+
+This document may not be reproduced, republished, distributed, transmitted,
+displayed, broadcast or otherwise exploited in any manner without the express
+prior written permission of Voxel Labs, Inc. The receipt or possession of this
+document does not convey any rights to reproduce, disclose, or distribute its
+contents, or to manufacture, use, or sell anything that it may describe, in
+whole or in part.
+*/
+.reviewCard {
+  padding: 30px;
+}
+
+.reviewCard h1 {
+  color: var(--brand-gray-500);
+  margin: 0 0 30px 0;
+}
+
+.contentWrapper {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  grid-gap: 30px;
+}
+
+.spinner {
+  min-height: 200px;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+.pageHeader {
+  background-color: #fff;
+  border-radius: 5px 5px 0 0;
+  padding: 10px 10px;
+  margin-bottom: 10px;
+  transition: box-shadow 0.2s ease, top 0.2s ease;
+}
+
+.pageHeader.stuck {
+  border-radius: 5px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.2s ease, top 0.2s ease;
+  position: relative;
+  top: 10px;
+}
+
+.filter {
+  display: grid;
+  align-items: center;
+  grid-gap: 20px;
+  grid-template-columns: auto auto auto auto auto 1fr;
+}
+
+.filterButton {
+  width: auto;
+}
+
+@media (max-width: 768px) {
+  .filterButton {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .filter {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.loadingSpinner {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 30px 50px 30px;
+  opacity: 0.4;
+}
+
+.loadingSpinner.pageLoading {
+  height: 300px;
+}
+
+.noFeedback {
+  padding: 20px;
+}

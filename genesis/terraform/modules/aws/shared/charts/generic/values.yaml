@@ -1,0 +1,138 @@
+non_web_app: false
+stateful_set: false
+# Default values for generic.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+healthcheck_path: /
+replicaCount: 1
+command:
+args: []
+image:
+  repository: nginx
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: latest
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext:
+  {}
+  # fsGroup: 2000
+
+securityContext:
+  {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+strategy:
+  type: Recreate
+
+lifecycle: {}
+
+service:
+  type: ClusterIP
+  port: 80
+  containerPort: 80
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-additional-resource-tags: map-migrated=d-server-00swbp99drezfh
+
+ingress:
+  enabled: false
+  className: ""
+  annotations:
+    alb.ingress.kubernetes.io/tags: map-migrated=d-server-00swbp99drezfh
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources:
+  requests:
+    cpu: 512m
+    memory: 1000Mi
+    # nvidia.com/gpu: 1
+  limits:
+    cpu: 512m
+    memory: 1000Mi
+    # nvidia.com/gpu: 1
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 70
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector:
+  "nvidia.com/gpu": "false"
+
+tolerations:
+- key: nvidia.com/gpu
+  operator: Equal
+  value: "true" # Toleration alone doesn't matter as the node selector is set to true or false as per requirements
+  effect: NoSchedule
+
+# affinity:
+#   podAntiAffinity:
+#     requiredDuringSchedulingIgnoredDuringExecution:
+#       - labelSelector:
+#           matchExpressions:
+#             - key: application
+#               operator: In
+#               values:
+#                 - runner
+#         topologyKey: "kubernetes.io/hostname"
+
+env:
+  secret_refs: []
+  config_refs: []
+  secret: {}
+  config_files:
+    /a/b: |-
+      jdkasjdsakdsa
+  secret_files:
+    /a/b: |-
+      jdkasjdsakdsa
+  config:
+    AWS_DEFAULT_REGION: "us-west-2"
+    OTEL_TRACES_EXPORTER: otlp
+    OTEL_METRICS_EXPORTER: otlp
+    OTEL_LOGS_EXPORTER: otlp
+    OTEL_EXPORTER_OTLP_ENDPOINT: http://default-collector.observability:4317
+
+podDisruptionBudget:
+  enabled: false

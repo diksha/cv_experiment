@@ -1,0 +1,24 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+py_library(
+    name = "fetch_camera_frames",
+    srcs = [
+        "fetch_camera_frames.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//protos/perception/structs/v1:structspb_py_library",
+        requirement("boto3"),
+        requirement("protobuf"),
+        requirement("pytz"),
+    ],
+)
+
+go_library(
+    name = "utils",
+    srcs = ["gengofakes.go"],
+    importpath = "github.com/voxel-ai/voxel/lib/utils",
+    visibility = ["//visibility:public"],
+)

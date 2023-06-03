@@ -1,0 +1,37 @@
+config:
+  useInsecureCookies: false
+  auth:
+    google:
+      clientId: ${GOOGLE_CLIENT_ID}
+      domain: voxelai.com
+
+image:
+  repository: "tryretool/backend"
+  tag: "2.111.11"
+  pullPolicy: "IfNotPresent"
+
+service:
+  type: ClusterIP
+  externalPort: 80
+
+ingress:
+  enabled: false
+
+postgresql:
+  enabled: true
+  image:
+    repository: "bitnami/postgresql"
+    tag: "15.1.0"
+  persistence:
+    size: 200Gi
+    storageClass: gp3-retain
+
+resources:
+  limits:
+    cpu: 4096m
+    memory: 8192Mi
+  requests:
+    cpu: 2048m
+    memory: 4096Mi
+
+replicaCount: 1

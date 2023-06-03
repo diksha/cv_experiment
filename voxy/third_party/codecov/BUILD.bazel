@@ -1,0 +1,8 @@
+load("@aspect_bazel_lib//lib:copy_file.bzl", "copy_file")
+
+copy_file(
+    name = "codecov_copy",
+    src = "@codecov//file",
+    out = "codecov",
+    is_executable = True,
+)

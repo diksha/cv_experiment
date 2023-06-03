@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package protos.perception.structs.v1;
+
+
+option go_package = "github.com/voxel-ai/voxel/protos/perception/structs/v1;structspb";
+
+
+import "protos/perception/types/v1/types.proto";
+import "google/protobuf/struct.proto";
+
+/* The scope of PerceivedIncident is currently limited to the data necessary to
+generate an "Incident" entry in the PDB */
+message PerceivedIncident {
+    string uuid = 1;
+    protos.perception.types.v1.Timestamp timestamp = 2;
+    string camera_uuid = 3;
+    // TODO: This should be an enum one day.
+    string incident_type_key_string = 4;
+    bool is_experimental = 5;
+
+    message VideoData {
+        optional string video_path = 1;
+        optional string thumbnail_path = 2;
+        optional string annotations_path = 3;
+    }
+    optional VideoData video_data = 6;
+    
+    optional google.protobuf.Struct additional_context = 7;
+}

@@ -1,0 +1,809 @@
+# Copyright 2023 Voxel Labs, Inc.
+# All rights reserved.
+#
+# This document may not be reproduced, republished, distributed, transmitted,
+# displayed, broadcast or otherwise exploited in any manner without the express
+# prior written permission of Voxel Labs, Inc. The receipt or possession of this
+# document does not convey any rights to reproduce, disclose, or distribute its
+# contents, or to manufacture, use, or sell anything that it may describe, in
+# whole or in part.
+#
+#
+# Vivek: Adding more regression tests.
+scenario_for_incidents: [OPEN_DOOR_DURATION]
+scenarios:
+### OPEN_DOOR_DURATION
+# POSITIVE SCENARIOS - 20 videos for americold/modesto/0003/cha
+- camera_uuid: americold/modesto/0003/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0003/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/86dcaa8b-5e47-4c2e-b05e-e9abc21c82e7_0000
+- camera_uuid: americold/modesto/0003/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0003/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/e7057496-3cb9-412a-80ef-e48991aff53a_0000
+- camera_uuid: americold/modesto/0003/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0003/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/c9b4447a-e4a2-4db3-af96-cb210beb6b47_0000
+- camera_uuid: americold/modesto/0003/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0003/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/a5ea307a-b559-4f57-bab8-aeee6843177a_0000
+- camera_uuid: americold/modesto/0003/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0003/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/deb3c781-a0fb-4e73-a14a-920a4bd07b0a_0000
+- camera_uuid: americold/modesto/0003/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0003/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/3871ea02-f5d4-4cd2-b0c2-e2a43d76a282_0000
+- camera_uuid: americold/modesto/0003/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0003/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/9cf82dce-0ed5-4358-bfc9-0cf071f43ce6_0000
+- camera_uuid: americold/modesto/0003/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0003/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/424b65dd-a8da-4ebc-a6ea-ea33772e8e9a_0000
+- camera_uuid: americold/modesto/0003/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0003/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/65acc1fb-e5ca-4e57-aef1-89b15d9adefd_0000
+- camera_uuid: americold/modesto/0003/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0003/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/12e440ea-11f3-45d3-b98a-527970513018_0000
+- camera_uuid: americold/modesto/0003/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0003/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/19705ba5-ffae-4dfc-b271-2372df679f83_0000
+- camera_uuid: americold/modesto/0003/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0003/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/3f9c9c89-a804-4b9d-9490-96c0051472d5_0000
+- camera_uuid: americold/modesto/0003/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0003/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/0bb5deb5-22f9-4f91-98e9-356ae89f64b2_0000
+- camera_uuid: americold/modesto/0003/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0003/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/6b6612e5-e61f-4794-b9f1-8f533cee4a51_0000
+- camera_uuid: americold/modesto/0003/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0003/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/0ca8be14-f459-4614-85b0-897a67020d72_0000
+- camera_uuid: americold/modesto/0003/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0003/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/fbc521de-8e58-4738-9c14-aa2a482b5f6b_0000
+- camera_uuid: americold/modesto/0003/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0003/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/3950465d-6d3e-4833-a29d-837fceb0dbfa_0000
+- camera_uuid: americold/modesto/0003/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0003/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/ddcb7803-9f2d-4dcb-9301-825ee3ae341d_0000
+- camera_uuid: americold/modesto/0003/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0003/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/f4c42ec0-3ad9-4f7e-8313-d33dbc00ba1c_0000
+- camera_uuid: americold/modesto/0003/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0003/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/568cd64d-c714-4a4d-8937-00ef44434743_0000
+
+
+# scenarios for americold/ontario/0009/cha
+#### OPEN_DOOR_DURATION
+# POSITIVE SCENARIOS - 7 videos
+- camera_uuid: americold/ontario/0009/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/ontario/0009/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/0957ad46-f10f-457a-8a71-59083e939b0e_0000
+- camera_uuid: americold/ontario/0009/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/ontario/0009/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/36242493-b914-4f09-85e4-26f722a39970_0000
+- camera_uuid: americold/ontario/0009/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/ontario/0009/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/fcd739f6-19b3-4d0e-b363-ed2117e4745b_0000
+- camera_uuid: americold/ontario/0009/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/ontario/0009/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/47d98805-8f9e-43b6-9b0b-10e52b13e5ae_0000
+- camera_uuid: americold/ontario/0009/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/ontario/0009/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/135f3c2c-3b09-4510-bbec-48e06a8ea2c7_0000
+- camera_uuid: americold/ontario/0009/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/ontario/0009/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/44d3ccba-1d8a-49b8-a29a-6835cfb23fd6_0000
+- camera_uuid: americold/ontario/0009/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/ontario/0009/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/48ee22e8-a887-4b7e-9a99-6f52c9751237_0000
+
+
+# scenarios for americold/modesto/0011/cha
+#### OPEN_DOOR_DURATION
+# POSITIVE SCENARIOS - 20 videos
+- camera_uuid: americold/modesto/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/de3d3b1b-24e6-44c4-8ee1-58bedf00782f_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/0a3f5cec-3dfb-40a2-8f96-90355a21db44_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/3f5eab22-17ac-402a-855c-488e7f7b24cb_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/84755a3a-7f34-4183-a78d-d796d68c5829_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/fc61c5e6-fc18-490e-9123-90828890b6b5_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/57ba3145-4722-44d4-9b2e-e983ca953219_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/226d18e2-e8d3-48f8-92d8-edc8ef1de5bf_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/566c0e85-eda7-43a4-9a02-249a89e5b01b_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/f53f7145-fcb1-4504-86e4-de1f990b1538_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/19fb2c7a-ba35-4b5a-bfb8-da616ccf3e0a_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/d7dc185d-1d0d-4fe2-9ee1-eff5d7715306_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/9b7fe6fa-acb8-46b8-87bd-a4ff190297d6_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/78d3441c-54d8-428c-9805-7e157af2377f_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/b723ccd7-8ea1-46eb-be69-9c426f1425b3_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/1cc9e77c-4ae9-4b81-ac1d-572a8894b6b7_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/916d115b-2d8b-4c36-a6d9-40fd769ff4a0_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/8f10d1fc-5e6a-4393-a5a8-c84b91f9e2f0_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/f3847d79-105c-482c-b1e3-e467d7dd7407_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/4e13fbf6-0ca8-48ce-80d2-2a927199b6be_0000
+# NEGATIVE SCENARIOS - 20 videos
+- camera_uuid: americold/modesto/0011/cha
+  incidents: []
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/cd3321b0-5241-43c0-a959-39e5f23e590a_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents: []
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/cb2144ed-07b2-4870-bea3-d641a23f5991_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents: []
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/3f355257-f5c7-4fa4-9a86-f4941fd8dec3_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents: []
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/7382b6f7-2a5f-4203-9ac6-a7f14098b275_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents: []
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/62a72039-1af2-4267-b5a4-dbab535511de_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents: []
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/a45d0729-b46e-4905-81f7-338337c15f65_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents: []
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/f4f819ac-4ce6-4f8b-80b7-67378021c35c_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents: []
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/076c1cb3-4099-41b3-9072-7c2d2f72ffe6_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents: []
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/527527dd-67ec-4b3d-bda2-9722e1ab8483_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents: []
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/4ef3dc8f-4da8-4f5f-8c60-4b94a6d2d640_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents: []
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/642d4391-c81c-4f05-b858-a845a56cf861_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents: []
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/fc773d4f-5ad0-4635-ab8f-57917f01e335_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents: []
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/13a2f86b-dbc9-44f4-9d5a-c4ebd072ca34_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents: []
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/bb3f771e-f5bd-45ad-ab56-d35a9ed98ef3_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents: []
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/273901c0-44b9-43e7-a7a7-16c73b074eb7_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents: []
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/fa2d07c2-a7e4-4142-beb7-38e7ff3d68ce_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents: []
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/650d0fa5-42dc-491a-90d9-ee37ab7d1972_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents: []
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/3aa9ebfc-6c39-47e5-a765-4900d2e60b67_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents: []
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/42b5d9ae-0c4c-48fd-862b-8871f23ac557_0000
+- camera_uuid: americold/modesto/0011/cha
+  incidents: []
+  video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/f83d7767-6964-423e-b14a-13646d3ded55_0000
+
+
+# scenarios for americold/ontario/0011/cha
+#### OPEN_DOOR_DURATION
+# POSITIVE SCENARIOS - 20 videos
+- camera_uuid: americold/ontario/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/ontario/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/da7a19aa-805b-4d56-8ac7-be1eaa17439f_0000
+- camera_uuid: americold/ontario/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/ontario/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/aebdc98b-9053-4085-8e08-166c2f92ef2b_0000
+- camera_uuid: americold/ontario/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/ontario/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/84144f9f-74cd-49c7-8fd3-c1d298988fdd_0000
+- camera_uuid: americold/ontario/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/ontario/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/d421bc5c-4488-4042-8c68-f2cc4f161a6a_0000
+- camera_uuid: americold/ontario/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/ontario/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/9134984f-aea3-4be4-a3a9-0553fd21b1a4_0000
+- camera_uuid: americold/ontario/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/ontario/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/9eddeaf1-48be-40b9-82a1-9cea86857c8c_0000
+- camera_uuid: americold/ontario/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/ontario/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/161ad2e0-c91f-40da-83a5-0638ba324588_0000
+- camera_uuid: americold/ontario/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/ontario/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/bf70a3fe-d845-420d-9c06-63474ff7f12e_0000
+- camera_uuid: americold/ontario/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/ontario/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/32640a75-9b5f-45e4-b247-e8cdbf5b0f72_0000
+- camera_uuid: americold/ontario/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/ontario/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/98d0a405-36cf-4cef-b06c-6178cb5b3683_0000
+- camera_uuid: americold/ontario/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/ontario/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/e5471669-a0bc-4e99-9f45-fc37b05d1a59_0000
+- camera_uuid: americold/ontario/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/ontario/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/5fd4dec8-e8ea-4696-a70b-6a42337c82bf_0000
+- camera_uuid: americold/ontario/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/ontario/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/2ae52962-4276-4e21-ac5c-8ac8d92ae077_0000
+- camera_uuid: americold/ontario/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/ontario/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/81ff8d4e-63d5-4a3f-9e92-7b3e562bd622_0000
+- camera_uuid: americold/ontario/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/ontario/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/1c3f787b-5ea0-445a-9b48-36a1a9a50fcb_0000
+- camera_uuid: americold/ontario/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/ontario/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/6dc431ec-02f9-47b5-866e-98ada617d4c0_0000
+- camera_uuid: americold/ontario/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/ontario/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/bd3a4caa-c97c-4a15-a068-ec8a7605df48_0000
+- camera_uuid: americold/ontario/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/ontario/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/22a00020-9a3c-4cb5-8661-d304a5a46b3e_0000
+- camera_uuid: americold/ontario/0011/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/ontario/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/696291ce-0548-4cd4-8c91-fa9966fa67b7_0000
+
+# POSITIVE Scenarios - 2 videos for uscold/quakertown/0002/cha            from 2022-11-01T00:00:00 to 2022-12-22T02:02:34.535201+00:00      
+- camera_uuid: uscold/quakertown/0002/cha         
+  incidents: [OPEN_DOOR_DURATION]            
+  video_uuid: uscold/quakertown/0002/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/uscold-quakertown-0002
+- camera_uuid: uscold/quakertown/0002/cha           
+  incidents: [OPEN_DOOR_DURATION]            
+  video_uuid: uscold/quakertown/0002/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/uscold-quakertown-0002-4
+# NEGATIVE SCENARIOS - 6 videos
+- camera_uuid: uscold/quakertown/0002/cha           
+  incidents: []            
+  video_uuid: uscold/quakertown/0002/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/uscold-quakertown-0002-6
+- camera_uuid: uscold/quakertown/0002/cha  
+  incidents: []            
+  video_uuid: uscold/quakertown/0002/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/uscold-quakertown-0002-7
+- camera_uuid: uscold/quakertown/0002/cha           
+  incidents: []            
+  video_uuid: uscold/quakertown/0002/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/uscold-quakertown-0002-8
+- camera_uuid: uscold/quakertown/0002/cha 
+  incidents: []            
+  video_uuid: uscold/quakertown/0002/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/uscold-quakertown-0002-9
+- camera_uuid: uscold/quakertown/0002/cha  
+  incidents: []            
+  video_uuid: uscold/quakertown/0002/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/uscold-quakertown-0002-10
+- camera_uuid: uscold/quakertown/0002/cha  
+  incidents: []            
+  video_uuid: uscold/quakertown/0002/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/uscold-quakertown-0002-13
+
+
+# POSITIVE SCENARIOS - 2 videos for ulta/dallas/0004/cha
+- camera_uuid: ulta/dallas/0004/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: ulta/dallas/0004/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/f1d33264-59f2-44a1-b0a0-a2536cf2080a_0000
+- camera_uuid: ulta/dallas/0004/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: ulta/dallas/0004/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/7053a4b9-6dd8-451a-b65d-19416209f50a_0000
+
+#### OPEN_DOOR_DURATION for buildersfirstsource/dixieline/0001/cha
+# POSITIVE SCENARIOS - 1 videos
+- camera_uuid: buildersfirstsource/dixieline/0001/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: buildersfirstsource/dixieline/0001/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/e0081ee9-c308-4c9e-b8ff-54e0107469cb_0000
+# NEGATIVE SCENARIOS - 9 videos
+- camera_uuid: buildersfirstsource/dixieline/0001/cha
+  incidents: []
+  video_uuid: buildersfirstsource/dixieline/0001/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/abf55966-6817-4530-b789-bca2be20b4ef_0000
+- camera_uuid: buildersfirstsource/dixieline/0001/cha
+  incidents: []
+  video_uuid: buildersfirstsource/dixieline/0001/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/28afdf5a-1c06-4502-81b1-bb3bcd5bdf04_0000
+- camera_uuid: buildersfirstsource/dixieline/0001/cha
+  incidents: []
+  video_uuid: buildersfirstsource/dixieline/0001/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/4c2a3abc-113f-49a7-b4cd-6e5e1fc90dae_0000
+- camera_uuid: buildersfirstsource/dixieline/0001/cha
+  incidents: []
+  video_uuid: buildersfirstsource/dixieline/0001/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/bb4d42dd-ed80-4d87-ad20-635b1a8b3a42_0000
+- camera_uuid: buildersfirstsource/dixieline/0001/cha
+  incidents: []
+  video_uuid: buildersfirstsource/dixieline/0001/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/7d9a43cf-5dc7-48cf-bad6-b334393d6ec1_0000
+- camera_uuid: buildersfirstsource/dixieline/0001/cha
+  incidents: []
+  video_uuid: buildersfirstsource/dixieline/0001/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/d2ce6fed-ab23-4f3c-ace0-2d59359cbedb_0000
+- camera_uuid: buildersfirstsource/dixieline/0001/cha
+  incidents: []
+  video_uuid: buildersfirstsource/dixieline/0001/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/41fa2ddf-a4ef-4ede-946e-5a33d694a93f_0000
+- camera_uuid: buildersfirstsource/dixieline/0001/cha
+  incidents: []
+  video_uuid: buildersfirstsource/dixieline/0001/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/8a9d87c2-74cf-4628-9b83-9e70cb4fb9e4_0000
+- camera_uuid: buildersfirstsource/dixieline/0001/cha
+  incidents: []
+  video_uuid: buildersfirstsource/dixieline/0001/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/51748228-04d3-458b-b228-33df4a68c519_0000
+
+
+#### OPEN_DOOR_DURATION
+# POSITIVE SCENARIOS - 20 videos for trieagle/ocala/0005/cha
+- camera_uuid: trieagle/ocala/0005/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0005/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/576b98b7-d38a-482a-bf0c-6c289621cd2a_0000
+- camera_uuid: trieagle/ocala/0005/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0005/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/f6c8902a-3eee-44ec-a9bd-e416123ae7cc_0000
+- camera_uuid: trieagle/ocala/0005/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0005/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/737e65f4-245f-4c94-bd98-c7367d785f7c_0000
+- camera_uuid: trieagle/ocala/0005/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0005/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/5eca7740-6134-417f-a1d8-33d6a847b909_0000
+- camera_uuid: trieagle/ocala/0005/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0005/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/2860e9f4-6fc8-4d46-a179-8283e476be44_0000
+- camera_uuid: trieagle/ocala/0005/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0005/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/7d00aff6-69b9-4f9a-b015-2187fccc716c_0000
+- camera_uuid: trieagle/ocala/0005/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0005/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/8994825d-b3d1-4d5d-8874-a9cd16058bba_0000
+- camera_uuid: trieagle/ocala/0005/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0005/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/12a4edac-0805-44ed-a184-252018ef4a8e_0000
+- camera_uuid: trieagle/ocala/0005/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0005/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/4c6ff14c-d3aa-4051-9def-8404e5c54e14_0000
+- camera_uuid: trieagle/ocala/0005/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0005/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/ea29d814-c4aa-4146-bb15-c33cfa69594c_0000
+- camera_uuid: trieagle/ocala/0005/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0005/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/831b5a93-19c9-491c-afb4-fac3d14cf29c_0000
+- camera_uuid: trieagle/ocala/0005/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0005/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/dc17a2e6-356b-4336-90c3-f215ae179a73_0000
+- camera_uuid: trieagle/ocala/0005/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0005/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/9c4467fd-50ab-40b3-9ae2-1b14f6add198_0000
+- camera_uuid: trieagle/ocala/0005/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0005/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/429175df-a533-4848-9065-d0f812b2452e_0000
+- camera_uuid: trieagle/ocala/0005/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0005/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/79fbba8e-f7b8-439e-a7ee-37bfcc73fd96_0000
+- camera_uuid: trieagle/ocala/0005/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0005/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/731e467b-0456-45f7-a595-04fa58ac1570_0000
+- camera_uuid: trieagle/ocala/0005/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0005/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/0d6d028a-895b-4cda-a03b-547c42b29be7_0000
+- camera_uuid: trieagle/ocala/0005/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0005/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/3d6e703a-d37f-42b9-ae08-4806de8ff3b9_0000
+- camera_uuid: trieagle/ocala/0005/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0005/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/2c62f455-278f-4310-a036-aebcc4547575_0000
+- camera_uuid: trieagle/ocala/0005/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0005/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/05b132d2-f7a5-49de-a0c4-1fe7c0842209_0000
+
+
+# POSITIVE SCENARIOS - 20 videos - for trieagle/ocala/0001/cha
+- camera_uuid: trieagle/ocala/0001/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0001/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/4ff2472b-163b-4b0a-a468-c03e2cdc38e9_0000
+- camera_uuid: trieagle/ocala/0001/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0001/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/d2747c61-7784-41c2-9c83-02b3b73a5840_0000
+- camera_uuid: trieagle/ocala/0001/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0001/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/1c36afbf-6232-4da4-8e8b-5ce86fc5d3d8_0000
+- camera_uuid: trieagle/ocala/0001/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0001/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/fb578b66-7a11-4bea-bc6f-39dedb466005_0000
+- camera_uuid: trieagle/ocala/0001/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0001/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/3945ea4b-35ec-4373-991c-69ca45f9b82d_0000
+- camera_uuid: trieagle/ocala/0001/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0001/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/38435e67-5cf0-4bce-b898-243fa19020df_0000
+- camera_uuid: trieagle/ocala/0001/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0001/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/7519880a-df1e-4246-89f4-a73036cf498c_0000
+- camera_uuid: trieagle/ocala/0001/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0001/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/c4c829d9-0d87-4fce-b005-f7168cf75d02_0000
+- camera_uuid: trieagle/ocala/0001/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0001/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/5cc85f57-ebd1-493b-a975-26588af30d5a_0000
+- camera_uuid: trieagle/ocala/0001/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0001/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/85b03833-a589-4582-bab1-98c87ec2a2a3_0000
+- camera_uuid: trieagle/ocala/0001/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0001/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/c19817c5-4951-4a02-a5c5-f8b5608dcd67_0000
+- camera_uuid: trieagle/ocala/0001/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0001/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/e03cff6b-c8dd-43a1-a965-76d76176646e_0000
+- camera_uuid: trieagle/ocala/0001/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0001/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/48c1a2b0-4d41-4e31-950c-400e43fe813f_0000
+- camera_uuid: trieagle/ocala/0001/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0001/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/202190a4-7704-4433-b1ad-a0b412b8c17a_0000
+- camera_uuid: trieagle/ocala/0001/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0001/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/cbad4545-2a3d-4c43-8580-5b063feb3033_0000
+- camera_uuid: trieagle/ocala/0001/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0001/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/cb711fa1-50f8-4484-9c52-186c2d428755_0000
+- camera_uuid: trieagle/ocala/0001/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0001/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/d58bf715-7062-42c6-9fa2-4fb0780a5bf7_0000
+- camera_uuid: trieagle/ocala/0001/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0001/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/779b9796-f90e-4595-a5f0-477160945ca0_0000
+- camera_uuid: trieagle/ocala/0001/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0001/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/e112d4f1-b492-42e9-aaaa-aec2e3ded069_0000
+- camera_uuid: trieagle/ocala/0001/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: trieagle/ocala/0001/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/aa172ed9-e55d-4044-915d-daf15ad72528_0000
+
+
+# POSITIVE SCENARIOS - 20 videos for innovate_manufacturing/knoxville/0004/cha
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/5556bafb-021c-40ba-815a-10b51d505d40_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/376c26b4-0f29-4f26-bcc3-e1c246441ec2_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/2deb69ba-6d26-4cef-a008-18c8e8c515ba_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/e70afcfd-7709-442b-ad0a-16cc061b0338_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/e0d1d0f9-74a1-442c-b1ce-892f3cc888d5_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/f92ffd29-c90d-479a-a697-131d43ebfff7_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/4c3fcebb-df78-42dc-a5ce-b5c8ba464ee5_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/12718233-e8f9-471b-9578-cc5f2f288850_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/297a122d-ad44-4413-9926-c5fe85bf9f8c_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/4e4203c8-1be7-4e4e-ba47-b2e2f90e293e_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/d19284fc-5996-4452-959b-226845364040_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/f2230e51-ca8a-4e4e-9cdc-cc4826b94ba0_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/9bfbc338-f86e-40e1-a251-331a1e1fc75e_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/6dd6f06a-0882-431d-bd7e-0a46f14a809e_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/62be88e4-401f-443e-a6dc-04870ce93e15_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/3c3abed0-6f09-45d3-9a79-087f1acf4db5_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/2e230823-8bc3-4261-a591-e0dba7f055d0_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/b385b38c-1c21-4bc6-b7b2-3430d41c600d_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/63f54a3b-b8a5-4c68-b2b3-33f662966ccb_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/ebccfa37-6131-4c44-8867-53d73a6d1683_0000
+# NEGATIVE SCENARIOS - 15 videos
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents: []
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/b4bef2d0-7c2d-4853-ab2c-7de2bbb1b8dc_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents: []
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/e20eaf06-6cc0-463d-9364-2a357c31d0c7_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents: []
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/132622a4-f83e-4c68-ba89-6bd6ac7e2f6b_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents: []
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/aeb0b4f5-6f06-446b-bc0d-6fc70ac28f89_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents: []
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/96dbc9af-6949-4b5e-b9cf-3dc17cd0b91f_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents: []
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/362a492a-cb39-4e6b-944c-03c6ae16d104_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents: []
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/dd6eea40-1643-42b0-b964-73a69ed367ff_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents: []
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/53b285cf-e09f-4b8e-99ba-32ee94a5aa5e_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents: []
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/2b567406-3fa4-486f-89dc-1a9d745ae981_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents: []
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/00387e98-0573-4cf6-8fb8-6934978a7ce8_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents: []
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/779cfc65-db56-4252-9844-af9ac179bff9_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents: []
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/b03ea3cf-dd1a-4983-b2fe-0c4196284075_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents: []
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/f90bf940-46ea-4ce8-9050-46888bcb7476_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents: []
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/bbac5f85-df1a-46d1-a13b-f1b376e8ba65_0000
+- camera_uuid: innovate_manufacturing/knoxville/0004/cha
+  incidents: []
+  video_uuid: innovate_manufacturing/knoxville/0004/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/c0ad5ab0-6763-4a8f-b4bf-11a054cc051d_0000
+
+
+#### OPEN_DOOR_DURATION
+# POSITIVE SCENARIOS - 11 videos
+- camera_uuid: americold/ontario/0104/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/ontario/0104/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/a81aacc4-feef-419f-903d-48b4e2ef0470_0000 # TP
+- camera_uuid: americold/ontario/0104/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/ontario/0104/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/690f6a74-55bd-4f85-a2e1-26e0302ef3fb_0000 # TP
+- camera_uuid: americold/ontario/0104/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/ontario/0104/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/b6346d8a-588f-41a9-a1d4-2061f262ee00_0000 # TP
+- camera_uuid: americold/ontario/0104/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/ontario/0104/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/da524bba-3104-428b-ab54-c151758906fb_0000 # TP
+- camera_uuid: americold/ontario/0104/cha
+  incidents:
+    - OPEN_DOOR_DURATION
+  video_uuid: americold/ontario/0104/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/d0c35517-e023-4ff4-bf0b-adb602f8ea78_0000 # TP
+- camera_uuid: americold/ontario/0104/cha
+  incidents: [OPEN_DOOR_DURATION]
+  video_uuid: americold/ontario/0104/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/768d55e9-e3aa-4bf6-8cf1-7887d9c0104c_0000 # FP -> TP
+- camera_uuid: americold/ontario/0104/cha
+  incidents: [OPEN_DOOR_DURATION]
+  video_uuid: americold/ontario/0104/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/07742271-d647-418f-9370-88fe659c0486_0000 # FP -> TP
+- camera_uuid: americold/ontario/0104/cha
+  incidents: [OPEN_DOOR_DURATION]
+  video_uuid: americold/ontario/0104/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/827df164-aec2-4271-847e-70069696dbc0_0000 # FP -> TP
+- camera_uuid: americold/ontario/0104/cha
+  incidents: [OPEN_DOOR_DURATION]
+  video_uuid: americold/ontario/0104/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/9eae0439-d769-4757-9c13-bb709f3dd62d_0000 # FP -> TP
+- camera_uuid: americold/ontario/0104/cha
+  incidents: [OPEN_DOOR_DURATION]
+  video_uuid: americold/ontario/0104/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/4b990e07-577e-4089-9073-13ffb6fd1490_0000 # FP -> TP
+- camera_uuid: americold/ontario/0104/cha
+  incidents: [OPEN_DOOR_DURATION]
+  video_uuid: americold/ontario/0104/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/a0284b65-d2f2-4f3e-8473-a40756a41a6b_0000 # FP -> TP
+# NEGATIVE SCENARIOS - 15 videos
+- camera_uuid: americold/ontario/0104/cha
+  incidents: []
+  video_uuid: americold/ontario/0104/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/639ff0f4-0147-4982-a6bd-a86ff456c967_0000
+- camera_uuid: americold/ontario/0104/cha
+  incidents: []
+  video_uuid: americold/ontario/0104/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/f1c97ef5-a142-48c1-8770-5053e1f443da_0000
+- camera_uuid: americold/ontario/0104/cha
+  incidents: []
+  video_uuid: americold/ontario/0104/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/3ddc1c03-2aea-432f-811b-b208132921b7_0000
+- camera_uuid: americold/ontario/0104/cha
+  incidents: []
+  video_uuid: americold/ontario/0104/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/86c0546a-a86f-4c15-9cf2-ce86b67c68cc_0000
+- camera_uuid: americold/ontario/0104/cha
+  incidents: []
+  video_uuid: americold/ontario/0104/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/c8787527-5302-46f9-ab10-0fdb5c47a38b_0000
+- camera_uuid: americold/ontario/0104/cha
+  incidents: []
+  video_uuid: americold/ontario/0104/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/030c6c55-8d43-490a-b105-9fdc39487dfa_0000
+- camera_uuid: americold/ontario/0104/cha
+  incidents: []
+  video_uuid: americold/ontario/0104/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/f603d3ac-abeb-49e8-8eeb-0eaa6dfb28e6_0000
+- camera_uuid: americold/ontario/0104/cha
+  incidents: []
+  video_uuid: americold/ontario/0104/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/130937ca-0f9b-4e68-9790-cd5d6e8ec863_0000
+- camera_uuid: americold/ontario/0104/cha
+  incidents: []
+  video_uuid: americold/ontario/0104/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/0089d40d-faef-468b-83d6-a2cc01f4b89e_0000
+- camera_uuid: americold/ontario/0104/cha
+  incidents: []
+  video_uuid: americold/ontario/0104/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/b98538f7-2bdd-4540-b29b-617943e0199a_0000 # FN -> TN
+- camera_uuid: americold/ontario/0104/cha
+  incidents: []
+  video_uuid: americold/ontario/0104/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/9ed8edea-07b1-450e-9845-68e59a687a26_0000 # FN -> TN
+- camera_uuid: americold/ontario/0104/cha
+  incidents: []
+  video_uuid: americold/ontario/0104/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/49d8c286-4821-4960-8419-e994c36652d4_0000 # FN -> TN
+- camera_uuid: americold/ontario/0104/cha
+  incidents: []
+  video_uuid: americold/ontario/0104/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/b7a9952b-aa30-4938-b8e9-53b959a65604_0000 # FN -> TN
+- camera_uuid: americold/ontario/0104/cha
+  incidents: []
+  video_uuid: americold/ontario/0104/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/f5acbd7a-fd45-4925-a4f8-c0b3aa58572c_0000 # FN -> TN
+- camera_uuid: americold/ontario/0104/cha
+  incidents: []
+  video_uuid: americold/ontario/0104/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/7c28f834-9e1a-4ccd-a34e-b2c2944cadde_0000 # FN -> TN

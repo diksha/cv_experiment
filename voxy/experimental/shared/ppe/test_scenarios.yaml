@@ -1,0 +1,30 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+
+{% set image_tag=GENERATE_UUID_WITH_PREFIX("testscenario_") %}
+{% set logset_path="/home/nasha_voxelsafety_com/voxel/data/logsets/nasha/ppe_classification/scenario-set-2022-02-25" %}
+local_jobs:
+  -
+    name : test_scenario_container
+    type: bazel
+    command: //experimental/shared/ppe:test_scenario_push --define IMAGE_TAG={{image_tag}}
+  -
+    name: {{GENERATE_UUID_WITH_PREFIX("testscenario")}}
+    items: {{ITEMS_FROM_FILE(logset_path)}}
+    type: k8s
+    command: /app/experimental/shared/ppe/scenario_set_testing --new_uuid is_old --data_path gs://voxel-users/nasha/ppe_classification/scenario_test_full --scale_dataset_id ds_c8gqc48w9wkg0789qwd0 --video_uuid
+    image: us.gcr.io/sodium-carving-227300/voxel/experimental:{{image_tag}}
+    gpus: 0
+    cpus: 1
+    memory_mb: 4000
+    depends_on:
+      - test_scenario_container

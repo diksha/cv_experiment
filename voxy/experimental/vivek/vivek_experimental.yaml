@@ -1,0 +1,27 @@
+".*":
+  incident:
+    incident_machine_params:
+      hard_hat:
+        max_no_hat_s: 3
+    monitors_requested: []
+    state_machine_monitors_requested: [open_door]
+  # video_stream:
+  #   video_source_bucket: voxel-raw-logs
+cameras/*:
+  perception:
+    enabled: True
+    acausal_layer:
+      PPESmoothener:
+        hard_hat_time_interval_ms: 2000
+        pose_points_min_confidence_threshold: 0.5
+    # hat_classifier:
+      # enabled: True
+      # min_actor_pixel_area: 2000
+      # model_path: artifacts_2022-11-05_uscold_hard_hat_vit_v3_30k/2022-11-05_uscold_hard_hat_vit_v3_30k.pth
+      # is_classification_by_detection: False
+      # detr_model_path: artifacts_detr_trained_lr_4.5e-05_lr_backbone_1e-05_weight_decay_0.0001_classes_3_q50/detr_trained_lr_4.5e-05_lr_backbone_1e-05_weight_decay_0.0001_classes_3_q50.pth
+    # door_classifier:
+    #   enabled: true
+    #   # model_path: artifacts_02_09_2023_old_generalized_side_door/91f587b1-a464-4bb2-9124-4634a12ee929.pt
+    #   model_path: /home/vivek/door_models/6ec9304f-e1be-4731-b687-82c318bfbf6d.pt
+    #   model_type: vanilla_resnet

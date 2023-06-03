@@ -1,0 +1,18 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+voxel_py_test(
+    name = "pipeline_test",
+    srcs = [
+        "pipeline_test.py",
+    ],
+    deps = [
+        requirement("sematic"),
+        "//core/infra/sematic/perception/data_ingestion/ingest_raw_videos:pipeline",
+        "//core/infra/sematic/shared:mock_sematic_funcs",
+        "//core/infra/sematic/shared:utils",
+        "//core/labeling/logs_store:chunk_and_upload_video_logs_lib",
+        "//core/labeling/logs_store:ingest_data_collection_metaverse_lib",
+        "//core/labeling/scale/runners:create_scale_tasks_lib",
+    ],
+)

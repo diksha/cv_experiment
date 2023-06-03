@@ -1,0 +1,56 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+voxel_py_test(
+    name = "constants_test",
+    srcs = [
+        "constants_test.py",
+    ],
+    deps = [
+        "//lib/infra/metrics:constants",
+    ],
+)
+
+voxel_py_test(
+    name = "metrics_helper_test",
+    srcs = [
+        "metrics_helper_test.py",
+    ],
+    deps = [
+        "//lib/infra/metrics:metrics_helper",
+        requirement("opentelemetry-sdk"),
+    ],
+)
+
+voxel_py_test(
+    name = "metrics_trace_resource_test",
+    srcs = [
+        "metrics_trace_resource_test.py",
+    ],
+    deps = [
+        "//lib/infra/metrics:metrics_trace_resource",
+    ],
+)
+
+voxel_py_test(
+    name = "logger_span_exporter_test",
+    srcs = [
+        "logger_span_exporter_test.py",
+    ],
+    deps = [
+        requirement("opentelemetry-sdk"),
+        "//lib/infra/metrics:logger_span_exporter",
+    ],
+)
+
+voxel_py_test(
+    name = "metrics_tracer_test",
+    srcs = [
+        "metrics_tracer_test.py",
+    ],
+    deps = [
+        "//lib/infra/metrics:constants",
+        "//lib/infra/metrics:metrics_trace_resource",
+        "//lib/infra/metrics:metrics_tracer",
+    ],
+)

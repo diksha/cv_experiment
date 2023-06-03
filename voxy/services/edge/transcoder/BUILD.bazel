@@ -1,0 +1,42 @@
+load("@rules_pkg//:pkg.bzl", "pkg_zip")
+load(":release.bzl", "transcoder_release")
+
+pkg_zip(
+    name = "artifact",
+    srcs = [
+        "//services/edge/transcoder/cmd/transcoder-kubectl",
+        "//services/edge/transcoder/kubernetes:files",
+    ],
+)
+
+transcoder_release(
+    name = "quicksync",
+    artifact = ":artifact.zip",
+    environment = "production",
+    transcode_mode = "quicksync",
+    version = "0.0.73",
+)
+
+transcoder_release(
+    name = "quicksync-dev",
+    artifact = ":artifact.zip",
+    environment = "development",
+    transcode_mode = "quicksync",
+    version = "0.0.110",
+)
+
+transcoder_release(
+    name = "cuda",
+    artifact = ":artifact.zip",
+    environment = "production",
+    transcode_mode = "cuda",
+    version = "0.0.17",
+)
+
+transcoder_release(
+    name = "cuda-dev",
+    artifact = ":artifact.zip",
+    environment = "development",
+    transcode_mode = "cuda",
+    version = "0.0.17",
+)

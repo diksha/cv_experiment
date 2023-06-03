@@ -1,0 +1,44 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+apiVersion: batch/v1
+kind: Job
+metadata:
+  # Unique key of the Job instance
+  name: coco-weights-uscold-americold-hybrid-anchor-lr0001-e30-2gpu
+spec:
+  template:
+    metadata:
+      name: coco-weights-uscold-americold-hybrid-anchor-lr0001-e30-2gpu
+    spec:
+      serviceAccountName: k8
+      hostIPC: True
+      containers:
+      - name: detectron2
+        image: us.gcr.io/sodium-carving-227300/voxel/experimental:ramin_voxelsafety_com_1630793604
+        command: ["/bin/sh", "-c"]
+        args: ["apt update && mkdir /data && gsutil -m cp -r gs://voxel-users/ramin/coco/uscold_americold_fitness_9_3/* /data/ && ls /data/ && gsutil cp gs://voxel-users/common/WandB/.netrc ~/ && /usr/bin/python3 /app/experimental/ramin/detectron2/train -lr 0.0001 -epochs 30 -out_dir /data/output -data_dir /data -use_local_weights 0 -gamma 0.5 -wandb_name cocoWeights_uscold_americold_hybrid_anchor_new_val_e30 -num_gpus 2
+ && gsutil cp -r /data/output/* gs://voxel-users/ramin/experiments/detectron/cocoWeights-uscold-americold-hybrid-anchor-new-val-lr0001-e30-2gpu"]
+        resources:
+          limits:
+            cpu: 8
+            nvidia.com/gpu: 2
+            memory: "50Gi"
+            ephemeral-storage: "40Gi"
+          requests:
+            cpu: 8
+            memory: "50Gi"
+            nvidia.com/gpu: 2
+            ephemeral-storage: "40Gi"
+      # Do not restart containers after they exit
+      restartPolicy: Never
+  # of retries before marking as failed.
+  backoffLimit: 1

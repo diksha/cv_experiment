@@ -1,0 +1,11 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_py//py:defs.bzl", "py_binary")
+
+py_binary(
+    name = "python_binary",
+    srcs = ["python_binary.py"],
+    deps = [
+        requirement("numpy"),
+        "//third_party/galileo",
+    ],
+)

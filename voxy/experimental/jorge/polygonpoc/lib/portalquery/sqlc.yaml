@@ -1,0 +1,9 @@
+version: 1
+packages:
+  - path: "."
+    name: "portalquery"
+    schema: "portal.sql"
+    queries: "queries.sql"
+    output_db_file_name: "db.sqlc.go"
+    output_models_file_name: "models.sqlc.go"
+    output_querier_file_name: "queries.sqlc.go"

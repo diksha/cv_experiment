@@ -1,0 +1,57 @@
+#
+# Copyright 2023 Voxel Labs, Inc.
+# All rights reserved.
+#
+# This document may not be reproduced, republished, distributed, transmitted,
+# displayed, broadcast or otherwise exploited in any manner without the express
+# prior written permission of Voxel Labs, Inc. The receipt or possession of this
+# document does not convey any rights to reproduce, disclose, or distribute its
+# contents, or to manufacture, use, or sell anything that it may describe, in
+# whole or in part.
+#
+#
+scenario_for_incidents: [HARD_HAT]
+scenarios:
+  # POSITIVE SCENARIOS
+  - camera_uuid: uscold/laredo/dock04/cha
+    incidents: [HARD_HAT]
+    video_uuid: uscold/laredo/dock04/cha/c0b13672-460c-43ae-a1c8-4877f9dfaf00_0000
+  - camera_uuid: uscold/laredo/doors_14_20/cha
+    incidents: [HARD_HAT]
+    video_uuid: uscold/laredo/doors_14_20/cha/fd0ed3bb-fff1-497c-9551-f7fd39d45e81_0000
+  - camera_uuid: uscold/laredo/dock03/cha
+    incidents: [HARD_HAT]
+    video_uuid: uscold/laredo/dock03/cha/43066680-c347-4746-8f01-e63c00b6a0f0_0000
+  - camera_uuid: uscold/quakertown/0001/cha
+    incidents: [HARD_HAT]
+    video_uuid: uscold/quakertown/0001/cha/3bf86c4c-5c8f-492f-bbba-207410a61216_0000
+  - camera_uuid: uscold/quakertown/0002/cha
+    incidents: [HARD_HAT]
+    video_uuid: uscold/quakertown/0002/cha/9317ad37-29e5-498e-82af-0aa2fa294324_0000
+  - camera_uuid: uscold/quakertown/0003/cha
+    incidents: [HARD_HAT]
+    video_uuid: uscold/quakertown/0003/cha/961b7524-5937-4d31-a6d6-b2a910c175d0_0000
+  - camera_uuid: uscold/quakertown/0007/cha
+    incidents: [HARD_HAT]
+    video_uuid: uscold/quakertown/0007/cha/b1ba73d0-c2ba-41b5-b615-228c781a585c_0000
+  - camera_uuid: uscold/quakertown/0007/cha
+    incidents: [HARD_HAT]
+    video_uuid: uscold/quakertown/0007/cha/0d4327dc-e6f5-468b-a888-6e9ed3556a65_0000
+  - camera_uuid: uscold/quakertown/0004/cha
+    incidents: [HARD_HAT]
+    video_uuid: uscold/quakertown/0004/cha/scenarios/HARD_HAT/POSITIVE/6d8e6961-15bd-4488-8b1d-f366fab3261d_0000
+  - camera_uuid: uscold/quakertown/0005/cha
+    incidents: [HARD_HAT]
+    video_uuid: uscold/quakertown/0005/cha/a2ad2a1e-59b8-46eb-a46d-1ce20bc66137_0000
+  - camera_uuid: uscold/quakertown/0006/cha
+    incidents: [HARD_HAT]
+    video_uuid: uscold/quakertown/0006/cha/scenarios/HARD_HAT/POSITIVE/b4ce4e4f-6ddc-48a8-b97e-4c6eefc6862b_0000
+  - camera_uuid: uscold/quakertown/0008/cha
+    incidents: [HARD_HAT]
+    video_uuid: uscold/quakertown/0008/cha/scenarios/HARD_HAT/POSITIVE/9c956ff5-810a-4fb4-964f-8a915cadda55_0000
+  - camera_uuid: uscold/quakertown/0009/cha
+    incidents: [HARD_HAT]
+    video_uuid: uscold/quakertown/0009/cha/scenarios/HARD_HAT/POSITIVE/330c611e-4238-4a3e-8ca1-cf6bcbd7ef05_0000
+  - camera_uuid: uscold/quakertown/0009/cha
+    incidents: [HARD_HAT]
+    video_uuid: uscold/quakertown/0009/cha/23523eb7-9a82-45c8-8ce3-06e849a3e3b6_0000

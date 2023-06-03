@@ -1,0 +1,200 @@
+load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
+load("@build_stack_rules_proto//rules:proto_compiled_sources.bzl", "proto_compiled_sources")
+load("@build_stack_rules_proto//rules/go:proto_go_library.bzl", "proto_go_library")
+load("@build_stack_rules_proto//rules/py:proto_py_library.bzl", "proto_py_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@rules_python//python:defs.bzl", "py_library")
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+load(":defs.bzl", "triton_model_repository")
+
+proto_library(
+    name = "modelrepo_proto",
+    srcs = ["repo.proto"],
+    visibility = ["//visibility:public"],
+    deps = ["//experimental/jorge/modelrepo/third_party/triton:tritonpb_proto"],
+)
+
+proto_compiled_sources(
+    name = "modelrepo_go_compiled_sources",
+    srcs = ["repo.pb.go"],
+    output_mappings = ["repo.pb.go=github.com/voxel-ai/voxel/experimental/jorge/modelrepo/repo.pb.go"],
+    plugins = ["@build_stack_rules_proto//plugin/golang/protobuf:protoc-gen-go"],
+    proto = "modelrepo_proto",
+)
+
+proto_go_library(
+    name = "modelrepo_go_proto",
+    srcs = ["repo.pb.go"],
+    importpath = "github.com/voxel-ai/voxel/experimental/jorge/modelrepo",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//experimental/jorge/modelrepo/third_party/triton:tritonpb_go_proto",
+        "@org_golang_google_grpc//:go_default_library",
+        "@org_golang_google_grpc//codes",
+        "@org_golang_google_grpc//status",
+        "@org_golang_google_protobuf//reflect/protoreflect",
+        "@org_golang_google_protobuf//runtime/protoimpl",
+    ],
+)
+
+go_library(
+    name = "modelrepo",
+    srcs = ["repo.pb.go"],
+    importpath = "github.com/voxel-ai/voxel/experimental/jorge/modelrepo",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//experimental/jorge/modelrepo/third_party/triton",
+        "@org_golang_google_protobuf//reflect/protoreflect",
+        "@org_golang_google_protobuf//runtime/protoimpl",
+    ],
+)
+
+triton_model_repository(
+    name = "jorge-experiment",
+    config = "jorge-experiment.yaml",
+    data = [
+        "@artifacts_03_05_2023_americold_modesto_0011_cha",
+        "@artifacts_2021-12-06-00-00-00-0000-yolo",
+        "@artifacts_2022-10-26_americold_modesto_0009_cha",
+    ],
+    repo_path = "s3://voxel-production-triton-models/jorge-experiment",
+)
+
+triton_model_repository(
+    name = "ensemble-experiment",
+    config = "ensemble-experiment.yaml",
+    data = [
+        "@artifacts_02_27_2023_michaels_wesco_office_yolo",
+        "@artifacts_03_05_2023_americold_modesto_0011_cha",
+        "@artifacts_2021-12-06-00-00-00-0000-yolo",
+        "@artifacts_2022-10-26_americold_modesto_0009_cha",
+        "@artifacts_yolo_v5_post_processing_04_11_2023",
+        "@artifacts_yolo_v5_pre_processing_04_11_2023",
+    ],
+    repo_path = "/tmp/modelrepos/ensemble-experiment",
+)
+
+triton_model_repository(
+    name = "ensemble-experiment-s3",
+    config = "ensemble-experiment.yaml",
+    data = [
+        "@artifacts_02_27_2023_michaels_wesco_office_yolo",
+        "@artifacts_03_05_2023_americold_modesto_0011_cha",
+        "@artifacts_2021-12-06-00-00-00-0000-yolo",
+        "@artifacts_2022-10-26_americold_modesto_0009_cha",
+        "@artifacts_yolo_v5_post_processing_04_11_2023",
+        "@artifacts_yolo_v5_pre_processing_04_11_2023",
+    ],
+    repo_path = "s3://voxel-experimental-triton-models/ensemble-experiment",
+)
+
+triton_model_repository(
+    name = "door-one",
+    config = "door-one.yaml",
+    data = [
+        "@artifacts_03_05_2023_americold_modesto_0011_cha",
+        "@artifacts_2021-12-06-00-00-00-0000-yolo",
+        "@artifacts_2022-10-26_americold_modesto_0009_cha",
+    ],
+    repo_path = "/tmp/modelrepos/door-one",
+)
+
+triton_model_repository(
+    name = "door-two",
+    config = "door-two.yaml",
+    data = [
+        "@artifacts_03_05_2023_americold_modesto_0011_cha",
+        "@artifacts_2021-12-06-00-00-00-0000-yolo",
+        "@artifacts_2022-10-26_americold_modesto_0009_cha",
+    ],
+    repo_path = "/tmp/modelrepos/door-two",
+)
+
+triton_model_repository(
+    name = "door-both",
+    config = "door-both.yaml",
+    data = [
+        "@artifacts_03_05_2023_americold_modesto_0011_cha",
+        "@artifacts_2021-12-06-00-00-00-0000-yolo",
+        "@artifacts_2022-10-26_americold_modesto_0009_cha",
+    ],
+    repo_path = "/tmp/modelrepos/door-both",
+)
+
+triton_model_repository(
+    name = "door-all",
+    config = "door-all.yaml",
+    data = [
+        "@artifacts_01_09_2023_wn_foods_hayward_0009_cha",
+        "@artifacts_01_09_2023_wn_foods_hayward_0012_cha",
+        "@artifacts_01_18_2023_generalized-front-door",
+        "@artifacts_02_06_2023_generalized_EXIT_Door_new",
+        "@artifacts_02_15_2023_americold_ontario_0005_cha",
+        "@artifacts_02_15_2023_americold_ontario_0006_cha",
+        "@artifacts_02_15_2023_americold_tacoma_0005_cha",
+        "@artifacts_02_15_2023_buildersfirstsource_dixieline_0001_cha",
+        "@artifacts_02_15_2023_innovate_manufacturing_knoxville_0004_cha",
+        "@artifacts_02_15_2023_wn_foods_hayward_0011_cha",
+        "@artifacts_02_24_2023_americold_ontario_0004_cha",
+        "@artifacts_03_03_2023_ulta_dallas_0004_cha",
+        "@artifacts_03_04_2023_generalized_freezer_door",
+        "@artifacts_03_05_2023_americold_modesto_0011_cha",
+        "@artifacts_03_13_2023_americold_ontario_0104_fine_tuned_freezer_generalized_model",
+        "@artifacts_2022-08-26-T18-42buildersfirstsource_solanabeach_0009_cha",
+        "@artifacts_2022-10-21-T16-34americold_taunton_0003_cha",
+        "@artifacts_2022-10-25-T19-22americold_tacoma_0004_cha",
+        "@artifacts_2022-10-26_americold_modesto_0001_cha",
+        "@artifacts_2022-10-26_americold_modesto_0002_cha",
+        "@artifacts_2022-10-26_americold_modesto_0003_cha",
+        "@artifacts_2022-10-26_americold_modesto_0005_cha",
+        "@artifacts_2022-10-26_americold_modesto_0009_cha",
+        "@artifacts_2022-10-26_americold_ontario_0003_cha",
+        "@artifacts_2022-10-26_americold_ontario_0009_cha",
+        "@artifacts_2022-10-26_americold_ontario_0011_cha",
+        "@artifacts_2022-10-26_americold_ontario_0012_cha",
+        "@artifacts_2022-10-28_americold_sanford_0001_cha",
+        "@artifacts_2022-10-28_americold_sanford_0005_cha",
+        "@artifacts_2022-10-28_americold_savannah_pooler_0006_cha",
+        "@artifacts_2022-10-28_americold_taunton_0006_cha",
+        "@artifacts_2022-10-28_americold_taunton_0007_cha",
+        "@artifacts_2022-10-28_americold_taunton_0010_cha",
+        "@artifacts_2022-10-28_feb_distributing_biloxi_0005_cha",
+        "@artifacts_2022-10-28_hensley_chandler_0005_cha",
+        "@artifacts_2022-10-28_hensley_phoenix_0003_cha",
+        "@artifacts_2022-10-28_trieagle_ocala_0001_cha",
+        "@artifacts_2022-10-28_trieagle_ocala_0005_cha",
+        "@artifacts_2022-10-28_uscold_quakertown_0002_cha",
+        "@artifacts_2022-10-31_americold_ontario_0001_cha",
+        "@artifacts_2022-11-08_americold_savannah_bloomingdale_0006_cha",
+        "@artifacts_2022-11-08_builderfirstsource_solanabeach_0003_cha",
+        "@artifacts_2022-11-08_hensley_phoenix_0002_cha",
+    ],
+    repo_path = "/tmp/modelrepos/door-all",
+)
+
+py_library(
+    name = "triton_model_name",
+    srcs = ["triton_model_name.py"],
+    visibility = ["//visibility:public"],
+)
+
+voxel_py_test(
+    name = "test_triton_model_name",
+    srcs = ["test_triton_model_name.py"],
+    deps = [":triton_model_name"],
+)
+
+proto_compile(
+    name = "modelrepo_python_compile",
+    outputs = ["repo_pb2.py"],
+    plugins = ["@build_stack_rules_proto//plugin/builtin:python"],
+    proto = "modelrepo_proto",
+)
+
+proto_py_library(
+    name = "modelrepo_py_library",
+    srcs = ["repo_pb2.py"],
+    visibility = ["//visibility:public"],
+    deps = ["//experimental/jorge/modelrepo/third_party/triton:tritonpb_py_library"],
+)

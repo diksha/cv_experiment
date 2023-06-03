@@ -1,0 +1,13 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+# gazelle:exclude tools.go
+
+go_library(
+    name = "go",
+    srcs = ["xerrrorsfix.go"],
+    importpath = "github.com/voxel-ai/voxel/go",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@org_golang_x_xerrors//:xerrors",
+    ],
+)

@@ -1,0 +1,18 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "gstreamer",
+    srcs = ["gstreamer.go"],
+    importpath = "github.com/voxel-ai/voxel/go/edge/gstreamer",
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "gstreamer_test",
+    srcs = ["gstreamer_test.go"],
+    data = ["testdata/gst-buffer-log-sample.txt"],
+    deps = [
+        ":gstreamer",
+        "@com_github_stretchr_testify//assert",
+    ],
+)

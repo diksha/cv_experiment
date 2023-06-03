@@ -1,0 +1,17 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+
+package(default_visibility = ["//visibility:public"])
+
+py_binary(
+    name = "syn_data_generation",
+    srcs = ["syn_data_generation.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("torch"),
+        requirement("torchvision"),
+        requirement("numpy"),
+        requirement("opencv-python"),
+        "//core/utils:aws_utils",
+    ],
+)

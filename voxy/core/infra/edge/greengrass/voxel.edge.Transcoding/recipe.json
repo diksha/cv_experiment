@@ -1,0 +1,56 @@
+{
+  "RecipeFormatVersion": "2020-01-25",
+  "ComponentName": "voxel.edge.Transcoding",
+  "ComponentVersion": "0.2.4",
+  "ComponentType": "aws.greengrass.generic",
+  "ComponentDescription": "Runs transcoding container(s)",
+  "ComponentPublisher": "Voxel Labs Inc",
+  "ComponentConfiguration": {
+    "DefaultConfiguration": {
+      "secretSuffix": "transcoding.k8s.yaml",
+      "timestamp": ""
+    }
+  },
+  "ComponentDependencies": {
+    "aws.greengrass.DockerApplicationManager": {
+      "VersionRequirement": ">=2.0.0 <2.1.0",
+      "DependencyType": "HARD"
+    },
+    "aws.greengrass.TokenExchangeService": {
+      "VersionRequirement": ">=2.0.0 <2.1.0",
+      "DependencyType": "HARD"
+    }
+  },
+  "Manifests": [
+    {
+      "Platform": {
+        "os": "linux"
+      },
+      "Lifecycle": {
+        "Run": {
+          "Script": "TMPDIR=/voxel/runtime python3 -u {artifacts:path}/get_secret.zip --thing_name={iot:thingName} --secret_suffix={configuration:/secretSuffix} | microk8s kubectl apply -f /dev/stdin"
+        }
+      },
+      "Artifacts": [
+        {
+          "Uri": "s3://voxel-infra-edge/greengrass/voxel.edge.EdgeKit/get_secret.zip",
+          "Algorithm": "SHA-256",
+          "Unarchive": "NONE",
+          "Permission": {
+            "Read": "OWNER",
+            "Execute": "NONE"
+          }
+        },
+        {
+          "Uri": "docker:360054435465.dkr.ecr.us-west-2.amazonaws.com/voxel/edge/transcoding:1648865298",
+          "Unarchive": "NONE",
+          "Permission": {
+            "Read": "OWNER",
+            "Execute": "NONE"
+          }
+        }
+      ]
+    }
+  ],
+  "Lifecycle": {}
+}

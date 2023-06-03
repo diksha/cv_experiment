@@ -1,0 +1,24 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+voxel_py_test(
+    name = "test_yaml_config",
+    srcs = ["yaml_config_test.py"],
+    data = ["//configs"],
+    deps = [
+        "//protos/perception/graph_config/v1:graphconfigpb_py_library",
+        "//services/platform/polygon/lib/proto_schema:validator",
+        requirement("google-api-core"),
+        requirement("pyyaml"),
+    ],
+)
+
+filegroup(
+    name = "unit_test_resources",
+    srcs = [
+        "test-cha.yaml",
+        "test-layered-result.yaml",
+        "test-override.yaml",
+    ],
+    visibility = ["//visibility:public"],
+)

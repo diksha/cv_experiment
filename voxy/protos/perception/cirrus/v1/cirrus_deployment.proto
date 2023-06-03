@@ -1,0 +1,13 @@
+syntax = "proto3";
+package protos.perception.cirrus.v1;
+option go_package = "github.com/voxel-ai/voxel/protos/perception/cirrus/v1;cirruspb";
+
+// Deployment config to deploy the cirrus service
+message DeploymentConfig {
+  // Path of the camera config from configs/ folder
+  repeated Camera cameras = 1;
+}
+
+message Camera {
+  string camera_config_path = 1;
+}

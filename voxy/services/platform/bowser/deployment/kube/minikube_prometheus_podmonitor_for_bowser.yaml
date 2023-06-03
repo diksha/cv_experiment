@@ -1,0 +1,58 @@
+#Bowser Operator
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: system-flink-operator-metrics
+  labels:
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: flink-kubernetes-operator
+  podMetricsEndpoints:
+      - port: "metrics"
+---
+#Bowser job_manager metrics
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: system-fink-jobmanager-metrics
+  labels:
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      component: jobmanager
+  podMetricsEndpoints:
+      - port: "metrics"
+---
+#Bowser task_manager metrics
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: system-flink-taskmanager-metrics
+  labels:
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      component: taskmanager
+  podMetricsEndpoints:
+      - port: "metrics"
+---
+#Bowser opentelemetry metrics
+#Prometheus is seeing 2 bowser-minikube-opentelemetry-collector cause OTCOL create 2 identical service [normal/headless]
+#Known issue https://github.com/open-telemetry/opentelemetry-operator/issues/898
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: custom-bowser-otcol-metrics
+  labels:
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: bowser-minikube-opentelemetry-collector
+  endpoints:
+  - interval: 1s
+    port: metrics

@@ -1,0 +1,17 @@
+state_prefix: aws-staging-portal-svc-v1
+variables:
+  environment: staging
+  perception_vpc_cidr_root: "32"
+  portal_vpc_cidr_root: "33"
+  portal_RDS_replica_cidr_root: "34"
+  portal_RDS_replica_region: "us-east-1"
+  subdomain: aws-staging
+  observability_identifier: staging
+  db_instance_size: db.t4g.small
+  redis_instance_type: cache.t2.small
+  redis_cluster_size: 3
+  perception_eks_gpu_instance_types_comma_separated: g4dn.xlarge
+  perception_eks_cpu_instance_types_comma_separated: t3.large,t3.xlarge
+  portal_eks_cpu_instance_types_comma_separated: t3.large,t3.xlarge
+  portal_starting_image_tag: 1b9085c6d94abe46d17b4a970c6bc023d85977e9
+  portal_domain: app.staging.voxelplatform.com

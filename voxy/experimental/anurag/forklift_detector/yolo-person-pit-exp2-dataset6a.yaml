@@ -1,0 +1,42 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+apiVersion: batch/v1
+kind: Job
+metadata:
+  # Unique key of the Job instance
+  name: yolo-person-pit-exp2-dataset6a
+spec:
+  template:
+    metadata:
+      name: yolo-person-pit-exp2-dataset6a
+    spec:
+      serviceAccountName: k8
+      hostIPC: True
+      containers:
+      - name: yolov5
+        image: us.gcr.io/sodium-carving-227300/yolov5:15jan2021_v6
+        command: ["/bin/sh", "-c"]
+        args: ["mkdir /data && gsutil -m cp -r gs://voxel-users/common/yolo/dataset6/* /data/ && ls /data/ && gsutil cp gs://voxel-users/anurag/yolo/.netrc /root/ && python3 train.py --epochs 100 --data /data/dataset6a.yaml --img 2688 --batch-size 2 --weights yolov5m.pt --name yolo-person-pit-exp2-dataset6a --cfg yolov5m.yaml && gsutil cp -r runs/train/* gs://voxel-users/anurag/experiments/yolo_exps/"]
+        resources:
+          limits:
+            nvidia.com/gpu: 1
+            memory: "50Gi"
+            ephemeral-storage: "40Gi"
+          requests:
+            cpu: 8
+            memory: "50Gi"
+            nvidia.com/gpu: 1
+            ephemeral-storage: "40Gi"
+      # Do not restart containers after they exit
+      restartPolicy: Never
+  # of retries before marking as failed.
+  backoffLimit: 1

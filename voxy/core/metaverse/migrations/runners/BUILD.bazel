@@ -1,0 +1,26 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+
+py_binary(
+    name = "backup_metaverse",
+    srcs = ["backup_metaverse.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/metaverse/migrations/lib:backup_wrapper",
+    ],
+)
+
+py_binary(
+    name = "restore_metaverse",
+    srcs = ["restore_metaverse.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        requirement("neo4j"),
+        requirement("neo4j-backup"),
+        "//core/metaverse",
+        "//core/utils/logging/slack:get_slack_webhooks",
+        "//core/utils/logging/slack:synchronous_webhook_wrapper",
+        "//third_party/neo4j_backup:neo4j_importer",
+    ],
+)

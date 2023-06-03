@@ -1,0 +1,36 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+names:
+- HARDHAT 
+- PERSON 
+- SAFETY_VEST
+nc: 3
+test:
+- /data/uscold/denton/e_pick03/cha/20210225_085912_lower_645_upper_660/images
+- /data/uscold/denton/rail_dock02/cha/20210225_092736_lower_1090_upper_1105/images
+- /data/uscold/denton/truck_doors_22_32/cha/20210224_093148_lower_445_upper_455/images
+train:
+- /data/uscold/denton/dock01/cha/20210225_084906/images
+- /data/uscold/denton/dock02/cha/20210224_084900/images
+- /data/uscold/denton/dock03/cha/20210224_090348/images
+- /data/uscold/denton/dock04/cha/20210224_085054/images
+- /data/uscold/denton/e_pick03/cha/20210225_085912/images
+- /data/uscold/denton/rail_dock02/cha/20210225_092736/images
+- /data/uscold/denton/truck_doors_22_32/cha/20210224_093148/images
+- /data/uscold/denton/dock01/cha/20210225_084906_lower_1045_upper_1051/images
+- /data/uscold/denton/dock01/cha/20210225_084906_lower_1080_upper_1087/images
+- /data/uscold/denton/dock01/cha/20210225_084906_lower_670_upper_693/images
+val:
+- /data/uscold/denton/dock01/cha/20210225_084906_lower_820_upper_830/images
+- /data/uscold/denton/dock02/cha/20210224_084900_lower_680_upper_730/images
+- /data/uscold/denton/dock03/cha/20210224_090348_lower_660_upper_690/images
+- /data/uscold/denton/dock04/cha/20210224_085054_lower_195_upper_205/images

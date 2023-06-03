@@ -1,0 +1,41 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+apiVersion: batch/v1
+kind: Job
+metadata:
+  # Unique key of the Job instance
+  name: example-job2
+  namespace: default
+spec:
+  template:
+    metadata:
+      name: example-job2
+    spec:
+      serviceAccountName: k8
+      containers:
+      - name: voxel
+        image: us.gcr.io/sodium-carving-227300/voxel:2020-12-02-04-06-43
+        command: ["./tools/aws"]
+        args: ["s3", "ls", "s3://voxel-users"]
+        resources:
+          limits:
+            cpu: 1
+            nvidia.com/gpu: 1
+            memory: "1Gi"
+          requests:
+            cpu: 1
+            memory: "1Gi"
+            nvidia.com/gpu: 1
+      # Do not restart containers after they exit
+      restartPolicy: Never
+  # of retries before marking as failed.
+  backoffLimit: 1

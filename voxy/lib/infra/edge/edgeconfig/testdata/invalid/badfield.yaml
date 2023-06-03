@@ -1,0 +1,4 @@
+version: "notaninteger"
+streams:
+  - rtsp_uri: test-uri
+    kinesis_video_stream: test-stream

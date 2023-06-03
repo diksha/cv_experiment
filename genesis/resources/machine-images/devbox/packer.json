@@ -1,0 +1,33 @@
+{
+  "variables": {
+    "primary_region": "us-west-2",
+    "base_ami": "ami-0fe5af21074ad2a10",
+    "organisation_arn": "arn:aws:organizations::667031391229:organization/o-wahw3d1w2l",
+    "ami_name": "voxel-devbox-ami-v1"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "{{user `primary_region`}}",
+      "source_ami": "{{user `base_ami`}}",
+      "instance_type": "m5.xlarge",
+      "ssh_username": "ubuntu",
+      "ami_name": "{{user `ami_name`}}",
+      "ami_org_arns": "{{user `organisation_arn`}}",
+      "force_deregister": true,
+      "profile": "cicd"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "devbox.sh",
+      "destination": "/tmp/devbox.sh"
+    },
+    {
+      "type": "shell",
+      "script": "provision.sh",
+      "execute_command": "sudo -s bash -c '{{ .Vars }} {{ .Path }}'"
+    }
+  ]
+}

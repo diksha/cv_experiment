@@ -1,0 +1,12 @@
+load("@rules_python//python:defs.bzl", "py_binary")
+
+py_binary(
+    name = "proto_test",
+    srcs = [
+        "proto_test.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/structs",
+    ],
+)

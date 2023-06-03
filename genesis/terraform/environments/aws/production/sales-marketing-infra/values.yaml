@@ -1,0 +1,8 @@
+state_prefix: aws-prod-sales-marketing-infra-v1
+variables:
+  sales_marketing_vpc_cidr_root: "66"
+  sales_marketing_RDS_replica_cidr_root: "66"
+  sales_marketing_RDS_replica_region: "us-east-1"
+  environment: production
+  subdomain: aws-production
+  db_instance_size: db.t4g.micro

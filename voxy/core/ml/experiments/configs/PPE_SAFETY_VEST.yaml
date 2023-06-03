@@ -1,0 +1,5 @@
+task_purpose: PPE_SAFETY_VEST
+service_category: IMAGE_CLASSIFICATION
+model_config: core/ml/training/configs/VIT_CLASSIFIER.yaml
+dataset_config: core/ml/data/generation/configs/datasets/PPE_SAFETY_VEST.yaml
+logset_config: core/ml/data/generation/configs/logsets/PPE_SAFETY_VEST.yaml

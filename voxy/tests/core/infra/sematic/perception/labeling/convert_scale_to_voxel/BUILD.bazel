@@ -1,0 +1,14 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+voxel_py_test(
+    name = "pipeline_test",
+    srcs = [
+        "pipeline_test.py",
+    ],
+    deps = [
+        requirement("sematic"),
+        "//core/infra/sematic/perception/labeling/convert_scale_to_voxel:pipeline",
+        "//core/infra/sematic/shared:utils",
+    ],
+)

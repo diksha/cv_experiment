@@ -1,0 +1,24 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+scenarios:
+- camera_uuid: uscold/laredo/dock03/cha
+  incidents: [HARD_HAT]
+  video_uuid: uscold/laredo/dock03/cha/scenarios/HARD_HAT/positive/56984
+- camera_uuid: uscold/laredo/dock01/cha
+  incidents: [BAD_POSTURE]
+  video_uuid: uscold/laredo/dock01/cha/scenarios/BAD_POSTURE/positive/49849
+- camera_uuid: uscold/laredo/room_f1/cha
+  incidents: []
+  video_uuid: uscold/laredo/room_f1/cha/scenarios/NO_STOP_AT_END_OF_AISLE/negative/46962
+- camera_uuid: uscold/laredo/dock04/cha
+  incidents: [SAFETY_VEST]
+  video_uuid: uscold/laredo/dock04/cha/scenarios/SAFETY_VEST/positive/57418

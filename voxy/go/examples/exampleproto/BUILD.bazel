@@ -1,0 +1,17 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "exampleproto",
+    srcs = ["exampleproto.go"],
+    importpath = "github.com/voxel-ai/voxel/go/examples/exampleproto",
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "exampleproto_test",
+    srcs = ["exampleproto_test.go"],
+    deps = [
+        "//protos/examplepb/v1:examplepb",
+        "@org_golang_google_protobuf//encoding/protojson",
+    ],
+)

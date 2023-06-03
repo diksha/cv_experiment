@@ -1,0 +1,6 @@
+incident:
+    #TODO(delorean): remove this when the experiment is over
+    should_generate_on_cooldown: True
+    incident_machine_params:
+      parking:
+        max_parked_duration_s: 1234

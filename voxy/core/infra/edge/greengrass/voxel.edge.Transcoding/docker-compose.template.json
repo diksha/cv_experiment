@@ -1,0 +1,31 @@
+{
+  "version": "3.9",
+  "services": {
+    "camera_1": {
+      "image": "667031391229.dkr.ecr.us-west-2.amazonaws.com/voxel/edge/transcoding:1648426277",
+      "command": "gst-launch-1.0 rtspsrc location='<RTSP-URI>' protocols=4 short-header=TRUE ! rtph264depay ! video/x-h264,stream-format=byte-stream ! h264parse ! nvh264dec ! videorate ! 'video/x-raw(memory:CUDAMemory),framerate=5/1' ! cudascale ! 'video/x-raw(memory:CUDAMemory),width=1280,height=720' ! nvh265enc max-bitrate=300 ! video/x-h265,alignment=au ! h265parse ! video/x-h265,stream-format=hvc1,alignment=au ! queue ! kvssink content-type='video/h-265' stream-name=<KINESIS-STREAM-NAME> storage-size=512 avg-bandwidth-bps=250000 aws-region='us-west-2' iot-certificate='iot-certificate,endpoint=cs4fa9m4oj6wd.credentials.iot.us-west-2.amazonaws.com,cert-path=/greengrass/v2/thingCert.crt,key-path=/greengrass/v2/privKey.key,ca-path=/greengrass/v2/rootCA.pem,role-aliases=GreengrassV2TokenExchangeRoleAlias,iot-thing-name=$AWS_IOT_THING_NAME'",
+      "ipc": "host",
+      "restart": "unless-stopped",
+      "volumes": [
+        "/greengrass/v2/privKey.key:/greengrass/v2/privKey.key",
+        "/greengrass/v2/thingCert.crt:/greengrass/v2/thingCert.crt",
+        "/greengrass/v2/rootCA.pem:/greengrass/v2/rootCA.pem"
+      ],
+      "environment": {
+        "AWS_IOT_THING_NAME": "${AWS_IOT_THING_NAME}"
+      },
+      "deploy": {
+        "resources": {
+          "reservations": {
+            "devices": [
+              {
+                "driver": "nvidia",
+                "capabilities": ["gpu"]
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

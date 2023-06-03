@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -euo pipefail
+
+FILEPATH=$(readlink -f "$0")
+BASEDIR=$(dirname "$FILEPATH")
+WORKSPACEDIR=$(dirname "$BASEDIR")
+cd "$WORKSPACEDIR" || exit 1
+
+BINARY="$WORKSPACEDIR/bazel-bin/third_party/google/gcloud/gsutil"
+if ! test -f "$BINARY"; then
+	"$WORKSPACEDIR/bazel" build //third_party/google/gcloud:gsutil
+fi
+
+exec "$BINARY" "$@"

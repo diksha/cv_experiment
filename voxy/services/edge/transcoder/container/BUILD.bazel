@@ -1,0 +1,272 @@
+load(
+    "@io_bazel_rules_docker//container:container.bzl",
+    "container_image",
+    "container_layer",
+    "container_push",
+)
+load(
+    "@io_bazel_rules_docker//docker/util:run.bzl",
+    "container_run_and_commit_layer",
+)
+
+################ FFmpeg with libmfx for Quicksync encoding #################
+
+container_layer(
+    name = "ffmpeg_sources",
+    data_path = ".",
+    directory = "/ffmpeg_sources",
+    files = ["@ffmpeg_sources"],
+    tags = ["manual"],
+)
+
+container_layer(
+    name = "ffmpeg_build_scripts",
+    files = [
+        "scripts/build_ffmpeg_with_cuda.sh",
+        "scripts/build_ffmpeg_with_libmfx.sh",
+    ],
+    tags = ["manual"],
+)
+
+container_run_and_commit_layer(
+    name = "ffmpeg_with_libmfx_build_deps",
+    commands = [
+        "apt-get -y update",
+        "apt-get -y --no-install-recommends install ca-certificates gnupg2 curl",
+        "curl https://repositories.intel.com/graphics/intel-graphics.key | apt-key add -",
+        "echo 'deb [arch=amd64] https://repositories.intel.com/graphics/ubuntu focal-legacy main' > /etc/apt/sources.list.d/intel-graphics-ppa.list",
+        "apt-get -y update",
+        "apt-get -y install intel-opencl-icd intel-level-zero-gpu level-zero intel-media-va-driver-non-free libmfx1 libmfxgen1 libvpl2",
+        "apt-get -y install libigc-dev intel-igc-cm libigdfcl-dev libigfxcmrt-dev level-zero-dev libmfx-dev ocl-icd-opencl-dev",
+        "apt-get -y --no-install-recommends install autoconf automake build-essential cmake git-core libtool libva-dev libxshmfence-dev",
+        "apt-get -y --no-install-recommends install meson ninja-build pkg-config texinfo wget yasm zlib1g-dev gnutls-dev libxv-dev",
+        "apt-get -y --no-install-recommends install libx11-dev libunistring-dev libx264-dev libx265-dev libnuma-dev nasm",
+        "rm -rf /var/lib/apt/lists/*",
+    ],
+    env = {
+        "DEBIAN_FRONTEND": "noninteractive",
+    },
+    image = "@ubuntu_20_04//image",
+    tags = ["manual"],
+)
+
+container_image(
+    name = "ffmpeg_with_libmfx_builder",
+    base = "@ubuntu_20_04//image",
+    layers = [
+        ":ffmpeg_sources",
+        ":ffmpeg_build_scripts",
+        ":ffmpeg_with_libmfx_build_deps",
+    ],
+    tags = ["manual"],
+)
+
+container_run_and_commit_layer(
+    name = "ffmpeg_with_libmfx_build",
+    commands = [
+        "/build_ffmpeg_with_libmfx.sh /ffmpeg_sources",
+        "rm -rf /ffmpeg_sources",
+    ],
+    env = {
+        "DEBIAN_FRONTEND": "noninteractive",
+    },
+    image = ":ffmpeg_with_libmfx_builder.tar",
+    tags = ["manual"],
+)
+
+container_run_and_commit_layer(
+    name = "ffmpeg_with_libmfx_runtime_deps",
+    commands = [
+        "apt-get -y update",
+        "apt-get -y --no-install-recommends install ca-certificates gnupg2 curl",
+        "curl https://repositories.intel.com/graphics/intel-graphics.key | apt-key add -",
+        "echo 'deb [arch=amd64] https://repositories.intel.com/graphics/ubuntu focal-legacy main' > /etc/apt/sources.list.d/intel-graphics-ppa.list",
+        "apt-get -y update",
+        "apt-get -y install intel-opencl-icd intel-level-zero-gpu level-zero intel-media-va-driver-non-free libmfx1 libmfxgen1 libvpl2 ocl-icd-libopencl1",
+        "apt-get -y --no-install-recommends install libx264-155 libxv1 libx11-6 libva-x11-2 libvdpau1 libx265-179",
+        "rm -rf /var/lib/apt/lists/*",
+    ],
+    env = {
+        "DEBIAN_FRONTEND": "noninteractive",
+    },
+    image = "@ubuntu_20_04//image",
+    tags = ["manual"],
+)
+
+container_image(
+    name = "ffmpeg_with_libmfx",
+    base = "@ubuntu_20_04//image",
+    layers = [
+        ":ffmpeg_with_libmfx_runtime_deps",
+        ":ffmpeg_with_libmfx_build",
+    ],
+    tags = ["manual"],
+)
+
+################## FFmpeg with CUDA for nvenc/nvdec ######################
+
+container_run_and_commit_layer(
+    name = "ffmpeg_with_cuda_build_deps",
+    commands = [
+        "apt-get update",
+        "apt-get -y --no-install-recommends install autoconf automake build-essential cmake git-core libtool",
+        "apt-get -y --no-install-recommends install meson ninja-build pkg-config texinfo wget yasm zlib1g-dev gnutls-dev",
+        "apt-get -y --no-install-recommends install libunistring-dev libx264-dev libx265-dev libnuma-dev nasm",
+        "rm -rf /var/lib/apt/lists/*",
+    ],
+    env = {
+        "DEBIAN_FRONTEND": "noninteractive",
+    },
+    image = "@nvidia_cuda_11_6_devel_ubuntu_20_04//image",
+    tags = ["manual"],
+)
+
+container_image(
+    name = "ffmpeg_with_cuda_builder",
+    base = "@nvidia_cuda_11_6_devel_ubuntu_20_04//image",
+    layers = [
+        ":ffmpeg_sources",
+        ":ffmpeg_build_scripts",
+        ":ffmpeg_with_cuda_build_deps",
+    ],
+    tags = ["manual"],
+)
+
+container_run_and_commit_layer(
+    name = "ffmpeg_with_cuda_build",
+    commands = [
+        "/build_ffmpeg_with_cuda.sh /ffmpeg_sources",
+        "rm -rf /ffmpeg_sources",
+    ],
+    env = {
+        "DEBIAN_FRONTEND": "noninteractive",
+    },
+    image = ":ffmpeg_with_cuda_builder.tar",
+    tags = ["manual"],
+)
+
+container_run_and_commit_layer(
+    name = "ffmpeg_with_cuda_runtime_deps",
+    commands = [
+        "apt-get update",
+        "apt-get -y install ca-certificates libx264-155 libx265-179",
+        "rm -rf /var/lib/apt/lists/*",
+    ],
+    env = {
+        "DEBIAN_FRONTEND": "noninteractive",
+    },
+    image = "@nvidia_cuda_11_6_runtime_ubuntu_20_04//image",
+    tags = ["manual"],
+)
+
+container_image(
+    name = "ffmpeg_with_cuda",
+    base = "@nvidia_cuda_11_6_runtime_ubuntu_20_04//image",
+    layers = [
+        ":ffmpeg_with_cuda_runtime_deps",
+        ":ffmpeg_with_cuda_build",
+    ],
+    tags = ["manual"],
+)
+
+#################### images ###################
+
+container_image(
+    name = "quicksync_base",
+    base = "@ubuntu_20_04//image",
+    layers = [
+        ":ffmpeg_with_libmfx_runtime_deps",
+        ":ffmpeg_with_libmfx_build",
+    ],
+    tags = ["manual"],
+)
+
+container_image(
+    name = "cuda_base",
+    base = "@nvidia_cuda_11_6_runtime_ubuntu_20_04//image",
+    layers = [
+        ":ffmpeg_with_cuda_runtime_deps",
+        ":ffmpeg_with_cuda_build",
+    ],
+    tags = ["manual"],
+)
+
+container_layer(
+    name = "edge-transcoder-app",
+    directory = "/opt/voxel/bin",
+    files = ["//services/edge/transcoder/cmd/transcoder"],
+)
+
+container_layer(
+    name = "fish2persp-bin",
+    directory = "/opt/voxel/bin",
+    files = ["//third_party/fish2persp"],
+)
+
+container_image(
+    name = "quicksync",
+    base = "@voxel_edge_edge_transcoder_quicksync_base//image",
+    entrypoint = "/opt/voxel/bin/transcoder",
+    layers = [
+        ":fish2persp-bin",
+        ":edge-transcoder-app",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+container_image(
+    name = "cuda",
+    base = "@voxel_edge_edge_transcoder_cuda_base//image",
+    entrypoint = "/opt/voxel/bin/transcoder",
+    layers = [
+        ":fish2persp-bin",
+        ":edge-transcoder-app",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+############### container pushes ################
+
+container_push(
+    name = "push_quicksync_base",
+    format = "Docker",
+    image = ":quicksync_base",
+    registry = "360054435465.dkr.ecr.us-west-2.amazonaws.com",
+    repository = "voxel/edge/edge-transcoder-quicksync-base",
+    stamp = "@io_bazel_rules_docker//stamp:always",
+    tag = "{GIT_COMMIT}",
+    tags = ["manual"],
+)
+
+container_push(
+    name = "push_cuda_base",
+    format = "Docker",
+    image = ":cuda_base",
+    registry = "360054435465.dkr.ecr.us-west-2.amazonaws.com",
+    repository = "voxel/edge/edge-transcoder-cuda-base",
+    stamp = "@io_bazel_rules_docker//stamp:always",
+    tag = "{GIT_COMMIT}",
+    tags = ["manual"],
+)
+
+container_push(
+    name = "push_quicksync",
+    format = "Docker",
+    image = ":quicksync",
+    registry = "360054435465.dkr.ecr.us-west-2.amazonaws.com",
+    repository = "voxel/edge/edge-transcoder-quicksync",
+    stamp = "@io_bazel_rules_docker//stamp:always",
+    tag = "{GIT_COMMIT}",
+    tags = ["manual"],
+)
+
+container_push(
+    name = "push_cuda",
+    format = "Docker",
+    image = ":cuda",
+    registry = "360054435465.dkr.ecr.us-west-2.amazonaws.com",
+    repository = "voxel/edge/edge-transcoder-cuda",
+    stamp = "@io_bazel_rules_docker//stamp:always",
+    tag = "{GIT_COMMIT}",
+    tags = ["manual"],
+)

@@ -1,0 +1,58 @@
+#
+# Copyright 2020-2021 Voxel Labs, Inc.
+# All rights reserved.
+#
+# This document may not be reproduced, republished, distributed, transmitted,
+# displayed, broadcast or otherwise exploited in any manner without the express
+# prior written permission of Voxel Labs, Inc. The receipt or possession of this
+# document does not convey any rights to reproduce, disclose, or distribute its
+# contents, or to manufacture, use, or sell anything that it may describe, in
+# whole or in part.
+#
+#
+camera:
+  arn: arn:aws:kinesisvideo:us-west-2:360054435465:stream/michaels-tracy-0009/1674507662949
+  version: 1
+camera_uuid: michaels/tracy/0009/cha
+incident:
+  incident_machine_params:
+    parking:
+      max_parked_duration_s: 600
+  monitors_requested: []
+  state_machine_monitors_requested:
+    - bad_posture
+    - overreaching
+    - parking
+perception:
+  detector_tracker:
+    actor2class:
+      PERSON: 0
+      PIT: 1
+    height: 736
+    model_path: artifacts_02_27_2023_michaels_wesco_office_yolo/best_736_1280.engine
+    width: 1280
+  door_classifier:
+    enabled: false
+  hat_classifier:
+    enabled: false
+  lift_classifier:
+    enabled: true
+    model_path: artifacts_lift_classifier_01282022/lift_classifer_01282022.sav
+  pose:
+    enabled: true
+    model_path: artifacts_03_21_2023_pose_0630_jit_update/fast_res50_256x192.pt
+  reach_classifier:
+    enabled: true
+    model_path: artifacts_03_23_2023_overreaching_model_jit/voxel_ergo_ml_overreaching_2022-05-23-jit.pt
+    model_type: DL
+  vest_classifier:
+    enabled: false
+  carry_object_classifier:
+    enabled: True
+    min_actor_pixel_area: 2000
+    model_path: artifacts_03_24_2023_carry_classifier_jit/best_lift_DSv4_RN34-jit.pt
+    prediction2class:
+      NOT_CARRYING: 0
+      CARRYING: 1
+publisher:
+  organization_key: MICHAELS

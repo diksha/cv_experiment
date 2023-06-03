@@ -1,0 +1,72 @@
+load(
+    "@io_bazel_rules_docker//container:container.bzl",
+    "container_image",
+)
+
+# Ideally /sematic/bin/ would be added to PATH, but it's
+# hard to append to PATH from bazel. This makes all the
+# executables we need available
+symlinks = {
+    "/usr/bin/bazel_python": "/sematic/bin/bazel_python",
+    "/usr/bin/python": "/alias_hermetic_python.sh",
+    "/usr/bin/ray": "/sematic/bin/ray",
+}
+
+container_image(
+    name = "cuda_base_image",
+    base = "@voxel_cuda_11_4_runtime_ubuntu_20_04//image",
+    env = {
+        "AWS_CONFIG_FILE": "/aws-config",
+        "RAY_LOG_TO_STDERR": "1",
+    },
+    files = [
+        ":alias_hermetic_python.sh",
+        ":aws-config",
+    ],
+    symlinks = symlinks,
+    tags = ["manual"],
+    visibility = ["//visibility:public"],
+)
+
+container_image(
+    name = "no_cuda_base_image",
+    base = "@voxel_ubuntu_20_04//image",
+    env = {
+        "AWS_CONFIG_FILE": "/aws-config",
+        "RAY_LOG_TO_STDERR": "1",
+    },
+    files = [
+        ":alias_hermetic_python.sh",
+        ":aws-config",
+    ],
+    symlinks = symlinks,
+    tags = ["manual"],
+    visibility = ["//visibility:public"],
+)
+
+container_image(
+    name = "lightly_sematic_base",
+    base = "@lightly_worker_repush//image",
+    files = [":alias_hermetic_python.sh"],
+    symlinks = symlinks,
+    tags = ["manual"],
+    visibility = ["//visibility:public"],
+)
+
+container_image(
+    name = "yolov5_sematic_base",
+    base = "@yolov5_repush//image",
+    files = [":alias_hermetic_python.sh"],
+    symlinks = symlinks,
+    tags = ["manual"],
+    visibility = ["//visibility:public"],
+)
+
+container_image(
+    name = "spill_sematic_base",
+    base = "@spill_repush//image",
+    files = [":alias_hermetic_python.sh"],
+    symlinks = symlinks,
+    tags = ["manual"],
+    visibility = ["//visibility:public"],
+)

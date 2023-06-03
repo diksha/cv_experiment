@@ -1,0 +1,17 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+
+py_binary(
+    name = "predict_intrinsics",
+    srcs = [
+        "predict_intrinsics.py",
+    ],
+    data = ["@artifacts_deepcalib_pretrained_weights"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("keras"),
+        requirement("tensorflow"),
+        requirement("numpy"),
+        requirement("opencv-python"),
+    ],
+)

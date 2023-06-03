@@ -1,0 +1,57 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary", "py_library")
+
+filegroup(
+    name = "configs",
+    srcs = glob(["*.yaml"]),
+    visibility = ["//visibility:public"],
+)
+
+py_binary(
+    name = "add_to_metaverse",
+    srcs = [
+        "add_to_metaverse.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":read_consumable_labels",
+        "//core/infra/sematic/shared:resources",
+        requirement("sematic"),
+        "//core/common/utils:recursive_namespace",
+        "//core/infra/cloud:firestore_utils",
+        "//core/metaverse",
+        "//core/metaverse/utils:structs",
+        "//core/utils:aws_utils",
+    ],
+)
+
+py_binary(
+    name = "visualizer",
+    srcs = [
+        "visualizer.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/utils:aws_utils",
+        requirement("loguru"),
+        requirement("mcap-protobuf-support"),
+        "//core/labeling/label_store:label_reader",
+        "//core/structs",
+        "//core/utils:video_reader",
+    ],
+)
+
+py_library(
+    name = "read_consumable_labels",
+    srcs = [
+        "read_consumable_labels.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/infra/cloud:gcs_utils",
+        "//core/labeling:constants",
+        "//core/metaverse",
+        "//core/metaverse/api",
+        requirement("loguru"),
+    ],
+)

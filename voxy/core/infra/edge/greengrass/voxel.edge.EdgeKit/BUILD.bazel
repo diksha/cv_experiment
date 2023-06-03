@@ -1,0 +1,28 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+
+# These targets are intended to be consumed by custom Greengrass components as
+# artifacts. You can build a .zip archive of each binary target like this:
+#
+#   $ bazel build core/infra/edge/greengrass/voxel.edge.EdgeKit:get_secret --build_python_zip
+#   $ bazel build core/infra/edge/greengrass/voxel.edge.EdgeKit:debug --build_python_zip
+#
+# And then upload that new zip archive to S3 to be consumed by Greengrass.
+
+py_binary(
+    name = "get_secret",
+    srcs = ["get_secret.py"],
+    deps = [
+        requirement("boto3"),
+        requirement("boto3-stubs"),
+        "//core/utils:aws_utils",
+    ],
+)
+
+py_binary(
+    name = "debug",
+    srcs = ["debug.py"],
+    deps = [
+        requirement("boto3"),
+    ],
+)

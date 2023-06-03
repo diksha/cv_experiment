@@ -1,0 +1,71 @@
+injector:
+  serviceAccount:
+    annotations: {}
+server:
+  resources: {}
+  # resources:
+  #   requests:
+  #     memory: 256Mi
+  #     cpu: 250m
+  #   limits:
+  #     memory: 256Mi
+  #     cpu: 250m
+  # Toleration Settings for server pods
+  # This should be either a multi-line string or YAML matching the Toleration array
+  # in a PodSpec.
+  tolerations: []
+
+  # nodeSelector labels for server pod assignment, formatted as a multi-line string or YAML map.
+  # ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector
+  # Example:
+  # nodeSelector:
+  #   beta.kubernetes.io/arch: amd64
+  nodeSelector: {}
+  # Extra annotations to attach to the server pods
+  # This can either be YAML or a YAML-formatted multi-line templated string map
+  # of the annotations to apply to the server pods
+  annotations: {}
+  extraEnvironmentVars:
+    VAULT_SEAL_TYPE: awskms
+    VAULT_AWSKMS_SEAL_KEY_ID: ${KMS_KEY_ID}
+    GOOGLE_REGION: global
+    GOOGLE_PROJECT: voxel-devops-production
+    GOOGLE_APPLICATION_CREDENTIALS: /vault/userconfig/voxel-devops-production/vault-server.json
+  postStart:
+    - sh
+    - -c
+    - "mkdir -p /vault/userconfig/voxel-devops-production/ && echo $GOOGLE_APPLICATION_CREDENTIALS_BASE64_ENCODED | base64 -d > $GOOGLE_APPLICATION_CREDENTIALS"
+  service:
+    enabled: true
+    type: ClusterIP
+  dataStorage:
+    enabled: true
+    size: 10Gi
+    mountPath: "/vault/data"
+    storageClass: "gp3-retain"
+    accessMode: ReadWriteOnce
+    annotations: {}
+
+  auditStorage:
+    enabled: true
+    size: 10Gi
+    mountPath: "/vault/audit"
+    storageClass: "gp3-retain"
+    accessMode: ReadWriteOnce
+    annotations: {}
+
+  ha:
+    enabled: true
+    replicas: 3
+    raft:
+      # Enables Raft integrated storage
+      enabled: true
+      # Set the Node Raft ID to the name of the pod
+      setNodeId: true
+  serviceAccount:
+    annotations:
+      eks.amazonaws.com/role-arn: ${IAM_ROLE_ARN}
+ui:
+  enabled: true
+  serviceType: ClusterIP
+  activeVaultPodOnly: true

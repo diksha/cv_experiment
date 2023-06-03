@@ -1,0 +1,24 @@
+#
+# Copyright 2020-2021 Voxel Labs, Inc.
+# All rights reserved.
+#
+# This document may not be reproduced, republished, distributed, transmitted,
+# displayed, broadcast or otherwise exploited in any manner without the express
+# prior written permission of Voxel Labs, Inc. The receipt or possession of this
+# document does not convey any rights to reproduce, disclose, or distribute its
+# contents, or to manufacture, use, or sell anything that it may describe, in
+# whole or in part.
+#
+
+load("//third_party/sematic:defs.bzl", "voxel_sematic_pipeline")
+
+voxel_sematic_pipeline(
+    name = "main",
+    base = "//third_party/sematic:cuda_base_image",
+    deps = [
+        "//core/infra/sematic/shared:utils",
+        "//core/ml/common:utils",
+        "//core/ml/experiments/runners:experiment_manager",
+        "//core/utils:yaml_jinja",
+    ],
+)

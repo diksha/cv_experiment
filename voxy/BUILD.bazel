@@ -1,0 +1,110 @@
+load("@aspect_bazel_lib//lib:copy_to_bin.bzl", "copy_to_bin")
+load("@aspect_bazel_lib//lib:directory_path.bzl", "directory_path")
+load("@aspect_rules_js//js:defs.bzl", "js_binary")
+load("@aspect_rules_ts//ts:defs.bzl", "ts_config")
+load("@bazel_gazelle//:def.bzl", "gazelle", "gazelle_binary")
+load("@npm//:defs.bzl", "npm_link_all_packages")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+exports_files([
+    ".swcrc",
+    "package.json",
+    "tsconfig.json",
+])
+
+# all of these were taken from the examples for @build_stack_rules_proto
+#
+#  https://github.com/stackb/rules_proto/blob/master/example/golden/testdata/go/BUILD.in
+#
+# gazelle:proto_plugin protoc-gen-go implementation golang:protobuf:protoc-gen-go
+# gazelle:proto_plugin protoc-gen-go-grpc implementation grpc:grpc-go:protoc-gen-go-grpc
+# gazelle:proto_plugin python implementation builtin:python
+
+# gazelle:proto_rule proto_compile implementation stackb:rules_proto:proto_compile
+# gazelle:proto_rule proto_compiled_sources implementation stackb:rules_proto:proto_compiled_sources
+
+# gazelle:proto_rule proto_go_library implementation stackb:rules_proto:proto_go_library
+# gazelle:proto_rule proto_go_library deps @org_golang_google_protobuf//reflect/protoreflect
+# gazelle:proto_rule proto_go_library deps @org_golang_google_protobuf//runtime/protoimpl
+# gazelle:proto_rule proto_go_library deps @org_golang_google_grpc//:go_default_library
+# gazelle:proto_rule proto_go_library deps @org_golang_google_grpc//codes
+# gazelle:proto_rule proto_go_library deps @org_golang_google_grpc//status
+# gazelle:proto_rule proto_go_library resolve google/protobuf/descriptor.proto @org_golang_google_protobuf//types/descriptorpb
+# gazelle:proto_rule proto_go_library resolve google/protobuf/([a-z]+).proto @org_golang_google_protobuf//types/known/${1}pb
+# gazelle:proto_rule proto_go_library visibility //visibility:public
+
+# gazelle:proto_rule grpc_go_library implementation stackb:rules_proto:grpc_go_library
+# gazelle:proto_rule grpc_go_library visibility //visibility:public
+
+# gazelle:proto_rule proto_py_library implementation stackb:rules_proto:proto_py_library
+# gazelle:proto_rule proto_py_library visibility //visibility:public
+
+# gazelle:proto_language go plugin protoc-gen-go
+# gazelle:proto_language go plugin protoc-gen-go-grpc
+# gazelle:proto_language go rule proto_compiled_sources
+# gazelle:proto_language go rule proto_go_library
+
+# gazelle:proto_language python plugin python
+# gazelle:proto_language python rule proto_compile
+# gazelle:proto_language python rule proto_py_library
+
+gazelle_binary(
+    name = "gazelle-bin",
+    languages = [
+        "@bazel_gazelle//language/go",
+        "@bazel_gazelle//language/proto",
+        # must be after the proto extension (order matters)
+        "@build_stack_rules_proto//language/protobuf",
+    ],
+)
+
+# gazelle:prefix github.com/voxel-ai/voxel
+gazelle(
+    name = "gazelle",
+    gazelle = ":gazelle-bin",
+)
+
+# gazelle:prefix github.com/voxel-ai/voxel
+gazelle(
+    name = "gazelle-update-repos",
+    args = [
+        "-from_file=go.mod",
+        "-to_macro=go_deps.bzl%go_dependencies",
+        "-prune",
+    ],
+    command = "update-repos",
+)
+
+py_library(
+    name = "voxel_base_import",
+    imports = ["."],
+)
+
+####################### JS/TS/Web #######################
+npm_link_all_packages(name = "node_modules")
+
+ts_config(
+    name = "tsconfig",
+    src = "tsconfig.json",
+    visibility = ["//visibility:public"],
+)
+
+copy_to_bin(
+    name = "jest_config",
+    srcs = ["jest.config.mjs"],
+    visibility = ["//visibility:public"],
+)
+
+directory_path(
+    name = "tsc_entry_point",
+    directory = ":node_modules/typescript/dir",
+    path = "bin/tsc",
+)
+
+js_binary(
+    name = "tsc_bin",
+    entry_point = ":tsc_entry_point",
+)
+####################### JS/TS/Web #######################

@@ -1,0 +1,19 @@
+incident:
+  dry_run: false
+  generate_temp_subdirs: true
+  temp_directory: /var/tmp/voxel/incidents
+  publisher: # Prism publisher (currently in development)
+    enabled: true
+    sns_topic_arn: arn:aws:sns:us-west-2:360054435465:voxel-production-prism-incident-ingest.fifo
+
+publisher:
+  enabled: true
+  auth_token: fake_auth_token
+  portal_host: https://app.voxelai.com
+
+state:
+  enabled: true
+  publisher:
+    emulator_host: null
+    event_topic: projects/sodium-carving-227300/topics/voxel-production-event-messages
+    state_topic: projects/sodium-carving-227300/topics/voxel-production-state-messages

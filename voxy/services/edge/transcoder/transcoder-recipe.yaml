@@ -1,0 +1,41 @@
+---
+RecipeFormatVersion: '2020-01-25'
+ComponentName: $$COMPONENT_NAME$$
+ComponentVersion: $$COMPONENT_VERSION$$
+ComponentDescription: Voxel edge $$TRANSCODE_MODE$$ transcoder
+ComponentPublisher: Me
+ComponentConfiguration:
+ComponentDependencies:
+  aws.greengrass.Nucleus:
+    VersionRequirement: ">=2.5.4"
+  aws.greengrass.DockerApplicationManager:
+    VersionRequirement: ">=2.0.0 <2.1.0"
+    DependencyType: HARD
+  aws.greengrass.TokenExchangeService:
+    VersionRequirement: ">=2.0.0 <2.1.0"
+    DependencyType: HARD
+  $$EDGECONFIG_COMPONENT_NAME$$:
+    VersionRequirement: ">=0.0.2"
+    DependencyType: HARD
+Manifests:
+- Name: Install $$TRANSCODE_MODE$$ transcode pods
+  Platform:
+    os: linux
+  Lifecycle:
+    Setenv:
+      IOT_THING_NAME: "{iot:thingName}"
+      IOT_CREDS_ENDPOINT: "{aws.greengrass.Nucleus:configuration:/iotCredEndpoint}"
+      IOT_ROLE_ALIAS: "{aws.greengrass.Nucleus:configuration:/iotRoleAlias}"
+    Startup:
+      RequiresPrivilege: true
+      Script: |
+        set -eu
+        chmod +x {artifacts:decompressedPath}/artifact/transcoder-kubectl
+        {artifacts:decompressedPath}/artifact/transcoder-kubectl \
+          -stateful_set_yaml {artifacts:decompressedPath}/artifact/statefulset-$$TRANSCODE_MODE$$.yaml \
+          -image_name 360054435465.dkr.ecr.us-west-2.amazonaws.com/voxel/edge/edge-transcoder-$$TRANSCODE_MODE$$:$$IMAGE_TAG$$ \
+          -edge_config {$$EDGECONFIG_COMPONENT_NAME$$:configuration:/LocalEdgeConfigPath}
+  Artifacts:
+  - Uri: $$COMPONENT_ARTIFACT_URI$$
+    Unarchive: ZIP
+  - Uri: docker:360054435465.dkr.ecr.us-west-2.amazonaws.com/voxel/edge/edge-transcoder-$$TRANSCODE_MODE$$:$$IMAGE_TAG$$

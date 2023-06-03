@@ -1,0 +1,29 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+py_library(
+    name = "bowser_engine",
+    srcs = [
+        "common/bowser_fondation.py",
+        "common/flatmaps/aws_bucket_to_s3_object_flat_map.py",
+        "common/flatmaps/aws_s3_object_to_states_events_flat_map.py",
+        "common/flatmaps/keys/base_key.py",
+        "common/flatmaps/keys/incident_rich_key.py",
+        "common/flatmaps/keys/state_event_rich_key.py",
+        "common/flatmaps/state_or_event_to_incident_flat_map.py",
+        "common/reducer/count_keys.py",
+        "utils/bowser_config_utils.py",
+        "utils/bowser_proto_utils.py",
+        "utils/bowser_utils.py",
+        "utils/key_utils.py",
+        "utils/proto_utils.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("boto3"),
+        requirement("loguru"),
+        "//core/execution/nodes:incident_machine",
+        "//core/structs:protobufs",
+        "//core/utils:yaml_jinja",
+    ],
+)

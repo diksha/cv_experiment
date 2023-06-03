@@ -1,0 +1,41 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+load("//third_party/aws/lambda:defs.bzl", "go_aws_lambda")
+
+go_library(
+    name = "lambda-transcoder_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/voxel-ai/voxel/experimental/jorge/lambda-transcoder",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//go/core/utils/ffmpeg",
+        "@com_github_aws_aws_lambda_go//lambda",
+        "@io_bazel_rules_go//go/runfiles:go_default_library",
+    ],
+)
+
+genrule(
+    name = "ffmpeg-bin",
+    srcs = ["@artifacts_ffmpeg_static_binary//:ffmpeg"],
+    outs = ["ffmpeg"],
+    cmd = "cp $< $@",
+)
+
+go_binary(
+    name = "lambda-transcoder",
+    data = [
+        ":ffmpeg-bin",
+        "@artifacts_office_cam_720p_mkv",
+    ],
+    embed = [":lambda-transcoder_lib"],
+    gc_linkopts = [
+        "-w",
+        "-s",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+go_aws_lambda(
+    name = "dev",
+    function_name = "jorge-lambda-transcoder-test",
+    target = ":lambda-transcoder",
+)

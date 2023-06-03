@@ -1,0 +1,34 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+py_library(
+    name = "api",
+    srcs = [
+        "data_collection_queries.py",
+        "queries.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/common/utils:hash_utils",
+        "//core/metaverse",
+        "//core/metaverse/utils:structs",
+        "//core/structs",
+        requirement("graphql-core"),
+        requirement("loguru"),
+        requirement("GitPython"),
+    ],
+)
+
+py_library(
+    name = "datapool_api",
+    srcs = ["datapool_queries.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/metaverse",
+        "//core/ml/data/curation:voxel_lightly_utils",
+        "//core/structs",
+        "//core/utils:aws_utils",
+        requirement("graphql-core"),
+        requirement("loguru"),
+    ],
+)

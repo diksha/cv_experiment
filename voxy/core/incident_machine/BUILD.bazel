@@ -1,0 +1,25 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "utils",
+    srcs = ["utils.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/incident_machine/machines",
+        "//core/structs",
+    ],
+)
+
+py_library(
+    name = "controller",
+    srcs = ["controller.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        ":utils",
+        "//core/incident_machine/machines",
+    ],
+)

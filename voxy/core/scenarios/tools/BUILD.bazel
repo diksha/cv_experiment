@@ -1,0 +1,13 @@
+load("@rules_python//python:defs.bzl", "py_binary")
+
+py_binary(
+    name = "scenario_creation_from_csv",
+    srcs = [
+        "scenario_creation_from_csv.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/infra/cloud:gcs_utils",
+        "//core/scenarios:scenario_generator",
+    ],
+)

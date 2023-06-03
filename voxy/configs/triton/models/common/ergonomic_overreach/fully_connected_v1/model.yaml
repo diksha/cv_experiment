@@ -1,0 +1,16 @@
+model:
+  # Ergo Configs
+  artifact_model_paths:
+        - artifacts_03_23_2023_overreaching_model_jit/voxel_ergo_ml_overreaching_2022-05-23-jit.pt
+  config:
+    platform: pytorch_libtorch
+    max_batch_size: 128
+    input:
+      - name: images
+        data_type: TYPE_FP32
+        format: FORMAT_NONE
+        dims: [30]
+    output:
+      - name: output0
+        data_type: TYPE_FP32
+        dims: [2]

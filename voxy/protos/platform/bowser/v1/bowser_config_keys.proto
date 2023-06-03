@@ -1,0 +1,38 @@
+syntax = "proto3";
+package protos.platform.bowser.v1;
+option go_package = "github.com/voxel-ai/voxel/protos/platform/bowser/v1";
+
+import "google/protobuf/descriptor.proto";
+
+/* ProcessorKeys represents the business configuration objects used to reduce the stream to unique keys*/
+
+message ProcessorKeys {
+    repeated string name =1; //Bowser not allow the key process to have a name - this fiel is purely for human
+    repeated string fields =2; // List of field present in your datastream that need to be reduces to unique key
+    ProcessorFunctionKeyTimestampConfig timestamp =3; //Special configuration for timestamp milli seconds field key
+}
+
+/* ProcessorFunctionKeyTimestampConfig represents the business configuration objects used to reduce the stream to timestamp */
+
+message ProcessorFunctionKeyTimestampConfig {
+    string field = 1; // name of the timestamp field you want to reduce
+    Unit by = 2; // Unit is a Enum that will group your timestamp to a single date
+}
+
+extend google.protobuf.EnumValueOptions {
+    int32 seconds = 51234;
+}
+
+/* Unit represents the time of symbolic period of time that would be interesting to reduce to it */
+
+enum Unit {
+    UNIT_MINUTE_UNSPECIFIED = 0 [(seconds)= 60];
+    UNIT_FIVE_MINUTE = 1 [(seconds) = 300];
+    UNIT_HALF_HOUR = 2 [(seconds) = 1800];
+    UNIT_HOURS = 3 [(seconds) = 3600];
+    UNIT_DAY = 4 [(seconds) = 86400];
+    UNIT_WEEK = 5;
+    UNIT_MONTH = 6;
+}
+
+

@@ -1,0 +1,35 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "filesystem",
+    srcs = [
+        "convertor.go",
+        "directory.go",
+    ],
+    importpath = "github.com/voxel-ai/voxel/lib/utils/go/filesystem",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_spf13_afero//:afero",
+        "@io_k8s_sigs_yaml//:yaml",
+        "@org_golang_google_protobuf//encoding/protojson",
+        "@org_golang_google_protobuf//proto",
+    ],
+)
+
+go_test(
+    name = "filesystem_test",
+    srcs = [
+        "convertor_test.go",
+        "directory_test.go",
+    ],
+    deps = [
+        ":filesystem",
+        "//lib/utils/go/filesystem/filesystemfakes",
+        "//protos/perception/cirrus/v1:cirrus",
+        "@com_github_spf13_afero//:afero",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+        "@io_k8s_sigs_yaml//:yaml",
+        "@org_golang_google_protobuf//proto",
+    ],
+)

@@ -1,0 +1,392 @@
+/*
+Copyright 2020-2021 Voxel Labs, Inc.
+All rights reserved.
+
+This document may not be reproduced, republished, distributed, transmitted,
+displayed, broadcast or otherwise exploited in any manner without the express
+prior written permission of Voxel Labs, Inc. The receipt or possession of this
+document does not convey any rights to reproduce, disclose, or distribute its
+contents, or to manufacture, use, or sell anything that it may describe, in
+whole or in part.
+*/
+@font-face {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    src: local("Raleway"), url(http://themes.googleusercontent.com/static/fonts/raleway/v6/IczWvq5y_Cwwv_rBjOtT0w.woff) format("woff")
+}
+
+body {
+    font-family: georgia, times, serif;
+    font-size: 14pt;
+    line-height: 20pt;
+    margin: 0;
+    padding: 0 0.5em 3em 0.5em;
+    background-color: #000000;
+}
+
+pre {
+	line-height: 16pt;
+}
+
+header {
+	margin: 0;
+	padding: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Raleway', helvetica;
+	font-weight: normal;
+}
+
+h2 {
+	font-size: 28pt;
+	margin: 1em 0 0 0;
+}
+
+h3 {
+	font-size: 24pt;
+	margin: 1em 0 0 0;
+}
+
+h4 {
+	font-size: 20pt;
+	margin: 1.3em 0 0 0;
+}
+
+h1#name {
+	font-family: 'Raleway', helvetica;
+	font-size: 30pt;
+	line-height: 1.1em;
+	text-transform: uppercase;
+	font-weight: lighter;
+	letter-spacing: 0.02em;
+	margin: 10px -0.2em .7em -0.2em;
+	padding: 0 0.2em 0 0.2em;
+	background-color: black;
+	background: rgba(255,255,255,0.9);
+	display: inline-block;
+
+}
+
+h1#name a, h1#name a:hover {
+	color: black;
+	text-decoration: none;
+}
+
+div#navigation.home h1#name {
+	margin-top: 160px;
+}
+
+hr {
+	background-color: lightgray;
+	height: 1px;
+	border: none;
+	margin: 2em 0 2em 0;
+}
+
+a {
+	text-decoration: none;
+	color: #E57124;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+p {
+	margin: 1.3em 0 1.3em 0;
+}
+
+div.container {
+	max-width: 800px;
+	padding: 0 .4em 0 .4em;
+	margin: auto;
+}
+
+div#navigation.home {
+	padding-bottom: 2em;
+}
+
+div#navigation.home ul, div#navigation ul {
+	font-family: 'Raleway', helvetica;
+	text-transform: uppercase;
+	font-size: 30pt;
+	line-height: 1em;
+	letter-spacing: 0.02em;
+	font-weight: lighter;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: inline-block;
+	width: 100%;
+
+}
+
+div#navigation.home ul li, div#navigation ul li {
+	background-color: black;
+	padding: 0.1em 0 0.1em 0;
+	margin: 0 -0.2em 0 -0.2em;
+	display: inline-block;
+	float: left;
+	clear: left;
+	background: rgba(255,255,255,0.9);
+}
+
+div#navigation.home ul li a, div#navigation ul li a {
+	text-decoration: none;
+	margin: 0;
+	padding: 0 0.2em 0 0.2em;
+}
+
+.red {
+	color: #ED2B27;
+}
+
+a.red:hover {
+	color: white;
+	background-color: #ED2B27;
+}
+
+.orange {
+	color: #E57124;
+}
+
+.orange:hover, .orange_active {
+	color: white;
+	background-color: #E57124;
+}
+
+.green {
+	color: #66BC45;
+}
+
+.green:hover, .green_active {
+	color: white;
+	background-color: #66BC45;
+}
+
+.blue {
+	color: #2BBAA2;
+}
+
+.blue:hover, .blue_active {
+	color: white;
+	background-color: #2BBAA2;
+}
+
+img#headshot {
+	display: block;
+	width: 100%;
+	max-width: 200px;
+	margin: 0 auto 0 auto;
+}
+
+ul#contact {
+	list-style: none;
+	margin: 0;
+	padding: 1em 0 0 0;
+}
+
+ul#contact li {
+	margin: .5em 0 .5em 0;
+}
+
+ul#contact.foot li {
+	margin: 0;
+	padding: 0;
+}
+
+.foot {
+	font-size: 12pt;
+}
+
+ul#contact.foot li a {
+	background-size: 18px;
+	height: 18px;
+	line-height: 18px;
+	padding: 0 0 0 24px;
+	color: darkgray;
+	text-decoration: none;
+}
+
+ul#contact.foot li a:hover {
+	text-decoration: underline;
+}
+
+a#twitter {
+	background: transparent url('img/twitter.png') no-repeat left center;
+	background-size: 28px;
+	padding: 0 0 0 40px;
+	display: inline-block;
+	line-height: 28px;
+	height: 28px;
+}
+
+a#linkedin {
+	background: transparent url('img/linkedin.png') no-repeat left center;
+	background-size: 28px;
+	padding: 0 0 0 40px;
+	display: inline-block;
+	line-height: 28px;
+	height: 28px;
+}
+
+a#email {
+	background: transparent url('img/email.png') no-repeat left center;
+	background-size: 28px;
+	padding: 0 0 0 40px;
+	display: inline-block;
+	line-height: 28px;
+	height: 28px;
+}
+
+a#github {
+	background: transparent url('img/github.png') no-repeat left center;
+	background-size: 28px;
+	padding: 0 0 0 40px;
+	display: inline-block;
+	line-height: 28px;
+	height: 28px;
+}
+
+span.date {
+	font-weight: bold;
+	color: darkgray;
+	display: block;
+	width: 100%;
+	margin: 1em 0 1em 0;
+}
+
+h2.blog {
+	margin-bottom: 1em;
+	text-transform: none;
+	line-height: 1.2em;
+	font-weight: normal;
+}
+
+ul.bloglist {
+	list-style: none;
+	margin: 1em 0;
+	padding: 0;
+}
+
+.bloglist .date {
+	font-weight: bold;
+	display: block;
+	color: darkgray;
+	margin: 1em 0;
+}
+
+.bloglist p {
+	color: black;
+	text-decoration: none;
+	font-size: 14pt;
+	margin: 0;
+}
+
+.bloglist a.title {
+	font-weight: bold;
+}
+
+ul.cv {
+	margin: 1em 0;
+	padding: 0;
+	list-style: none;
+    color: white;
+}
+
+ul.cv li {
+	padding-left: 2em;
+	text-indent: -2em;
+    color: white;
+}
+
+dl.cv {
+	overflow: hidden;
+    color: white;
+}
+
+dl.cv dt {
+	font-style: italic;
+    color: white;
+}
+
+dl.cv dd {
+	padding: 0;
+	margin: 0 0 0.5em;
+    color: white;
+}
+
+div.post img {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div.altmetric-embed, div.altmetric-embed a {
+	display: inline-block;
+	text-indent: 0;
+	vertical-align: middle;
+}
+
+@media (min-width: 600px) {
+
+	body {
+		font-size: 12pt;
+		line-height: 1.8em;
+	}
+
+	div#navigation ul {
+		font-size: 28pt;
+	}
+
+	div#navigation.home {
+		font-size: 42pt;
+		padding-bottom: 0.8em;
+	}
+
+	div#navigation ul li {
+		display: inline-block;
+		clear: none;
+		margin-right: 0.5em;
+	}
+
+	h1#name {
+		font-size: 42pt;
+		margin-top: 160px;
+	}
+
+	div.container {
+		padding-left: 5%;
+		padding-right: 5%;
+	}
+
+	div#section1 {
+		display: block;
+		padding-top: 1.3em;
+		width: 200px;
+		float: left;
+	}
+
+	div#section2 {
+		display: block;
+		margin-left: 200px;
+		padding-top: 0.1em;
+		padding-left: 2em;
+	}
+
+	dl.cv dt {
+		float: left;
+		width: 6em;
+	}
+
+	dl.cv dd {
+		padding-left: 6em;
+	}
+
+	div.post img {
+		float: left;
+		margin: 0 2em 2em 0;
+	}
+
+}

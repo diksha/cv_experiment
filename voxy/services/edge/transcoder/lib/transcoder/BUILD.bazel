@@ -1,0 +1,48 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "transcoder",
+    srcs = [
+        "cuda_flags.go",
+        "flags.go",
+        "input.go",
+        "quicksync_flags.go",
+        "receiver.go",
+        "software_flags.go",
+        "transcoder.go",
+        "transcoder_darwin.go",
+        "transcoder_linux.go",
+    ],
+    importpath = "github.com/voxel-ai/voxel/services/edge/transcoder/lib/transcoder",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//go/core/utils/ffmpeg",
+        "//go/edge/metricsctx",
+        "//services/edge/transcoder/lib/kvspusher",
+        "@com_github_rs_zerolog//hlog",
+        "@com_github_rs_zerolog//log",
+        "@io_goji//:goji.io",
+        "@io_goji//pat",
+    ],
+)
+
+go_test(
+    name = "transcoder_test",
+    srcs = [
+        "flags_test.go",
+        "fpsfilter_test.go",
+        "transcoder_test.go",
+    ],
+    data = ["//third_party/fish2persp"],
+    deps = [
+        ":transcoder",
+        "//go/core/utils/ffmpeg",
+        "//go/core/utils/ffmpeg/ffmpegbazel",
+        "//go/edge/metricsctx",
+        "//protos/edge/edgeconfig/v1:edgeconfig",
+        "//services/edge/transcoder/lib/fish2persp",
+        "//services/edge/transcoder/lib/kvspusher",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+    ],
+)

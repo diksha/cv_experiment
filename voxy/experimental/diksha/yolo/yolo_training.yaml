@@ -1,0 +1,56 @@
+#
+# Copyright 2020-2021 Voxel Labs, Inc.
+# All rights reserved.
+#
+# This document may not be reproduced, republished, distributed, transmitted,
+# displayed, broadcast or otherwise exploited in any manner without the express
+# prior written permission of Voxel Labs, Inc. The receipt or possession of this
+# document does not convey any rights to reproduce, disclose, or distribute its
+# contents, or to manufacture, use, or sell anything that it may describe, in
+# whole or in part.
+#
+steps:
+  - block: "Yolo dataset"
+    prompt: "Enter name of dataset"
+    fields:
+      - text: "Dataset name"
+        key: "dataset_name"
+  - label: "Run Training"
+    commands:
+      - . .buildkite/pipeline-setup
+      - mkdir -p /data/images
+      - mkdir /data/labels
+      - mkdir /data/training
+      - aws s3 cp --recursive s3://voxel-datasets/derived/voxel/images /data/images
+      - aws s3 cp --recursive s3://voxel-datasets/derived/voxel/yolo/$(buildkite-agent meta-data get dataset_name)/labels /data/labels
+      - aws s3 cp --recursive s3://voxel-datasets/derived/voxel/yolo/$(buildkite-agent meta-data get dataset_name)/training /data/training
+      - aws s3 cp s3://voxel-users/common/WandB/.netrc ~/
+      - cd /usr/src/app && python3 train.py --weights yolov5m.pt --epochs 20 --batch-size 8 --data /data/training/yolo_training_dataset.yaml --img 1280 --name yolo_automated_$(buildkite-agent meta-data get dataset_name) --cfg yolov5m.yaml && aws s3 cp --recursive runs/train s3://voxel-models/automated/OBJECT_DETECTION_2D/yolo/yolo_automated_$(buildkite-agent meta-data get dataset_name)/model_output
+    agents:
+      queue: "gpu-aws-8c32g-x1"
+    plugins:
+      - seek-oss/aws-sm#v2.3.1:
+          env:
+            CLEARML_WEB_HOST: "CLEARML_WEB_HOST"
+            CLEARML_API_HOST: "CLEARML_API_HOST"
+            CLEARML_FILES_HOST: "CLEARML_FILES_HOST"
+            CLEARML_API_ACCESS_KEY: "CLEARML_API_ACCESS_KEY"
+            CLEARML_API_SECRET_KEY: "CLEARML_API_SECRET_KEY"
+      - docker#v5.3.0:
+          image: "203670452561.dkr.ecr.us-west-2.amazonaws.com/sematic:yolo_clearml"
+          propagate-environment: true
+          mount-ssh-agent: true
+          mount-buildkite-agent: true
+          gpus: "all"
+          always-pull: true
+          runtime: nvidia
+          shm-size: 1gb
+          mount-checkout: true
+          environment:
+            - NVIDIA_VISIBLE_DEVICES=all
+            - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+            - "CLEARML_WEB_HOST"
+            - "CLEARML_API_HOST"
+            - "CLEARML_FILES_HOST"
+            - "CLEARML_API_ACCESS_KEY"
+            - "CLEARML_API_SECRET_KEY"

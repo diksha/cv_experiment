@@ -1,0 +1,5 @@
+streams:
+  - rtsp_uri: fakeuri1
+    iot_thing_name: fakething1
+  - rtsp_uri: fakeuri2
+    iot_thing_name: fakething2

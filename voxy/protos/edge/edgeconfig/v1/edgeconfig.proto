@@ -1,0 +1,118 @@
+syntax = "proto3";
+package protos.edge.edgeconfig.v1;
+option go_package = "github.com/voxel-ai/voxel/protos/edgeconfig/v1;edgeconfigpb";
+
+
+message EdgeConfig {
+    int32 version = 1;
+    repeated StreamConfig streams = 10;
+}
+
+message StreamConfig {
+    // The rtsp uri of the input feed
+    string rtsp_uri = 1;
+
+    // The name of the kinesis video stream to push data to
+    string kinesis_video_stream = 2;
+
+    // Video bitrate in Kilobits per second
+    int32 video_bitrate_kbps = 3;
+
+    // Segment duration is the mkv segment duration
+    float segment_duration_s = 4;
+
+    message Scaler {
+        // Enables scaler to transform input to the target resolution, currently only downscales
+        // default: true
+        bool enabled = 1;
+
+        enum Resolution {
+            RESOLUTION_UNSPECIFIED = 0;
+            RESOLUTION_EXACT = 1;
+            RESOLUTION_480P = 2;
+            RESOLUTION_720P = 3;
+            RESOLUTION_1080P = 4;
+        }
+
+        // Target resolution for the scaler to hit while maintaining aspect ratio
+        // default: RESOLUTION_720P
+        Resolution resolution = 10;
+    }
+
+    Scaler scaler = 20;
+
+    message Dewarp {
+        // Whether to enable the scaler
+        // default: false
+        bool enabled = 1;
+
+        // Paramters to generate remap pgm files
+        // with fish2persp
+        Fish2PerspRemap fish2persp_remap = 10;
+    }
+
+    Dewarp dewarp = 30;
+
+    // causes the transcoder to produce much more log output to help debug problems.
+    bool debug_log = 100;
+}
+
+// fish2persp [options] fisheyeimage
+// Options
+//    -w n        perspective image width, default = 1600
+//    -h n        perspective image height, default = 1200
+//    -t n        field of view of perspective (degrees), default = 100
+//    -s n        field of view of fisheye (degrees), default = 180
+//    -c x y      center of the fisheye image, default is center of image
+//    -r n        fisheye radius (horizontal), default is half width of fisheye image
+//    -ry n       fisheye radius (vertical) for anamophic lens, default is circular fisheye
+//    -x n        tilt angle (degrees), default: 0
+//    -y n        roll angle (degrees), default: 0
+//    -z n        pan angle (degrees), default: 0
+//    -a n        antialiasing level, default = 2
+//    -vo n       vertical offset for offaxis perspective (percentage), default: 0
+//    -ho n       horizontal offset for offaxis perspective (percentage), default: 0
+//    -f          create PGM files for ffmpeg remap filter, default: off
+//    -p n n n n  4th order lens correction, default: off
+//    -d          verbose mode, default: off
+message Fish2PerspRemap {
+    message Fish {
+        // these don't correspond to any specific fish2persp flags
+        // but they are used to generate a blank image for fish2persp to run against
+        // since all we really want from it are the pgm files
+        int32 width_pixels = 1;
+        int32 height_pixels = 2;
+
+        // -c x y
+        int32 center_x_pixels = 3;
+        int32 center_y_pixels = 4;
+        
+        // -r n
+        int32 radius_x_pixels = 5;
+        // -s n
+        int32 fov_degrees = 6;
+
+        // -x n
+        int32 tilt_degrees = 7;
+        // -y n
+        int32 roll_degrees = 8;
+        // -z n
+        int32 pan_degrees = 9;
+    }
+
+    message Persp {
+        // -w n
+        int32 width_pixels = 1;
+        // -h n
+        int32 height_pixels = 2;
+        // -t n
+        int32 fov_degrees = 3;
+    }
+
+
+    // Fisheye related parameters
+    Fish fish = 1;
+
+    // Perspective related paramters
+    Persp persp = 2;
+}

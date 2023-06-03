@@ -1,0 +1,25 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "fish2persp",
+    srcs = ["fish2persp.go"],
+    importpath = "github.com/voxel-ai/voxel/services/edge/transcoder/lib/fish2persp",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//protos/edge/edgeconfig/v1:edgeconfig",
+        "@com_github_rs_zerolog//log",
+        "@io_bazel_rules_go//go/tools/bazel:go_default_library",
+    ],
+)
+
+go_test(
+    name = "fish2persp_test",
+    srcs = ["fish2persp_test.go"],
+    data = glob(["testdata/**"]) + ["//third_party/fish2persp:fish2persp"],
+    deps = [
+        ":fish2persp",
+        "//protos/edge/edgeconfig/v1:edgeconfig",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+    ],
+)

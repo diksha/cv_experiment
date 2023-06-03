@@ -1,0 +1,22 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+load("//third_party/sematic:defs.bzl", "voxel_sematic_pipeline")
+
+py_library(
+    name = "pipeline",
+    srcs = ["pipeline.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("sematic"),
+        "//core/infra/sematic/shared:resources",
+    ],
+)
+
+voxel_sematic_pipeline(
+    name = "main",
+    deps = [
+        requirement("sematic"),
+        ":pipeline",
+        "//core/infra/sematic/shared:utils",
+    ],
+)

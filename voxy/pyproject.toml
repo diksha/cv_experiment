@@ -1,0 +1,95 @@
+[tool.black]
+line-length = 79
+include = '\.pyi?$'
+exclude = '''
+/(
+ \.git
+ | \.mypy_cache
+ | \.tox
+ | \.venv
+ | _build
+ | build
+ | dist
+ | experimental
+ | wandb
+ | portal/api/venv
+ | portal/api/api/migrations
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 79
+skip = "experimental, portal/api/venv, portal/api/api/migrations, wandb, .mypy_cache, .vscode, .github, .git, bazel-bin, bazel-out, bazel-testlogs, bazel-voxel bazel-pull-request"
+known_first_party = ["voxel", "protos"]
+
+[tool.pydocstyle]
+inherit = false
+match_dir = '[^\.|^.*/voxel/portal/api/venv|^.*/voxel/experimental].*'
+convention = 'google'
+add_ignore = [
+  # Missing module docstring
+  'D100',
+  # Missing class docstring
+  'D101',
+  # Missing function docstring
+  'D102',
+  'D103',
+  # Missing magic method docstrings
+  'D105',
+  # Missing __init__ docstrings
+  'D107',
+  # Multi-line docstring summary should start at the first line
+  'D212',
+]
+
+[tool.pylint.master]
+ignore = "experimental"
+disable = [
+  # Handled by Black autoformatter
+  'format',
+  # Unable to import X; import errors are highly environment dependant
+  'E0401',
+  # Missing module docstring
+  'C0114',
+  # Missing class docstring
+  'C0115',
+  # Missing function or method docstring
+  'C0116',
+  # Import order handled by isort
+  'C0411',
+  # Black compatible
+  'C0330',
+  # Black compatible
+  'C0326',
+  # Too few public methods (common pattern in Django meta classes)
+  'R0903',
+  # Disable TODO check
+  'W0511',
+  # Method could be a function (common pattern in pytest classes)
+  'R0201',
+  # Variable name doesn't conform to snake_case naming style
+  'C0103',
+  # Too many arguments
+  'R0913',
+  # Too many local variables
+  'R0914',
+  # Unused argument
+  'W0613',
+  # Missing docstring in magic method
+  'D105',
+  # Too many instance attributes
+  'R0902',
+  # Empty module docstring
+  'C0112',
+  # Unused Variable
+  'W0612',
+  # Use lazy % formatting in logging functions
+  'W1203',
+  #  Do not use `len(SEQUENCE)` without comparison to determine if a sequence is empty
+  'C1802',
+  # Ignore Similarities Sequence
+  'R0801',
+  # Attempted relative import beyond top-level package -- pylint is getting confused when run with trunk
+  'E0402',
+]

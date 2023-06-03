@@ -1,0 +1,11 @@
+tolerations:
+  - key: nvidia.com/gpu
+    operator: Equal
+    value: "true" # Toleration alone doesn't matter as the node selector is set to true or false as per requirements
+    effect: NoSchedule
+    
+config:
+  clients:
+    - url: ${LOKI_URL}
+      tenant_id: ${LOKI_TENANT_ID}
+      

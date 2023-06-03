@@ -1,0 +1,47 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "motion_zone_detector_base",
+    srcs = [
+        "motion_zone_detector_base.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        requirement("numpy"),
+        requirement("rasterio"),
+        "//core/incidents:utils",
+        "//core/structs",
+    ],
+)
+
+py_library(
+    name = "motion_zone_detector_mog2",
+    srcs = [
+        "motion_zone_detector_mog2.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        requirement("numpy"),
+        ":motion_zone_detector_base",
+        "//core/common/functional/lib:compose",
+        "//core/common/functional/transforms",
+        "//core/structs",
+    ],
+)
+
+py_library(
+    name = "motion_zone_detector",
+    srcs = [
+        "motion_zone_detector.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        ":motion_zone_detector_mog2",
+    ],
+)

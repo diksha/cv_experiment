@@ -1,0 +1,5 @@
+#!/bin/bash
+
+TOOLS=$(dirname "$0")
+
+exec "$TOOLS/trunk" check --filter trivy

@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "logtailer",
+    srcs = ["logtailer.go"],
+    importpath = "github.com/voxel-ai/voxel/services/edge/metricsagent/lib/logtailer",
+    visibility = ["//visibility:public"],
+    deps = ["@com_github_nxadm_tail//:tail"],
+)
+
+go_test(
+    name = "logtailer_test",
+    srcs = ["logtailer_test.go"],
+    deps = [
+        ":logtailer",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+    ],
+)

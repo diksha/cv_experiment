@@ -1,0 +1,7 @@
+{% set camera_uuids= task["camera_uuids"]%}
+
+- organizations: []
+  zones: []
+  cameras: {{ camera_uuids }}
+  incidents:
+    safety_vest: invalid

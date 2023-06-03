@@ -1,0 +1,23 @@
+#
+# Copyright 2023 Voxel Labs, Inc.
+# All rights reserved.
+#
+# This document may not be reproduced, republished, distributed, transmitted,
+# displayed, broadcast or otherwise exploited in any manner without the express
+# prior written permission of Voxel Labs, Inc. The receipt or possession of this
+# document does not convey any rights to reproduce, disclose, or distribute its
+# contents, or to manufacture, use, or sell anything that it may describe, in
+# whole or in part.
+#
+
+logset_generation:
+  name: "DataCollectionLogsetGeneratorFromQuery"
+  params: 
+    query: ' query get_data_collection_test_sample_contains_actor_categories($categories: [String!], $count: Int) { data_collection_test_sample_contains_actor_categories(categories: $categories, data_collection_types: "VIDEO", count: $count) { uuid, voxel_uuid } }'
+    query_name: 'data_collection_test_sample_contains_actor_categories'
+    query_variables:
+      categories:
+        - PERSON_V2
+        - PIT_V2
+      count: 6
+    logset_name: {{task["uuid"]}}

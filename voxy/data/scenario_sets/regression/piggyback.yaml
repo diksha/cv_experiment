@@ -1,0 +1,66 @@
+#
+# Copyright 2023 Voxel Labs, Inc.
+# All rights reserved.
+#
+# This document may not be reproduced, republished, distributed, transmitted,
+# displayed, broadcast or otherwise exploited in any manner without the express
+# prior written permission of Voxel Labs, Inc. The receipt or possession of this
+# document does not convey any rights to reproduce, disclose, or distribute its
+# contents, or to manufacture, use, or sell anything that it may describe, in
+# whole or in part.
+#
+#
+scenario_for_incidents: [PIGGYBACK]
+scenarios:
+  # POSITIVE SCENARIOS
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: [PIGGYBACK]
+    video_uuid: americold/modesto/0001/cha/d8360551-d29c-48a8-ba39-5b592706489d_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: [PIGGYBACK]
+    video_uuid: americold/modesto/0001/cha/d0101fe1-2b3e-45bc-9334-bb5a12d23864_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: [PIGGYBACK, PIGGYBACK]
+    video_uuid: americold/modesto/0002/cha/306fb0ec-7bc9-4d9a-91df-d6671561899d_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: [PIGGYBACK]
+    video_uuid: americold/modesto/0002/cha/4139bc0e-d3dc-4f06-b1ea-3b05e288e05e_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: [PIGGYBACK]
+    video_uuid: americold/modesto/0003/cha/09dba059-7030-4a27-8f02-df51f8f4f93a_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: [PIGGYBACK]
+    video_uuid: americold/modesto/0003/cha/519b4bf7-6122-4aaf-9973-23f43725c4c5_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: [PIGGYBACK]
+    video_uuid: americold/modesto/0011/cha/8248960b-cf1d-4d62-a1f3-a7e2899766f6_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: [PIGGYBACK]
+    video_uuid: americold/modesto/0011/cha/699f278b-e9a9-4aac-bf1f-dfba7d7740bd_0000
+  - camera_uuid: americold/ontario/0003/cha
+    incidents: [PIGGYBACK]
+    video_uuid: americold/ontario/0003/cha/3abf68a8-5aad-402a-9da5-8ff3d6acf067_0000
+  - camera_uuid: americold/ontario/0003/cha
+    incidents: [PIGGYBACK]
+    video_uuid: americold/ontario/0003/cha/bdc5a267-3f43-47c5-937e-3efc6b213ae1_0000
+  - camera_uuid: americold/ontario/0004/cha
+    incidents: [PIGGYBACK]
+    video_uuid: americold/ontario/0004/cha/d7c15aa8-6e3a-4508-bfa5-0c469cccd72a_0000
+  - camera_uuid: americold/ontario/0004/cha
+    incidents: [PIGGYBACK]
+    video_uuid: americold/ontario/0004/cha/1c1b6f36-f792-4088-b8dc-4b3fbf2a8ff8_0000
+  - camera_uuid: americold/ontario/0005/cha
+    incidents: [PIGGYBACK]
+    video_uuid: americold/ontario/0005/cha/4647f738-77a2-4d62-9720-64d473dee0cf_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: [PIGGYBACK]
+    video_uuid: americold/modesto/0009/cha/scenarios/PIGGYBACK/POSITIVE/319bb930-1030-4ecf-a098-70a262155611_0000
+  - camera_uuid: americold/ontario/0012/cha
+    incidents: [PIGGYBACK]
+    video_uuid: americold/ontario/0012/cha/scenarios/PIGGYBACK/POSITIVE/2b53244a-0bd8-4299-ac6c-6d7453ef84cf_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0001/cha
+    incidents: [PIGGYBACK]
+    video_uuid: vertical_cold_storage/bolingbrook/0001/cha/0773b818-d235-4a58-a039-6b59f9109ca9_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0001/cha
+    incidents: [PIGGYBACK]
+    video_uuid: vertical_cold_storage/bolingbrook/0001/cha/20c41333-817e-41c6-bafc-716b869371dd_0000

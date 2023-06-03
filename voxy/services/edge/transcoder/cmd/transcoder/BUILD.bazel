@@ -1,0 +1,60 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
+
+go_library(
+    name = "transcoder_lib",
+    srcs = [
+        "app.go",
+        "config.go",
+        "main.go",
+        "transcoder_mode.go",
+    ],
+    importpath = "github.com/voxel-ai/voxel/services/edge/transcoder/cmd/transcoder",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//go/core/aws/iotcredentials",
+        "//go/core/utils/ffmpeg",
+        "//go/core/utils/iorate",
+        "//go/core/utils/retry",
+        "//go/edge/metricsctx",
+        "//protos/edge/edgeconfig/v1:edgeconfig",
+        "//services/edge/transcoder/lib/fish2persp",
+        "//services/edge/transcoder/lib/kvspusher",
+        "//services/edge/transcoder/lib/transcoder",
+        "@com_github_aws_aws_sdk_go_v2//aws",
+        "@com_github_aws_aws_sdk_go_v2_config//:config",
+        "@com_github_aws_aws_sdk_go_v2_service_cloudwatch//:cloudwatch",
+        "@com_github_cristalhq_aconfig//:aconfig",
+        "@com_github_davecgh_go_spew//spew",
+        "@com_github_rs_zerolog//:zerolog",
+        "@com_github_rs_zerolog//log",
+        "@org_golang_google_protobuf//encoding/protojson",
+        "@org_golang_google_protobuf//proto",
+    ],
+)
+
+go_binary(
+    name = "transcoder",
+    embed = [":transcoder_lib"],
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "transcoder_test",
+    srcs = ["app_test.go"],
+    data = glob(["testdata/**"]),
+    embed = [":transcoder_lib"],
+    deps = [
+        "//go/core/utils/ffmpeg/ffmpegbazel",
+        "//go/edge/metricsctx",
+        "//lib/utils/aws/fake",
+        "//protos/edge/edgeconfig/v1:edgeconfig",
+        "//services/edge/transcoder/lib/kvspusher",
+        "//services/edge/transcoder/lib/transcoder",
+        "@com_github_aws_aws_sdk_go_v2//aws",
+        "@com_github_aws_aws_sdk_go_v2_credentials//:credentials",
+        "@com_github_aws_aws_sdk_go_v2_service_kinesisvideo//:kinesisvideo",
+        "@com_github_rs_zerolog//:zerolog",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+    ],
+)

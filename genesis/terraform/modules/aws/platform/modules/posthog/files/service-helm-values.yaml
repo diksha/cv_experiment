@@ -1,0 +1,71 @@
+cloud: aws
+
+siteUrl: ${SITE_URL}
+
+web:
+  secureCookies: false
+  env:
+    - name: SOCIAL_AUTH_GOOGLE_OAUTH2_KEY
+      value: ${GOOGLE_CLIENT_ID}
+    - name: SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET
+      value: ""
+    - name: SOCIAL_AUTH_GOOGLE_OAUTH2_WHITELISTED_DOMAINS
+      value: "voxelai.com"
+
+env:
+  - name: SOCIAL_AUTH_GOOGLE_OAUTH2_KEY
+    value: ${GOOGLE_CLIENT_ID}
+  - name: SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET
+    value: ""
+  - name: SOCIAL_AUTH_GOOGLE_OAUTH2_WHITELISTED_DOMAINS
+    value: "voxelai.com"
+  - name: IS_BEHIND_PROXY
+    value: "true"
+  - name: TRUST_ALL_PROXIES
+    value: "true"
+
+image:
+  repository: 448273619612.dkr.ecr.us-west-2.amazonaws.com/posthog
+  tag: 9d4629235845
+
+service:
+  type: ClusterIP
+
+ingress:
+  enabled: false
+
+clickhouse:
+  persistence:
+    size: 50Gi
+    storageClass: gp3-retain
+
+kafka:
+  logRetentionHours: 24
+  persistence:
+    size: 20Gi
+    storageClass: gp3-retain
+
+postgresql:
+  persistence:
+    size: 50Gi
+    storageClass: gp3-retain
+
+redis:
+  master:
+    extraFlags:
+      - "--maxmemory-policy volatile-lru"
+      - "--maxmemory 2000mb"
+    persistence:
+      size: 20Gi
+      storageClass: gp3-retain
+    resources:
+      limits:
+        cpu: 1024m
+        memory: 4000Mi
+
+zookeeper:
+  autopurge:
+    purgeInterval: 1
+  persistence:
+    size: 20Gi
+    storageClass: gp3-retain

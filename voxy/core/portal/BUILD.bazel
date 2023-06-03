@@ -1,0 +1,268 @@
+load("@io_bazel_rules_docker//container:container.bzl", "container_push")
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary", "py_library")
+load("//core/portal:build_defs.bzl", "portal_django_test")
+load("//third_party/containers/python3:image.bzl", "py3_image")
+
+package(default_visibility = [
+    "//core/portal:__subpackages__",
+    "//services/portal:__subpackages__",
+])
+
+portal_django_test(
+    name = "mega_test",
+    srcs = ["conftest.py"] + glob(include = [
+        "**/*_test.py",
+    ]),
+    data = [
+        "//core/portal:lib/graphql/generated_schema.graphql",
+        "//core/portal:lib/graphql/schema.graphql",
+    ],
+)
+
+py_library(
+    name = "app_lib",
+    srcs = glob(
+        include = ["**/*.py"],
+        exclude = [
+            "infra/**",
+            "scripts/**",
+            "tools/**",
+            "**/*_test.py",
+        ],
+    ),
+    deps = [
+        requirement("attrs"),
+        requirement("auth0-python"),
+        requirement("av"),
+        requirement("bleach"),
+        requirement("boto3"),
+        requirement("cryptography"),
+        requirement("dash-table"),
+        requirement("dash"),
+        requirement("dj-database-url"),
+        requirement("django-allow-cidr"),
+        requirement("django-cors-headers"),
+        requirement("django-cte"),
+        requirement("django-extensions"),
+        requirement("django-filter"),
+        requirement("django-plotly-dash"),
+        requirement("django-redis"),
+        requirement("django-storages"),
+        requirement("django-stubs"),
+        requirement("django-timescaledb"),
+        requirement("graphql-core"),
+        requirement("promise"),
+        requirement("django"),
+        requirement("djangorestframework"),
+        requirement("google-cloud-core"),
+        requirement("google-cloud-logging"),
+        requirement("google-cloud-pubsub"),
+        requirement("google-cloud-secret-manager"),
+        requirement("google-cloud-storage"),
+        requirement("google-cloud-tasks"),
+        requirement("graphene-django"),
+        requirement("graphene"),
+        requirement("graphql-relay"),
+        requirement("loguru"),
+        requirement("deepdiff"),
+        requirement("opencv-python"),
+        requirement("pandas"),
+        requirement("psycopg2-binary"),
+        requirement("pyjwt"),
+        requirement("python-dateutil"),
+        requirement("python-dotenv"),
+        requirement("python-http-client"),
+        requirement("pytz"),
+        requirement("sendgrid"),
+        requirement("sentry-sdk"),
+        requirement("shapely"),
+        requirement("timeout-decorator"),
+        requirement("tzdata"),
+        requirement("fakeredis"),
+        "//core/incidents:utils",
+        "//core/infra/cloud:gcs_utils",
+        "//core/state:utils",
+        "//core/structs",
+        "//core/utils:aws_utils",
+        "//core/utils:print_utils",
+        "//core/utils:type_check",
+        "//core/utils:video_utils",
+    ],
+)
+
+py_binary(
+    name = "graphql_schema.update",
+    srcs = [
+        "//core/portal:manage.py",
+    ],
+    args = [
+        "graphql_schema",
+        "--schema",
+        "core.portal.lib.graphql.graphene_schema.schema",
+        "--out",
+        "$(location //core/portal:lib/graphql/schema.graphql)",
+    ],
+    data = [
+        "//core/portal:lib/graphql/schema.graphql",
+    ],
+    main = "//core/portal:manage.py",
+    deps = [
+        ":app_lib",
+    ],
+)
+
+genrule(
+    name = "gen_schema",
+    outs = ["lib/graphql/generated_schema.graphql"],
+    cmd = """
+    ENVIRONMENT=test \\
+    $(location //core/portal:manage) graphql_schema \\
+    --schema core.portal.lib.graphql.graphene_schema.schema \\
+    --out $(location lib/graphql/generated_schema.graphql)
+  """,
+    tools = [":manage"],
+)
+
+py_binary(
+    name = "manage",
+    srcs = [
+        "manage.py",
+    ],
+    legacy_create_init = False,
+    main = "manage.py",
+    deps = [
+        requirement("factory_boy"),
+        requirement("faker"),
+        ":app_lib",
+    ],
+)
+
+py_binary(
+    name = "dump_schema",
+    srcs = [
+        "dump_schema.py",
+    ],
+    deps = [
+        requirement("loguru"),
+        ":app_lib",
+    ],
+)
+
+# Deploys static assets to cloud environments
+py_binary(
+    name = "deploy",
+    srcs = [
+        "manage.py",
+    ],
+    args = [
+        "collectstatic",
+    ],
+    main = "manage.py",
+    deps = [
+        ":app_lib",
+    ],
+)
+
+py_binary(
+    name = "devserver",
+    srcs = [
+        "manage.py",
+    ],
+    args = [
+        "runserver",
+        "0.0.0.0:9001",
+        "--noreload",
+    ],
+    env = {
+        "ENVIRONMENT": "development",
+    },
+    main = "manage.py",
+    deps = [
+        ":app_lib",
+    ],
+)
+
+# ============================================================================
+# Web server binary
+# ============================================================================
+py_binary(
+    name = "serve",
+    srcs = [
+        "serve.py",
+    ],
+    main = "serve.py",
+    deps = [
+        requirement("gunicorn"),
+        requirement("eventlet"),
+        ":app_lib",
+    ],
+)
+
+# ============================================================================
+# Database migration binary
+# ============================================================================
+py_binary(
+    name = "migrate",
+    srcs = [
+        "migrate.py",
+    ],
+    main = "migrate.py",
+    deps = [
+        ":app_lib",
+    ],
+)
+
+# ============================================================================
+# Containers
+# ============================================================================
+py3_image(
+    name = "image",
+    base = "@voxel_ubuntu_20_04//image",
+    binaries = [
+        ":migrate",
+        ":serve",
+        "//core/portal/tools:message_processor",
+        "//core/portal/tools:uber_data_cronjob",
+    ],
+)
+
+container_push(
+    name = "push",
+    format = "Docker",
+    image = ":image",
+    registry = "667031391229.dkr.ecr.us-west-2.amazonaws.com",
+    repository = "portal/api",
+    tag = "{BUILD_USER}_{BUILD_TIMESTAMP}",
+    tags = ["manual"],
+)
+
+container_push(
+    name = "push_ci",
+    format = "Docker",
+    image = ":image",
+    registry = "667031391229.dkr.ecr.us-west-2.amazonaws.com",
+    repository = "portal/api",
+    tag = "$$BUILDKITE_COMMIT",
+    tags = ["manual"],
+)
+
+container_push(
+    name = "push_ci_staging",
+    format = "Docker",
+    image = ":image",
+    registry = "115099983231.dkr.ecr.us-west-2.amazonaws.com",
+    repository = "staging/portal/api",
+    tag = "$$BUILDKITE_COMMIT",
+    tags = ["manual"],
+)
+
+container_push(
+    name = "push_ci_production",
+    format = "Docker",
+    image = ":image",
+    registry = "360054435465.dkr.ecr.us-west-2.amazonaws.com",
+    repository = "production/portal/api",
+    tag = "$$BUILDKITE_COMMIT",
+    tags = ["manual"],
+)

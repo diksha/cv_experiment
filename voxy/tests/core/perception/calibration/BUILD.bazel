@@ -1,0 +1,35 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+package(default_visibility = ["//visibility:public"])
+
+voxel_py_test(
+    name = "distortion_test",
+    srcs = ["distortion_test.py"],
+    deps = [
+        "//core/perception/calibration/models",
+        "//core/structs",
+    ],
+)
+
+voxel_py_test(
+    name = "camera_model_test",
+    srcs = ["camera_model_test.py"],
+    deps = [
+        "//core/perception/calibration:camera_model",
+        "//core/perception/calibration/models",
+        "//core/structs",
+    ],
+)
+
+voxel_py_test(
+    name = "utils_test",
+    srcs = ["utils_test.py"],
+    deps = [
+        "//core/perception/calibration:camera_model",
+        "//core/perception/calibration:utils",
+        "//core/perception/calibration/models",
+        "//core/structs",
+        requirement("pyyaml"),
+    ],
+)

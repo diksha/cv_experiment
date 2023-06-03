@@ -1,0 +1,28 @@
+load("@rules_python//python:defs.bzl", "py_library")
+
+py_library(
+    name = "image_extractor",
+    srcs = [
+        "image_extractor.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/ml/data/extraction/writers:image_writer",
+        "//core/structs",
+        "//core/utils:video_reader",
+    ],
+)
+
+py_library(
+    name = "label_extractor",
+    srcs = [
+        "label_extractor.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/labeling/label_store:label_reader",
+        "//core/ml/data/extraction/writers:label_writer",
+        "//core/structs",
+        "//core/utils:video_reader",
+    ],
+)

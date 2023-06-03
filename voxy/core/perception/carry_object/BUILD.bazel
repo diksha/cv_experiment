@@ -1,0 +1,23 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "carry_object_classifier",
+    srcs = ["carry_object_classifier.py"],
+    data = [
+        "@artifacts_03_24_2023_carry_classifier_jit",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/structs",
+        "//protos/perception/graph_config/v1:graphconfigpb_py_library",
+        requirement("torch"),
+        requirement("opencv-python"),
+        requirement("numpy"),
+        requirement("torchvision"),
+        "//core/perception/common:utils",
+        "//lib/ml/inference/tasks/ergonomic_carry_object/res_net34:factory",
+    ],
+)

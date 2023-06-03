@@ -1,0 +1,107 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+name: first
+scenarios:
+- camera_uuid: americold/modesto/e_dock_north/ch12
+  config: {}
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch12/scenarios/cf3f5038-5e04-45d3-88b0-f197e85a63a1
+- camera_uuid: americold/modesto/e_dock_north/ch12
+  incidents: [PIGGYBACK]
+  video_uuid: americold/modesto/e_dock_north/ch12/scenarios/86dbd348-2a8d-4bcd-95c1-8eaef9dfa99e
+- camera_uuid: americold/modesto/e_dock_north/ch22
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch22/scenarios/4cfeb238-27e0-41c9-923b-d4fb6f85042e
+- camera_uuid: americold/modesto/e_dock_north/ch12
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch12/scenarios/130e62c8-048b-4afe-96e9-b7cb44d40dce
+- camera_uuid: americold/modesto/e_dock_north/ch12
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch12/scenarios/12bc5ffa-47ad-4a4d-a3e2-93f5fd5fe199
+- camera_uuid: americold/modesto/e_dock_north/ch12
+  incidents: [NO_STOP_AT_INTERSECTION]
+  video_uuid: americold/modesto/e_dock_north/ch12/scenarios/97075915-c833-42f5-91c1-0d38e498e1b7
+- camera_uuid: americold/modesto/e_dock_north/ch12
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch12/scenarios/b818764c-2fcb-4039-8eb7-59b1d470844a
+- camera_uuid: americold/modesto/e_dock_north/ch22
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch22/scenarios/6301e162-95a4-4397-a40d-da38389a4eee
+- camera_uuid: americold/modesto/e_dock_north/ch12
+  incidents: [OPEN_DOOR_DURATION]
+  video_uuid: americold/modesto/e_dock_north/ch12/scenarios/caccdf96-373f-4233-808e-28ced7471207
+- camera_uuid: americold/modesto/e_dock_north/ch22
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch22/scenarios/070c0aff-0699-4775-a2fa-02103e50a6da
+- camera_uuid: americold/modesto/e_dock_north/ch22
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch22/scenarios/e4d56f5e-58a0-47f3-a338-0aad76a839ad
+- camera_uuid: americold/modesto/e_dock_north/ch12
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch12/scenarios/316fc5d4-4ef6-40a2-8a75-37b51ce753ee
+- camera_uuid: americold/modesto/e_dock_north/ch12
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch12/scenarios/9626dd33-5133-4fe6-b7f7-96430ff93ee5
+- camera_uuid: americold/modesto/e_dock_north/ch12
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch12/scenarios/5657fadb-0b62-437b-b4e2-e750edacec77
+- camera_uuid: americold/modesto/e_dock_north/ch12
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch12/scenarios/b3c01476-ec2a-46be-ac21-1749ccfb187c
+- camera_uuid: americold/modesto/e_dock_north/ch12
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch12/scenarios/f08cad0e-d284-446e-a752-eef4c81a3445
+- camera_uuid: americold/modesto/e_dock_north/ch22
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch22/scenarios/8cc911f2-65cb-48a8-a705-4280c31d6b3c
+- camera_uuid: americold/modesto/e_dock_north/ch12
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch12/scenarios/289ccaae-0ca2-4fc0-b783-00789fc3c58b
+- camera_uuid: americold/modesto/e_dock_north/ch12
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch12/scenarios/a3c1c35c-4cec-4f78-b37b-75c4643a4fa5
+- camera_uuid: americold/modesto/e_dock_north/ch22
+  incidents: [NO_STOP_AT_INTERSECTION]
+  video_uuid: americold/modesto/e_dock_north/ch22/scenarios/84bd8a90-1638-4e1a-b78f-9ac74d062243
+- camera_uuid: americold/modesto/e_dock_north/ch22
+  incidents: [NO_STOP_AT_INTERSECTION]
+  video_uuid: americold/modesto/e_dock_north/ch22/scenarios/38b88d74-cd12-4908-8615-f2a31df9c7fe
+- camera_uuid: americold/modesto/e_dock_north/ch12
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch12/scenarios/0768f14a-b562-4e2d-a963-ad979138e26b
+- camera_uuid: americold/modesto/e_dock_north/ch12
+  incidents: [PIGGYBACK]
+  video_uuid: americold/modesto/e_dock_north/ch12/scenarios/26b5bf6e-0d69-4631-8dc6-0ee6ca1ac1fe
+- camera_uuid: americold/modesto/e_dock_north/ch12
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch12/scenarios/96f7b2fb-eed2-49cd-abe9-d12b1695b468
+- camera_uuid: americold/modesto/e_dock_north/ch22
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch22/scenarios/de89c553-5da5-4566-aef1-1720b7a1ced4
+- camera_uuid: americold/modesto/e_dock_north/ch22
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch22/scenarios/fb7b5701-3de3-4b63-83fe-6eda7ce843cb
+- camera_uuid: americold/modesto/e_dock_north/ch22
+  incidents: [PIGGYBACK]
+  video_uuid: americold/modesto/e_dock_north/ch22/e_dock_north_ch22_piggyback_door_violation
+- camera_uuid: americold/modesto/e_dock_north/ch12
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch12/scenarios/07d90591-2cb9-4a1f-8d44-712c7ee0a8a4
+- camera_uuid: americold/modesto/e_dock_north/ch12
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch12/scenarios/83556f9e-7422-40a8-b99e-0d999711fd80
+- camera_uuid: americold/modesto/e_dock_north/ch12
+  incidents: []
+  video_uuid: americold/modesto/e_dock_north/ch12/scenarios/1c3a1759-69a8-4cee-bd61-75bd0d7c1ce7
+- camera_uuid: americold/modesto/e_dock_north/ch12
+  incidents: [NO_STOP_AT_INTERSECTION]
+  video_uuid: americold/modesto/e_dock_north/ch12/scenarios/4b414086-5da8-42e9-a420-5f411195a54c

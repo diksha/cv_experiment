@@ -1,0 +1,25 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+
+# This target is intended to be consumed by custom Greengrass components as
+# an artifact. You can rebuild a .zip archive of this binary target like this:
+#
+#   $ bazel build path/to:get_local_secret --build_python_zip
+#   $ bazel build path/to:get_cloud_secret --build_python_zip
+#
+# And then upload that new zip archive to S3 to be consumed by Greengrass.
+py_binary(
+    name = "get_local_secret",
+    srcs = ["get_local_secret.py"],
+    deps = [
+        requirement("awsiotsdk"),
+    ],
+)
+
+py_binary(
+    name = "get_cloud_secret",
+    srcs = ["get_cloud_secret.py"],
+    deps = [
+        requirement("boto3"),
+    ],
+)

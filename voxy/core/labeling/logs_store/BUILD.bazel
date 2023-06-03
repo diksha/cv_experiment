@@ -1,0 +1,79 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary", "py_library")
+
+py_library(
+    name = "ingestion_helpers",
+    srcs = [
+        "ingestion_helpers.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [],
+)
+
+py_library(
+    name = "ingest_data_collection_metaverse_lib",
+    srcs = ["ingest_data_collection_metaverse.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/infra/sematic/shared:resources",
+        requirement("sematic"),
+        "//core/metaverse/api",
+    ],
+)
+
+py_binary(
+    name = "ingest_data_collection_metaverse",
+    srcs = [
+        "ingest_data_collection_metaverse.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":ingest_data_collection_metaverse_lib",
+    ],
+)
+
+py_library(
+    name = "chunk_and_upload_video_logs_lib",
+    srcs = ["chunk_and_upload_video_logs.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("google-cloud-storage"),
+        "//core/infra/cloud:gcs_utils",
+        requirement("ffmpeg-python"),
+        requirement("boto3"),
+        requirement("av"),
+        "//core/infra/cloud:firestore_utils",
+        "//core/infra/sematic/shared:resources",
+        "//core/labeling:constants",
+        "//core/labeling/logs_store:ingest_data_collection_metaverse_lib",
+        "//core/labeling/logs_store:ingestion_helpers",
+        "//core/utils:aws_utils",
+        requirement("loguru"),
+        requirement("sematic"),
+    ],
+)
+
+py_binary(
+    name = "ingest_image_collection",
+    srcs = ["ingest_image_collection.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/infra/cloud:gcs_utils",
+        "//core/labeling/logs_store:ingest_data_collection_metaverse_lib",
+        "//core/utils:aws_utils",
+        requirement("sematic"),
+        "//core/structs",
+    ],
+)
+
+py_binary(
+    name = "chunk_and_upload_video_logs",
+    srcs = [
+        "chunk_and_upload_video_logs.py",
+    ],
+    main = "chunk_and_upload_video_logs.py",
+    visibility = ["//visibility:public"],
+    deps = [
+        ":chunk_and_upload_video_logs_lib",
+    ],
+)

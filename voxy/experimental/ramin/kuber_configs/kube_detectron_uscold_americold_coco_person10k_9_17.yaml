@@ -1,0 +1,41 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+apiVersion: batch/v1
+kind: Job
+metadata:
+  # Unique key of the Job instance
+  name: local-weights-uscold-americold-coco-person-lr001-9-17
+spec:
+  template:
+    metadata:
+      name: local-weights-uscold-americold-coco-personlr001-9-17
+    spec:
+      serviceAccountName: k8
+      hostIPC: True
+      containers:
+      - name: detectron2
+        image: us.gcr.io/sodium-carving-227300/voxel/experimental:ramin_voxelsafety_com_1631754900
+        command: ["/bin/sh", "-c"]
+        args: ["apt update && mkdir /data && mkdir /data/coco_person && gsutil -m cp -r gs://voxel-users/ramin/coco/uscold_americold_fitness_9_17/* /data/ && gsutil -m cp -r gs://voxel-users/common/coco_person_10k/* /data/coco_person/ && ls /data/ && gsutil cp gs://voxel-users/common/WandB/.netrc ~/ && /usr/bin/python3 /app/experimental/ramin/detectron2/train -lr 0.0005 -epochs 15 -out_dir /data/output -data_dir /data -use_local_weights 1 -gamma 0.5 -batch_size 8 -wandb_name localWeights_uscold_good_americold_coco_person10k_lr0005_9_17 -num_gpus 4
+ && gsutil cp -r /data/output/* gs://voxel-users/ramin/experiments/detectron/localWeights-uscold-good-americold-coco-person10k-9-17"]
+        resources:
+          limits:
+            cpu: 30
+            nvidia.com/gpu: 4
+            memory: "100Gi"
+          requests:
+            cpu: 30
+            nvidia.com/gpu: 4
+            memory: "100Gi"
+      restartPolicy: Never
+  # of retries before marking as failed.
+  backoffLimit: 0

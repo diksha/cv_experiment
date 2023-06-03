@@ -1,0 +1,93 @@
+syntax = "proto3";
+package protos.perception.graph_config.v1;
+option go_package = "github.com/voxel-ai/voxel/protos/perception/graph_config/v1;graphconfigpb";
+import "google/protobuf/timestamp.proto";
+
+
+message OpenDoorParams {
+    optional int32 max_open_door_s = 1;
+    optional int32 per_camera_cooldown_s = 2;
+}
+
+message IntersectionParams {
+    optional float incident_thresh_low = 1;
+    optional float incident_thresh_med = 2;
+    optional float incident_thresh_high = 3;
+    optional int32 per_camera_cooldown_s = 4;
+}
+
+message ParkingParams {
+    optional int32 max_parked_duration_s = 1;
+    optional int32 per_camera_cooldown_s = 2;
+}
+
+message PiggybackParams {
+    optional int32 max_pit_crossing_time_differences_s = 1;
+}
+
+message SafetyVestParams {
+    optional int32 max_no_vest_s = 1;
+}
+
+message NoPedZoneParams {
+    optional int32 max_ped_zone_duration_s = 1;
+    optional google.protobuf.Timestamp active_hours_start_utc = 2;
+    optional google.protobuf.Timestamp active_hours_end_utc = 3;
+    optional int32 per_camera_cooldown_s = 4;
+}
+
+message NoStopAtAisleEndParams {
+    optional float incident_thresh_low = 1;
+    optional float incident_thresh_med = 2;
+    optional float incident_thresh_high = 3;
+    optional int32 per_camera_cooldown_s = 4;
+}
+
+message ProductionLineDownParams {
+    optional int32 max_no_motion_detection_s = 1;
+    optional int32 per_actor_cooldown_s = 2;
+}
+
+message HardHatParams {
+    optional int32 per_camera_cooldown_s = 1;
+    optional int32 max_no_hat_s = 2;
+}
+
+message HighVisHatOrVestParams {
+    optional int32 per_camera_cooldown_s = 1;
+}
+
+message DoorIntersectionParams {
+    optional int32 per_camera_cooldown_s = 1;
+}
+
+message DoorViolationParams {
+    optional int32 per_camera_cooldown_s = 1;
+}
+
+message BumpCapParams {
+    optional int32 per_camera_cooldown_s = 1;
+    optional int32 max_no_bumpcap_s = 2;
+}
+
+message ObstructionParams {
+    optional int32 max_obstruction_duration_s = 1;
+    optional int32 per_actor_cooldown_s = 2;
+}
+
+message ModelConfig {
+    optional OpenDoorParams open_door = 1;
+    optional IntersectionParams intersection = 2;
+    optional SafetyVestParams safety_vest = 3;
+    optional NoPedZoneParams no_ped_zone = 4;
+    optional NoStopAtAisleEndParams no_stop_at_aisle_end = 5;
+    optional ProductionLineDownParams production_line_down = 6;
+    optional HardHatParams hard_hat = 7;
+    optional HighVisHatOrVestParams high_vis_hat_or_vest = 8;
+    optional DoorIntersectionParams door_intersection = 9;
+    optional DoorViolationParams door_violation = 10;
+    optional ParkingParams parking = 11;
+    optional PiggybackParams piggyback = 12;
+    optional BumpCapParams bump_cap = 13;
+    optional ObstructionParams obstruction = 14;
+}

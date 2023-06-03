@@ -1,0 +1,24 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "ffmpegbazel",
+    srcs = ["ffmpegbazel.go"],
+    data = [
+        "@artifacts_ffmpeg_static_binary",
+    ],
+    importpath = "github.com/voxel-ai/voxel/go/core/utils/ffmpeg/ffmpegbazel",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//go/core/utils/ffmpeg",
+        "@io_bazel_rules_go//go/runfiles:go_default_library",
+    ],
+)
+
+go_test(
+    name = "ffmpegbazel_test",
+    srcs = ["ffmpegbazel_test.go"],
+    deps = [
+        ":ffmpegbazel",
+        "@com_github_stretchr_testify//require",
+    ],
+)

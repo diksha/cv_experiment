@@ -1,0 +1,25 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "obstruction_segmenter",
+    srcs = [
+        "obstruction_segmenter.py",
+    ],
+    data = [
+        "@artifacts_05_17_2023",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/execution/utils:graph_config_utils",
+        "//core/execution/utils:perception_runner_context",
+        "//core/perception/utils:segmentation_utils",
+        "//lib/ml/inference/tasks/segmentation/unet_v1:factory",
+        "//protos/perception/graph_config/v1:graphconfigpb_py_library",
+        requirement("torch"),
+        requirement("torchvision"),
+        requirement("scikit-image"),
+    ],
+)

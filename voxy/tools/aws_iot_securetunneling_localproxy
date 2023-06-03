@@ -1,0 +1,4 @@
+#!/bin/bash
+
+./bazel build @artifacts_aws_iot_securetunneling_localproxy//:artifacts_aws_iot_securetunneling_localproxy
+bazel-"${PWD##*/}"/external/artifacts_aws_iot_securetunneling_localproxy/localproxy "$@"

@@ -1,0 +1,33 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "generated_model",
+    srcs = [
+        "generated_model.py",
+    ],
+    deps = [
+    ],
+)
+
+py_library(
+    name = "training_manager",
+    srcs = [
+        "training_manager.py",
+    ],
+    deps = [
+        ":generated_model",
+        "//core/infra/cloud:gcs_utils",
+        "//core/metaverse/api",
+        "//core/ml/common:torch_utils",
+        "//core/ml/data/generation/common:utils",
+        "//core/ml/experiments/tracking:experiment_tracking",
+        "//core/ml/training/models:model",
+        "//core/ml/training/registry",
+        "//core/ml/training/registry:register_components",
+        "//core/utils:aws_utils",
+        requirement("loguru"),
+    ],
+)

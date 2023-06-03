@@ -1,0 +1,39 @@
+#
+# Copyright 2023 Voxel Labs, Inc.
+# All rights reserved.
+#
+# This document may not be reproduced, republished, distributed, transmitted,
+# displayed, broadcast or otherwise exploited in any manner without the express
+# prior written permission of Voxel Labs, Inc. The receipt or possession of this
+# document does not convey any rights to reproduce, disclose, or distribute its
+# contents, or to manufacture, use, or sell anything that it may describe, in
+# whole or in part.
+#
+#
+scenario_for_incidents: [N_PERSON_PED_ZONE]
+scenarios:
+  # POSITIVE SCENARIOS
+  - camera_uuid: ppg/cedar_falls/0003/cha
+    incidents: [N_PERSON_PED_ZONE]
+    video_uuid: ppg/cedar_falls/0003/cha/2f58b29b-52ad-49a0-b114-9d7fd38d0235_0000
+  - camera_uuid: ppg/cedar_falls/0003/cha
+    incidents: [N_PERSON_PED_ZONE]
+    video_uuid: ppg/cedar_falls/0003/cha/d810a15f-b6c8-4714-a00a-418fa49cf5d6_0000
+  - camera_uuid: ppg/cedar_falls/0005/cha
+    incidents: [N_PERSON_PED_ZONE]
+    video_uuid: ppg/cedar_falls/0005/cha/8398090b-5a82-4a46-bbc9-e836382eaf76_0000
+  - camera_uuid: ppg/cedar_falls/0005/cha
+    incidents: [N_PERSON_PED_ZONE]
+    video_uuid: ppg/cedar_falls/0005/cha/be93daf9-7005-4877-a1c3-d6d93c911c09_0000
+  - camera_uuid: ppg/cedar_falls/0011/cha
+    incidents: [N_PERSON_PED_ZONE]
+    video_uuid: ppg/cedar_falls/0011/cha/8f623718-dfaf-427e-b975-20aecc146c0e_0000
+  - camera_uuid: ppg/cedar_falls/0011/cha
+    incidents: [N_PERSON_PED_ZONE]
+    video_uuid: ppg/cedar_falls/0011/cha/d8e223bc-4e1a-470d-980e-ad044844124f_0000
+  - camera_uuid: ppg/cedar_falls/0004/cha
+    incidents: [N_PERSON_PED_ZONE]
+    video_uuid: ppg/cedar_falls/0004/cha/scenarios/N_PERSON_PED_ZONE/POSITIVE/07c5bb62-07c1-4b06-9c05-e61fcf0eab48_0000
+  - camera_uuid: ppg/cedar_falls/0007/cha
+    incidents: [N_PERSON_PED_ZONE]
+    video_uuid: ppg/cedar_falls/0007/cha/scenarios/N_PERSON_PED_ZONE/POSITIVE/1b9e3068-1f36-4357-b67a-ce79bc7c324d_0000

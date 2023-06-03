@@ -1,0 +1,16 @@
+[flake8]
+ignore = E203, E266, E501, W503, F403, E401, F401
+max-line-length = 79
+max-complexity = 18
+select = B,C,E,F,W,T4,B9
+# Note:
+# Excluded paths are evaluated as relative paths to this file.
+# This makes the relative paths ugly (../../) but we decided the benefit
+# of keeping all flake8 related files/config in the same directory outweighs
+# the hassle of ugly relative paths.
+# https://flake8.pycqa.org/en/latest/user/options.html#cmdoption-flake8-exclude
+exclude = 
+    ../../experimental/*,
+    ../../portal/api/venv/*,
+    ../../portal/api/api/migrations/*,
+    ../../wandb/*

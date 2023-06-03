@@ -1,0 +1,20 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "autocertfetcher",
+    srcs = ["autocertfetcher.go"],
+    importpath = "github.com/voxel-ai/voxel/lib/infra/autocertfetcher",
+    visibility = ["//visibility:public"],
+    deps = ["@com_github_fsnotify_fsnotify//:fsnotify"],
+)
+
+go_test(
+    name = "autocertfetcher_test",
+    srcs = ["autocertfetcher_test.go"],
+    deps = [
+        ":autocertfetcher",
+        "@com_github_madflojo_testcerts//:testcerts",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+    ],
+)

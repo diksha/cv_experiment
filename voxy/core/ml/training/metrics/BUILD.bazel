@@ -1,0 +1,25 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+py_library(
+    name = "registry",
+    srcs = glob(["*.py"]),
+    data = [],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("fastai"),
+        requirement("torch"),
+        requirement("torchvision"),
+    ],
+)
+
+py_library(
+    name = "metrics",
+    srcs = ["metrics.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("scikit-learn"),
+        requirement("torch"),
+        requirement("numpy"),
+    ],
+)

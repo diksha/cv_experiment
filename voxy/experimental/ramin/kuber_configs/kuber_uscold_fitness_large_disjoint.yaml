@@ -1,0 +1,43 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+apiVersion: batch/v1
+kind: Job
+metadata:
+  # Unique key of the Job instance
+  name: yolo-ramin-uscold-fitness-l-disjoint
+spec:
+  template:
+    metadata:
+      name: yolo-ramin-uscold-fitness-l-disjoint
+    spec:
+      serviceAccountName: k8
+      hostIPC: True
+      containers:
+      - name: yolov5
+        image: us.gcr.io/sodium-carving-227300/yolov5:22jun2021_v4
+        command: ["/bin/sh", "-c"]
+        args: ["mkdir /data && gsutil -m cp -r gs://voxel-users/ramin/yolo/uscold_fitness_disjoint/* /data/ && ls /data/ && gsutil cp gs://voxel-users/common/WandB/.netrc ~/ && python3  train.py --epochs 150 --data /data/all_classes.yaml --img 1024 --rect  --batch 16 --name yolo-ramin-uscold-fitness-l-disjoint --cfg yolov5l.yaml --weights yolov5l.pt --hyp /data/finetune_hyp.yaml  && gsutil cp -r runs/train/* gs://voxel-users/ramin/experiments/yolo/all_classes"]
+        resources:
+          limits:
+            cpu: 8
+            nvidia.com/gpu: 1
+            memory: "50Gi"
+            ephemeral-storage: "40Gi"
+          requests:
+            cpu: 8
+            memory: "50Gi"
+            nvidia.com/gpu: 1
+            ephemeral-storage: "40Gi"
+      # Do not restart containers after they exit
+      restartPolicy: Never
+  # of retries before marking as failed.
+  backoffLimit: 1

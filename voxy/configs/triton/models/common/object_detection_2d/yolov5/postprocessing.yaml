@@ -1,0 +1,33 @@
+model:
+  artifact_model_paths:
+      - artifacts_yolo_v5_post_processing_04_11_2023/yolo_torchscript_postprocess_apr_11.pt
+  disable_warmup_generation: true
+  config:
+    platform: pytorch_libtorch
+    max_batch_size: 16
+    input:
+      - name: input0
+        data_type: TYPE_FP16
+        dims: [-1, -1]
+      - name: input1
+        data_type: TYPE_FP32
+        dims: [2]
+      - name: input2
+        data_type: TYPE_FP32
+        dims: [2]
+      - name: input3
+        data_type: TYPE_INT32
+        dims: [2]
+      - name: input4
+        data_type: TYPE_FP16
+        dims: [1]
+      - name: input5
+        data_type: TYPE_FP16
+        dims: [1]
+    output:
+      - name: output0
+        data_type: TYPE_INT64
+        dims: [1]
+      - name: output1
+        data_type: TYPE_FP32
+        dims: [-1]

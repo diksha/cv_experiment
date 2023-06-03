@@ -1,0 +1,30 @@
+load("@rules_python//python:defs.bzl", "py_binary")
+
+py_binary(
+    name = "analyze",
+    srcs = ["analyze.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/utils:yaml_jinja",
+    ],
+)
+
+py_binary(
+    name = "generate_all_configs",
+    srcs = ["generate_all_configs.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/execution/utils:graph_config_builder",
+        "//core/utils:yaml_jinja",
+    ],
+)
+
+py_binary(
+    name = "compare_all_configs",
+    srcs = ["compare_all_configs.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/execution/utils:graph_config_builder",
+        "//core/utils:yaml_jinja",
+    ],
+)

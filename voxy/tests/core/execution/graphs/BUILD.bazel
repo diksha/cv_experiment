@@ -1,0 +1,21 @@
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+voxel_py_test(
+    name = "production_test",
+    srcs = [
+        "production_test.py",
+    ],
+    deps = [
+        "//core/execution/graphs:production",
+    ],
+)
+
+voxel_py_test(
+    name = "metrics_constants_test",
+    srcs = [
+        "metrics_constants_test.py",
+    ],
+    deps = [
+        "//core/execution/graphs:metrics_constants",
+    ],
+)

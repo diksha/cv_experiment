@@ -1,0 +1,62 @@
+/*
+Copyright 2020-2021 Voxel Labs, Inc.
+All rights reserved.
+
+This document may not be reproduced, republished, distributed, transmitted,
+displayed, broadcast or otherwise exploited in any manner without the express
+prior written permission of Voxel Labs, Inc. The receipt or possession of this
+document does not convey any rights to reproduce, disclose, or distribute its
+contents, or to manufacture, use, or sell anything that it may describe, in
+whole or in part.
+*/
+.options {
+  max-height: 0;
+  height: 0;
+  overflow: hidden;
+  position: absolute;
+  background-color: #fff;
+  font-weight: normal;
+  width: 100%;
+  transition: max-height 0.5s;
+  z-index: 28;
+  text-align: center;
+  border-radius: 0 0 5px 5px;
+}
+
+.options.active {
+  display: block;
+  height: auto;
+  overflow-y: scroll;
+  max-height: 400px;
+}
+
+.option {
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: 25px 1fr;
+  text-align: left;
+  justify-content: center;
+  align-items: center;
+}
+
+.option .icon {
+  display: grid;
+  justify-content: center;
+}
+
+.option .icon svg {
+  height: 22px;
+  width: 22px;
+}
+
+.options.active > .option {
+  padding: 5px;
+}
+
+.option[data-active="true"] {
+  font-weight: bold;
+}
+.option:hover {
+  cursor: pointer;
+  background-color: #eee;
+}

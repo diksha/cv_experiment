@@ -1,0 +1,55 @@
+// Copyright 2020-2021 Voxel Labs, Inc.
+// All rights reserved.
+//
+// This document may not be reproduced, republished, distributed, transmitted,
+// displayed, broadcast or otherwise exploited in any manner without the express
+// prior written permission of Voxel Labs, Inc. The receipt or possession of this
+// document does not convey any rights to reproduce, disclose, or distribute its
+// contents, or to manufacture, use, or sell anything that it may describe, in
+// whole or in part.
+
+syntax = "proto3";
+
+package protos.perception.structs.v1;
+
+option go_package = "github.com/voxel-ai/voxel/protos/perception/structs/v1;structspb";
+
+import "protos/perception/structs/v1/actor.proto";
+
+
+message Tracklet {
+    // The track ID of the tracklet
+    int64 track_id = 1;
+
+    // The category of the tracklet
+    perception.structs.v1.ActorCategory category = 2;
+
+    // The timestamps of the tracklet
+    repeated int64 timestamps = 3;
+
+    // The expire threshold of the tracklet
+    int64 expire_threshold_ms = 4;
+
+    // The stationary since of the tracklet
+    int64 stationary_since_ms = 5;
+
+    // The is believed to be wearing hard hat of the tracklet
+    bool is_believed_to_be_wearing_hard_hat = 6;
+
+    // The is believed to be wearing safety vest of the tracklet
+    bool is_believed_to_be_wearing_safety_vest = 7;
+
+    // The is associated with pit of the tracklet
+    bool is_associated_with_pit = 8;
+
+    // The is associated with person of the tracklet
+    bool is_associated_with_person = 9;
+
+    bool is_believed_to_be_in_unsafe_posture = 10;
+
+    bool is_stationary = 11;
+    bool is_motion_zone_in_motion = 12;
+    float x_velocity_pixel_per_sec = 13;
+    float y_velocity_pixel_per_sec = 14;
+    float normalized_pixel_speed = 15;
+}

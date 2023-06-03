@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<!--
+-- Copyright 2020-2021 Voxel Labs, Inc.
+-- All rights reserved.
+--
+-- This document may not be reproduced, republished, distributed, transmitted,
+-- displayed, broadcast or otherwise exploited in any manner without the express
+-- prior written permission of Voxel Labs, Inc. The receipt or possession of this
+-- document does not convey any rights to reproduce, disclose, or distribute its
+-- contents, or to manufacture, use, or sell anything that it may describe, in
+-- whole or in part.
+-->
+
+
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="expires" content="Tue, 01 Jan 1980 11:00:00 GMT">
+
+	<title>Extrinsics Calibration</title>
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.3.0/math.min.js></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5@0.10.2/lib/p5.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/static/style.css">
+	<link rel="stylesheet" type="text/css" href="/static/syntax.css">
+	<style>
+		body {
+            margin:0;
+            margin-left:45px;
+            padding:0;
+            overflow: hidden;
+            background-color: #FFFFFF;
+        }
+		canvas {
+			margin:auto;
+		}
+	</style>
+    <script type="text/javascript">
+        function preload()
+        {
+            console.log("preloading")
+            img = loadImage('/load/{{image}}');
+        }
+
+        function draw_on_image(x, y, saturation = 0)
+        {
+            // placeholder warehouse image
+            // do some perspective transforms
+            stroke(255, saturation, 255)
+            strokeWeight(2);
+            vertex(x,y);
+        }
+
+        function mouseWheel(event) {
+            height_z_m += 0.1 * event.delta;
+            if(height_z_m < 0)
+            {
+                height_z_m = 0;
+            }
+        }
+
+        function get_intrinsics()
+        {
+            // return focal length in image coordinates from deep calib
+            // TODO: make this a ajax call
+            f_dc = float({{focal_length}}) ;
+            return img.width * f_dc / 299.0  * image_scale;
+        }
+        cos = math.cos
+        sin = math.sin
+
+        function get_grid()
+        {
+            let edges = []
+            imax = 300
+            //TODO (twroge) make the size of the grid variable
+            for(let i = -imax; i <= imax; i+= 3)
+            {
+                // horizontal lines
+                if( i > 4)
+                {
+                    edges.push([ [ [ imax],   [i], [0], [1]] ,
+                                [[  -imax],    [i], [0], [1]] ])
+                }
+                // vertical lines
+                edges.push([[     [i],  [    1],[0], [1]] ,
+                                [ [i], [ imax ],[0], [1]]] )
+            }
+            return edges;
+        }
+
+        function draw_grid(camera_matrix)
+        {
+            let grid_edges = get_grid()
+            for (let [ start, end ] of grid_edges)
+            {
+                // draw grid lines
+                beginShape();
+                let [u1, v1]  = project_camera(camera_matrix, start)
+                draw_on_image(u1, v1)
+                let [u2, v2]  = project_camera(camera_matrix, end)
+                draw_on_image(u2, v2)
+                endShape()
+            }
+        }
+
+        function draw_box(camera_matrix)
+        {
+            radius = 12
+            x_trans = radius * cos(time)
+            y_trans = radius * sin(time)
+
+            front_ur = [ [-1 + x_trans],   [24 +  20 + y_trans], [0], [1]]
+            front_ul = [ [ 1 + x_trans],   [24 +  20 + y_trans], [0], [1]]
+            front_bl = [ [-1 + x_trans],   [22 +  20 + y_trans], [0], [1]]
+            front_br = [ [ 1 + x_trans],   [22 +  20 + y_trans], [0], [1]]
+
+            back_ur = [ [-1 + x_trans],   [24 +  20 + y_trans], [2], [1]]
+            back_ul = [ [ 1 + x_trans],   [24 +  20 + y_trans], [2], [1]]
+            back_bl = [ [-1 + x_trans],   [22 +  20 + y_trans], [2], [1]]
+            back_br = [ [ 1 + x_trans],   [22 +  20 + y_trans], [2], [1]]
+
+            box_points  = [ front_ur, front_ul, front_br, front_bl, front_ur,
+                        back_ur, back_ul, back_br, back_bl, back_ur]
+            noFill();
+            beginShape();
+            for(let point of box_points)
+            {
+                let [u, v] = project_camera(camera_matrix, point)
+                draw_on_image(u, v, 100)
+            }
+            endShape()
+            edge_points  = [ [front_ur, back_ur], [ front_br, back_br], [ front_bl, back_bl], [front_ul, back_ul]]
+
+            for (let [front_point, back_point] of edge_points )
+            {
+                beginShape()
+                let [u1, v1]  = project_camera(camera_matrix, front_point)
+                draw_on_image(u1, v1, 100)
+                let [u2, v2]  = project_camera(camera_matrix, back_point)
+                draw_on_image(u2, v2, 100)
+                endShape()
+            }
+        }
+
+
+        function get_camera_matrix()
+        {
+            // camera matrix is
+            // for more reference see:
+            // https://docs.opencv.org/2.4/modules/calib3d/doc/camera_calibration_and_3d_reconstruction.html
+            // first get rotation and translation
+
+            // define roll, pitch yaw
+            //
+            // http://planning.cs.uiuc.edu/node102.html
+            //TODO: use a real rotation matrix library for this math
+            alpha = yaw_rad
+            beta  = pitch_rad
+            gamma = roll_rad
+            yaw_matrix     = math.matrix ([[cos(alpha), -sin(alpha), 0.0],
+                                           [sin(alpha),  cos(alpha), 0.0],
+                                           [        0.0,          0.0, 1.0]]);
+            pitch_matrix   = math.matrix ( [[cos(beta) ,          0.0, sin(beta) ],
+                                            [        0.0,          1.0, 0.0],
+                                            [-sin(beta),          0.0, cos(beta) ]]);
+            roll_matrix    = math.matrix ([ [          1.0,           0.0, 0.0],
+                                          [         0.0,      cos(gamma), -sin(gamma) ],
+                                          [         0.0,      sin(gamma),  cos(gamma) ]] );
+
+            rotation_matrix = math.multiply(math.multiply(yaw_matrix, pitch_matrix) ,  roll_matrix)
+            world_T_camera = math.matrix([ [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 1] ])
+            world_T_camera.subset(math.index([0, 1, 2], [0, 1, 2]), rotation_matrix)
+
+            rotation_for_camera = math.inv( math.matrix([ [1, 0, 0, 0], [0, 0, 1,  0], [0, -1, 0, height_z_m], [0, 0, 0, 1] ]))
+            camera_T_world = math.multiply( rotation_for_camera, math.inv(world_T_camera) )
+
+            // now make the camera matrix
+            // assume scale is zero
+            // a = aspect ratio (known from the camera intrinsics cal)
+            // [f,  0,   cx ]
+            // [0,  a*f, cy ]
+            // [0,  0,   1  ]
+            focal_length = get_intrinsics()
+            aspect_ratio =  1 //TODO (twroge): see if there is any requirement that we use the correct aspect ratio
+            calibration_matrix = math.matrix([[focal_length,                   0,  image_scale * img.width/2, 0],
+                                              [0,    aspect_ratio * focal_length,  image_scale * img.height/2, 0],
+                                              [0,                              0,            1, 0],
+                                              [0,                              0,            0, 1] ])
+            camera_matrix = math.multiply(calibration_matrix, camera_T_world)
+            return camera_matrix;
+        }
+
+        function project_camera(camera_matrix, world_point)
+        {
+            image_point = math.multiply(camera_matrix, world_point)
+            scale = image_point.subset(math.index(2, 0))
+            image_point = math.multiply(image_point, 1/scale)
+            return [image_point.subset(math.index(0, 0)), image_point.subset(math.index(1, 0)) ]
+        }
+
+        function draw_extrinsics_values()
+        {
+            fill(255, 0, 255)
+            stroke(0, 0, 0)
+            textSize(32)
+            text("Roll: : " + roll_rad  * 180 / 3.14+ " degrees " , 50, 50)
+            text("Pitch : " + pitch_rad * 180 / 3.14+ " degrees " , 50, 100)
+            text("Height z: " + height_z_m + " m " , 50, 200)
+        }
+
+        function update_time()
+        {
+            time += 0.05;
+        }
+
+        function show_extrinsics()
+        {
+            // draw grid
+            camera_matrix = get_camera_matrix()
+            draw_extrinsics_values()
+            // now just draw the grid
+            draw_grid(camera_matrix)
+            draw_box(camera_matrix)
+            update_time()
+        }
+
+        function get_scale()
+        {
+            return 0.9 * windowHeight / img.height ;
+        }
+
+        function initialize_extrinsics()
+        {
+            height_z_m = 5.0; // meters
+            yaw_rad = 0.0; // radians
+            roll_rad = 0.0;  // radians
+            pitch_rad = 0.0; // radians
+            time = 0.0;
+            angle_min = - 3.14/4;
+            angle_max =   3.14/4;
+        }
+
+        function initialize_sliders()
+        {
+            // make slider to change value of noise and amplitude
+            var pitch_slider = document.getElementById("pitch_slider");
+            var roll_slider = document.getElementById("roll_slider");
+
+            pitch_slider.oninput = function() {
+                  pitch_rad = this.value  / 100 * (angle_max - angle_min) + angle_min;
+                document.getElementById("pitch" ).innerText = "" +  pitch_rad * 180 / 3.14 + " degrees";
+            }
+            pitch_slider.value = 50;
+            roll_slider.oninput = function() {
+                  roll_rad = this.value  / 100 * (angle_max - angle_min) + angle_min;
+                document.getElementById("roll" ).innerText = "" +  roll_rad * 180 / 3.14 + " degrees" ;
+            }
+            roll_slider.value = 50;
+        }
+
+
+        function setup()
+        {
+            image_scale  = get_scale()
+            var canvas = createCanvas(image_scale * img.width, image_scale * img.height);
+            canvas.parent("calibration");
+            colorMode(HSB, 255);
+            initialize_extrinsics()
+            initialize_sliders()
+        }
+
+        function draw()
+        {
+          // placeholder warehouse image
+          image(img, 0, 0, img.width * image_scale, img.height * image_scale);
+          show_extrinsics()
+        }
+
+        function save_extrinsics()
+        {
+            // do a call to:
+            document.getElementById("save_success").innerText = "Saved at " + new Date().toString();
+            fetch("/save/{{image}}/" +  pitch_rad + "/" +  roll_rad + "/" + height_z_m)
+        }
+    </script>
+
+</head>
+<body>
+    <center>
+        <table>
+            <tr> <th> <h1> Extrinsics calibration ui<h1/> </th> </tr>
+            <tr> <th>
+                <p>
+                This plugin just calibrates the camera height, roll and pitch using the origin defined
+                directly below the camera. Use the roll, pitch sliders to change those values. The mouse wheel
+                is used to scale the height up and down.
+
+                The size of each grid square is 3.0 x 3.0 meters. The size of the average pallet is 48" X 40"
+                or about 1.016 m x 1.2192 m for reference.
+                <p>
+				<p style="color:black"  >Pitch: <span id="pitch" ></span></p>
+				<input type="range" step=1 min="1" max="100" value="1" class="slider" id="pitch_slider">
+				<p style="color:black"  >Roll: <span id="roll" ></span></p>
+				<input type="range" step=1 min="1" max="100" value="1" class="slider" id="roll_slider">
+
+                <p>
+				<button type="button" onclick="save_extrinsics()">Save Extrinsics</button>
+                        <div id="save_success"> </div>
+                </p>
+                </th> <th> <div id="calibration"></div> </th> </tr>
+    </center>
+</body>
+</html>

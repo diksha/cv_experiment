@@ -1,0 +1,8 @@
+{% set camera_uuids=JINJA_GET_CAMERA_UUIDS_PARSER() %}
+
+
+- organizations: []
+  zones: []
+  cameras: {{ camera_uuids }}
+  incidents:
+    safety_vest: invalid

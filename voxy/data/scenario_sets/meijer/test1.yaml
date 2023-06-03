@@ -1,0 +1,46 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+name: test1
+scenarios:
+  - video_uuid: meijer/middlebury/aisles_23_26/cha/20210716_0000
+    camera_uuid: meijer/middlebury/aisles_23_26/cha
+    incidents: []
+  - video_uuid: meijer/middlebury/aisles_23_26/cha/20210716_0001
+    camera_uuid: meijer/middlebury/aisles_23_26/cha
+    incidents: []
+  - video_uuid: meijer/middlebury/aisles_23_26/cha/20210716_0002
+    camera_uuid: meijer/middlebury/aisles_23_26/cha
+    incidents: []
+  - video_uuid: meijer/middlebury/aisles_23_26/cha/20210716_0003
+    camera_uuid: meijer/middlebury/aisles_23_26/cha
+    incidents: []
+  - video_uuid: meijer/middlebury/aisles_23_26/cha/20210716_0004
+    camera_uuid: meijer/middlebury/aisles_23_26/cha
+    incidents: []
+  - video_uuid: meijer/middlebury/aisles_23_26/cha/20210716_0005
+    camera_uuid: meijer/middlebury/aisles_23_26/cha
+    incidents: []
+  - video_uuid: meijer/middlebury/aisles_23_26/cha/20210716_0006
+    camera_uuid: meijer/middlebury/aisles_23_26/cha
+    incidents: []
+  - video_uuid: meijer/middlebury/east_dock/cha/20210716_0000
+    camera_uuid: meijer/middlebury/east_dock/cha
+    incidents: []
+  - video_uuid: meijer/middlebury/travel_aisle_bakery/cha/20210716_0000
+    camera_uuid: meijer/middlebury/travel_aisle_bakery/cha
+    incidents: []
+  - video_uuid: meijer/middlebury/travel_aisle_deli/cha/20210716_0000
+    camera_uuid: meijer/middlebury/travel_aisle_deli/cha
+    incidents: []
+  - video_uuid: meijer/middlebury/west_dock_deli/cha/20210716_0000
+    camera_uuid: meijer/middlebury/west_dock_deli/cha
+    incidents: []

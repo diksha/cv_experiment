@@ -1,0 +1,29 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "developer-ca-signer_lib",
+    srcs = [
+        "handler.go",
+        "main.go",
+    ],
+    importpath = "github.com/voxel-ai/voxel/services/platform/devcert/cmd/developer-ca-signer",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//lib/utils/csrsigner",
+        "//lib/utils/x509pem",
+        "//protos/platform/devcert/v1:devcert",
+        "@com_github_aws_aws_lambda_go//events",
+        "@com_github_aws_aws_lambda_go//lambda",
+        "@com_github_aws_aws_sdk_go_v2_config//:config",
+        "@com_github_aws_aws_sdk_go_v2_service_secretsmanager//:secretsmanager",
+        "@com_github_rs_zerolog//:zerolog",
+        "@com_github_rs_zerolog//log",
+        "@org_golang_google_protobuf//encoding/protojson",
+    ],
+)
+
+go_binary(
+    name = "developer-ca-signer",
+    embed = [":developer-ca-signer_lib"],
+    visibility = ["//visibility:public"],
+)

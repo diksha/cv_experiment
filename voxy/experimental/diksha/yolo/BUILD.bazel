@@ -1,0 +1,24 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+
+py_binary(
+    name = "split_train_val",
+    srcs = [
+        "split_train_val.py",
+    ],
+    data = [
+        ":files",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("pandas"),
+        requirement("scikit-learn"),
+        "//core/utils:aws_utils",
+    ],
+)
+
+filegroup(
+    name = "files",
+    srcs = glob(["**"]),
+    visibility = ["//visibility:public"],
+)

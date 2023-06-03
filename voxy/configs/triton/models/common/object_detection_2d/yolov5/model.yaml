@@ -1,0 +1,16 @@
+model:
+  artifact_model_paths:
+      - artifacts_2021-12-06-00-00-00-0000-yolo/best_480_960.engine
+  disable_warmup_generation: true
+  config:
+    platform: tensorrt_plan
+    max_batch_size: 2
+    input:
+      - name: images
+        data_type: TYPE_FP16
+        format: FORMAT_NCHW
+        dims: [3, -1, -1]
+    output:
+      - name: output0
+        data_type: TYPE_FP16
+        dims: [-1, -1]

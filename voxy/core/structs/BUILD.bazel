@@ -1,0 +1,48 @@
+load("@com_google_protobuf//:protobuf.bzl", "py_proto_library")
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+# gazelle:proto disable
+
+py_proto_library(
+    name = "protobufs",
+    srcs = glob(["protobufs/v1/*.proto"]),
+    # We need to override default runtime such that
+    # we can use protobuf dependency from hermetic python
+    # by setting py_libs. Otherwise it will cause other
+    # imports like google.auth etc. to fail due to
+    # namespacing.
+    default_runtime = "",
+    py_libs = [
+        requirement("protobuf"),
+    ],
+    visibility = ["//visibility:public"],
+)
+
+py_library(
+    name = "structs",
+    srcs = glob(["*.py"]),
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("attrs"),
+        requirement("shapely"),
+        requirement("sortedcontainers"),
+        requirement("sympy"),
+        requirement("opencv-python"),
+        requirement("numpy"),
+        requirement("scipy"),
+        requirement("mcap_protobuf_support"),
+        requirement("protobuf"),
+        requirement("foxglove-schemas-protobuf"),
+        ":protobufs",
+        "//core/common/utils:proto_utils",
+        "//core/common/utils:recursive_namespace",
+        "//core/utils:aws_utils",
+        "//core/utils:constants",
+        "//core/utils/math:compare",
+        "//protos/perception/structs/v1:structspb_py_library",
+        "//protos/perception/types/v1:typespb_py_library",
+    ],
+)

@@ -1,0 +1,116 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+
+py_binary(
+    name = "add_person_pit_v2",
+    srcs = [
+        "add_person_pit_v2.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("google-cloud-storage"),
+        "//core/labeling/cvat:cvat_client",
+        "//core/labeling/label_store:labels_backend",
+        "//core/utils:aws_utils",
+    ],
+)
+
+py_binary(
+    name = "add_door_id",
+    srcs = [
+        "add_door_id.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        requirement("google-cloud-storage"),
+        "//core/infra/cloud:gcs_utils",
+        "//core/labeling/cvat:cvat_client",
+        "//core/utils:aws_utils",
+    ],
+)
+
+py_binary(
+    name = "v1_to_v2",
+    srcs = [
+        "v1_to_v2.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("google-cloud-storage"),
+        "//core/labeling/cvat:cvat_client",
+        "//core/labeling/label_store:labels_backend",
+        "//core/utils:aws_utils",
+    ],
+)
+
+py_binary(
+    name = "get_cvat_for_task_name",
+    srcs = [
+        "get_cvat_for_task_name.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/labeling/cvat:cvat_client",
+        "//core/utils:aws_utils",
+    ],
+)
+
+py_binary(
+    name = "cvat_to_scale_camera_config",
+    srcs = [
+        "cvat_to_scale_camera_config.py",
+    ],
+    data = [
+        "//core/labeling/scale/task_creation:scale_taxonomies",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("xmltodict"),
+        "//core/labeling/cvat:cvat_client",
+        "//core/utils:aws_utils",
+        requirement("scaleapi"),
+        "//core/labeling/tools:pull_kinesis_feed_lib",
+        requirement("loguru"),
+        "//core/labeling/scale/lib:scale_batch_wrapper",
+        "//core/labeling/scale/lib:scale_task_retry",
+        "//core/labeling/scale/lib:scale_task_wrapper",
+        requirement("shortuuid"),
+    ],
+)
+
+py_binary(
+    name = "cvat_to_scale_all",
+    srcs = [
+        "cvat_to_scale_all.py",
+    ],
+    data = [
+        "//core/labeling/scale/task_creation:scale_taxonomies",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":cvat_to_scale_camera_config",
+        requirement("xmltodict"),
+        "//core/labeling/cvat:cvat_client",
+        "//core/utils:aws_utils",
+        requirement("scaleapi"),
+        "//core/labeling/tools:pull_kinesis_feed_lib",
+        requirement("loguru"),
+        "//core/labeling/scale/lib:scale_batch_wrapper",
+        "//core/labeling/scale/lib:scale_task_retry",
+        "//core/labeling/scale/lib:scale_task_wrapper",
+        requirement("shortuuid"),
+    ],
+)
+
+py_binary(
+    name = "export_cvat_data",
+    srcs = [
+        "export_cvat_data.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/labeling/cvat:cvat_client",
+        "//core/utils:aws_utils",
+    ],
+)

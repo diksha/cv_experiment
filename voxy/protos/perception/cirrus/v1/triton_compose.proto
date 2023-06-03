@@ -1,0 +1,22 @@
+syntax = "proto3";
+package protos.perception.cirrus.v1;
+option go_package = "github.com/voxel-ai/voxel/protos/perception/cirrus/v1;cirruspb";
+import "protos/perception/cirrus/v1/repo.proto";
+
+// The ProductionGraphModelRepo message is used to specify the paths to the
+// graph configs that would be used to contruct the triton model service.
+message ProductionGraphModelRepo{
+    // The paths to the graph config directory
+    repeated string graph_config_paths = 1;
+    // The name of the triton model repo
+    string name = 2;
+}
+
+// The TritonModel message is used to specify the model 
+// or ensemble that would be used in the triton server
+message TritonModel {
+  oneof model_spec {
+    Model model = 1;
+    Ensemble ensemble = 2;
+  };
+}

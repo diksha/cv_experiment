@@ -1,0 +1,36 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+load("//third_party/sematic:defs.bzl", "voxel_sematic_pipeline")
+
+py_library(
+    name = "lib",
+    srcs = [
+        "lightly_worker.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        requirement("lightly"),
+        requirement("docker"),
+        requirement("sematic"),
+        "//core/infra/sematic/shared:resources",
+        "//core/ml/data/curation:voxel_lightly_utils",
+        "//core/utils:aws_utils",
+        "//core/utils:yaml_jinja",
+    ],
+)
+
+voxel_sematic_pipeline(
+    name = "main",
+    base = "//third_party/sematic:lightly_sematic_base",
+    bases = {
+        "default": "//third_party/sematic:lightly_sematic_base",
+        "lightly-image": "//third_party/sematic:lightly_sematic_base",
+    },
+    data = [
+        "//core/ml/data/curation/configs",
+    ],
+    deps = [
+        ":lib",
+    ],
+)

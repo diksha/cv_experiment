@@ -1,0 +1,16 @@
+exports_files([
+    "aws/dist/aws",
+])
+
+filegroup(
+    name = "aws_cli_files",
+    srcs = glob(["**"]),
+    visibility = ["//visibility:public"],
+)
+
+sh_binary(
+    name = "aws_cli",
+    srcs = ["@aws_cli//:aws/dist/aws"],
+    data = ["@aws_cli//:aws_cli_files"],
+    visibility = ["//visibility:public"],
+)

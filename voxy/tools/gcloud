@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -euo pipefail
+
+FILEPATH=$(readlink -f "$0")
+BASEDIR=$(dirname "$FILEPATH")
+WORKSPACEDIR=$(dirname "$BASEDIR")
+cd "$WORKSPACEDIR" || exit 1
+
+BINARY="$WORKSPACEDIR/bazel-bin/third_party/google/gcloud/gcloud"
+BAZELISK="$WORKSPACEDIR"/tools/bazelisk
+
+if test -f "$BINARY"; then
+	exec "$BINARY" "$@"
+else
+	# Use bazelisk instead of ./bazel depends on gcloud to download credentials.
+	exec "$BAZELISK" run //third_party/google/gcloud:gcloud -- "$@"
+fi

@@ -1,0 +1,106 @@
+#
+# Copyright 2020-2021 Voxel Labs, Inc.
+# All rights reserved.
+#
+# This document may not be reproduced, republished, distributed, transmitted,
+# displayed, broadcast or otherwise exploited in any manner without the express
+# prior written permission of Voxel Labs, Inc. The receipt or possession of this
+# document does not convey any rights to reproduce, disclose, or distribute its
+# contents, or to manufacture, use, or sell anything that it may describe, in
+# whole or in part.
+#
+
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary", "py_library")
+load("//third_party/sematic:defs.bzl", "voxel_sematic_pipeline")
+
+voxel_sematic_pipeline(
+    name = "regression_test_main",
+    base = "//third_party/sematic:cuda_base_image",
+    image_layers = [
+        # Though this dependency isn't a direct dependency
+        # of main, including it here causes it (and its
+        # dependencies) to be placed in their own dedicated
+        # docker layer. This makes it so the bazel & docker
+        # caches can be leveraged for greatly improved build
+        # & push times.
+        "//core/execution/nodes:perception",
+        requirement("sematic"),
+    ],
+    deps = [
+        ":utils",
+        "//core/execution/utils:perception_runner_context",
+        "//core/infra/sematic/perception:graph_config",
+        "//core/infra/sematic/shared:utils",
+        "//core/structs",
+    ],
+)
+
+py_library(
+    name = "utils",
+    srcs = ["utils.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":pipeline",
+        requirement("loguru"),
+        "//core/common:queries",
+        "//core/execution/utils:perception_runner_context",
+        "//core/structs",
+        "//core/utils:perception_portal_graphql_session",
+        "//core/utils:yaml_jinja",
+        "//core/utils/logging/slack:get_slack_webhooks",
+        "//core/utils/logging/slack:synchronous_webhook_wrapper",
+    ],
+)
+
+py_binary(
+    name = "add_regression_scenario",
+    srcs = ["add_regression_scenario.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        "//core/common:queries",
+        "//core/infra/sematic/perception/data_ingestion/ingest_raw_videos:pipeline",
+        "//core/infra/sematic/shared:utils",
+        "//core/ml/data/collection:data_collector_lib",
+        "//core/utils:aws_utils",
+        "//core/utils:perception_portal_graphql_session",
+        "//core/utils:video_utils",
+    ],
+)
+
+voxel_sematic_pipeline(
+    name = "main",
+    base = "//third_party/sematic:cuda_base_image",
+    image_layers = [
+        # Though this dependency isn't a direct dependency
+        # of main, including it here causes it (and its
+        # dependencies) to be placed in their own dedicated
+        # docker layer. This makes it so the bazel & docker
+        # caches can be leveraged for greatly improved build
+        # & push times.
+        "//core/execution/nodes:perception",
+        requirement("sematic"),
+    ],
+    deps = [
+        ":pipeline",
+        "//core/execution/utils:perception_runner_context",
+        "//core/infra/sematic/perception:graph_config",
+        "//core/structs",
+    ],
+)
+
+py_library(
+    name = "pipeline",
+    srcs = ["pipeline.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/infra/sematic/perception:graph_config",
+        "//core/infra/sematic/perception:performance_evaluation",
+        "//core/infra/sematic/perception:run_inferences",
+        "//core/infra/sematic/shared:utils",
+        "//core/utils/struct_utils:scenario_utils",
+        requirement("sematic"),
+        "//core/execution/utils:perception_runner_context",
+    ],
+)

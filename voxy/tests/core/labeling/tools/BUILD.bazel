@@ -1,0 +1,23 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+package(default_visibility = ["//visibility:public"])
+
+voxel_py_test(
+    name = "sync_camera_config_test",
+    srcs = ["sync_camera_config_test.py"],
+    deps = [
+        "//core/labeling/tools:sync_camera_config",
+        "//core/utils:aws_utils",
+        requirement("boto3"),
+        requirement("moto"),
+    ],
+)
+
+voxel_py_test(
+    name = "utils_test",
+    srcs = ["utils_test.py"],
+    deps = [
+        "//core/labeling/tools:sync_camera_config",
+    ],
+)

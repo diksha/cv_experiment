@@ -1,0 +1,33 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+
+# Manually added `/data/yt8m_data/images/` to the train set and copied to gs://voxel-users/common/yolo/dataset2
+names:
+- PIT
+nc: 1
+test:
+- /data/americold/modesto/2020-11-28/test_set/e_dock_north_ch22_20201105185845_20201105200042_lower_3180_upper_3205~f10/images
+- /data/americold/modesto/2020-11-28/test_set/e_dock_north_ch22_20201105185845_20201105200042_lower_1860_upper_1920~f10/images
+- /data/americold/modesto/2020-11-28/test_set/e_dock_north_ch12_20201102001829_20201102041946_lower_5005_upper_5020~f10/images
+- /data/americold/modesto/2020-11-28/test_set/e_dock_north_ch12_20201102001829_20201102041946_lower_1410_upper_1420~f10/images
+- /data/americold/modesto/2020-11-28/test_set/e_dock_north_ch12_20201102001829_20201102041946_lower_11930_upper_11990~f10/images
+train:
+- /data/americold/modesto/2020-11-28/e_dock_north_ch4_20201105000345_20201105040238/images
+- /data/americold/modesto/2020-11-28/e_dock_north_ch4_20201026015837_20201026060339/images
+- /data/americold/modesto/2020-11-28/e_dock_north_ch22_20201104000304_20201104040543/images
+- /data/americold/modesto/2020-11-28/e_dock_north_ch22_20201104000155_20201104040203/images
+- /data/americold/modesto/2020-11-28/e_dock_north_ch12_20201102001829_20201102041946/images
+- /data/americold/modesto/2020-11-28/e_dock_north_ch22_20201105185845_20201105200042/images
+- /data/yt8m_data/images/
+val:
+- /data/americold/modesto/2020-11-28/test_set/e_dock_north_ch22_20201105185845_20201105200042_lower_1410_upper_1470~f10/images
+- /data/americold/modesto/2020-11-28/test_set/e_dock_north_ch12_20201102001829_20201102041946_lower_1201_upper_1227~f10/images

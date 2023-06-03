@@ -1,0 +1,14 @@
+load("@rules_python//python:defs.bzl", "py_library")
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+py_library(
+    name = "triton_model_name",
+    srcs = ["triton_model_name.py"],
+    visibility = ["//visibility:public"],
+)
+
+voxel_py_test(
+    name = "test_triton_model_name",
+    srcs = ["test_triton_model_name.py"],
+    deps = [":triton_model_name"],
+)

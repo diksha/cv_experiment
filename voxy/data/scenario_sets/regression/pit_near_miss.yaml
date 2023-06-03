@@ -1,0 +1,36 @@
+#
+# Copyright 2023 Voxel Labs, Inc.
+# All rights reserved.
+#
+# This document may not be reproduced, republished, distributed, transmitted,
+# displayed, broadcast or otherwise exploited in any manner without the express
+# prior written permission of Voxel Labs, Inc. The receipt or possession of this
+# document does not convey any rights to reproduce, disclose, or distribute its
+# contents, or to manufacture, use, or sell anything that it may describe, in
+# whole or in part.
+#
+#
+scenario_for_incidents: [PIT_NEAR_MISS]
+scenarios:
+  # POSITIVE SCENARIOS
+  - camera_uuid: americold/tacoma/0005/cha
+    incidents: [PIT_NEAR_MISS]
+    video_uuid: americold/tacoma/0005/cha/20d8bd0b-a91d-445d-b172-3e1c2d676a5f
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: [PIT_NEAR_MISS]
+    video_uuid: americold/modesto/0011/cha/0283fba0-4271-4ab5-8a8f-c417d069b1dc
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: [PIT_NEAR_MISS]
+    video_uuid: americold/modesto/0001/cha/92bb47b3-c5a0-4650-b3de-917c6303efd4
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: [PIT_NEAR_MISS]
+    video_uuid: americold/modesto/0001/cha/d1a407f9-ae62-4fc4-9ba8-97ab04821a89
+  - camera_uuid: ppg/cedar_falls/0003/cha
+    incidents: [PIT_NEAR_MISS]
+    video_uuid: ppg/cedar_falls/0003/cha/eeeadc96-c66d-4b0e-b803-1e49c06c3fd0
+  - camera_uuid: americold/ontario/0110/cha
+    incidents: [PIT_NEAR_MISS]
+    video_uuid: americold/ontario/0110/cha/c5d3ba10-c30e-4668-9dcb-9d61838dcd59
+  - camera_uuid: americold/ontario/0104/cha
+    incidents: [PIT_NEAR_MISS]
+    video_uuid: americold/ontario/0104/cha/dbcec521-c9af-4265-b650-de3500957f35

@@ -1,0 +1,14 @@
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "converters",
+    srcs = [
+        "converters.py",
+    ],
+    deps = [
+        "//core/ml/data/loaders/common:converter",
+        "//core/ml/data/loaders/resources/dataloaders",
+    ],
+)

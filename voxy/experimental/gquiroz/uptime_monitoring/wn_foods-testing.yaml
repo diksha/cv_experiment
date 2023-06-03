@@ -1,0 +1,61 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+
+scenarios:
+  - camera_uuid: wn_foods/hayward/0001/cha
+    incidents: [] # DOWNTIME
+    video_uuid: wn_foods/hayward/0001/cha/uptime_monitoring_test/video-1
+  - camera_uuid: wn_foods/hayward/0001/cha
+    incidents: [] # DOWNTIME (LOW LIGHTING)
+    video_uuid: wn_foods/hayward/0001/cha/uptime_monitoring_test/video-2
+  - camera_uuid: wn_foods/hayward/0001/cha
+    incidents: [] # DOWNTIME
+    video_uuid: wn_foods/hayward/0001/cha/uptime_monitoring_test/video-3
+  - camera_uuid: wn_foods/hayward/0001/cha
+    incidents: [] # DOWNTIME
+    video_uuid: wn_foods/hayward/0001/cha/uptime_monitoring_test/video-4
+  - camera_uuid: wn_foods/hayward/0001/cha
+    incidents: [] # DOWNTIME
+    video_uuid: wn_foods/hayward/0001/cha/uptime_monitoring_test/video-5
+  - camera_uuid: wn_foods/hayward/0002/cha
+    incidents: [] # DOWNTIME
+    video_uuid: wn_foods/hayward/0002/cha/uptime_monitoring_test/video-1
+  - camera_uuid: wn_foods/hayward/0003/cha
+    incidents: [] # NO DOWNTIME (PRODUCT ALWAYS MOVING)
+    video_uuid: wn_foods/hayward/0003/cha/uptime_monitoring_test/video-1
+  - camera_uuid: wn_foods/hayward/0003/cha
+    incidents: [] # DOWNTIME
+    video_uuid: wn_foods/hayward/0003/cha/uptime_monitoring_test/video-2
+  - camera_uuid: wn_foods/hayward/0003/cha
+    incidents: [] # DOWNTIME
+    video_uuid: wn_foods/hayward/0003/cha/uptime_monitoring_test/video-3
+  - camera_uuid: wn_foods/hayward/0003/cha
+    incidents: [] # DOWNTIME (LOW LIGHTING)
+    video_uuid: wn_foods/hayward/0003/cha/uptime_monitoring_test/video-4
+  - camera_uuid: wn_foods/hayward/0003/cha
+    incidents: [] # NO DOWNTIME (BUT NO PRODUCT MOVING)
+    video_uuid: wn_foods/hayward/0003/cha/uptime_monitoring_test/video-5
+  - camera_uuid: wn_foods/hayward/0004/cha
+    incidents: [] # NO DOWNTIME (PERIODS OF NO PRODUCT MOVING)
+    video_uuid: wn_foods/hayward/0004/cha/uptime_monitoring_test/video-1
+  - camera_uuid: wn_foods/hayward/0004/cha
+    incidents: [] # DOWNTIME
+    video_uuid: wn_foods/hayward/0004/cha/uptime_monitoring_test/video-2
+  - camera_uuid: wn_foods/hayward/0004/cha
+    incidents: [] # DOWNTIME
+    video_uuid: wn_foods/hayward/0004/cha/uptime_monitoring_test/video-3
+  - camera_uuid: wn_foods/hayward/0004/cha
+    incidents: [] # DOWNTIME (LOW LIGHTING)
+    video_uuid: wn_foods/hayward/0004/cha/uptime_monitoring_test/video-4
+  - camera_uuid: wn_foods/hayward/0004/cha
+    incidents: [] # NO DOWNTIME (PRODUCT ALWAYS MOVING)
+    video_uuid: wn_foods/hayward/0004/cha/uptime_monitoring_test/video-5

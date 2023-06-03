@@ -1,0 +1,116 @@
+load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
+load("@build_stack_rules_proto//rules:proto_compiled_sources.bzl", "proto_compiled_sources")
+load("@build_stack_rules_proto//rules/go:proto_go_library.bzl", "proto_go_library")
+load("@build_stack_rules_proto//rules/py:proto_py_library.bzl", "proto_py_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+go_library(
+    name = "structs",
+    srcs = [
+        "actor.pb.go",
+        "frame.pb.go",
+        "model.pb.go",
+        "perceived_incident.pb.go",
+        "tracklet.pb.go",
+        "vignette.pb.go",
+    ],
+    importpath = "github.com/voxel-ai/voxel/protos/perception/structs/v1",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//protos/perception/types/v1:types",
+        "@org_golang_google_protobuf//reflect/protoreflect",
+        "@org_golang_google_protobuf//runtime/protoimpl",
+        "@org_golang_google_protobuf//types/known/structpb",
+    ],
+)
+
+proto_library(
+    name = "structspb_proto",
+    srcs = [
+        "actor.proto",
+        "frame.proto",
+        "model.proto",
+        "perceived_incident.proto",
+        "tracklet.proto",
+        "vignette.proto",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//protos/perception/types/v1:typespb_proto",
+        "@com_google_protobuf//:struct_proto",
+    ],
+)
+
+proto_compiled_sources(
+    name = "structspb_go_compiled_sources",
+    srcs = [
+        "actor.pb.go",
+        "frame.pb.go",
+        "model.pb.go",
+        "perceived_incident.pb.go",
+        "tracklet.pb.go",
+        "vignette.pb.go",
+    ],
+    output_mappings = [
+        "frame.pb.go=github.com/voxel-ai/voxel/protos/perception/structs/v1/frame.pb.go",
+        "model.pb.go=github.com/voxel-ai/voxel/protos/perception/structs/v1/model.pb.go",
+        "perceived_incident.pb.go=github.com/voxel-ai/voxel/protos/perception/structs/v1/perceived_incident.pb.go",
+        "tracklet.pb.go=github.com/voxel-ai/voxel/protos/perception/structs/v1/tracklet.pb.go",
+        "vignette.pb.go=github.com/voxel-ai/voxel/protos/perception/structs/v1/vignette.pb.go",
+        "actor.pb.go=github.com/voxel-ai/voxel/protos/perception/structs/v1/actor.pb.go",
+    ],
+    plugins = ["@build_stack_rules_proto//plugin/golang/protobuf:protoc-gen-go"],
+    proto = "structspb_proto",
+)
+
+proto_go_library(
+    name = "structspb_go_proto",
+    srcs = [
+        "actor.pb.go",
+        "frame.pb.go",
+        "model.pb.go",
+        "perceived_incident.pb.go",
+        "tracklet.pb.go",
+        "vignette.pb.go",
+    ],
+    importpath = "github.com/voxel-ai/voxel/protos/perception/structs/v1",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//protos/perception/types/v1:typespb_go_proto",
+        "@org_golang_google_grpc//:go_default_library",
+        "@org_golang_google_grpc//codes",
+        "@org_golang_google_grpc//status",
+        "@org_golang_google_protobuf//reflect/protoreflect",
+        "@org_golang_google_protobuf//runtime/protoimpl",
+        "@org_golang_google_protobuf//types/known/structpb",
+    ],
+)
+
+proto_compile(
+    name = "structspb_python_compile",
+    outputs = [
+        "frame_pb2.py",
+        "model_pb2.py",
+        "perceived_incident_pb2.py",
+        "tracklet_pb2.py",
+        "vignette_pb2.py",
+        "actor_pb2.py",
+    ],
+    plugins = ["@build_stack_rules_proto//plugin/builtin:python"],
+    proto = "structspb_proto",
+)
+
+proto_py_library(
+    name = "structspb_py_library",
+    srcs = [
+        "actor_pb2.py",
+        "frame_pb2.py",
+        "model_pb2.py",
+        "perceived_incident_pb2.py",
+        "tracklet_pb2.py",
+        "vignette_pb2.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = ["//protos/perception/types/v1:typespb_py_library"],
+)

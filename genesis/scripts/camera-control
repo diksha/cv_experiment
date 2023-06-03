@@ -1,0 +1,227 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+export PATH="${PATH}:/tmp/voxel-argo/"
+ARGO_SERVER="${ARGO_SERVER:-"argo.voxelplatform.com"}"
+IMAGE_TAG="${IMAGE_TAG:-"v0.52.0"}"
+
+ARGO_TEMPLATE="""
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: CAMERA_IDENTIFIER_PLACEHOLDER
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  namespace: argo-cd
+  annotations:
+    notifications.argoproj.io/subscribe.on-created.slack: devops-alerts
+    notifications.argoproj.io/subscribe.on-health-degraded: devops-alerts
+    notifications.argoproj.io/subscribe.on-sync-failed: devops-alerts
+spec:
+  destination:
+    name: ENV_NAME_PLACEHOLDER-perception
+    namespace: runners-ENV_NAME_PLACEHOLDER
+  source:
+    path: terraform/modules/aws/shared/charts/generic
+    repoURL: 'git@github.com:voxel-ai/genesis'
+    targetRevision: main
+    helm:
+      parameters:
+        - name: fullnameOverride
+          value: CAMERA_IDENTIFIER_PLACEHOLDER
+        - name: env.config.CONFIG_FILE
+          value: CONFIG_FILE_PATH_PLACEHOLDER
+        - name: env.config.ENVIRONMENT
+          value: ENV_NAME_PLACEHOLDER
+        - name: env.config.OTEL_RESOURCE_ATTRIBUTES
+          value: service.name=production-graph,environment_name=ENV_NAME_PLACEHOLDER,service.instance.id=CAMERA_IDENTIFIER_PLACEHOLDER,image.tag=IMAGE_TAG_PLACEHOLDER
+        - name: image.repository
+          value: 360054435465.dkr.ecr.us-west-2.amazonaws.com/voxel/production
+        - name: image.tag
+          value: IMAGE_TAG_PLACEHOLDER
+        - name: command
+          value: /etc/entrypoint.sh
+        - name: 'env.secret_refs[0]'
+          value: runner-secrets
+        - name: 'nodeSelector.nvidia\.com/gpu'
+          value: 'true'
+          forceString: true
+        - name: 'nodeSelector.subnet'
+          value: 'public'
+          forceString: true
+        - name: resources.requests.cpu
+          value: '1900m'
+        - name: resources.limits.cpu
+          value: '3800m'
+        - name: resources.requests.memory
+          value: '7500Mi'
+        - name: resources.limits.memory
+          value: '7500Mi'
+        - name: stateful_set
+          value: 'true'
+        - name: non_web_app
+          value: 'true'
+        - name: serviceAccount.create
+          value: 'false'
+        - name: serviceAccount.name
+          value: 'runners-sa'
+        - name: tolerations[0].key
+          value: 'nvidia.com/gpu'
+        - name: tolerations[0].operator
+          value: 'Equal'
+        - name: tolerations[0].value
+          value: 'true'
+          forceString: true
+        - name: tolerations[0].effect
+          value: 'NoSchedule'
+        - name: tolerations[1].key
+          value: 'subnet'
+        - name: tolerations[1].operator
+          value: 'Equal'
+        - name: tolerations[1].value
+          value: 'public'
+          forceString: true
+        - name: tolerations[1].effect
+          value: 'NoSchedule'
+  project: cameras-ENV_NAME_PLACEHOLDER
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - Replace=true
+"""
+
+# Hack function
+__get_os_alias__() {
+	if [[ ${OSTYPE} == "linux-gnu"* ]]; then
+		echo "linux"
+	elif [[ ${OSTYPE} == "darwin"* ]]; then
+		echo "darwin"
+	elif [[ ${OSTYPE} == "cygwin" ]]; then
+		echo "linux"
+	elif [[ ${OSTYPE} == "msys" ]]; then
+		echo "linux"
+	elif [[ ${OSTYPE} == "win32" ]]; then
+		echo "linux"
+	elif [[ ${OSTYPE} == "freebsd"* ]]; then
+		echo "linux"
+	else
+		echo "linux"
+	fi
+}
+
+__ensure_argo__() {
+	if ! command -v argocd &>/dev/null; then
+		echo "Please wait while we're installing ArgoCD CLI"
+		mkdir -p /tmp/voxel-argo/
+		ARGO_VERSION=$(curl --silent "https://api.github.com/repos/argoproj/argo-cd/releases/latest" | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/')
+		curl -sSL -o/tmp/voxel-argo/argocd "https://github.com/argoproj/argo-cd/releases/download/${ARGO_VERSION}/argocd-$(__get_os_alias__)-amd64"
+		chmod +x /tmp/voxel-argo/argocd
+	fi
+}
+
+__resolve_camera_identifier__() {
+	if [[ -z ${CONFIG_FILE_PATH:-} ]]; then
+		read -r -p "Please provide config path relative to 'voxel' repo root: " CONFIG_FILE_PATH
+	fi
+
+	if [[ -z ${ENV_NAME:-} ]]; then
+		read -r -p "Please provide environment name (production | dev ): " ENV_NAME
+	fi
+
+	if [[ -z ${CAMERA_IDENTIFIER:-} ]]; then
+		CAMERA_IDENTIFIER="${CONFIG_FILE_PATH%.yaml}"
+		CAMERA_IDENTIFIER="$(echo "${CAMERA_IDENTIFIER:8}" | sed -r 's/\//-/g')"
+		CAMERA_IDENTIFIER="$(echo "${CAMERA_IDENTIFIER:8}" | sed -r 's/_/-/g')"
+	fi
+}
+
+__template_setup__() {
+	__resolve_camera_identifier__
+
+	if [[ -z ${IMAGE_TAG_OVERRIDE:-} ]]; then
+		read -r -p "Please provide image tag (Default: '${IMAGE_TAG}'  . Leave blank to use this):" IMAGE_TAG_OVERRIDE
+	fi
+	if [[ -n ${IMAGE_TAG_OVERRIDE:-} ]]; then
+		IMAGE_TAG="${IMAGE_TAG_OVERRIDE}"
+	fi
+
+	ARGO_TEMPLATE="${ARGO_TEMPLATE//ENV_NAME_PLACEHOLDER/${ENV_NAME}}"
+	ARGO_TEMPLATE="${ARGO_TEMPLATE//CONFIG_FILE_PATH_PLACEHOLDER/${CONFIG_FILE_PATH}}"
+	ARGO_TEMPLATE="${ARGO_TEMPLATE//CAMERA_IDENTIFIER_PLACEHOLDER/${CAMERA_IDENTIFIER}}"
+	ARGO_TEMPLATE="${ARGO_TEMPLATE//IMAGE_TAG_PLACEHOLDER/${IMAGE_TAG}}"
+
+}
+
+__argo_login__() {
+	echo "Please login to ArgoCD: "
+	argocd login "${ARGO_SERVER}" --sso
+}
+
+__deploy__() {
+	mkdir -p /tmp/voxel-argo/
+	echo "Will be deploying ${CONFIG_FILE_PATH} from image  ${IMAGE_TAG} to ${ENV_NAME} with id ${CAMERA_IDENTIFIER}"
+	_DEPLOYMENT_FILE_="/tmp/voxel-argo/${CAMERA_IDENTIFIER}.yaml"
+	rm -f "${_DEPLOYMENT_FILE_}"
+	echo "${ARGO_TEMPLATE}" >"${_DEPLOYMENT_FILE_}"
+	if [[ -z ${DRY_RUN:-} ]]; then
+		argocd proj list &>/dev/null || __argo_login__
+		if [[ -n ${USE_KUBECTL:-} ]]; then
+			echo "Using Kubectl to apply file ${_DEPLOYMENT_FILE_}"
+			kubectl apply -f "${_DEPLOYMENT_FILE_}"
+		else
+			if [[ -n ${FORCE_DEPLOY:-} ]]; then
+				echo "Creating/Updating Argo application via ${_DEPLOYMENT_FILE_}"
+				argocd app create --upsert -f "${_DEPLOYMENT_FILE_}"
+			else
+				echo "Creating Argo applciation via ${_DEPLOYMENT_FILE_}"
+				argocd app create -f "${_DEPLOYMENT_FILE_}"
+			fi
+		fi
+	else
+		echo "Dry run enabled! Skipping..."
+	fi
+	if [[ -z ${DEBUG:-} ]]; then
+		rm -f "${_DEPLOYMENT_FILE_}" &>/dev/null
+	fi
+}
+
+help() {
+	echo "Help:"
+	echo
+	echo "$(basename "$0") install 				-> Install a new camera (interactive)"
+	echo "$(basename "$0") uninstall <id> 			-> Uninstall a running camera"
+	echo "$(basename "$0") uninstall 				-> Uninstall a running camera (provide camera file and env)"
+	echo "$(basename "$0") list	 			-> List current installations (shows ids)"
+	echo "$(basename "$0") help	 			-> Shows help (Shows this menu)"
+	echo
+}
+
+install() {
+	__ensure_argo__ &>/dev/null &
+	__template_setup__
+	__ensure_argo__
+	__deploy__
+}
+
+uninstall() {
+	__ensure_argo__ &>/dev/null &
+	if [[ -z ${1:-} ]]; then
+		__resolve_camera_identifier__
+	else
+		CAMERA_IDENTIFIER="${1}"
+	fi
+	echo "Uninstalling camera with identifier ${CAMERA_IDENTIFIER}"
+	__ensure_argo__
+	argocd app delete "${CAMERA_IDENTIFIER}"
+}
+
+list() {
+	__ensure_argo__
+	argocd app list
+}
+
+${1:-help} "${@:2}"

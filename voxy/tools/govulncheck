@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# trunk-ignore(shellcheck/SC2016): the single quotes are intentional here
+exec ./bazel run --run_under='cd "$BUILD_WORKING_DIRECTORY" && exec' @org_golang_x_vuln//cmd/govulncheck -- "$@"

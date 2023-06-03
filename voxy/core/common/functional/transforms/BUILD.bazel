@@ -1,0 +1,23 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = [
+    "//core/ml:__subpackages__",
+    "//core/perception:__subpackages__",
+    "//tests:__subpackages__",
+])
+
+py_library(
+    name = "transforms",
+    srcs = [
+        "transforms.py",
+    ],
+    deps = [
+        "//core/common/functional/lib:transform",
+        "//core/common/functional/registry",
+        "//core/datasets/generators:association",
+        "//core/incidents:utils",
+        requirement("numpy"),
+        requirement("opencv-python"),
+    ],
+)

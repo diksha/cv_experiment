@@ -1,0 +1,40 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
+
+go_library(
+    name = "pinholeserver_lib",
+    srcs = [
+        "app.go",
+        "main.go",
+    ],
+    importpath = "github.com/voxel-ai/voxel/services/edge/pinhole/cmd/pinholeserver",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//lib/infra/autocertfetcher",
+        "//lib/utils/healthcheck",
+        "//services/edge/pinhole/lib/connecthandler",
+        "@com_github_cristalhq_aconfig//:aconfig",
+        "@com_github_rs_zerolog//:zerolog",
+        "@com_github_rs_zerolog//hlog",
+        "@com_github_rs_zerolog//log",
+        "@org_golang_x_exp//slices",
+    ],
+)
+
+go_binary(
+    name = "pinholeserver",
+    embed = [":pinholeserver_lib"],
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "pinholeserver_test",
+    srcs = ["app_test.go"],
+    embed = [":pinholeserver_lib"],
+    deps = [
+        "//lib/utils/mtlstest",
+        "@com_github_cristalhq_aconfig//:aconfig",
+        "@com_github_rs_zerolog//:zerolog",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+    ],
+)

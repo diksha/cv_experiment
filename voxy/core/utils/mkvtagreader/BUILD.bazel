@@ -1,0 +1,32 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary", "py_library")
+
+py_library(
+    name = "mkvtagreader",
+    srcs = [
+        "__init__.py",
+        "elementid.py",
+        "mkvparser.py",
+        ":mkv_element_ids.py",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+py_binary(
+    name = "gen_element_ids",
+    srcs = [
+        "gen_element_ids.py",
+    ],
+    deps = [
+        requirement("defusedxml"),
+        "@rules_python//python/runfiles",
+    ],
+)
+
+genrule(
+    name = "mkv_element_ids",
+    srcs = ["@matroska_specification//:ebml_matroska.xml"],
+    outs = ["mkv_element_ids.py"],
+    cmd = "./$(location gen_element_ids) < \"$<\" > \"$@\"",
+    tools = [":gen_element_ids"],
+)

@@ -1,0 +1,22 @@
+---
+RecipeFormatVersion: '2020-01-25'
+ComponentName: $$COMPONENT_NAME$$
+ComponentVersion: $$COMPONENT_VERSION$$
+ComponentDescription: Voxel EdgeConfig depdendency test
+ComponentPublisher: Me
+ComponentConfiguration:
+ComponentDependencies:
+  voxel.edge.EdgeConfigDev:
+    VersionRequirement: ">=0.0.1"
+Manifests:
+- Name: Install edgeconfig dependency test daemon
+  Platform:
+    os: linux
+  Lifecycle:
+    Startup:
+      Script: |
+        set -eu
+        echo DEPENDENCY TEST STARTING UP
+  Artifacts:
+  - Uri: $$COMPONENT_ARTIFACT_URI$$
+    Unarchive: ZIP

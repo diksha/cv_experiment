@@ -1,0 +1,28 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+py_library(
+    name = "neomodel_context",
+    srcs = glob(
+        include = [
+            "*.py",
+        ],
+    ),
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/metaverse",
+    ],
+)
+
+py_library(
+    name = "backup_wrapper",
+    srcs = ["backup_wrapper.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        requirement("neo4j"),
+        "//core/metaverse",
+        "//core/utils:aws_utils",
+        "//third_party/neo4j_backup:neo4j_extractor",
+    ],
+)

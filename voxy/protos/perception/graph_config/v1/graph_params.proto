@@ -1,0 +1,78 @@
+syntax = "proto3";
+package protos.perception.graph_config.v1;
+option go_package = "github.com/voxel-ai/voxel/protos/perception/graph_config/v1;graphconfigpb";
+import "protos/perception/graph_config/v1/incident_machine_params.proto";
+import "protos/perception/graph_config/v1/perception_params.proto";
+
+message Camera {
+    optional string arn = 1;
+    optional int32 version = 2; 
+    optional int32 fps = 3;
+}
+
+message IncidentPublisherConfig {
+    optional bool enabled = 1;
+    optional string sns_topic_arn = 2;
+}
+
+message IncidentConfig {
+    optional ModelConfig incident_machine_params = 1;
+    repeated string monitors_requested = 2 [deprecated=true];
+    repeated string state_machine_monitors_requested = 3;
+    optional bool should_generate_on_cooldown = 4;
+    optional bool incident_machine_enabled = 5;
+    optional bool dry_run = 6;
+    optional bool generate_temp_subdirs = 7;
+    optional string temp_directory = 8;
+    optional IncidentPublisherConfig publisher = 9;
+}
+
+message TemporalConfig {
+    optional int32 max_past_frames = 1;
+    optional int32 max_future_frames = 2;
+    optional int32 expire_threshold_ms = 3;
+    optional int32 max_frame_segments = 4;
+}
+
+message PublisherConfig {
+    optional bool enabled = 1;
+    optional string portal_host = 2;
+    optional string auth_token = 3;
+    optional string organization_key = 4;
+    optional string kinesis_frame_structs_stream = 5;
+}
+
+message PublisherStateConfig {
+    optional int32 batch_max_bytes = 1;
+    optional int32 batch_max_latency_seconds = 2;
+    optional int32 batch_max_message = 3;
+    optional int32 retry_deadline_seconds = 4;
+    optional string emulator_host = 5;
+    optional string event_topic = 6;
+    optional string state_topic = 7;
+    optional string kinesis_data_stream = 8;
+}
+
+message StateConfig {
+    optional bool enabled = 1;
+    optional bool add_epoch_time = 2;
+    optional int32 frames_to_buffer = 3;
+    optional PublisherStateConfig publisher = 4;
+}
+
+message AssumeRoleConfig {
+    optional string default_role_arn = 1;
+    optional string read_kvs_arn = 2;
+}
+
+message GraphConfig {
+    optional string camera_uuid = 10;
+    optional Camera camera = 20;
+    optional IncidentConfig incident = 30;
+    optional PerceptionConfig perception = 40;
+    optional TemporalConfig temporal = 50;
+    optional PublisherConfig publisher = 60;
+    optional StateConfig state = 70;
+    optional AssumeRoleConfig assume_role = 80;
+}
+

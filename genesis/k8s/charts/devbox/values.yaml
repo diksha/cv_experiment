@@ -1,0 +1,109 @@
+base_domain: devbox.voxelplatform.com
+devbox:
+  user: voxeluser
+  uid: 20001
+  group: voxel
+  gid: 10001
+stateful_set: false
+use_gpu: false
+replicaCount: 1
+command: /custom-utils/devbox.sh
+args: []
+image:
+  repository: 203670452561.dkr.ecr.us-west-2.amazonaws.com/voxel/ci-cd-base
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: devbox-v2
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext:
+  {}
+  # fsGroup: 2000
+
+securityContext:
+  privileged: true
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: LoadBalancer
+  port: 22
+  containerPort: 22
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-scheme: internal
+    service.beta.kubernetes.io/aws-load-balancer-type: "external"
+    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "instance"
+    service.beta.kubernetes.io/load-balancer-source-ranges: 10.0.0.0/8
+ingress:
+  enabled: false
+  className: ""
+  annotations:
+    {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources:
+  requests:
+    cpu: 3500m
+    memory: 14000Mi
+  limits:
+    cpu: 3500m
+    memory: 14000Mi
+tolerations:
+  - key: nvidia.com/gpu
+    operator: Equal
+    value: "true" # Toleration alone doesn't matter as the node selector is set to true or false as per requirements
+    effect: NoSchedule
+
+env:
+  secret_refs: []
+  config_refs:
+    - ssh-public-key
+  secret: {}
+  config:
+    AWS_DEFAULT_REGION: "us-west-2"
+    OTEL_TRACES_EXPORTER: otlp
+    OTEL_METRICS_EXPORTER: otlp
+    OTEL_LOGS_EXPORTER: otlp
+    OTEL_EXPORTER_OTLP_ENDPOINT: http://default-collector.observability:4317
+    USER_NAME: nobody
+    USER_ID: "1001"
+    DOCKER_HOST: tcp://localhost:2375/
+affinity:
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+    - labelSelector:
+        matchExpressions:
+        - key: application
+          operator: In
+          values:
+          - devbox
+      topologyKey: "kubernetes.io/hostname"
+nodeSelector: {}

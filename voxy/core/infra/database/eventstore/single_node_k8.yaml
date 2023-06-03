@@ -1,0 +1,103 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+
+# ./tools/kubectl --context=gke_sodium-carving-227300_us-west1_west1-autopilot apply -f core/infra/database/eventstore/single_node_k8.yaml
+---
+apiVersion: v1
+kind: Service
+metadata:
+  # Don't start the name with eventstore as kube sets env
+  # variable which mess up with eventstore db.
+  name: service-eventstore 
+  namespace: default
+  labels:
+    name: eventstore
+spec:
+  ports:
+  - port: 2113
+    targetPort: 2113
+    protocol: TCP
+  selector:
+    role: eventstore
+  type: LoadBalancer
+  loadBalancerIP: 35.197.113.139  # Reserved static IP for eventstore
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: eventstore
+  namespace: default
+spec:
+  serviceName: eventstore
+  replicas: 1
+  selector:
+    matchLabels:
+      role: eventstore
+  template:
+    metadata:
+      labels:
+        role: eventstore
+    spec:
+      securityContext:
+        fsGroup: 1000
+      containers:
+        - name: eventstore
+          image: "eventstore/eventstore:21.6.0-buster-slim"
+          imagePullPolicy: IfNotPresent
+          command: ["/bin/sh", "-c"]
+          args:
+            - curl -L https://github.com/EventStore/es-gencert-cli/releases/download/1.0.2/es-gencert-cli_1.0.2_Linux-x86_64.tar.gz -o /tmp/es-gencert-cli_1.0.2_Linux-x86_64.tar.gz;
+              tar xvf /tmp/es-gencert-cli_1.0.2_Linux-x86_64.tar.gz -C /tmp;
+              /tmp/es-gencert-cli create-node -ca-certificate /etc/secrets/tls.crt -ca-key /etc/secrets/tls.key -out /tmp/certs/ -dns-names localhost;
+              /opt/eventstore/eventstored;
+          env: 
+            - name: EVENTSTORE_TRUSTED_ROOT_CERTIFICATES_PATH
+              value: /etc/secrets
+            - name: EVENTSTORE_CERTIFICATE_FILE
+              value: /tmp/certs/node.crt
+            - name: EVENTSTORE_CERTIFICATE_PRIVATE_KEY_FILE
+              value: /tmp/certs/node.key
+            - name: EVENTSTORE_RUN_PROJECTIONS
+              value: "ALL"
+          ports:
+            - containerPort: 2113
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 2000m
+              memory: 8000Mi
+            requests:
+              cpu: 2000m
+              memory: 8000Mi
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/eventstore
+            - name: secrets
+              mountPath: /etc/secrets
+              readOnly: true
+      volumes:
+        - name: secrets
+          secret:
+            secretName: eventstoredb-cert
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+        namespace: default
+        labels:
+          app.kubernetes.io/name: eventstore
+          app.kubernetes.io/instance: eventstore
+      spec:
+        accessModes:
+          - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: "40Gi"

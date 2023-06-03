@@ -1,0 +1,156 @@
+load("//experimental/jorge/modelrepo:defs.bzl", "triton_model_repository")
+
+triton_model_repository(
+    name = "americold_modesto",
+    config = "americold_modesto.yaml",
+    data = [
+        "@artifacts_02_05_2023_spill_generalized_jit",
+        "@artifacts_03_05_2023_americold_modesto_0011_cha",
+        "@artifacts_03_21_2023_pose_0630_jit_update",
+        "@artifacts_03_23_2023_overreaching_model_jit",
+        "@artifacts_2021-12-06-00-00-00-0000-yolo",
+        "@artifacts_2022-10-26_americold_modesto_0001_cha",
+        "@artifacts_2022-10-26_americold_modesto_0002_cha",
+        "@artifacts_2022-10-26_americold_modesto_0003_cha",
+        "@artifacts_2022-10-26_americold_modesto_0005_cha",
+        "@artifacts_2022-10-26_americold_modesto_0009_cha",
+        "@artifacts_yolo_v5_post_processing_04_11_2023",
+        "@artifacts_yolo_v5_pre_processing_04_13_2023",
+    ],
+    repo_path = "s3://voxel-experimental-triton-models/ensemble-experiment",
+)
+
+triton_model_repository(
+    name = "uscold_quakertown",
+    config = "uscold_quakertown.yaml",
+    data = [
+        "@artifacts_02_05_2023_spill_generalized_jit",
+        "@artifacts_03_21_2023_pose_0630_jit_update",
+        "@artifacts_03_23_2023_overreaching_model_jit",
+        "@artifacts_03_24_2023_carry_classifier_jit",
+        "@artifacts_04_18_2023_voxel_safetyvest_vit_quakertown_laredo_2022_08_24_jit",
+        "@artifacts_2022-10-04-18-20-08-f6eb-yolo",
+        "@artifacts_2022-10-28_uscold_quakertown_0002_cha",
+        "@artifacts_hard_hat_occlusion_vit_v4_2022-11-18-jit",
+        "@artifacts_yolo_v5_post_processing_04_11_2023",
+        "@artifacts_yolo_v5_pre_processing_04_13_2023",
+    ],
+    repo_path = "s3://voxel-experimental-triton-models/ensemble-experiment",
+)
+
+triton_model_repository(
+    name = "piston-automotive_marion",
+    config = "piston-automotive_marion.yaml",
+    data = [
+        "@artifacts_01_18_2023_piston-automotive-yolo",
+        "@artifacts_03_21_2023_pose_0630_jit_update",
+        "@artifacts_03_23_2023_overreaching_model_jit",
+        "@artifacts_03_24_2023_carry_classifier_jit",
+        "@artifacts_2022-11-15-03-38-16-91db-yolo",
+        "@artifacts_yolo_v5_post_processing_04_11_2023",
+        "@artifacts_yolo_v5_pre_processing_04_13_2023",
+    ],
+    repo_path = "s3://voxel-experimental-triton-models/ensemble-experiment",
+)
+
+triton_model_repository(
+    name = "ppg_cedar-falls",
+    config = "ppg_cedar-falls.yaml",
+    data = [
+        "@artifacts_01_18_2023_piston-automotive-yolo",
+        "@artifacts_02_05_2023_spill_generalized_jit",
+        "@artifacts_03_21_2023_pose_0630_jit_update",
+        "@artifacts_03_23_2023_overreaching_model_jit",
+        "@artifacts_03_24_2023_carry_classifier_jit",
+        "@artifacts_04_18_2023_voxel_safetyvest_vit_general_2022-09-21-jit",
+        "@artifacts_bumpcap_vit_99_46_34k_2022-12-20-jit",
+        "@artifacts_yolo_v5_post_processing_04_11_2023",
+        "@artifacts_yolo_v5_pre_processing_04_13_2023",
+    ],
+    repo_path = "s3://voxel-experimental-triton-models/ensemble-experiment",
+)
+
+triton_model_repository(
+    name = "trieagle_ocala",
+    config = "trieagle_ocala.yaml",
+    data = [
+        "@artifacts_02_05_2023_spill_generalized_jit",
+        "@artifacts_03_21_2023_pose_0630_jit_update",
+        "@artifacts_03_23_2023_overreaching_model_jit",
+        "@artifacts_03_24_2023_carry_classifier_jit",
+        "@artifacts_04_18_2023_voxel_safetyvest_vit_arlington_2022-09-08-jit",
+        "@artifacts_2022-10-28_trieagle_ocala_0001_cha",
+        "@artifacts_2022-10-28_trieagle_ocala_0005_cha",
+        "@artifacts_2022-11-09-22-58-28-2d35-yolo",
+        "@artifacts_yolo_v5_post_processing_04_11_2023",
+        "@artifacts_yolo_v5_pre_processing_04_13_2023",
+    ],
+    repo_path = "s3://voxel-experimental-triton-models/ensemble-experiment",
+)
+
+triton_model_repository(
+    name = "ulta_dallas",
+    config = "ulta_dallas.yaml",
+    data = [
+        "@artifacts_02_05_2023_spill_generalized_jit",
+        "@artifacts_02_06_2023_generalized_EXIT_Door_new",
+        "@artifacts_02_27_2023_michaels_wesco_office_yolo",
+        "@artifacts_03_03_2023_ulta_dallas_0004_cha",
+        "@artifacts_03_21_2023_pose_0630_jit_update",
+        "@artifacts_03_23_2023_overreaching_model_jit",
+        "@artifacts_03_24_2023_carry_classifier_jit",
+        "@artifacts_04_03_2023_ulta_dallas_0003_cha_local",
+        "@artifacts_yolo_v5_post_processing_04_11_2023",
+        "@artifacts_yolo_v5_pre_processing_04_13_2023",
+    ],
+    repo_path = "s3://voxel-experimental-triton-models/ensemble-experiment",
+)
+
+triton_model_repository(
+    name = "verst_walton",
+    config = "verst_walton.yaml",
+    data = [
+        "@artifacts_03_21_2023_pose_0630_jit_update",
+        "@artifacts_03_23_2023_overreaching_model_jit",
+        "@artifacts_03_24_2023_carry_classifier_jit",
+        "@artifacts_04_18_2023_voxel_safetyvest_vit_laredo_walton_2022-10-05-jit",
+        "@artifacts_2022-10-04-18-20-08-f6eb-yolo",
+        "@artifacts_yolo_v5_post_processing_04_11_2023",
+        "@artifacts_yolo_v5_pre_processing_04_13_2023",
+    ],
+    repo_path = "s3://voxel-experimental-triton-models/ensemble-experiment",
+)
+
+triton_model_repository(
+    name = "wesco_reno",
+    config = "wesco_reno.yaml",
+    data = [
+        "@artifacts_02_06_2023_generalized_EXIT_Door_new",
+        "@artifacts_02_27_2023_michaels_wesco_office_yolo",
+        "@artifacts_03_21_2023_pose_0630_jit_update",
+        "@artifacts_03_23_2023_overreaching_model_jit",
+        "@artifacts_03_24_2023_carry_classifier_jit",
+        "@artifacts_04_18_2023_voxel_safetyvest_vit_general_2022-09-21-jit",
+        "@artifacts_yolo_v5_post_processing_04_11_2023",
+        "@artifacts_yolo_v5_pre_processing_04_13_2023",
+    ],
+    repo_path = "s3://voxel-experimental-triton-models/ensemble-experiment",
+)
+
+triton_model_repository(
+    name = "wn-foods_hayward",
+    config = "wn-foods_hayward.yaml",
+    data = [
+        "@artifacts_01_09_2023_wn_foods_hayward_0009_cha",
+        "@artifacts_01_09_2023_wn_foods_hayward_0012_cha",
+        "@artifacts_02_05_2023_spill_generalized_jit",
+        "@artifacts_02_15_2023_wn_foods_hayward_0011_cha",
+        "@artifacts_03_21_2023_pose_0630_jit_update",
+        "@artifacts_03_23_2023_overreaching_model_jit",
+        "@artifacts_03_24_2023_carry_classifier_jit",
+        "@artifacts_2022-11-15-03-38-16-91db-yolo",
+        "@artifacts_yolo_v5_post_processing_04_11_2023",
+        "@artifacts_yolo_v5_pre_processing_04_13_2023",
+    ],
+    repo_path = "s3://voxel-experimental-triton-models/ensemble-experiment",
+)

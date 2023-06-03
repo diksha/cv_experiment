@@ -1,0 +1,6 @@
+[profile production]
+role_arn=arn:aws:iam::360054435465:role/sematic_access_assumable_role
+web_identity_token_file = /var/run/secrets/eks.amazonaws.com/serviceaccount/token
+[profile staging]
+role_arn=arn:aws:iam::115099983231:role/sematic_access_assumable_role
+web_identity_token_file = /var/run/secrets/eks.amazonaws.com/serviceaccount/token

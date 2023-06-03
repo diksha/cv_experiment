@@ -1,0 +1,35 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "buildtriton",
+    srcs = [
+        "model_repo_compose.go",
+        "triton_config_compose.go",
+    ],
+    importpath = "github.com/voxel-ai/voxel/services/perception/cirrus/cmd/buildtriton",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//lib/graphconfig",
+        "//lib/utils/go/filesystem",
+        "//protos/perception/cirrus/v1:cirrus",
+        "//protos/perception/graph_config/v1:graph_config",
+        "@com_github_hashicorp_go_set//:go-set",
+    ],
+)
+
+go_test(
+    name = "buildtriton_test",
+    srcs = [
+        "model_repo_compose_test.go",
+        "triton_config_compose_test.go",
+    ],
+    deps = [
+        ":buildtriton",
+        "//lib/utils/go/filesystem/filesystemfakes",
+        "//protos/perception/cirrus/v1:cirrus",
+        "//protos/perception/graph_config/v1:graph_config",
+        "@com_github_stretchr_testify//assert",
+        "@io_k8s_sigs_yaml//:yaml",
+        "@org_golang_google_protobuf//encoding/protojson",
+    ],
+)

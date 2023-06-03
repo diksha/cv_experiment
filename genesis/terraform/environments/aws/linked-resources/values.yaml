@@ -1,0 +1,3 @@
+state_prefix: aws-shared-svc-nd-links-v1
+variables:
+  environment: development

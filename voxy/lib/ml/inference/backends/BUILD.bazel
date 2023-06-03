@@ -1,0 +1,51 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "trt",
+    srcs = ["trt.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("nvidia-tensorrt"),
+        requirement("numpy"),
+        requirement("torch"),
+        requirement("opencv-python"),
+        ":base",
+    ],
+)
+
+py_library(
+    name = "triton",
+    srcs = ["triton.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("torch"),
+        requirement("numpy"),
+        requirement("tritonclient"),
+        ":base",
+        "//core/structs",
+        "//lib/infra/utils:resolve_model_path",
+        "//lib/utils/triton:triton_model_name",
+    ],
+)
+
+py_library(
+    name = "torchscript",
+    srcs = ["torchscript.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("torch"),
+        ":base",
+    ],
+)
+
+py_library(
+    name = "base",
+    srcs = ["base.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("torch"),
+    ],
+)

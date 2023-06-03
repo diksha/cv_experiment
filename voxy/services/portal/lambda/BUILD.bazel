@@ -1,0 +1,35 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+load("//third_party/aws/lambda:defs.bzl", "aws_lambda", "py_aws_lambda_container_image")
+
+py_binary(
+    name = "states_events_rollup",
+    srcs = ["states_events_rollup.py"],
+    deps = [
+        requirement("aws-lambda-powertools"),
+        requirement("loguru"),
+        "//core/portal:app_lib",
+    ],
+)
+
+aws_lambda(
+    name = "states_events_rollup-staging",
+    function_name = "portal-staging-states-events-rollup",
+    image = ":states_events_rollup-image",
+    image_registry = "115099983231.dkr.ecr.us-west-2.amazonaws.com",
+    image_repository = "services/portal/lambdas/states_events_rollup",
+)
+
+aws_lambda(
+    name = "states_events_rollup-production",
+    function_name = "portal-production-states-events-rollup",
+    image = ":states_events_rollup-image",
+    image_registry = "360054435465.dkr.ecr.us-west-2.amazonaws.com",
+    image_repository = "services/portal/lambdas/states_events_rollup",
+)
+
+py_aws_lambda_container_image(
+    name = "states_events_rollup-image",
+    handler = "states_events_rollup.lambda_handler",
+    target = ":states_events_rollup",
+)

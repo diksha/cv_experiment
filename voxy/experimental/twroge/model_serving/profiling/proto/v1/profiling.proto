@@ -1,0 +1,33 @@
+//
+// Copyright 2022 Voxel Labs, Inc.
+// All rights reserved.
+//
+// This document may not be reproduced, republished, distributed, transmitted,
+// displayed, broadcast or otherwise exploited in any manner without the express
+// prior written permission of Voxel Labs, Inc. The receipt or possession of this
+// document does not convey any rights to reproduce, disclose, or distribute its
+// contents, or to manufacture, use, or sell anything that it may describe, in
+// whole or in part.
+//
+
+syntax = "proto3";
+
+package experimental.twroge.model_serving.profiling.proto.v1;
+
+message SystemUsage {
+  double cpu_percent = 1;
+  double memory_percent = 2;
+  uint64 memory_total = 3;
+  uint64 memory_used = 4;
+  repeated double gpu_utilization = 5 [deprecated = true];
+  repeated double gpu_memory = 6 [deprecated = true];
+  double gpu_utilization_total = 7 [deprecated = true];
+  double gpu_memory_total = 8 [deprecated = true];
+  double cpu_count_total = 9;
+  repeated double cpu_core_counts = 10;
+}
+
+message GpuUsage {
+  double gpu_percent = 1;
+  double gpu_memory_percent = 2;
+}

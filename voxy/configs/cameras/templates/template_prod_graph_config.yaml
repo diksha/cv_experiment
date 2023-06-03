@@ -1,0 +1,41 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+camera:
+  version: 1
+
+perception:
+  detector_tracker:
+    height: 736
+    width: 1280
+    actor2class: {PERSON: 0, PIT: 1}
+  pose:
+    enabled: False
+  lift_classifier:
+    enabled: False
+  reach_classifier:
+    enabled: False
+  door_classifier:
+    enabled: False
+  vest_classifier:
+    enabled: False
+  hat_classifier:
+    enabled: False
+  motion_zone_detection:
+    enabled: False
+
+incident:
+  monitors_requested: []
+  state_machine_monitors_requested: []
+  incident_machine_params: {}
+
+publisher:
+  organization_key: VOXEL_SANDBOX

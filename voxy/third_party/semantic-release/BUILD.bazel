@@ -1,0 +1,5 @@
+load("@npm//:semantic-release/package_json.bzl", "bin")
+
+bin.semantic_release_binary(
+    name = "semantic-release",
+)

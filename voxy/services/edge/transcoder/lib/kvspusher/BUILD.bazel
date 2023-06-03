@@ -1,0 +1,41 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "kvspusher",
+    srcs = [
+        "kvspusher.go",
+        "mkv_fragment.go",
+    ],
+    importpath = "github.com/voxel-ai/voxel/services/edge/transcoder/lib/kvspusher",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_at_wat_ebml_go//:ebml-go",
+        "@com_github_at_wat_ebml_go//mkv",
+        "@com_github_aws_aws_sdk_go_v2//aws",
+        "@com_github_aws_aws_sdk_go_v2//aws/signer/v4:signer",
+        "@com_github_aws_aws_sdk_go_v2_service_kinesisvideo//:kinesisvideo",
+        "@com_github_aws_aws_sdk_go_v2_service_kinesisvideo//types",
+    ],
+)
+
+go_test(
+    name = "kvspusher_test",
+    srcs = [
+        "kvspusher_test.go",
+        "mkv_fragment_test.go",
+    ],
+    data = ["@voxel_kvspusher_testdata"],
+    deps = [
+        ":kvspusher",
+        "//go/core/utils/ffmpeg",
+        "//go/core/utils/ffmpeg/ffmpegbazel",
+        "//lib/utils/aws/fake",
+        "@com_github_aws_aws_sdk_go_v2//aws",
+        "@com_github_aws_aws_sdk_go_v2_credentials//:credentials",
+        "@com_github_aws_aws_sdk_go_v2_service_kinesisvideo//:kinesisvideo",
+        "@com_github_davecgh_go_spew//spew",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+        "@io_bazel_rules_go//go/tools/bazel:go_default_library",
+    ],
+)

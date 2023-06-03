@@ -1,0 +1,40 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+
+# This can be run in development with this command:
+#
+#   ENVIRONMENT=development ./bazel run services/portal/configs/tools:sync_incident_types
+#
+py_binary(
+    name = "sync_incident_types",
+    srcs = [
+        "sync_incident_types.py",
+    ],
+    env = {
+        "DJANGO_SETTINGS_MODULE": "core.portal.voxel.settings",
+    },
+    deps = [
+        requirement("django"),
+        "//core/portal:app_lib",
+        "//services/portal/configs:incident_types",
+    ],
+)
+
+# This can be run in development with this command:
+#
+#   ENVIRONMENT=development ./bazel run services/portal/configs/tools:sync_perceived_event_rate_definitions
+#
+py_binary(
+    name = "sync_perceived_event_rate_definitions",
+    srcs = [
+        "sync_perceived_event_rate_definitions.py",
+    ],
+    env = {
+        "DJANGO_SETTINGS_MODULE": "core.portal.voxel.settings",
+    },
+    deps = [
+        requirement("django"),
+        "//core/portal:app_lib",
+        "//services/portal/configs:perceived_event_rate_definitions",
+    ],
+)

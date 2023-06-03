@@ -1,0 +1,10 @@
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+voxel_py_test(
+    name = "data_collector_test",
+    srcs = ["data_collector_test.py"],
+    tags = ["manual"],
+    deps = [
+        "//core/ml/data/collection:data_collector",
+    ],
+)

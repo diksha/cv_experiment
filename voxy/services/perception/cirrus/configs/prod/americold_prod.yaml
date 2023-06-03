@@ -1,0 +1,4 @@
+model_repo_name: "americold_modesto"
+graph_config_paths:
+    - configs/cameras/americold/modesto/0001
+    - configs/cameras/americold/ontario

@@ -1,0 +1,120 @@
+#
+# Copyright 2023 Voxel Labs, Inc.
+# All rights reserved.
+#
+# This document may not be reproduced, republished, distributed, transmitted,
+# displayed, broadcast or otherwise exploited in any manner without the express
+# prior written permission of Voxel Labs, Inc. The receipt or possession of this
+# document does not convey any rights to reproduce, disclose, or distribute its
+# contents, or to manufacture, use, or sell anything that it may describe, in
+# whole or in part.
+#
+#
+scenario_for_incidents: [SAFETY_VEST]
+scenarios:
+  # POSITIVE SCENARIOS
+  - camera_uuid: uscold/laredo/dock04/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: uscold/laredo/dock04/cha/0e70d5fd-2d39-43be-92bf-1244b7eeba14_0000
+  - camera_uuid: uscold/laredo/dock04/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: uscold/laredo/dock04/cha/98456299-357d-4cb0-9670-a22dd97fa1bd_0000
+  - camera_uuid: uscold/laredo/room_f1/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: uscold/laredo/room_f1/cha/98d5a2ea-4688-4cde-9aa1-2cceebab9525_0000
+  - camera_uuid: uscold/laredo/doors_14_20/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: uscold/laredo/doors_14_20/cha/scenarios/SAFETY_VEST/POSITIVE/5da393dc-7bb0-4e4f-8e9d-93bd9d91635d_0000
+  - camera_uuid: uscold/laredo/room_d1p/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: uscold/laredo/room_d1p/cha/scenarios/SAFETY_VEST/POSITIVE/6e485b50-c0e3-4f10-ada1-36dbdb962497_0000
+  - camera_uuid: uscold/laredo/dock03/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: uscold/laredo/dock03/cha/scenarios/SAFETY_VEST/POSITIVE/95dfe8f2-3453-4ac0-a432-770bb0b58677_0000
+  - camera_uuid: uscold/quakertown/0001/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: uscold/quakertown/0001/cha/scenarios/SAFETY_VEST/POSITIVE/da169464-c885-4005-a227-aa4b9bda4237_0000
+  - camera_uuid: uscold/quakertown/0006/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: uscold/quakertown/0006/cha/scenarios/SAFETY_VEST/POSITIVE/fc900667-95c7-4b56-960a-fbadf54d2247_0000
+  - camera_uuid: uscold/quakertown/0007/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: uscold/quakertown/0007/cha/scenarios/SAFETY_VEST/POSITIVE/ccb51ca2-482f-49bb-b2f2-f935967fef7a_0000
+  - camera_uuid: uscold/quakertown/0008/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: uscold/quakertown/0008/cha/scenarios/SAFETY_VEST/POSITIVE/b3ce996a-52f5-450e-a809-10c031398b85_0000
+  - camera_uuid: uscold/quakertown/0009/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: uscold/quakertown/0009/cha/scenarios/SAFETY_VEST/POSITIVE/2d28481f-1aa7-418b-853d-c8e4a3533f35_0000
+  - camera_uuid: uscold/quakertown/0010/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: uscold/quakertown/0010/cha/scenarios/SAFETY_VEST/POSITIVE/ab5794a1-331d-4a45-851f-cce7b634d69d_0000
+  - camera_uuid: trieagle/ocala/0007/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: trieagle/ocala/0007/cha/scenarios/SAFETY_VEST/POSITIVE/27f4e229-07ed-423c-adcf-8ec285e5e100_0000
+  - camera_uuid: verst/walton/0001/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: verst/walton/0001/cha/scenarios/SAFETY_VEST/POSITIVE/f0262bb1-ad24-48c1-8138-feb6faf8e55b_0000
+  - camera_uuid: verst/walton/0002/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: verst/walton/0002/cha/scenarios/SAFETY_VEST/POSITIVE/ea3c0865-2b0a-4e9c-b413-f476d96ab1b6_0000
+  - camera_uuid: verst/walton/0003/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: verst/walton/0003/cha/scenarios/SAFETY_VEST/POSITIVE/d1e3280a-13ec-4053-b33e-1efe3ae34317_0000
+  - camera_uuid: verst/walton/0004/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: verst/walton/0004/cha/scenarios/SAFETY_VEST/POSITIVE/705cb8ed-3d19-4999-87e2-88cf7f7f2771_0000
+  - camera_uuid: verst/walton/0005/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: verst/walton/0005/cha/scenarios/SAFETY_VEST/POSITIVE/f10d41ef-4656-451f-aaba-3990cdc46410_0000
+  - camera_uuid: verst/walton/0006/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: verst/walton/0006/cha/scenarios/SAFETY_VEST/POSITIVE/d97d48af-359f-4a51-abb1-1961bc05d86d_0000
+  - camera_uuid: verst/walton/0007/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: verst/walton/0007/cha/scenarios/SAFETY_VEST/POSITIVE/3c604ade-6bc5-4afe-ae9b-6e01aa75b774_0000
+  - camera_uuid: verst/walton/0008/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: verst/walton/0008/cha/scenarios/SAFETY_VEST/POSITIVE/d7228090-74e4-436f-936f-ba09d9551b56_0000
+  - camera_uuid: verst/walton/0009/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: verst/walton/0009/cha/scenarios/SAFETY_VEST/POSITIVE/aede6dce-2228-4b25-8470-99ce95b10549_0000
+  - camera_uuid: verst/walton/0010/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: verst/walton/0010/cha/scenarios/SAFETY_VEST/POSITIVE/2c7b7ed2-3d8d-4e7c-986b-4eb41ee0a2ac_0000
+  - camera_uuid: verst/walton/0011/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: verst/walton/0011/cha/scenarios/SAFETY_VEST/POSITIVE/b50dbd86-5dad-4d34-a9a8-8cfa91bfc6d3_0000
+  - camera_uuid: verst/walton/0012/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: verst/walton/0012/cha/scenarios/SAFETY_VEST/POSITIVE/88213543-c6cb-4b0d-b438-73234373e3fe_0000
+  - camera_uuid: wesco/reno/0003/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: wesco/reno/0003/cha/scenarios/SAFETY_VEST/POSITIVE/b677340e-a5c1-4298-ab3a-6befee61e4c3_0000
+  - camera_uuid: wesco/reno/0004/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: wesco/reno/0004/cha/scenarios/SAFETY_VEST/POSITIVE/fdee68ed-c681-44e3-9c12-a38b06da4957_0000
+  - camera_uuid: wesco/reno/0005/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: wesco/reno/0005/cha/scenarios/SAFETY_VEST/POSITIVE/64dac84b-1a79-4ab6-8e1d-c106336dede7_0000
+  - camera_uuid: wesco/reno/0007/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: wesco/reno/0007/cha/scenarios/SAFETY_VEST/POSITIVE/a512552f-6385-4f4c-9f55-297635c84d92_0000
+  - camera_uuid: wesco/reno/0010/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: wesco/reno/0010/cha/scenarios/SAFETY_VEST/POSITIVE/624103b4-12af-4976-b2a8-39ed54cd1131_0000
+  - camera_uuid: wesco/reno/0014/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: wesco/reno/0014/cha/scenarios/SAFETY_VEST/POSITIVE/18929c4d-a212-4cce-91d4-8c54e9e64a10_0000
+  - camera_uuid: wesco/reno/0015/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: wesco/reno/0015/cha/scenarios/SAFETY_VEST/POSITIVE/1032edac-e308-4458-b646-796c0c07fed6_0000
+  - camera_uuid: uscold/laredo/dock04/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: uscold/laredo/dock04/cha/scenarios/SAFETY_VEST/POSITIVE/8141b7a0-12b8-4457-a7ee-003872644aa4_0000
+  - camera_uuid: uscold/laredo/dock03/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: uscold/laredo/dock03/cha/scenarios/SAFETY_VEST/POSITIVE/b08a83ed-a9d8-465d-a668-f0d56cbeb616_0000
+  - camera_uuid: verst/walton/0013/cha
+    incidents: [SAFETY_VEST]
+    video_uuid: verst/walton/0013/cha/scenarios/SAFETY_VEST/POSITIVE/afe961ad-729e-43f4-8e34-9c57f8e3da18_0000

@@ -1,0 +1,8 @@
+FROM ghcr.io/runatlantis/atlantis:v0.22.3
+
+RUN curl -L -o /usr/bin/terragrunt https://github.com/gruntwork-io/terragrunt/releases/download/v0.43.2/terragrunt_linux_amd64
+RUN echo 'd9886c7de21fbe7127251735599f634eb7899f635e7cd73015a7b1a0a25772fc  /usr/bin/terragrunt' > /tmp/terragrunt.sha
+RUN sha256sum -c /tmp/terragrunt.sha || exit 1
+RUN chmod +x /usr/bin/terragrunt
+RUN apk add --no-cache python3 jq
+RUN ln -sf python3 /usr/bin/python

@@ -1,0 +1,27 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+
+py_binary(
+    name = "backup_metaverse",
+    srcs = ["backup_metaverse.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        requirement("neo4j"),
+        "//core/metaverse",
+        "//third_party/neo4j_backup:neo4j_extractor",
+    ],
+)
+
+py_binary(
+    name = "import_metaverse",
+    srcs = ["import_metaverse.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        requirement("neo4j"),
+        requirement("neo4j-backup"),
+        "//core/metaverse",
+        "//third_party/neo4j_backup:neo4j_importer",
+    ],
+)

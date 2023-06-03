@@ -1,0 +1,38 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+py_library(
+    name = "image_writer",
+    srcs = [
+        "image_writer.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("opencv-python"),
+        "//core/ml/data/extraction/utils:data_extraction_helpers",
+        "//core/utils:aws_utils",
+    ],
+)
+
+py_library(
+    name = "label_writer",
+    srcs = [
+        "label_writer.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/ml/data/extraction/label_generation:label_generator",
+        "//core/utils:aws_utils",
+    ],
+)
+
+py_library(
+    name = "status_writer",
+    srcs = [
+        "status_writer.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/utils:aws_utils",
+    ],
+)

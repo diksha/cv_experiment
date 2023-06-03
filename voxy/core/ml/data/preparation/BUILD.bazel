@@ -1,0 +1,12 @@
+package(default_visibility = [
+    "//core/ml:__subpackages__",
+    "//tests/core/ml:__subpackages__",
+])
+
+# py_binary(
+#     name = "generate_logset_binary",
+#     srcs = ["generate_logset_binary.py"],
+#     deps = [
+#         ":generate_logset",
+#     ],
+# )

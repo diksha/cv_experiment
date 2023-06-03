@@ -1,0 +1,13 @@
+ca:
+  url: https://${DNS_NAME}
+  provisioner:
+    name: ${PROVISIONER_NAME}
+    password:
+  certs:
+    root_ca.crt: |
+      ${indent(6, ROOT_CA_CERT_PEM)}
+  config:
+    defaults.json: |-
+      {}
+step-certificates:
+  enabled: false

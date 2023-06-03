@@ -1,0 +1,79 @@
+load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
+load("@build_stack_rules_proto//rules:proto_compiled_sources.bzl", "proto_compiled_sources")
+load("@build_stack_rules_proto//rules/go:proto_go_library.bzl", "proto_go_library")
+load("@build_stack_rules_proto//rules/py:proto_py_library.bzl", "proto_py_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+go_library(
+    name = "examplepb",
+    srcs = [
+        "examplepb.pb.go",
+        "examplepb_grpc.pb.go",
+    ],
+    importpath = "github.com/voxel-ai/voxel/protos/examplepb/v1",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@org_golang_google_grpc//:go_default_library",
+        "@org_golang_google_grpc//codes",
+        "@org_golang_google_grpc//status",
+        "@org_golang_google_protobuf//reflect/protoreflect",
+        "@org_golang_google_protobuf//runtime/protoimpl",
+        "@org_golang_google_protobuf//types/descriptorpb",
+    ],
+)
+
+proto_library(
+    name = "examplepb_proto",
+    srcs = ["examplepb.proto"],
+    visibility = ["//visibility:public"],
+    deps = ["@com_google_protobuf//:descriptor_proto"],
+)
+
+proto_compiled_sources(
+    name = "examplepb_go_compiled_sources",
+    srcs = [
+        "examplepb.pb.go",
+        "examplepb_grpc.pb.go",
+    ],
+    output_mappings = [
+        "examplepb.pb.go=github.com/voxel-ai/voxel/protos/examplepb/v1/examplepb.pb.go",
+        "examplepb_grpc.pb.go=github.com/voxel-ai/voxel/protos/examplepb/v1/examplepb_grpc.pb.go",
+    ],
+    plugins = [
+        "@build_stack_rules_proto//plugin/golang/protobuf:protoc-gen-go",
+        "@build_stack_rules_proto//plugin/grpc/grpc-go:protoc-gen-go-grpc",
+    ],
+    proto = "examplepb_proto",
+)
+
+proto_go_library(
+    name = "examplepb_go_proto",
+    srcs = [
+        "examplepb.pb.go",
+        "examplepb_grpc.pb.go",
+    ],
+    importpath = "github.com/voxel-ai/voxel/protos/examplepb/v1",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@org_golang_google_grpc//:go_default_library",
+        "@org_golang_google_grpc//codes",
+        "@org_golang_google_grpc//status",
+        "@org_golang_google_protobuf//reflect/protoreflect",
+        "@org_golang_google_protobuf//runtime/protoimpl",
+        "@org_golang_google_protobuf//types/descriptorpb",
+    ],
+)
+
+proto_compile(
+    name = "examplepb_python_compile",
+    outputs = ["examplepb_pb2.py"],
+    plugins = ["@build_stack_rules_proto//plugin/builtin:python"],
+    proto = "examplepb_proto",
+)
+
+proto_py_library(
+    name = "examplepb_py_library",
+    srcs = ["examplepb_pb2.py"],
+    visibility = ["//visibility:public"],
+)

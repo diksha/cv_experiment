@@ -1,0 +1,88 @@
+image:
+  repository: sematic/sematic-server-ee
+  pullPolicy: Always
+
+service:
+  create: true
+  port: 80
+  type: ClusterIP
+
+ingress:
+  sematic_dashboard_url: https://sematic.voxelplatform.com
+  class_name: nginx
+  create: true
+  hosts:
+  - host: sematic.voxelplatform.com
+    paths:
+    - path: /
+      pathType: ImplementationSpecific
+  - host: sematic.private.voxelplatform.com
+    paths:
+    - path: /
+      pathType: ImplementationSpecific
+  # Remove once we have everyone using sematic.private
+  - host: sematic-internal.voxelplatform.com
+    paths:
+    - path: /
+      pathType: ImplementationSpecific
+
+auth:
+  authorized_email_domain: "voxelai.com"
+  enabled: true
+  google_oauth_client_id: ${GOOGLE_CLIENT_ID}
+
+aws:
+  enabled: true
+  storage_bucket: 203670452561-sematic-ci-cd
+  bucket_region: us-west-2
+
+deployment:
+  autoscaling:
+    enabled: true
+    max_replicas: 4
+    min_replicas: 1
+    target_cpu_utilization_pct: 100
+  node_selector:
+    nvidia.com/gpu: "false"
+  resources:
+    limits:
+      cpu: 4000m
+      memory: 1000Mi
+    requests:
+      cpu: 4000m
+      memory: 1000Mi
+  socket_io:
+    dedicated: true
+  tolerations:
+  - effect: NoSchedule
+    key: nvidia.com/gpu
+    operator: Equal
+    value: "true"
+  worker_count: 4
+
+service_account:
+  create: false
+
+worker:
+  annotations: {}
+  service_account:
+    name: sematic-worker
+
+slack:
+  enabled: true
+
+rbac:
+  manage_ray: true
+
+ray:
+  enabled: true
+  supports_gpus: true
+  gpu_node_selector: {"node.kubernetes.io/instance-type": "g4dn.xlarge"}
+  non_gpu_node_selector: {}
+  gpu_tolerations:
+    - key: "nvidia.com/gpu"
+      value: "true"
+      operator: Equal
+      effect: NoSchedule
+  non_gpu_tolerations: []
+  gpu_resource_request_key: null

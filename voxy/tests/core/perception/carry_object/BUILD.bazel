@@ -1,0 +1,13 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+package(default_visibility = ["//visibility:public"])
+
+voxel_py_test(
+    name = "carry_object_classifier_test",
+    srcs = ["carry_object_classifier_test.py"],
+    deps = [
+        "//core/perception/carry_object:carry_object_classifier",
+        requirement("torchvision"),
+    ],
+)

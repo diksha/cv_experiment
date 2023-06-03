@@ -1,0 +1,120 @@
+enabled: true
+service:
+  type: LoadBalancer
+  portName: http-web
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-scheme: internal
+    service.beta.kubernetes.io/aws-load-balancer-type: "external"
+    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "instance"
+    service.beta.kubernetes.io/load-balancer-source-ranges: 10.0.0.0/8
+    service.beta.kubernetes.io/aws-load-balancer-additional-resource-tags: map-migrated=d-server-00swbp99drezfh
+grafana.ini:
+  users:
+    auto_assign_org: true
+  auth:
+    disable_login_form: false
+  server:
+    enforce_domain: false
+    domain: ${DOMAIN}
+    root_url: https://${DOMAIN}
+  auth.google:
+    enabled: true
+    client_id: ${GOOGLE_CLIENT_ID}
+    client_secret: ${GOOGLE_CLIENT_SECRET}
+    scopes: https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email
+    auth_url: https://accounts.google.com/o/oauth2/auth
+    token_url: https://accounts.google.com/o/oauth2/token
+    allow_sign_up: true
+  feature_toggles:
+    enable: "tempoSearch tempoBackendSearch tempoServiceGraph"
+adminPassword: ${ADMIN_PASSWORD}
+rbac:
+  pspEnabled: false
+ingress:
+  enabled: false
+sidecar:
+  dashboards:
+    enabled: true
+    label: grafana_dashboard
+    labelValue: "1"
+
+    ## Annotations for Grafana dashboard configmaps
+    ##
+    annotations: {}
+    multicluster:
+      global:
+        enabled: false
+      etcd:
+        enabled: false
+    provider:
+      allowUiUpdates: false
+  datasources:
+    enabled: true
+    defaultDatasourceEnabled: true
+
+    uid: prometheus
+
+    ## URL of prometheus datasource
+    ##
+    # url: http://prometheus-stack-prometheus:9090/
+
+    # If not defined, will use prometheus.prometheusSpec.scrapeInterval or its default
+    # defaultDatasourceScrapeInterval: 15s
+
+    ## Annotations for Grafana datasource configmaps
+    ##
+    annotations: {}
+
+    ## Create datasource for each Pod of Prometheus StatefulSet;
+    ## this uses headless service `prometheus-operated` which is
+    ## created by Prometheus Operator
+    ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/0fee93e12dc7c2ea1218f19ae25ec6b893460590/pkg/prometheus/statefulset.go#L255-L286
+    createPrometheusReplicasDatasources: false
+    label: grafana_datasource
+    labelValue: "1"
+
+extraConfigmapMounts: []
+# - name: certs-configmap
+#   mountPath: /etc/grafana/ssl/
+#   configMap: certs-configmap
+#   readOnly: true
+
+serviceMonitor:
+  # If true, a ServiceMonitor CRD is created for a prometheus operator
+  # https://github.com/coreos/prometheus-operator
+  #
+  enabled: true
+
+  # Path to use for scraping metrics. Might be different if server.root_url is set
+  # in grafana.ini
+  path: "/metrics"
+
+  #  namespace: monitoring  (defaults to use the namespace this chart is deployed to)
+
+  # labels for the ServiceMonitor
+  labels: {}
+
+  # Scrape interval. If not set, the Prometheus default scrape interval is used.
+  #
+  interval: ""
+  scheme: http
+  tlsConfig: {}
+  scrapeTimeout: 30s
+
+  ## RelabelConfigs to apply to samples before scraping
+  ## ref: https://github.com/prometheus-operator/prometheus-operator/blob/main/Documentation/api.md#relabelconfig
+  ##
+  relabelings: []
+  # - sourceLabels: [__meta_kubernetes_pod_node_name]
+  #
+serviceAccount:
+  name: grafana
+  annotations:
+    eks.amazonaws.com/role-arn: ${IAM_ROLE_ARN}
+persistence:
+  enabled: true
+  size: 20Gi
+  storageClassName: gp2-retain # TODO: Fix
+
+plugins:
+  - computest-cloudwatchalarm-datasource

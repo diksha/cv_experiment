@@ -1,0 +1,25 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "metricsagent_lib",
+    srcs = [
+        "logs.go",
+        "main.go",
+    ],
+    importpath = "github.com/voxel-ai/voxel/services/edge/metricsagent/cmd/metricsagent",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//go/edge/metricsctx",
+        "//services/edge/metricsagent/lib/logpublisher",
+        "//services/edge/metricsagent/lib/logtailer",
+        "//services/edge/metricsagent/lib/monitor",
+        "@com_github_aws_aws_sdk_go_v2_config//:config",
+        "@com_github_aws_aws_sdk_go_v2_service_cloudwatch//:cloudwatch",
+    ],
+)
+
+go_binary(
+    name = "metricsagent",
+    embed = [":metricsagent_lib"],
+    visibility = ["//visibility:public"],
+)

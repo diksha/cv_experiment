@@ -1,0 +1,56 @@
+// Copyright 2020-2021 Voxel Labs, Inc.
+// All rights reserved.
+//
+// This document may not be reproduced, republished, distributed, transmitted,
+// displayed, broadcast or otherwise exploited in any manner without the express
+// prior written permission of Voxel Labs, Inc. The receipt or possession of this
+// document does not convey any rights to reproduce, disclose, or distribute its
+// contents, or to manufacture, use, or sell anything that it may describe, in
+// whole or in part.
+syntax = "proto3";
+
+package core.structs.protobufs.v1;
+
+import "core/structs/protobufs/v1/actor.proto";
+
+message State {
+  uint64 timestamp_ms = 1;
+  string camera_uuid = 2;
+  string actor_id = 3;
+  ActorCategory actor_category = 4;
+  uint64 end_timestamp_ms = 5;
+  optional string run_uuid = 6;
+  optional bool door_is_open = 7;
+  optional ActivityType person_activity_type = 8 [deprecated=true];
+  optional PostureType person_posture_type = 9 [deprecated=true];
+  optional bool person_is_wearing_safety_vest = 10;
+  optional bool person_is_wearing_hard_hat = 11;
+  optional bool pit_is_stationary = 12;
+  optional bool person_is_associated = 13;
+  optional bool person_is_in_ped_zone = 14 [deprecated=true];
+  optional bool pit_in_driving_area = 15;
+  optional bool person_in_no_ped_zone = 16;
+  optional bool pit_is_associated = 17;
+  optional PostureType person_lift_type = 18;
+  optional PostureType person_reach_type = 19;
+  optional bool motion_zone_is_in_motion = 20;
+  optional uint64 num_persons_in_no_ped_zone = 21;
+  string track_uuid = 22;
+  optional bool person_is_carrying_object = 23;
+  optional bool obstruction_is_stationary = 24;
+
+  // field added out of order
+  optional DoorState door_state = 50;
+}
+
+// This is intended to be a 1:1 match to the python
+// core.structs.actor.DoorState type. Additionally
+// this has been defined here rather than using the type in `protos/`
+// to avoid mixing the old and new types.
+enum DoorState {
+  // trunk-ignore(buf-lint/ENUM_ZERO_VALUE_SUFFIX)
+  DOOR_STATE_FULLY_OPEN = 0;
+  DOOR_STATE_FULLY_CLOSED = 1;
+  DOOR_STATE_PARTIALLY_OPEN = 2;
+  DOOR_STATE_UNKNOWN = 3;
+}

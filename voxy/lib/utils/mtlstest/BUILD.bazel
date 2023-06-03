@@ -1,0 +1,17 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "mtlstest",
+    srcs = ["mtlstest.go"],
+    importpath = "github.com/voxel-ai/voxel/lib/utils/mtlstest",
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "mtlstest_test",
+    srcs = ["mtlstest_test.go"],
+    deps = [
+        ":mtlstest",
+        "@com_github_stretchr_testify//require",
+    ],
+)

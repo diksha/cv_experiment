@@ -1,0 +1,136 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "SE_Resnet",
+    srcs = [
+        "SE_Resnet.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("torch"),
+    ],
+)
+
+py_library(
+    name = "pPose_nms",
+    srcs = [
+        "pPose_nms.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("torch"),
+        requirement("numpy"),
+    ],
+)
+
+py_library(
+    name = "DUC",
+    srcs = [
+        "DUC.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("torch"),
+    ],
+)
+
+py_library(
+    name = "api",
+    srcs = [
+        "api.py",
+    ],
+    data = [
+        "@artifacts_03_21_2023_pose_0630_jit_update",
+        "@artifacts_pose_0630",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("addict"),
+        requirement("torch"),
+        requirement("numpy"),
+        requirement("opencv-python"),
+        ":DUC",
+        ":SE_Resnet",
+        ":pPose_nms",
+        "//core/structs",
+        "//lib/ml/inference/tasks/human_keypoint_detection_2d/alphapose:factory",
+        "//protos/perception/graph_config/v1:graphconfigpb_py_library",
+    ],
+)
+
+py_library(
+    name = "vit_pose",
+    srcs = [
+        "vit_pose.py",
+    ],
+    data = [
+        "@vit_pose_model_b_multi_coco_jit",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/structs",
+        "//lib/ml/inference/tasks/human_keypoint_detection_2d/vitpose:factory",
+        "//protos/perception/graph_config/v1:graphconfigpb_py_library",
+    ],
+)
+
+py_library(
+    name = "pose_embedder",
+    srcs = [
+        "pose_embedder.py",
+    ],
+    data = [
+        "@artifacts_ergo_ml",
+        "@artifacts_lift_classifier_01192022",
+        "@artifacts_lift_classifier_01282022",
+        "@artifacts_pose_classifier_90",
+        "@artifacts_reach_classifier_01242022",
+        "@artifacts_voxel_ergo_ml_overreaching",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("numpy"),
+        "//core/structs",
+    ],
+)
+
+py_library(
+    name = "lift_classifier",
+    srcs = ["lift_classifier.py"],
+    data = [
+        "@artifacts_03_23_2023_overreaching_model_jit",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/perception/pose:pose_embedder",
+        "//core/structs",
+        requirement("xgboost"),
+        requirement("loguru"),
+    ],
+)
+
+py_library(
+    name = "reach_classifier",
+    srcs = ["reach_classifier.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/perception/pose:pose_embedder",
+        "//core/structs",
+        "//lib/ml/inference/tasks/ergonomic_overreach/fully_connected_v1:factory",
+        requirement("torchvision"),
+    ],
+)
+
+py_library(
+    name = "activity_classifier",
+    srcs = ["activity_classifier.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/perception/pose:pose_embedder",
+        "//core/structs",
+        requirement("torchvision"),
+    ],
+)

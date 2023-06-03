@@ -1,0 +1,36 @@
+syntax = "proto3";
+package protos.platform.bowser.v1;
+option go_package = "github.com/voxel-ai/voxel/protos/platform/bowser/v1";
+
+
+/* ProcessorConsumer represents the business configuration objects used to execute a bowser Processor Consumer */
+
+message ProcessorConsumer {
+    string name = 1; // bowser Processor Consumer allow to have a name displayed on the bowser Web UI
+    ProcessorConsumerAws aws = 2; // bowser Processor Consumer dedicated to AWS
+}
+
+/* ProcessorConsumer represents the business configuration objects used to execute a bowser Processor Consumer dedicated to AWS */
+
+message ProcessorConsumerAws {
+    ProcessorConsumerAwsS3 s3 =1; // Special confiuration dedicated to AWS S3 - consuming batch file on a storage
+    ProcessorConsumerAwsKinesis kinesis =2;// Speciale configuration dedicated to AWS Kinesis - consuming stream of data
+}
+
+/* ProcessorConsumerAwsKinesis represents the business configuration objects used to execute a bowser Processor Consumer dedicated to AWS Kinesis  */
+
+message ProcessorConsumerAwsKinesis {
+}
+
+/* ProcessorConsumerAwsS3 represents the business configuration objects used to execute a bowser Processor Consumer dedicated to AWS S3  */
+
+message ProcessorConsumerAwsS3 {
+    repeated ProcessorConsumerAwsS3Bucket buckets = 1; //Object containing all what is needed to Batch file from S3 Bucket and S3 Uris
+}
+
+/* ProcessorConsumerAwsS3Bucket represents the business configuration objects used to execute a bowser Processor Consumer dedicated to AWS S3  */
+
+message ProcessorConsumerAwsS3Bucket{
+    string name = 1; // Represent the name of the bucket to access the uris
+    repeated string uris = 2; // Represent the name of the uris inside the bucket name
+}

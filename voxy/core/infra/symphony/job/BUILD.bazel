@@ -1,0 +1,51 @@
+#
+# Copyright 2020-2021 Voxel Labs, Inc.
+# All rights reserved.
+#
+# This document may not be reproduced, republished, distributed, transmitted,
+# displayed, broadcast or otherwise exploited in any manner without the express
+# prior written permission of Voxel Labs, Inc. The receipt or possession of this
+# document does not convey any rights to reproduce, disclose, or distribute its
+# contents, or to manufacture, use, or sell anything that it may describe, in
+# whole or in part.
+#
+
+load("@rules_python//python:defs.bzl", "py_binary", "py_library")
+
+py_library(
+    name = "abstract",
+    srcs = ["abstract.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/infra/symphony/utils:config",
+    ],
+)
+
+py_library(
+    name = "factory",
+    srcs = ["factory.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":bazel",
+        ":k8s",
+    ],
+)
+
+py_binary(
+    name = "bazel",
+    srcs = ["bazel.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":abstract",
+    ],
+)
+
+py_binary(
+    name = "k8s",
+    srcs = ["k8s.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":abstract",
+        "//core/infra/symphony/utils:k8s_client",
+    ],
+)

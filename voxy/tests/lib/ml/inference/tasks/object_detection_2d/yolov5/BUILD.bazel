@@ -1,0 +1,50 @@
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+package(default_visibility = ["//visibility:public"])
+
+voxel_py_test(
+    name = "test_yolo_inference_utils",
+    srcs = ["test_yolo_inference_utils.py"],
+    deps = [
+        "//core/perception/detector_tracker:utils",
+        "//core/structs",
+        "//lib/ml/inference/tasks/object_detection_2d/yolov5:utils",
+        "//third_party/byte_track:utils",
+    ],
+)
+
+voxel_py_test(
+    name = "post_processing_model_test",
+    srcs = ["post_processing_model_test.py"],
+    deps = [
+        "//core/structs",
+        "//lib/ml/inference/tasks/object_detection_2d/yolov5:post_processing_model",
+    ],
+)
+
+voxel_py_test(
+    name = "pre_processing_model_test",
+    srcs = ["pre_processing_model_test.py"],
+    deps = [
+        "//lib/ml/inference/tasks/object_detection_2d/yolov5:pre_processing_model",
+    ],
+)
+
+voxel_py_test(
+    name = "end_to_end_postprocessing_model_test",
+    srcs = ["end_to_end_postprocessing_model_test.py"],
+    data = [
+        "@artifacts_2021-12-06-00-00-00-0000-yolo",  # americold/modesto
+        "@artifacts_test_image_inference",
+    ],
+    tags = [
+        "requires-gpu",
+        "requires-network",
+    ],
+    deps = [
+        "//core/structs",
+        "//lib/infra/utils:resolve_model_path",
+        "//lib/ml/inference/tasks/object_detection_2d/yolov5:factory",
+        "//lib/ml/inference/tasks/object_detection_2d/yolov5:post_processing_model",
+    ],
+)

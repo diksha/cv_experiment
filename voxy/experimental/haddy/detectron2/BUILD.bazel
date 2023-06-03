@@ -1,0 +1,71 @@
+load("@io_bazel_rules_docker//container:container.bzl", "container_push")
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+load("//third_party/containers/python3:image.bzl", "py3_image")
+
+py_binary(
+    name = "train_mpii_coco",
+    srcs = [
+        "train_mpii_coco.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("opencv-python"),
+        requirement("numpy"),
+        requirement("pyyaml"),
+        requirement("detectron2"),
+        requirement("torch"),
+        requirement("torchvision"),
+        requirement("wandb"),
+        requirement("argparse"),
+    ],
+)
+
+py_binary(
+    name = "train_mpii_custom",
+    srcs = [
+        "train_mpii_custom.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("opencv-python"),
+        requirement("numpy"),
+        requirement("pyyaml"),
+        requirement("detectron2"),
+        requirement("torch"),
+        requirement("torchvision"),
+        requirement("wandb"),
+        requirement("argparse"),
+        requirement("scipy"),
+    ],
+)
+
+py3_image(
+    name = "detectron2_mpii_custom_image",
+    binary = ":train_mpii_custom",
+)
+
+container_push(
+    name = "push_detectron2_mpii_custom_image",
+    format = "Docker",
+    image = ":detectron2_mpii_custom_image",
+    registry = "us.gcr.io/sodium-carving-227300",
+    repository = "voxel/experimental",
+    tag = "{BUILD_USER}_{BUILD_TIMESTAMP}",
+    tags = ["manual"],
+)
+
+py3_image(
+    name = "detectron2_mpii_coco_image",
+    binary = ":train_mpii_coco",
+)
+
+container_push(
+    name = "push_detectron2_mpii_coco_image",
+    format = "Docker",
+    image = ":detectron2_mpii_coco_image",
+    registry = "us.gcr.io/sodium-carving-227300",
+    repository = "voxel/experimental",
+    tag = "{BUILD_USER}_{BUILD_TIMESTAMP}",
+    tags = ["manual"],
+)

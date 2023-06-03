@@ -1,0 +1,44 @@
+// Copyright 2020-2021 Voxel Labs, Inc.
+// All rights reserved.
+//
+// This document may not be reproduced, republished, distributed, transmitted,
+// displayed, broadcast or otherwise exploited in any manner without the express
+// prior written permission of Voxel Labs, Inc. The receipt or possession of this
+// document does not convey any rights to reproduce, disclose, or distribute its
+// contents, or to manufacture, use, or sell anything that it may describe, in
+// whole or in part.
+syntax = "proto3";
+
+package core.structs.protobufs.v1;
+
+enum EventType {
+    // Change to UNSPECIFIED
+    EVENT_TYPE_UNKNOWN = 0; // trunk-ignore(buf-lint) 
+    EVENT_TYPE_DOOR_OPENED = 1; 
+    EVENT_TYPE_DOOR_CLOSED = 2; 
+    EVENT_TYPE_PIT_ENTERING_DOOR = 3; 
+    EVENT_TYPE_PIT_EXITING_DOOR = 4; 
+    EVENT_TYPE_DOOR_PARTIALLY_OPENED = 5;
+    EVENT_TYPE_PIT_ENTERING_INTERSECTION = 6;
+    EVENT_TYPE_PIT_EXITING_INTERSECTION = 7;
+    EVENT_TYPE_PIT_ENTERING_AISLE = 8;
+    EVENT_TYPE_PIT_EXITING_AISLE = 9;
+    EVENT_TYPE_PERSON_ENTERING_DOOR = 10;
+    EVENT_TYPE_PERSON_EXITING_DOOR = 11;
+    EVENT_TYPE_SPILL_DETECTED = 12;
+}
+
+message Event {
+    uint64 timestamp_ms = 1;
+    string camera_uuid = 2;
+    optional string subject_id = 3;
+    optional string object_id = 4;
+    EventType event_type = 5;
+    uint64 end_timestamp_ms = 6;
+    optional string run_uuid = 7;
+    optional float x_velocity_pixel_per_sec = 8; 
+    optional float y_velocity_pixel_per_sec = 9; 
+    optional float normalized_speed = 10; 
+    optional string subject_uuid = 11;
+    optional string object_uuid = 12;
+}

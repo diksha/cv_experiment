@@ -1,0 +1,22 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+# gazelle:exclude .
+
+go_library(
+    name = "polygon-initial_lib",
+    srcs = ["app.go"],
+    importpath = "github.com/voxel-ai/voxel/experimental/dalin/data-import/polygon-initial",
+    visibility = ["//visibility:private"],
+    deps = [
+        "@com_github_cip8_autoname//:go_default_library",
+        "@com_github_google_uuid//:uuid",
+        "@com_github_lib_pq//:pq",
+        "@in_gopkg_yaml_v3//:yaml_v3",
+    ],
+)
+
+go_binary(
+    name = "polygon-initial",
+    embed = [":polygon-initial_lib"],
+    visibility = ["//visibility:public"],
+)

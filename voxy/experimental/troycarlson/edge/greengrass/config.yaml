@@ -1,0 +1,26 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+
+# TODO(troycarlson): Use this custom config as input for a config generator
+#                    which outputs docker-compose.yaml, deployment, etc.
+#                    either to be checked in or ephemerally used to 
+#                    deploy/update/etc. greengrass devices programmatically.
+
+---
+greengrass_device_name: edge-sandbox
+cameras:
+  - name: camera_1
+    camera_config_path: configs/cameras/experimental/edge_sandbox.yaml
+    image: 667031391229.dkr.ecr.us-west-2.amazonaws.com/voxel/edge_smoke_test:troy_voxelsafety_com_1630370512
+  - name: camera_2
+    camera_config_path: configs/cameras/experimental/edge_sandbox.yaml
+    image: 667031391229.dkr.ecr.us-west-2.amazonaws.com/voxel/edge_smoke_test:troy_voxelsafety_com_1630370512

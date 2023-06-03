@@ -1,0 +1,21 @@
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+voxel_py_test(
+    name = "utils_test",
+    srcs = ["utils_test.py"],
+    deps = [
+        "//core/structs",
+        "//core/utils/struct_utils:utils",
+    ],
+)
+
+voxel_py_test(
+    name = "scenario_utils_test",
+    srcs = [
+        "scenario_utils_test.py",
+    ],
+    deps = [
+        "//core/structs",
+        "//core/utils/struct_utils:scenario_utils",
+    ],
+)

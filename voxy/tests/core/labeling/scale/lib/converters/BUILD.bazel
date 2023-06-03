@@ -1,0 +1,23 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+package(default_visibility = ["//visibility:public"])
+
+voxel_py_test(
+    name = "video_playback_annotation_converter_test",
+    srcs = ["video_playback_annotation_converter_test.py"],
+    deps = [
+        "//core/labeling/scale/lib/converters",
+        "//core/labeling/scale/registry",
+    ],
+)
+
+voxel_py_test(
+    name = "ppe_hat_actor_utils_test",
+    srcs = ["ppe_hat_actor_utils_test.py"],
+    deps = [
+        requirement("scaleapi"),
+        "//core/labeling/scale/lib/converters:utils",
+        "//core/structs",
+    ],
+)

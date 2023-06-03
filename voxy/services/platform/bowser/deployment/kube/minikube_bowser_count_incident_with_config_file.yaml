@@ -1,0 +1,63 @@
+# trunk-ignore-all(semgrep/yaml.kubernetes.security.run-as-non-root.run-as-non-root):
+# ignore that cause minikube will never be public
+apiVersion: flink.apache.org/v1beta1
+kind: FlinkDeployment
+metadata:
+   name: poc-bowser-count-incident
+spec:
+  image: docker.local:5000/services/platform/bowser:latest
+  imagePullPolicy: Always
+  flinkVersion: v1_16
+  flinkConfiguration:
+    taskmanager.numberOfTaskSlots: "2"
+    #Prometheus reporter activation
+    metrics.reporter.prom.factory.class: org.apache.flink.metrics.prometheus.PrometheusReporterFactory
+    metrics.reporter.prom.port: 9249-9250
+  serviceAccount: bowser-testing
+  podTemplate:
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: pod-template
+    spec:
+      serviceAccount: bowser-testing
+      containers:
+        - name: flink-main-container
+          volumeMounts:
+            - mountPath: /root/.aws
+              name: aws-creds
+          env:
+            - name: ENVIRONMENT
+              value: production
+            - name: NOT_YET_USED_CONFIG_FILE
+              #NOT USED ANYMORE
+              #KEPT HERE TO REMEMBER HOW TO SUCCESSFULLY PASS A FILE PATH AS ENV VAR
+              value:  services/platform/bowser/deployment/kube/minikube_bowser_count_incident_with_config_file.yaml
+          ports:
+              #Allow to be scraped by prometheus for both jobManager and TaskManager
+            - name: metrics
+              containerPort: 9249
+              protocol: TCP
+      volumes:
+        - name: aws-creds
+          hostPath:
+            path: /root/.aws
+            type: Directory
+  jobManager:
+    resource:
+      memory: "2048m"
+      cpu: 1
+  taskManager:
+    resource:
+      memory: "2048m"
+      cpu: 1
+  ingress:
+    template: "/{{namespace}}/{{name}}(/|$)(.*)"
+    annotations:
+      nginx.ingress.kubernetes.io/rewrite-target: "/$2"
+  job:
+    jarURI: local:///opt/flink/opt/flink-python_2.12-1.16.0.jar # Note, this jarURI is actually a placeholder
+    entryClass: "org.apache.flink.client.python.PythonDriver"
+    args: ["-pym", "services.platform.bowser.processors.count_rich_incident_from_s3_bucket_30_days_sink_local"]
+    parallelism: 8
+    upgradeMode: stateless

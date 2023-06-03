@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# 1. Runs licenseheaders tool in dry-run mode (redirects stderr to stdout)
+# 2. Greps for files with missing headers (output spread across 2 lines)
+# 3. Greps for file names
+#
+# This is highly dependent on the debug output format from licenseheaders
+# and will likely break on some future release of the third party library.
+
+FILES_WITHOUT_HEADER=$(
+	./bazel run //third_party/licenseheaders:licenseheaders -- "$@" --dir "$BUILD_WORKSPACE_DIRECTORY" -D --dry 2>&1 |
+		grep -A 1 haveLicense=False |
+		grep -oP 'changed\ file\:\ \K.*'
+)
+
+if [[ -n $FILES_WITHOUT_HEADER ]]; then
+	printf "The following files are missing license headers:\n\n"
+	printf "$FILES_WITHOUT_HEADER"
+	printf "\n\nRun the following command to generate them:\n\n"
+	printf "$ tools/licenseheaders\n"
+	exit 1
+else
+	printf "License headers look good 👍\n"
+fi

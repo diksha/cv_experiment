@@ -1,0 +1,21 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "token",
+    srcs = ["token.go"],
+    importpath = "github.com/voxel-ai/voxel/services/platform/github/lib/token",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@com_github_golang_jwt_jwt_v5//:jwt",
+    ],
+)
+
+go_test(
+    name = "token_test",
+    srcs = ["token_test.go"],
+    embed = [":token"],
+    deps = [
+        "@com_github_golang_jwt_jwt_v5//:jwt",
+        "@com_github_stretchr_testify//assert",
+    ],
+)

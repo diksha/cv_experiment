@@ -1,0 +1,5 @@
+sh_binary(
+    name = "argocd",
+    srcs = ["@argocd//file"],
+    visibility = ["//visibility:public"],
+)

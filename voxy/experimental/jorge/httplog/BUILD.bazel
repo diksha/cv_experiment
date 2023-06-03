@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "httplog_lib",
+    srcs = ["httplog.go"],
+    importpath = "github.com/voxel-ai/voxel/experimental/jorge/httplog",
+    visibility = ["//visibility:private"],
+    deps = ["@com_github_cristalhq_aconfig//:aconfig"],
+)
+
+go_binary(
+    name = "httplog",
+    embed = [":httplog_lib"],
+    visibility = ["//visibility:public"],
+)

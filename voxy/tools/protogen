@@ -1,0 +1,30 @@
+#!/bin/bash
+
+set -eou pipefail
+
+FILEPATH=$(readlink -f "$0")
+BASEDIR=$(dirname "$FILEPATH")
+WORKSPACEDIR=$(dirname "$BASEDIR")
+cd "$WORKSPACEDIR" || exit 1
+
+BAZEL="$WORKSPACEDIR/tools/bazel"
+
+# from https://stackoverflow.com/questions/1527049/how-can-i-join-elements-of-a-bash-array-into-a-delimited-string
+function join_by {
+	local d=${1-} f=${2-}
+	if shift 2; then
+		printf %s "$f" "${@/#/$d}"
+	fi
+}
+
+"$BAZEL" run //:gazelle
+
+# generate a bzl file with all python library sources
+PY_LIBRARY_TARGETS=$(for target in $("$BAZEL" query //protos/... | grep _py_library); do echo "    \"$target\","; done)
+echo -e "#trunk-ignore-all(buildifier)\nPROTO_PY_LIBRARIES = [\n$PY_LIBRARY_TARGETS\n]" >"$WORKSPACEDIR"/protos/python_targets.bzl
+
+for TARGET in $("$BAZEL" query //protos/... | grep 'compiled_sources.update$'); do
+	"$BAZEL" run "$TARGET"
+done
+
+"$BAZEL" run //:gazelle

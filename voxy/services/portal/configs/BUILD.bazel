@@ -1,0 +1,26 @@
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = [
+    "//services/portal:__subpackages__",
+])
+
+py_library(
+    name = "incident_types",
+    srcs = [
+        "incident_types.py",
+    ],
+    deps = [
+        "//core/portal:app_lib",
+    ],
+)
+
+py_library(
+    name = "perceived_event_rate_definitions",
+    srcs = [
+        "perceived_event_rate_definitions.py",
+    ],
+    deps = [
+        ":incident_types",
+        "//core/portal:app_lib",
+    ],
+)

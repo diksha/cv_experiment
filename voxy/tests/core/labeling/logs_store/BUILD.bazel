@@ -1,0 +1,27 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+package(default_visibility = ["//visibility:public"])
+
+voxel_py_test(
+    name = "ingestion_helpers_test",
+    srcs = ["ingestion_helpers_test.py"],
+    deps = [
+        "//core/labeling/logs_store:ingestion_helpers",
+    ],
+)
+
+filegroup(
+    name = "data",
+    srcs = ["20220606_01_doors.mp4"],
+)
+
+voxel_py_test(
+    name = "chunk_and_upload_video_logs_test",
+    srcs = ["chunk_and_upload_video_logs_test.py"],
+    data = [":data"],
+    deps = [
+        "//core/labeling/logs_store:chunk_and_upload_video_logs",
+        requirement("sematic"),
+    ],
+)

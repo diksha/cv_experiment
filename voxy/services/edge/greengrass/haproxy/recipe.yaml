@@ -1,0 +1,19 @@
+---
+RecipeFormatVersion: "2020-01-25"
+ComponentName: $$COMPONENT_NAME$$
+ComponentVersion: $$COMPONENT_VERSION$$
+ComponentDescription: Voxel HAProxy Installer
+ComponentPublisher: Me
+ComponentConfiguration:
+ComponentDependencies:
+Manifests:
+  - Name: Install haproxy
+    Platform:
+      os: linux
+    Lifecycle:
+      Install:
+        RequiresPrivilege: true
+        Skipif: onpath haproxy
+        Script: |
+          DEBIAN_FRONTEND=noninteractive sudo apt-get -y update &&
+          DEBIAN_FRONTEND=noninteractive sudo apt-get -y install haproxy

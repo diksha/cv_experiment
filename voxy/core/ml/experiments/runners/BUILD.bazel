@@ -1,0 +1,27 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+
+py_binary(
+    name = "experiment_manager",
+    srcs = ["experiment_manager.py"],
+    data = [
+        "//core/ml/data/generation/configs",
+        "//core/ml/experiments/configs",
+        "//core/ml/training/configs",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/infra/sematic/shared:resources",
+        "//core/metaverse/api",
+        "//core/metaverse/models",
+        "//core/ml/common:utils",
+        "//core/ml/data/generation/resources/api:generator",
+        "//core/ml/experiments/tracking:experiment_tracking",
+        "//core/ml/training/api:training_manager",
+        "//core/utils:aws_utils",
+        "//core/utils:camera_config_utils",
+        "//core/utils:yaml_jinja",
+        requirement("loguru"),
+        requirement("mergedeep"),
+    ],
+)

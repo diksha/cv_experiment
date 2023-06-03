@@ -1,0 +1,17 @@
+".*":
+  incident:
+    dry_run: true
+    monitors_requested: []
+    state_machine_monitors_requested: ["obstruction"]
+    incident_machine_params:
+      obstruction:
+        max_obstruction_duration_s: 20
+  perception:
+    enabled: True
+    obstruction_segmenter:
+      enabled: True
+      model_path: artifacts_05_17_2023/smp-floor-070bd18d-402b-4ba8-87cb-ad7f8304ebd6-jit-cuda.pt
+      post_process_enabled: True
+      frame_segment2class: { UNKNOWN: 0, FLOOR: 1, OBSTRUCTION: 3 }
+      min_pixel_size: 400
+      ignore_actor_categories: [PIT, PERSON, SPILL]

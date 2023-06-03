@@ -1,0 +1,52 @@
+enabled: true
+environment: ${ENVIRONMENT}
+image:
+  repository: ${IMAGE_REPO}
+  pullPolicy: Always
+  tag: ${IMAGE_TAG}
+
+service:
+  type: ClusterIP
+  port: 80
+  containerPort: 8501
+  # annotations:
+  #   service.beta.kubernetes.io/aws-load-balancer-scheme: "internal"
+  #   service.beta.kubernetes.io/aws-load-balancer-type: "external"
+  #   service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: "instance"
+  #   service.beta.kubernetes.io/load-balancer-source-ranges: 10.0.0.0/8
+
+ingress:
+  enabled: false
+
+resources:
+  requests:
+    cpu: 256m
+    memory: 1024Mi
+  limits:
+    cpu: 256m
+    memory: 1024Mi
+
+autoscaling:
+  enabled: false
+
+livenessProbe:
+  failureThreshold: 6
+  httpGet:
+    path: /
+    port: 8501
+    scheme: HTTP
+  initialDelaySeconds: 30
+  periodSeconds: 5
+  successThreshold: 1
+  timeoutSeconds: 30
+
+readinessProbe:
+  failureThreshold: 6
+  httpGet:
+    path: /
+    port: 8501
+    scheme: HTTP
+  initialDelaySeconds: 30
+  periodSeconds: 5
+  successThreshold: 1
+  timeoutSeconds: 30

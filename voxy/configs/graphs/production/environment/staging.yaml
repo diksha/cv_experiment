@@ -1,0 +1,25 @@
+# Config for running production runner in staging
+# In order to use this, you must populate a kinesis stream in the staging account and specify the stream ARN in this document
+
+camera:
+  # arn: uncomment and replace this field with a valid KVS stream ARN from the staging account
+
+incident:
+  dry_run: false
+  generate_temp_subdirs: true
+  temp_directory: /var/tmp/voxel/incidents
+  publisher:
+    enabled: true
+    sns_topic_arn: arn:aws:sns:us-west-2:115099983231:voxel-staging-prism-incident-ingest.fifo
+
+publisher:
+  enabled: false
+  auth_token: a6ee782d225e7e6ab747f39f40ff19d35537941a
+  portal_host: https://app.staging.voxelplatform.com
+
+state:
+  enabled: false
+  publisher:
+    emulator_host: null
+    event_topic: projects/sodium-carving-227300/topics/voxel-internal-event-messages
+    state_topic: projects/sodium-carving-227300/topics/voxel-internal-state-messages

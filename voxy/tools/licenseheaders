@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# shellcheck disable=SC2046
+exec ./bazel run //third_party/licenseheaders:licenseheaders -- "$@" --files $(git diff --name-only origin main)

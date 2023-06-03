@@ -1,0 +1,8 @@
+image:
+  repository: ${REPOSITORY}
+  tag: ${TAG}
+
+service:
+  type: ClusterIP
+  port: 80
+  containerPort: 80

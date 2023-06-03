@@ -1,0 +1,40 @@
+load("@io_bazel_rules_docker//container:container.bzl", "container_push")
+load("@io_bazel_rules_docker//go:image.bzl", "go_image")
+load("//third_party/aws/lambda:defs.bzl", "go_aws_lambda")
+
+go_aws_lambda(
+    name = "pinholecert.development",
+    function_name = "pinholecert-development",
+    target = "//services/edge/pinhole/cmd/pinholecert",
+)
+
+go_aws_lambda(
+    name = "pinholecert.production",
+    function_name = "pinholecert-production",
+    target = "//services/edge/pinhole/cmd/pinholecert",
+)
+
+go_image(
+    name = "pinholeserver",
+    binary = "//services/edge/pinhole/cmd/pinholeserver",
+)
+
+container_push(
+    name = "pinholeserver.staging",
+    format = "Docker",
+    image = ":pinholeserver",
+    registry = "115099983231.dkr.ecr.us-west-2.amazonaws.com",
+    repository = "staging/service/pinhole",
+    tag_file = "pinholeserver.json.sha256",
+    tags = ["manual"],
+)
+
+container_push(
+    name = "pinholeserver.production",
+    format = "Docker",
+    image = ":pinholeserver",
+    registry = "360054435465.dkr.ecr.us-west-2.amazonaws.com",
+    repository = "production/service/pinhole",
+    tag_file = "pinholeserver.json.sha256",
+    tags = ["manual"],
+)

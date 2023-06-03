@@ -1,0 +1,140 @@
+config:
+  service: |
+    [SERVICE]
+        Daemon Off
+        Flush {{ .Values.flush }}
+        Log_Level {{ .Values.logLevel }}
+        Parsers_File parsers.conf
+        HTTP_Server On
+        HTTP_Listen 0.0.0.0
+        HTTP_Port {{ .Values.metricsPort }}
+        Health_Check On
+        storage.path              /var/fluent-bit/state/flb-storage/
+        storage.sync              normal
+        storage.checksum          off
+        storage.backlog.mem_limit 1M
+
+    @INCLUDE application-log.conf
+    @INCLUDE dataplane-log.conf
+    @INCLUDE host-log.conf
+
+  inputs: ""
+  filters: ""
+  outputs: ""
+  customParsers: |
+    [PARSER]
+        Name        docker
+        Format      json
+        Time_Key    time
+        Time_Format %Y-%m-%dT%H:%M:%S.%L
+        Time_Keep   On
+
+  extraFiles: 
+    application-log.conf: |
+      [INPUT]
+          Name                tail
+          Tag                 kube.*
+          Path                /var/log/containers/*.log
+          Parser              docker
+          DB                  /var/log/flb-storage/flb_kube.db
+
+      [FILTER]
+          Name                kubernetes
+          Match               kube.*
+          Merge_Log           Off
+          Keep_Log            On
+          K8S-Logging.Parser  Off
+          K8S-Logging.Exclude Off
+
+      [OUTPUT]
+          Name                    loki
+          Match                   kube.*
+          host                    loki-distributed-distributor
+          labels                  job=fluent-bit, stream=$stream, container=$kubernetes['container_name'], node=$kubernetes['host'], instance=$kubernetes['pod_name'], namespace=$kubernetes['namespace_name'], labels=$kubernetes['labels'], log_type=application
+          remove_keys             kubernetes
+          auto_kubernetes_labels  On
+
+    dataplane-log.conf: |
+      [INPUT]
+          Name                systemd
+          Tag                 dataplane.systemd.*
+          Systemd_Filter      _SYSTEMD_UNIT=docker.service
+          Systemd_Filter      _SYSTEMD_UNIT=kubelet.service
+          DB                  /var/log/flb-storage/flb_systemd.db
+          Path                /var/log/journal
+          Read_From_Tail      true
+
+      [INPUT]
+          Name                tail
+          Tag                 dataplane.tail.*
+          Path                /var/log/containers/aws-node*, /var/log/containers/kube-proxy*
+          Parser              docker
+          DB                  /var/log/flb-storage/flb_dataplane_tail.db
+
+      [FILTER]
+          Name                modify
+          Match               dataplane.systemd.*
+          Rename              _HOSTNAME                   hostname
+          Rename              _SYSTEMD_UNIT               systemd_unit
+          Rename              MESSAGE                     message
+          Remove_regex        ^((?!hostname|systemd_unit|message).)*$
+
+      [FILTER]
+          Name                aws
+          Match               dataplane.*
+          imds_version        v2
+
+      [OUTPUT]
+          Name                    loki
+          Match                   dataplane.systemd.*
+          host                    loki-distributed-distributor
+          labels                  job=fluent-bit, stream=$stream, container=$kubernetes['container_name'], node=$kubernetes['host'], instance=$kubernetes['pod_name'], namespace=$kubernetes['namespace_name'], labels=$kubernetes['labels'], log_type=dataplane
+          remove_keys             kubernetes
+          auto_kubernetes_labels  On
+
+    host-log.conf: |
+      [INPUT]
+          Name                tail
+          Tag                 host.dmesg
+          Path                /var/log/dmesg
+          Parser              syslog
+          DB                  /var/log/flb-storage/flb_dmesg.db
+
+      [INPUT]
+          Name                tail
+          Tag                 host.messages
+          Path                /var/log/messages
+          Parser              syslog
+          DB                  /var/log/flb-storage/flb_messages.db
+
+      [INPUT]
+          Name                tail
+          Tag                 host.secure
+          Path                /var/log/secure
+          Parser              syslog
+          DB                 /var/log/flb-storage/flb_secure.db
+
+      [FILTER]
+          Name                aws
+          Match               host.*
+          imds_version        v2
+
+      [OUTPUT]
+          Name                    loki
+          Match                   host.*
+          host                    loki-distributed-distributor
+          labels                  job=fluent-bit, stream=$stream, container=$kubernetes['container_name'], node=$kubernetes['host'], instance=$kubernetes['pod_name'], namespace=$kubernetes['namespace_name'], labels=$kubernetes['labels'], log_type=host
+          remove_keys             kubernetes
+          auto_kubernetes_labels  On
+
+logLevel: info
+flush: 1
+
+extraVolumes:
+  - hostPath:
+      path: /var/log/flb-storage/
+      type: DirectoryOrCreate
+    name: flb-storage
+extraVolumeMounts:
+  - mountPath: /var/log/flb-storage/
+    name: flb-storage

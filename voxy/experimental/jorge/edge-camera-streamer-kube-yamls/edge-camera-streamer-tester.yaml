@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: edge-transcoder-test
+spec:
+  containers:
+  - name: edge-transcoder-tester
+    image: localhost:32000/edge-transcoder-quicksync
+    imagePullPolicy: Always
+    command: ["sleep", "3600"]
+    resources:
+      limits:
+        gpu.intel.com/i915: 1
+    volumeMounts:
+    - mountPath: /greengrass/v2/thingCert.crt
+      name: greengrass-cert
+    - mountPath: /greengrass/v2/privKey.key
+      name: greengrass-priv
+    - mountPath: /greengrass/v2/rootCA.pem
+      name: greengrass-root
+  volumes:
+  - name: greengrass-cert
+    hostPath:
+      path: /greengrass/v2/thingCert.crt
+      type: File
+  - name: greengrass-priv
+    hostPath:
+      path: /greengrass/v2/privKey.key
+      type: File
+  - name: greengrass-root
+    hostPath:
+      path: /greengrass/v2/rootCA.pem
+      type: File
+  restartPolicy: Never

@@ -1,0 +1,22 @@
+syntax = "proto3";
+package protos.edge.pinhole.v1;
+option go_package = "github.com/voxel-ai/voxel/protos/platform/pinhole/v1;pinholepb";
+
+import "google/protobuf/timestamp.proto";
+
+service PinholeService {
+    rpc Sign(SignRequest) returns (SignResponse);
+}
+
+message SignRequest {
+    // Csr is a standard PEM encoded certificate signing request
+    string csr = 1;
+}
+
+message SignResponse {
+    // Cert is a standard PEM encoded certificate chain
+    string cert = 1;
+    string root_ca = 2;
+
+    google.protobuf.Timestamp expiration = 3;
+}

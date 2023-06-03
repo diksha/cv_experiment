@@ -1,0 +1,20 @@
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "controller",
+    srcs = ["controller.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/perception/acausal/algorithms:association_controller",
+        "//core/perception/acausal/algorithms:discrete_bayes",
+        "//core/perception/acausal/algorithms:ergonomics_smoothing",
+        "//core/perception/acausal/algorithms:is_stationary",
+        "//core/perception/acausal/algorithms:motion_zone_smoothing",
+        "//core/perception/acausal/algorithms:ppe_smoothening",
+        "//core/perception/acausal/algorithms:proximity_controller",
+        "//core/perception/acausal/algorithms:track_smoothing",
+        "//core/perception/acausal/algorithms:velocity_estimation",
+    ],
+)

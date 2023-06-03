@@ -1,0 +1,11 @@
+-----------------------------------------------------------------------------------------------------------------------------
+Your DevBox was successfully setup.
+It is accessible at {{ .Values.devbox.user}}.{{ .Values.base_domain}}.
+
+You need to be connected to CloudFlare Zero Trust to access it!
+You can access it using a variant of the following command:
+
+`ssh -A {{ .Values.devbox.user}}@{{ .Values.devbox.user}}.{{ .Values.base_domain}}`
+
+
+-----------------------------------------------------------------------------------------------------------------------------

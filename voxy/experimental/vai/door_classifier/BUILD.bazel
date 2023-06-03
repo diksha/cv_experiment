@@ -1,0 +1,79 @@
+load("@io_bazel_rules_docker//container:container.bzl", "container_push")
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+load("//third_party/containers/python3:image.bzl", "py3_image")
+
+package(default_visibility = ["//visibility:public"])
+
+py_binary(
+    name = "dataset_aug",
+    srcs = ["dataset_aug.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("pandas"),
+        requirement("numpy"),
+        requirement("pyyaml"),
+        "//core/datasets/generators:door_classification",
+        "//core/infra/cloud:gcs_utils",
+        "//core/utils:video_reader",
+    ],
+)
+
+py3_image(
+    name = "dataset_image",
+    binary = ":dataset_aug",
+)
+
+container_push(
+    name = "dataset_push",
+    format = "Docker",
+    image = ":dataset_image",
+    registry = "us.gcr.io/sodium-carving-227300",
+    repository = "voxel/experimental",
+    tag = "$(IMAGE_TAG)",
+    tags = ["manual"],
+)
+
+py_binary(
+    name = "dataset_from_incidents",
+    srcs = ["dataset_from_incidents.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("pandas"),
+        requirement("numpy"),
+        requirement("pyyaml"),
+        "//core/datasets/generators:door_classification_from_incidents",
+        "//core/infra/cloud:gcs_utils",
+    ],
+)
+
+py_binary(
+    name = "train_resnet50",
+    srcs = ["train_resnet50.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("torch"),
+        requirement("torchvision"),
+        requirement("numpy"),
+        requirement("scikit-learn"),
+        requirement("matplotlib"),
+        requirement("wandb"),
+        "//core/infra/cloud:gcs_utils",
+        "//third_party/autoaugment",
+    ],
+)
+
+py3_image(
+    name = "resnet50_image",
+    binary = ":train_resnet50",
+)
+
+container_push(
+    name = "resnet50_push",
+    format = "Docker",
+    image = ":resnet50_image",
+    registry = "us.gcr.io/sodium-carving-227300",
+    repository = "voxel/experimental",
+    tag = "{BUILD_USER}_{BUILD_TIMESTAMP}",
+    tags = ["manual"],
+)

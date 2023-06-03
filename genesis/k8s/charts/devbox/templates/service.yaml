@@ -1,0 +1,24 @@
+{{- if not .Values.non_web_app -}}
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "devbox.fullname" . }}
+  labels:
+    {{- include "devbox.labels" . | nindent 4 }}
+  annotations:
+    {{ .Values.service.annotations | toYaml | nindent 4 }}
+    external-dns.alpha.kubernetes.io/hostname: "{{.Values.devbox.user}}.{{.Values.base_domain}}"
+    external-dns.alpha.kubernetes.io/ttl: "120" #optional
+spec:
+  type: LoadBalancer
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 22
+      protocol: TCP
+      name: ssh
+  selector:
+    {{- include "devbox.selectorLabels" . | nindent 4 }}
+
+{{- end }}

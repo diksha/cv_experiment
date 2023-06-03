@@ -1,0 +1,5 @@
+load("@npm//:@withgraphite/graphite-cli/package_json.bzl", graphite_cli = "bin")
+
+graphite_cli.gt_binary(
+    name = "graphite",
+)

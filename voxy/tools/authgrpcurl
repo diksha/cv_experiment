@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -euo pipefail
+
+FILEPATH=$(readlink -f "$0")
+BASEDIR=$(dirname "$FILEPATH")
+WORKSPACEDIR=$(dirname "$BASEDIR")
+cd "$WORKSPACEDIR" || exit 1
+
+./bazel run //services/platform/devcert/cmd/devcert
+
+exec ./bazel run @com_github_fullstorydev_grpcurl//cmd/grpcurl -- -cacert "$HOME"/.voxel/devcert/root.crt -cert "$HOME"/.voxel/devcert/client.crt -key "$HOME"/.voxel/devcert/client.key "$@"

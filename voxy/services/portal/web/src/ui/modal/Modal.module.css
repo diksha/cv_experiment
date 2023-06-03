@@ -1,0 +1,50 @@
+/*
+Copyright 2020-2021 Voxel Labs, Inc.
+All rights reserved.
+
+This document may not be reproduced, republished, distributed, transmitted,
+displayed, broadcast or otherwise exploited in any manner without the express
+prior written permission of Voxel Labs, Inc. The receipt or possession of this
+document does not convey any rights to reproduce, disclose, or distribute its
+contents, or to manufacture, use, or sell anything that it may describe, in
+whole or in part.
+*/
+.modalBackdrop {
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9999;
+  opacity: 0;
+  padding: 0;
+
+  background-color: rgba(0, 0, 0, 0);
+  transition: all 0.2s ease-in-out;
+}
+
+.modalBackdrop.active {
+  visibility: visible;
+  background-color: rgba(0, 0, 0, 0.8);
+  opacity: 1;
+  padding: 20px 0 0 0;
+}
+
+.modalWrapper {
+  max-width: 600px;
+  margin: 60px auto 0;
+}
+
+.modalBody {
+  padding: 20px;
+}
+
+.modalFooter {
+  border-top: 1px solid var(--themeBackgroundColor60);
+  padding: 10px;
+  overflow: hidden;
+}
+.modalFooterrightAlign {
+  text-align: right;
+}

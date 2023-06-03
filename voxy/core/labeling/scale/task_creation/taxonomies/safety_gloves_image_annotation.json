@@ -1,0 +1,71 @@
+{
+  "geometries": {
+    "box": {
+      "objects_to_annotate": ["BARE_HAND", "SAFETY_GLOVE", "PERSON_V2"],
+      "min_width": 0,
+      "min_height": 0
+    }
+  },
+  "annotation_attributes": {
+    "safety_glove1": {
+      "description": "One safety glove for associating with a person",
+      "type": "linked",
+      "allowed_labels": ["SAFETY_GLOVE"],
+      "conditions": {
+        "label_condition": {
+          "label": ["PERSON_V2"]
+        }
+      }
+    },
+    "safety_glove2": {
+      "description": "One safety glove for associating with a person",
+      "type": "linked",
+      "allowed_labels": ["SAFETY_GLOVE"],
+      "conditions": {
+        "label_condition": {
+          "label": ["PERSON_V2"]
+        }
+      }
+    },
+    "bare_hand1": {
+      "description": "One bare hand for associating with a person",
+      "type": "linked",
+      "allowed_labels": ["BARE_HAND"],
+      "conditions": {
+        "label_condition": {
+          "label": ["PERSON_V2"]
+        }
+      }
+    },
+    "bare_hand2": {
+      "description": "One bare hand for associating with a person",
+      "type": "linked",
+      "allowed_labels": ["BARE_HAND"],
+      "conditions": {
+        "label_condition": {
+          "label": ["PERSON_V2"]
+        }
+      }
+    },
+    "occluded_degree": {
+      "description": "Degree of occlusion",
+      "conditions": {
+        "label_condition": {
+          "label": ["BARE_HAND", "SAFETY_GLOVE", "PERSON_V2"]
+        }
+      },
+      "choices": ["NONE", "Occluded", "HeavilyOccluded", "FullyOccluded"],
+      "type": "category"
+    },
+    "truncated": {
+      "description": "Object is truncated or not",
+      "conditions": {
+        "label_condition": {
+          "label": ["BARE_HAND", "SAFETY_GLOVE", "PERSON_V2"]
+        }
+      },
+      "choices": ["True", "False"],
+      "type": "category"
+    }
+  }
+}

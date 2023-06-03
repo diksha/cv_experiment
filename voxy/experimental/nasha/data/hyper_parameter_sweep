@@ -1,0 +1,4 @@
+--annotations /data/labels/person_pit_hard_hat_safety_vest/coco_labels.json --lr 1e-4 --grad-clip 0.1
+--annotations /data/labels/person_pit_hard_hat_safety_vest/coco_labels.json --lr 1e-6 --grad-clip 0.1
+--annotations /data/labels/person_pit_hard_hat_safety_vest/coco_labels.json --lr 1e-3 --grad-clip 0.1
+--annotations /data/labels/person_pit_hard_hat_safety_vest/coco_labels.json --lr 1e-5 --grad-clip 0.1

@@ -1,0 +1,25 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "dataflywheel",
+    srcs = ["dataflywheel.py"],
+    data = [
+        "//core/labeling/configs",
+        "//core/ml/data/collection/configs",
+        "//core/ml/data/curation/configs",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("mergedeep"),
+        "//core/infra/cloud:gcs_utils",
+        "//core/labeling/logs_store:ingest_image_collection",
+        "//core/labeling/scale/runners:create_scale_tasks_lib",
+        "//core/metaverse/api:datapool_api",
+        "//core/ml/common:utils",
+        "//core/ml/data/collection:data_collector",
+        "//core/ml/data/curation/lib",
+    ],
+)

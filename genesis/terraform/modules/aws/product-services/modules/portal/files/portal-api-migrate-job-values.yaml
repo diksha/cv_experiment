@@ -1,0 +1,43 @@
+enabled: true
+fullnameOverride: ${NAME}-job
+environment: ${ENVIRONMENT}
+image:
+  repository: ${PORTAL_REPO}
+  pullPolicy: Always
+  tag: ${PORTAL_IMAGE_TAG}
+command: "/app/core/portal/migrate"
+
+serviceAccount:
+  name: ${SERVICE_ACCOUNT_NAME}
+  create: false
+
+secrets:
+  name: secret-store
+  mountPath: /mnt/secrets-store
+  secretProviderClass: ${SECRET_PROVIDER_NAME}
+
+job:
+  containerPort: 8080
+
+ingress:
+  enabled: false
+
+resources:
+  requests:
+    cpu: 512m
+    memory: 2048Mi
+  limits:
+    cpu: 512m
+    memory: 2048Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 1
+  targetCPUUtilizationPercentage: 80
+
+env:
+  config:
+    SECRETS_FILEPATH: /mnt/secrets-store/portal
+    SECRETS_GOOGLE_SERVICE_ACCOUNT_JSON_FILEPATH: /mnt/secrets-store/portal_google_service_account_json
+    BASE_URL: https://${DOMAIN}

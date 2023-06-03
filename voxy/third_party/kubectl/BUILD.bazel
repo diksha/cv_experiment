@@ -1,0 +1,5 @@
+sh_binary(
+    name = "kubectl",
+    srcs = ["@kubectl//file"],
+    visibility = ["//visibility:public"],
+)

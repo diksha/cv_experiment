@@ -1,0 +1,2444 @@
+type Query {
+  productionLineDetails(productionLineId: ID): ProductionLine
+  zone(zoneId: String): ZoneType
+  currentUser: UserType
+  currentOrganization: OrganizationType
+  organizations(offset: Int, before: String, after: String, first: Int, last: Int): OrganizationTypeConnection
+  organization(organizationId: ID, organizationKey: String): OrganizationType
+  integrations: IntegrationFields
+  incidentTypes: [IncidentTypeType]!
+  incidentFeed(fromUtc: DateTime, toUtc: DateTime, filters: [FilterInputType], priorityFilter: [String], statusFilter: [String], incidentTypeFilter: [String], cameraFilter: [String], listFilter: [String], assigneeFilter: [String], experimentalFilter: Boolean, offset: Int, before: String, after: String, first: Int, last: Int): IncidentTypeConnection
+  incidentDetails(incidentId: ID, incidentUuid: String): IncidentType
+  incidentFeedbackSummary(internalFeedback: String, externalFeedback: String, hasComments: Boolean, incidentType: String, organizationId: String, siteId: String, fromUtc: DateTime, toUtc: DateTime, offset: Int, before: String, after: String, first: Int, last: Int): IncidentFeedbackSummaryTypeConnection
+  incidentFeedbackQueue(reviewQueueContext: ReviewQueueContext!): [IncidentType]!
+  comments(incidentId: ID!): [CommentType]
+  recentComments: [CommentType]
+  cameras: [CameraType]
+  cameraConfigNew(uuid: String, version: Int): CameraConfigNewModelType
+  analytics: AnalyticsType
+}
+
+type ProductionLine {
+  id: ID!
+  uuid: String!
+  name: String!
+  camera: CameraType!
+  status1hGroups(startTimestamp: DateTime!, endTimestamp: DateTime!, filters: [FilterInputType]): [ProductionLineStatusGroup!]!
+  incidents(startTimestamp: DateTime, endTimestamp: DateTime, orderBy: String, offset: Int, before: String, after: String, first: Int, last: Int): IncidentTypeConnection
+}
+
+"""The Camera type used for graphql queries"""
+type CameraType implements Node {
+  """The ID of the object"""
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+  uuid: String!
+
+  """User friendly name displayed throughout apps."""
+  name: String!
+  organization: OrganizationType
+  zone: ZoneType
+  edge: EdgeType
+  thumbnailGcsPath: String
+  thumbnailS3Path: String
+  cameraconfignewSet: [CameraConfigNewModelType!]!
+  incidentTypes: [CameraIncidentType!]!
+  cameraIncidentTypes: [CameraIncidentType!]!
+  incidents(offset: Int, before: String, after: String, first: Int, last: Int): IncidentFeedbackSummaryTypeConnection!
+  thumbnailUrl: String
+}
+
+"""An object with an ID"""
+interface Node {
+  """The ID of the object"""
+  id: ID!
+}
+
+"""
+The `DateTime` scalar type represents a DateTime
+value as specified by
+[iso8601](https://en.wikipedia.org/wiki/ISO_8601).
+"""
+scalar DateTime
+
+type OrganizationType implements Node {
+  """The ID of the object"""
+  id: ID!
+  name: String!
+  key: String!
+  users(offset: Int, before: String, after: String, first: Int, last: Int): UserTypeConnection
+  isSandbox: Boolean!
+  timezone: ApiOrganizationTimezoneChoices!
+  pk: Int
+  sites: [ZoneType]
+  incidentTypes: [OrganizationIncidentTypeType!]!
+  roles: [Role!]
+  overallScore(
+    """Start date, inclusive"""
+    startDate: Date!
+
+    """End date, inclusive"""
+    endDate: Date!
+  ): Score
+  eventScores(
+    """Start date, inclusive"""
+    startDate: Date!
+
+    """End date, inclusive"""
+    endDate: Date!
+  ): [Score]
+  sessionCount(
+    """Start date, inclusive"""
+    startDate: Date!
+
+    """End date, inclusive"""
+    endDate: Date!
+  ): SessionCount!
+}
+
+type UserTypeConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [UserTypeEdge]!
+}
+
+"""
+The Relay compliant `PageInfo` type, containing data necessary to paginate this connection.
+"""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+"""A Relay edge containing a `UserType` and its cursor."""
+type UserTypeEdge {
+  """The item at the end of the edge"""
+  node: UserType
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type UserType implements Node {
+  """The ID of the object"""
+  id: ID!
+  groups: GenericScalar
+  firstName: String!
+  lastName: String!
+  email: String!
+  pk: Int
+  isActive: Boolean
+  fullName: String
+  initials: String
+  roles: [Role!]
+  permissions: [String!]
+  organization: OrganizationType
+  zone: ZoneType
+  site: ZoneType
+  sites: [ZoneType]
+  isAdmin: Boolean
+  isSuperuser: Boolean
+  picture: String
+  tasksAssignedBy(status: TaskStatus, offset: Int, before: String, after: String, first: Int, last: Int): TaskTypeConnection
+  tasksAssignedByStats(fromUtc: DateTime, toUtc: DateTime): TaskStatsType
+  tasksAssignedTo(status: TaskStatus, offset: Int, before: String, after: String, first: Int, last: Int): TaskTypeConnection
+  tasksAssignedToStats(fromUtc: DateTime, toUtc: DateTime): TaskStatsType
+  bookmarkedIncidents(offset: Int, before: String, after: String, first: Int, last: Int): IncidentTypeConnection
+  stats: UserStats
+  teammates(offset: Int, before: String, after: String, first: Int, last: Int): UserTypeConnection
+  invitedUsers: [InvitedUserType!]
+}
+
+"""
+The `GenericScalar` scalar type represents a generic
+GraphQL scalar value that could be:
+String, Boolean, Int, Float, List or Object.
+"""
+scalar GenericScalar
+
+type Role {
+  id: ID!
+  key: String!
+  name: String!
+}
+
+type ZoneType implements Node {
+  """The ID of the object"""
+  id: ID!
+  key: String!
+  name: String!
+  timezone: String!
+  cameras(offset: Int, before: String, after: String, first: Int, last: Int): CameraTypeConnection
+  incidentCategories: [IncidentCategory]
+  incidentTypes: [IncidentTypeType]
+  complianceTypes: [ComplianceType]
+  incidentStats(startTimestamp: DateTime, endTimestamp: DateTime): ZoneIncidentStats
+  incidentTypeStats(startTimestamp: DateTime, endTimestamp: DateTime, filters: [FilterInputType]): [ZoneIncidentTypeStats]
+  cameraStats(startTimestamp: DateTime, endTimestamp: DateTime): [CameraStats]
+  assigneeStats(startTimestamp: DateTime, endTimestamp: DateTime, startDate: Date, endDate: Date): [AssigneeStats]
+  recentComments(offset: Int, before: String, after: String, first: Int, last: Int): CommentTypeConnection
+  latestActivityTimestamp: DateTime
+  incidentFeed(startDate: Date, endDate: Date, filters: [FilterInputType], timeBucketSizeHours: Int, after: String): IncidentFeedConnection
+  users(offset: Int, before: String, after: String, first: Int, last: Int): UserTypeConnection!
+  assignableUsers(offset: Int, before: String, after: String, first: Int, last: Int): UserTypeConnection!
+  clientPreferences: [ClientPreference!]!
+  overallScore(
+    """Start date, inclusive"""
+    startDate: Date!
+
+    """End date, inclusive"""
+    endDate: Date!
+  ): Score
+  eventScores(
+    """Start date, inclusive"""
+    startDate: Date!
+
+    """End date, inclusive"""
+    endDate: Date!
+  ): [Score]
+  sessionCount(
+    """Start date, inclusive"""
+    startDate: Date!
+
+    """End date, inclusive"""
+    endDate: Date!
+  ): SessionCount!
+  isActive: Boolean!
+  highlightedEvents(offset: Int, before: String, after: String, first: Int, last: Int): IncidentTypeConnection
+  highlightedEventsCount(startTimestamp: DateTime, endTimestamp: DateTime): Int!
+  productionLines(filters: [FilterInputType]): [ProductionLine!]
+  incidentAnalytics: SiteIncidentAnalytics!
+  incidents(startDate: Date, endDate: Date, startTimestamp: DateTime, endTimestamp: DateTime, filters: [FilterInputType], offset: Int, before: String, after: String, first: Int, last: Int): IncidentTypeConnection
+  siteScoreStats: SiteScoreStats @deprecated(reason: "Use 'overallScore' and 'eventScores' fields")
+}
+
+type CameraTypeConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [CameraTypeEdge]!
+}
+
+"""A Relay edge containing a `CameraType` and its cursor."""
+type CameraTypeEdge {
+  """The item at the end of the edge"""
+  node: CameraType
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type IncidentCategory {
+  key: String
+  name: String
+  incidentTypes: [IncidentTypeType]
+}
+
+"""Base incident type."""
+type IncidentTypeType {
+  id: ID!
+  key: String!
+  name: String!
+  backgroundColor: String
+  category: String
+}
+
+"""GraphQL type for compliance types."""
+type ComplianceType {
+  id: ID!
+  key: String!
+  name: String!
+}
+
+"""Incident stats at a zone."""
+type ZoneIncidentStats {
+  totalCount: Int
+  resolvedCount: Int
+  openCount: Int
+  highPriorityCount: Int
+  mediumPriorityCount: Int
+  lowPriorityCount: Int
+}
+
+"""Incident type stats at a zone."""
+type ZoneIncidentTypeStats {
+  incidentType: IncidentTypeType
+  totalCount: Int
+
+  """
+  Highest totalCount value of all incident type stats returned in a query. Used by clients to compare totalCount with maxTotalCount for things like bar charts with relative widths per incident type.
+  """
+  maxTotalCount: Int
+}
+
+input FilterInputType {
+  key: String
+  valueJson: String
+}
+
+"""Camera-related stats at a zone."""
+type CameraStats {
+  camera: CameraType
+  categoryStats: [IncidentCategoryStats]
+}
+
+"""Incident category stats."""
+type IncidentCategoryStats {
+  categoryKey: String
+  totalCount: Int
+}
+
+"""Assignee-related stats at a zone."""
+type AssigneeStats {
+  assignee: UserType
+  openCount: Int
+  resolvedCount: Int
+  resolvedTimeAvgMinutes: Int
+}
+
+"""
+The `Date` scalar type represents a Date
+value as specified by
+[iso8601](https://en.wikipedia.org/wiki/ISO_8601).
+"""
+scalar Date
+
+type CommentTypeConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [CommentTypeEdge]!
+}
+
+"""A Relay edge containing a `CommentType` and its cursor."""
+type CommentTypeEdge {
+  """The item at the end of the edge"""
+  node: CommentType
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type CommentType implements Node {
+  """The ID of the object"""
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+  text: String!
+  owner: UserType
+  incident: IncidentType
+  activityType: ApiCommentActivityTypeChoices
+  note: String
+}
+
+type IncidentType implements Node {
+  """The ID of the object"""
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  uuid: String!
+  title: String!
+  timestamp: DateTime!
+  lastFeedbackSubmissionTimestamp: DateTime
+  data: JSONString
+  organization: OrganizationType
+  camera: CameraType
+  zone: ZoneType
+  incidentType: CameraIncidentType
+  priority: ApiIncidentPriorityChoices!
+  status: String
+  highlighted: Boolean!
+  experimental: Boolean!
+  assignedBy(offset: Int, before: String, after: String, first: Int, last: Int): UserTypeConnection!
+  assignedTo(offset: Int, before: String, after: String, first: Int, last: Int): UserTypeConnection!
+  alerted: Boolean!
+  visibleToCustomers: Boolean!
+  validFeedbackCount: Int!
+  invalidFeedbackCount: Int!
+  unsureFeedbackCount: Int!
+  corruptFeedbackCount: Int!
+  reviewLevel: ApiIncidentReviewLevelChoices!
+  comments(offset: Int, before: String, after: String, first: Int, last: Int): CommentTypeConnection!
+  userIncidents: [AssignSchema!]!
+  feedback: [IncidentFeedbackType!]!
+  pk: Int!
+  bookmarked: Boolean!
+  thumbnailUrl: String!
+  thumbnailUrlMrap: String!
+  videoUrl: String!
+  videoUrlMrap: String!
+  annotationsUrl: String!
+  annotationsUrlMrap: String!
+  duration: Int
+  endTimestamp: DateTime
+  dockerImageTag: String
+  actorIds: [String!]!
+  assignees: [UserType]!
+  tags: [TagType]!
+  cameraUuid: String!
+  cameraConfig: CameraConfigNewModelType
+}
+
+"""
+Allows use of a JSON String for input / output from the GraphQL schema.
+
+Use of this type is *not recommended* as you lose the benefits of having a defined, static
+schema (one of the key benefits of GraphQL).
+"""
+scalar JSONString
+
+"""Camera-specific incident type."""
+type CameraIncidentType {
+  id: ID!
+  key: String!
+  name: String!
+  backgroundColor: String!
+  description: String
+}
+
+"""An enumeration."""
+enum ApiIncidentPriorityChoices {
+  """Low Priority"""
+  LOW
+
+  """Medium Priority"""
+  MEDIUM
+
+  """High Priority"""
+  HIGH
+}
+
+"""An enumeration."""
+enum ApiIncidentReviewLevelChoices {
+  """Red Level"""
+  RED
+
+  """Yello Level"""
+  YELLOW
+
+  """Green Level"""
+  GREEN
+
+  """Gold Level"""
+  GOLD
+}
+
+type AssignSchema {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+  organization: OrganizationType
+  incident: IncidentFeedbackSummaryType!
+  assignedBy: UserType
+  assignee: UserType
+  note: String
+}
+
+type IncidentFeedbackSummaryType implements Node {
+  """The ID of the object"""
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  uuid: UUID
+  title: String!
+  timestamp: DateTime!
+  lastFeedbackSubmissionTimestamp: DateTime
+  data: JSONString
+  organization: OrganizationType
+  camera: CameraType
+  zone: ZoneType
+  incidentType: IncidentTypeType
+  priority: ApiIncidentPriorityChoices!
+  status: ApiIncidentStatusChoices!
+  experimental: Boolean!
+  assignedBy(offset: Int, before: String, after: String, first: Int, last: Int): UserTypeConnection!
+  assignedTo(offset: Int, before: String, after: String, first: Int, last: Int): UserTypeConnection!
+
+  """True if any alerts have been sent for this incident, otherwise False"""
+  alerted: Boolean!
+  visibleToCustomers: Boolean!
+  validFeedbackCount: Int!
+  invalidFeedbackCount: Int!
+  unsureFeedbackCount: Int!
+  corruptFeedbackCount: Int!
+  reviewLevel: ApiIncidentReviewLevelChoices!
+  comments(offset: Int, before: String, after: String, first: Int, last: Int): CommentTypeConnection!
+  userIncidents: [AssignSchema!]!
+  feedback: [IncidentFeedbackType!]!
+  pk: Int
+  valid: [String]!
+  invalid: [String]!
+  unsure: [String]!
+}
+
+"""
+Leverages the internal Python implementation of UUID (uuid.UUID) to provide native UUID objects
+in fields, resolvers and input.
+"""
+scalar UUID
+
+"""An enumeration."""
+enum ApiIncidentStatusChoices {
+  """Open"""
+  OPEN
+
+  """In Progress"""
+  IN_PROGRESS
+
+  """Resolved"""
+  RESOLVED
+}
+
+type IncidentFeedbackType {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+  incident: IncidentFeedbackSummaryType!
+  user: UserType!
+  feedbackType: String!
+  feedbackValue: String!
+  feedbackText: String
+  incidentServedTimestampSeconds: Int
+  elapsedMillisecondsBetweenReviews: Int
+}
+
+type TagType {
+  label: String
+  value: String!
+}
+
+"""The CameraConfigNewModel type used for graphql queries"""
+type CameraConfigNewModelType {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+  camera: CameraType!
+  doors: JSONString
+  drivingAreas: JSONString
+  actionableRegions: JSONString
+  intersections: JSONString
+  endOfAisles: JSONString
+  noPedestrianZones: JSONString
+  motionDetectionZones: JSONString
+  noObstructionRegions: JSONString
+  version: Int!
+}
+
+"""An enumeration."""
+enum ApiCommentActivityTypeChoices {
+  """Comment"""
+  COMMENT
+
+  """Assign"""
+  ASSIGN
+
+  """Log"""
+  LOG
+
+  """Resolve"""
+  RESOLVE
+
+  """Reopen"""
+  REOPEN
+}
+
+type IncidentFeedConnection {
+  pageInfo: PageInfo!
+  edges: [IncidentFeedItemEdge]
+}
+
+type IncidentFeedItemEdge {
+  cursor: String!
+  node: IncidentFeedItem
+}
+
+union IncidentFeedItem = DailyIncidentsFeedItem | EmptyRangeFeedItem
+
+"""Feed item which contains 1 days worth of data."""
+type DailyIncidentsFeedItem {
+  key: String!
+  date: Date!
+
+  """
+  Time buckets covering all 24 hours of a single day, localized to the organization/zone timezone
+  """
+  timeBuckets: [IncidentFeedItemTimeBucket]!
+}
+
+"""Incident feed item data scoped to a time bucket."""
+type IncidentFeedItemTimeBucket {
+  key: String!
+  title: String!
+
+  """Time bucket start hour (1-24)"""
+  startHour: Int!
+
+  """Time bucket end hour (1-24)"""
+  endHour: Int!
+
+  """Time bucket duration in hours (1-24)"""
+  durationHours: Int!
+
+  """Time bucket exact start timestamp"""
+  startTimestamp: DateTime!
+
+  """Time bucket exact end timestamp"""
+  endTimestamp: DateTime!
+
+  """Total incident count within this time bucket"""
+  incidentCount: Int!
+
+  """Total incident counts by type within time bucket"""
+  incidentCounts: [TimeBucketIncidentTypeCount]
+
+  """Latest N incidents within this time bucket"""
+  latestIncidents: [IncidentType]
+}
+
+"""Incident type counts for time buckets"""
+type TimeBucketIncidentTypeCount {
+  count: Int
+  incidentType: IncidentTypeType
+}
+
+"""Feed item which represents a range of days without any incidents."""
+type EmptyRangeFeedItem {
+  key: String!
+  title: String!
+  startDate: Date!
+  endDate: Date!
+
+  """Number of days covered by this feed item (at least 1)"""
+  dayCount: Int!
+}
+
+"""Client preference key/value pair."""
+type ClientPreference {
+  key: String!
+  value: String!
+}
+
+type Score {
+  label: String!
+  value: Int!
+}
+
+type SessionCount {
+  users: [SessionUserCount]
+  sites: [SessionSiteCount]
+}
+
+type SessionUserCount {
+  user: UserType
+  value: Int!
+}
+
+type SessionSiteCount {
+  site: ZoneType
+  value: Int!
+}
+
+type IncidentTypeConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [IncidentTypeEdge]!
+}
+
+"""A Relay edge containing a `IncidentType` and its cursor."""
+type IncidentTypeEdge {
+  """The item at the end of the edge"""
+  node: IncidentType
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type SiteIncidentAnalytics {
+  id: ID!
+  name: String!
+  incidentAggregateGroups(
+    """Start date inclusive"""
+    startDate: Date
+
+    """End date, inclusive"""
+    endDate: Date
+
+    """Start timestamp, inclusive"""
+    startTimestamp: DateTime
+
+    """End timestamp, inclusive"""
+    endTimestamp: DateTime
+    groupBy: TimeBucketWidth!
+    filters: [FilterInputType]
+  ): [IncidentAggregateGroup!]
+}
+
+"""Incident aggregate group."""
+type IncidentAggregateGroup {
+  id: ID!
+  metrics: IncidentAggregateMetrics!
+  dimensions: IncidentAggregateDimensions!
+}
+
+"""Incident aggregate group metrics."""
+type IncidentAggregateMetrics {
+  """Count of incidents in this group."""
+  count: Int!
+}
+
+"""Incident aggregate group dimensions."""
+type IncidentAggregateDimensions {
+  """
+  Incident aggregate group datetime truncated to the appropriate date part based on the group_by property (e.g. hourly groups are truncated to the hour, daily groups truncated to the day, etc.). All values are localized to the parent zone's timezone.
+  """
+  datetime: DateTime!
+  organization: OrganizationType!
+  zone: ZoneType!
+  camera: CameraType!
+  incidentType: OrganizationIncidentTypeType!
+}
+
+"""Organization-specific incident type."""
+type OrganizationIncidentTypeType {
+  id: ID!
+  key: String!
+  name: String!
+  backgroundColor: String!
+}
+
+"""Time bucket width choices."""
+enum TimeBucketWidth {
+  YEAR
+  QUARTER
+  MONTH
+  WEEK
+  DAY
+  HOUR
+}
+
+type SiteScoreStats {
+  siteScore: Int
+  siteEventScores: [SiteEventScore!]
+}
+
+type SiteEventScore {
+  label: String!
+  score: Int!
+}
+
+type TaskTypeConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [TaskTypeEdge]!
+}
+
+"""A Relay edge containing a `TaskType` and its cursor."""
+type TaskTypeEdge {
+  """The item at the end of the edge"""
+  node: TaskType
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type TaskType implements Node {
+  """The ID of the object"""
+  id: ID!
+  incident: IncidentType
+  assignedBy: [UserType]
+  assignedTo: [UserType]
+  status: TaskStatus
+}
+
+"""An enumeration."""
+enum TaskStatus {
+  OPEN
+  RESOLVED
+}
+
+type TaskStatsType {
+  totalCount: Int
+  openCount: Int
+  resolvedCount: Int
+}
+
+type UserStats {
+  bookmarkTotalCount: Int
+  bookmarkOpenCount: Int
+  bookmarkResolvedCount: Int
+}
+
+"""Graphene class type to represent invited user object that is returned"""
+type InvitedUserType {
+  user: UserType
+  role: Role!
+  sites: [ZoneType]
+  expired: Boolean!
+  token: String!
+  createdAt: DateTime!
+}
+
+"""An enumeration."""
+enum ApiOrganizationTimezoneChoices {
+  """Africa/Abidjan"""
+  AFRICA_ABIDJAN
+
+  """Africa/Accra"""
+  AFRICA_ACCRA
+
+  """Africa/Addis_Ababa"""
+  AFRICA_ADDIS_ABABA
+
+  """Africa/Algiers"""
+  AFRICA_ALGIERS
+
+  """Africa/Asmara"""
+  AFRICA_ASMARA
+
+  """Africa/Bamako"""
+  AFRICA_BAMAKO
+
+  """Africa/Bangui"""
+  AFRICA_BANGUI
+
+  """Africa/Banjul"""
+  AFRICA_BANJUL
+
+  """Africa/Bissau"""
+  AFRICA_BISSAU
+
+  """Africa/Blantyre"""
+  AFRICA_BLANTYRE
+
+  """Africa/Brazzaville"""
+  AFRICA_BRAZZAVILLE
+
+  """Africa/Bujumbura"""
+  AFRICA_BUJUMBURA
+
+  """Africa/Cairo"""
+  AFRICA_CAIRO
+
+  """Africa/Casablanca"""
+  AFRICA_CASABLANCA
+
+  """Africa/Ceuta"""
+  AFRICA_CEUTA
+
+  """Africa/Conakry"""
+  AFRICA_CONAKRY
+
+  """Africa/Dakar"""
+  AFRICA_DAKAR
+
+  """Africa/Dar_es_Salaam"""
+  AFRICA_DAR_ES_SALAAM
+
+  """Africa/Djibouti"""
+  AFRICA_DJIBOUTI
+
+  """Africa/Douala"""
+  AFRICA_DOUALA
+
+  """Africa/El_Aaiun"""
+  AFRICA_EL_AAIUN
+
+  """Africa/Freetown"""
+  AFRICA_FREETOWN
+
+  """Africa/Gaborone"""
+  AFRICA_GABORONE
+
+  """Africa/Harare"""
+  AFRICA_HARARE
+
+  """Africa/Johannesburg"""
+  AFRICA_JOHANNESBURG
+
+  """Africa/Juba"""
+  AFRICA_JUBA
+
+  """Africa/Kampala"""
+  AFRICA_KAMPALA
+
+  """Africa/Khartoum"""
+  AFRICA_KHARTOUM
+
+  """Africa/Kigali"""
+  AFRICA_KIGALI
+
+  """Africa/Kinshasa"""
+  AFRICA_KINSHASA
+
+  """Africa/Lagos"""
+  AFRICA_LAGOS
+
+  """Africa/Libreville"""
+  AFRICA_LIBREVILLE
+
+  """Africa/Lome"""
+  AFRICA_LOME
+
+  """Africa/Luanda"""
+  AFRICA_LUANDA
+
+  """Africa/Lubumbashi"""
+  AFRICA_LUBUMBASHI
+
+  """Africa/Lusaka"""
+  AFRICA_LUSAKA
+
+  """Africa/Malabo"""
+  AFRICA_MALABO
+
+  """Africa/Maputo"""
+  AFRICA_MAPUTO
+
+  """Africa/Maseru"""
+  AFRICA_MASERU
+
+  """Africa/Mbabane"""
+  AFRICA_MBABANE
+
+  """Africa/Mogadishu"""
+  AFRICA_MOGADISHU
+
+  """Africa/Monrovia"""
+  AFRICA_MONROVIA
+
+  """Africa/Nairobi"""
+  AFRICA_NAIROBI
+
+  """Africa/Ndjamena"""
+  AFRICA_NDJAMENA
+
+  """Africa/Niamey"""
+  AFRICA_NIAMEY
+
+  """Africa/Nouakchott"""
+  AFRICA_NOUAKCHOTT
+
+  """Africa/Ouagadougou"""
+  AFRICA_OUAGADOUGOU
+
+  """Africa/Porto-Novo"""
+  AFRICA_PORTO_NOVO
+
+  """Africa/Sao_Tome"""
+  AFRICA_SAO_TOME
+
+  """Africa/Tripoli"""
+  AFRICA_TRIPOLI
+
+  """Africa/Tunis"""
+  AFRICA_TUNIS
+
+  """Africa/Windhoek"""
+  AFRICA_WINDHOEK
+
+  """America/Adak"""
+  AMERICA_ADAK
+
+  """America/Anchorage"""
+  AMERICA_ANCHORAGE
+
+  """America/Anguilla"""
+  AMERICA_ANGUILLA
+
+  """America/Antigua"""
+  AMERICA_ANTIGUA
+
+  """America/Araguaina"""
+  AMERICA_ARAGUAINA
+
+  """America/Argentina/Buenos_Aires"""
+  AMERICA_ARGENTINA_BUENOS_AIRES
+
+  """America/Argentina/Catamarca"""
+  AMERICA_ARGENTINA_CATAMARCA
+
+  """America/Argentina/Cordoba"""
+  AMERICA_ARGENTINA_CORDOBA
+
+  """America/Argentina/Jujuy"""
+  AMERICA_ARGENTINA_JUJUY
+
+  """America/Argentina/La_Rioja"""
+  AMERICA_ARGENTINA_LA_RIOJA
+
+  """America/Argentina/Mendoza"""
+  AMERICA_ARGENTINA_MENDOZA
+
+  """America/Argentina/Rio_Gallegos"""
+  AMERICA_ARGENTINA_RIO_GALLEGOS
+
+  """America/Argentina/Salta"""
+  AMERICA_ARGENTINA_SALTA
+
+  """America/Argentina/San_Juan"""
+  AMERICA_ARGENTINA_SAN_JUAN
+
+  """America/Argentina/San_Luis"""
+  AMERICA_ARGENTINA_SAN_LUIS
+
+  """America/Argentina/Tucuman"""
+  AMERICA_ARGENTINA_TUCUMAN
+
+  """America/Argentina/Ushuaia"""
+  AMERICA_ARGENTINA_USHUAIA
+
+  """America/Aruba"""
+  AMERICA_ARUBA
+
+  """America/Asuncion"""
+  AMERICA_ASUNCION
+
+  """America/Atikokan"""
+  AMERICA_ATIKOKAN
+
+  """America/Bahia"""
+  AMERICA_BAHIA
+
+  """America/Bahia_Banderas"""
+  AMERICA_BAHIA_BANDERAS
+
+  """America/Barbados"""
+  AMERICA_BARBADOS
+
+  """America/Belem"""
+  AMERICA_BELEM
+
+  """America/Belize"""
+  AMERICA_BELIZE
+
+  """America/Blanc-Sablon"""
+  AMERICA_BLANC_SABLON
+
+  """America/Boa_Vista"""
+  AMERICA_BOA_VISTA
+
+  """America/Bogota"""
+  AMERICA_BOGOTA
+
+  """America/Boise"""
+  AMERICA_BOISE
+
+  """America/Cambridge_Bay"""
+  AMERICA_CAMBRIDGE_BAY
+
+  """America/Campo_Grande"""
+  AMERICA_CAMPO_GRANDE
+
+  """America/Cancun"""
+  AMERICA_CANCUN
+
+  """America/Caracas"""
+  AMERICA_CARACAS
+
+  """America/Cayenne"""
+  AMERICA_CAYENNE
+
+  """America/Cayman"""
+  AMERICA_CAYMAN
+
+  """America/Chicago"""
+  AMERICA_CHICAGO
+
+  """America/Chihuahua"""
+  AMERICA_CHIHUAHUA
+
+  """America/Costa_Rica"""
+  AMERICA_COSTA_RICA
+
+  """America/Creston"""
+  AMERICA_CRESTON
+
+  """America/Cuiaba"""
+  AMERICA_CUIABA
+
+  """America/Curacao"""
+  AMERICA_CURACAO
+
+  """America/Danmarkshavn"""
+  AMERICA_DANMARKSHAVN
+
+  """America/Dawson"""
+  AMERICA_DAWSON
+
+  """America/Dawson_Creek"""
+  AMERICA_DAWSON_CREEK
+
+  """America/Denver"""
+  AMERICA_DENVER
+
+  """America/Detroit"""
+  AMERICA_DETROIT
+
+  """America/Dominica"""
+  AMERICA_DOMINICA
+
+  """America/Edmonton"""
+  AMERICA_EDMONTON
+
+  """America/Eirunepe"""
+  AMERICA_EIRUNEPE
+
+  """America/El_Salvador"""
+  AMERICA_EL_SALVADOR
+
+  """America/Fort_Nelson"""
+  AMERICA_FORT_NELSON
+
+  """America/Fortaleza"""
+  AMERICA_FORTALEZA
+
+  """America/Glace_Bay"""
+  AMERICA_GLACE_BAY
+
+  """America/Goose_Bay"""
+  AMERICA_GOOSE_BAY
+
+  """America/Grand_Turk"""
+  AMERICA_GRAND_TURK
+
+  """America/Grenada"""
+  AMERICA_GRENADA
+
+  """America/Guadeloupe"""
+  AMERICA_GUADELOUPE
+
+  """America/Guatemala"""
+  AMERICA_GUATEMALA
+
+  """America/Guayaquil"""
+  AMERICA_GUAYAQUIL
+
+  """America/Guyana"""
+  AMERICA_GUYANA
+
+  """America/Halifax"""
+  AMERICA_HALIFAX
+
+  """America/Havana"""
+  AMERICA_HAVANA
+
+  """America/Hermosillo"""
+  AMERICA_HERMOSILLO
+
+  """America/Indiana/Indianapolis"""
+  AMERICA_INDIANA_INDIANAPOLIS
+
+  """America/Indiana/Knox"""
+  AMERICA_INDIANA_KNOX
+
+  """America/Indiana/Marengo"""
+  AMERICA_INDIANA_MARENGO
+
+  """America/Indiana/Petersburg"""
+  AMERICA_INDIANA_PETERSBURG
+
+  """America/Indiana/Tell_City"""
+  AMERICA_INDIANA_TELL_CITY
+
+  """America/Indiana/Vevay"""
+  AMERICA_INDIANA_VEVAY
+
+  """America/Indiana/Vincennes"""
+  AMERICA_INDIANA_VINCENNES
+
+  """America/Indiana/Winamac"""
+  AMERICA_INDIANA_WINAMAC
+
+  """America/Inuvik"""
+  AMERICA_INUVIK
+
+  """America/Iqaluit"""
+  AMERICA_IQALUIT
+
+  """America/Jamaica"""
+  AMERICA_JAMAICA
+
+  """America/Juneau"""
+  AMERICA_JUNEAU
+
+  """America/Kentucky/Louisville"""
+  AMERICA_KENTUCKY_LOUISVILLE
+
+  """America/Kentucky/Monticello"""
+  AMERICA_KENTUCKY_MONTICELLO
+
+  """America/Kralendijk"""
+  AMERICA_KRALENDIJK
+
+  """America/La_Paz"""
+  AMERICA_LA_PAZ
+
+  """America/Lima"""
+  AMERICA_LIMA
+
+  """America/Los_Angeles"""
+  AMERICA_LOS_ANGELES
+
+  """America/Lower_Princes"""
+  AMERICA_LOWER_PRINCES
+
+  """America/Maceio"""
+  AMERICA_MACEIO
+
+  """America/Managua"""
+  AMERICA_MANAGUA
+
+  """America/Manaus"""
+  AMERICA_MANAUS
+
+  """America/Marigot"""
+  AMERICA_MARIGOT
+
+  """America/Martinique"""
+  AMERICA_MARTINIQUE
+
+  """America/Matamoros"""
+  AMERICA_MATAMOROS
+
+  """America/Mazatlan"""
+  AMERICA_MAZATLAN
+
+  """America/Menominee"""
+  AMERICA_MENOMINEE
+
+  """America/Merida"""
+  AMERICA_MERIDA
+
+  """America/Metlakatla"""
+  AMERICA_METLAKATLA
+
+  """America/Mexico_City"""
+  AMERICA_MEXICO_CITY
+
+  """America/Miquelon"""
+  AMERICA_MIQUELON
+
+  """America/Moncton"""
+  AMERICA_MONCTON
+
+  """America/Monterrey"""
+  AMERICA_MONTERREY
+
+  """America/Montevideo"""
+  AMERICA_MONTEVIDEO
+
+  """America/Montserrat"""
+  AMERICA_MONTSERRAT
+
+  """America/Nassau"""
+  AMERICA_NASSAU
+
+  """America/New_York"""
+  AMERICA_NEW_YORK
+
+  """America/Nipigon"""
+  AMERICA_NIPIGON
+
+  """America/Nome"""
+  AMERICA_NOME
+
+  """America/Noronha"""
+  AMERICA_NORONHA
+
+  """America/North_Dakota/Beulah"""
+  AMERICA_NORTH_DAKOTA_BEULAH
+
+  """America/North_Dakota/Center"""
+  AMERICA_NORTH_DAKOTA_CENTER
+
+  """America/North_Dakota/New_Salem"""
+  AMERICA_NORTH_DAKOTA_NEW_SALEM
+
+  """America/Nuuk"""
+  AMERICA_NUUK
+
+  """America/Ojinaga"""
+  AMERICA_OJINAGA
+
+  """America/Panama"""
+  AMERICA_PANAMA
+
+  """America/Pangnirtung"""
+  AMERICA_PANGNIRTUNG
+
+  """America/Paramaribo"""
+  AMERICA_PARAMARIBO
+
+  """America/Phoenix"""
+  AMERICA_PHOENIX
+
+  """America/Port-au-Prince"""
+  AMERICA_PORT_AU_PRINCE
+
+  """America/Port_of_Spain"""
+  AMERICA_PORT_OF_SPAIN
+
+  """America/Porto_Velho"""
+  AMERICA_PORTO_VELHO
+
+  """America/Puerto_Rico"""
+  AMERICA_PUERTO_RICO
+
+  """America/Punta_Arenas"""
+  AMERICA_PUNTA_ARENAS
+
+  """America/Rainy_River"""
+  AMERICA_RAINY_RIVER
+
+  """America/Rankin_Inlet"""
+  AMERICA_RANKIN_INLET
+
+  """America/Recife"""
+  AMERICA_RECIFE
+
+  """America/Regina"""
+  AMERICA_REGINA
+
+  """America/Resolute"""
+  AMERICA_RESOLUTE
+
+  """America/Rio_Branco"""
+  AMERICA_RIO_BRANCO
+
+  """America/Santarem"""
+  AMERICA_SANTAREM
+
+  """America/Santiago"""
+  AMERICA_SANTIAGO
+
+  """America/Santo_Domingo"""
+  AMERICA_SANTO_DOMINGO
+
+  """America/Sao_Paulo"""
+  AMERICA_SAO_PAULO
+
+  """America/Scoresbysund"""
+  AMERICA_SCORESBYSUND
+
+  """America/Sitka"""
+  AMERICA_SITKA
+
+  """America/St_Barthelemy"""
+  AMERICA_ST_BARTHELEMY
+
+  """America/St_Johns"""
+  AMERICA_ST_JOHNS
+
+  """America/St_Kitts"""
+  AMERICA_ST_KITTS
+
+  """America/St_Lucia"""
+  AMERICA_ST_LUCIA
+
+  """America/St_Thomas"""
+  AMERICA_ST_THOMAS
+
+  """America/St_Vincent"""
+  AMERICA_ST_VINCENT
+
+  """America/Swift_Current"""
+  AMERICA_SWIFT_CURRENT
+
+  """America/Tegucigalpa"""
+  AMERICA_TEGUCIGALPA
+
+  """America/Thule"""
+  AMERICA_THULE
+
+  """America/Thunder_Bay"""
+  AMERICA_THUNDER_BAY
+
+  """America/Tijuana"""
+  AMERICA_TIJUANA
+
+  """America/Toronto"""
+  AMERICA_TORONTO
+
+  """America/Tortola"""
+  AMERICA_TORTOLA
+
+  """America/Vancouver"""
+  AMERICA_VANCOUVER
+
+  """America/Whitehorse"""
+  AMERICA_WHITEHORSE
+
+  """America/Winnipeg"""
+  AMERICA_WINNIPEG
+
+  """America/Yakutat"""
+  AMERICA_YAKUTAT
+
+  """America/Yellowknife"""
+  AMERICA_YELLOWKNIFE
+
+  """Antarctica/Casey"""
+  ANTARCTICA_CASEY
+
+  """Antarctica/Davis"""
+  ANTARCTICA_DAVIS
+
+  """Antarctica/DumontDUrville"""
+  ANTARCTICA_DUMONTDURVILLE
+
+  """Antarctica/Macquarie"""
+  ANTARCTICA_MACQUARIE
+
+  """Antarctica/Mawson"""
+  ANTARCTICA_MAWSON
+
+  """Antarctica/McMurdo"""
+  ANTARCTICA_MCMURDO
+
+  """Antarctica/Palmer"""
+  ANTARCTICA_PALMER
+
+  """Antarctica/Rothera"""
+  ANTARCTICA_ROTHERA
+
+  """Antarctica/Syowa"""
+  ANTARCTICA_SYOWA
+
+  """Antarctica/Troll"""
+  ANTARCTICA_TROLL
+
+  """Antarctica/Vostok"""
+  ANTARCTICA_VOSTOK
+
+  """Arctic/Longyearbyen"""
+  ARCTIC_LONGYEARBYEN
+
+  """Asia/Aden"""
+  ASIA_ADEN
+
+  """Asia/Almaty"""
+  ASIA_ALMATY
+
+  """Asia/Amman"""
+  ASIA_AMMAN
+
+  """Asia/Anadyr"""
+  ASIA_ANADYR
+
+  """Asia/Aqtau"""
+  ASIA_AQTAU
+
+  """Asia/Aqtobe"""
+  ASIA_AQTOBE
+
+  """Asia/Ashgabat"""
+  ASIA_ASHGABAT
+
+  """Asia/Atyrau"""
+  ASIA_ATYRAU
+
+  """Asia/Baghdad"""
+  ASIA_BAGHDAD
+
+  """Asia/Bahrain"""
+  ASIA_BAHRAIN
+
+  """Asia/Baku"""
+  ASIA_BAKU
+
+  """Asia/Bangkok"""
+  ASIA_BANGKOK
+
+  """Asia/Barnaul"""
+  ASIA_BARNAUL
+
+  """Asia/Beirut"""
+  ASIA_BEIRUT
+
+  """Asia/Bishkek"""
+  ASIA_BISHKEK
+
+  """Asia/Brunei"""
+  ASIA_BRUNEI
+
+  """Asia/Chita"""
+  ASIA_CHITA
+
+  """Asia/Choibalsan"""
+  ASIA_CHOIBALSAN
+
+  """Asia/Colombo"""
+  ASIA_COLOMBO
+
+  """Asia/Damascus"""
+  ASIA_DAMASCUS
+
+  """Asia/Dhaka"""
+  ASIA_DHAKA
+
+  """Asia/Dili"""
+  ASIA_DILI
+
+  """Asia/Dubai"""
+  ASIA_DUBAI
+
+  """Asia/Dushanbe"""
+  ASIA_DUSHANBE
+
+  """Asia/Famagusta"""
+  ASIA_FAMAGUSTA
+
+  """Asia/Gaza"""
+  ASIA_GAZA
+
+  """Asia/Hebron"""
+  ASIA_HEBRON
+
+  """Asia/Ho_Chi_Minh"""
+  ASIA_HO_CHI_MINH
+
+  """Asia/Hong_Kong"""
+  ASIA_HONG_KONG
+
+  """Asia/Hovd"""
+  ASIA_HOVD
+
+  """Asia/Irkutsk"""
+  ASIA_IRKUTSK
+
+  """Asia/Jakarta"""
+  ASIA_JAKARTA
+
+  """Asia/Jayapura"""
+  ASIA_JAYAPURA
+
+  """Asia/Jerusalem"""
+  ASIA_JERUSALEM
+
+  """Asia/Kabul"""
+  ASIA_KABUL
+
+  """Asia/Kamchatka"""
+  ASIA_KAMCHATKA
+
+  """Asia/Karachi"""
+  ASIA_KARACHI
+
+  """Asia/Kathmandu"""
+  ASIA_KATHMANDU
+
+  """Asia/Khandyga"""
+  ASIA_KHANDYGA
+
+  """Asia/Kolkata"""
+  ASIA_KOLKATA
+
+  """Asia/Krasnoyarsk"""
+  ASIA_KRASNOYARSK
+
+  """Asia/Kuala_Lumpur"""
+  ASIA_KUALA_LUMPUR
+
+  """Asia/Kuching"""
+  ASIA_KUCHING
+
+  """Asia/Kuwait"""
+  ASIA_KUWAIT
+
+  """Asia/Macau"""
+  ASIA_MACAU
+
+  """Asia/Magadan"""
+  ASIA_MAGADAN
+
+  """Asia/Makassar"""
+  ASIA_MAKASSAR
+
+  """Asia/Manila"""
+  ASIA_MANILA
+
+  """Asia/Muscat"""
+  ASIA_MUSCAT
+
+  """Asia/Nicosia"""
+  ASIA_NICOSIA
+
+  """Asia/Novokuznetsk"""
+  ASIA_NOVOKUZNETSK
+
+  """Asia/Novosibirsk"""
+  ASIA_NOVOSIBIRSK
+
+  """Asia/Omsk"""
+  ASIA_OMSK
+
+  """Asia/Oral"""
+  ASIA_ORAL
+
+  """Asia/Phnom_Penh"""
+  ASIA_PHNOM_PENH
+
+  """Asia/Pontianak"""
+  ASIA_PONTIANAK
+
+  """Asia/Pyongyang"""
+  ASIA_PYONGYANG
+
+  """Asia/Qatar"""
+  ASIA_QATAR
+
+  """Asia/Qostanay"""
+  ASIA_QOSTANAY
+
+  """Asia/Qyzylorda"""
+  ASIA_QYZYLORDA
+
+  """Asia/Riyadh"""
+  ASIA_RIYADH
+
+  """Asia/Sakhalin"""
+  ASIA_SAKHALIN
+
+  """Asia/Samarkand"""
+  ASIA_SAMARKAND
+
+  """Asia/Seoul"""
+  ASIA_SEOUL
+
+  """Asia/Shanghai"""
+  ASIA_SHANGHAI
+
+  """Asia/Singapore"""
+  ASIA_SINGAPORE
+
+  """Asia/Srednekolymsk"""
+  ASIA_SREDNEKOLYMSK
+
+  """Asia/Taipei"""
+  ASIA_TAIPEI
+
+  """Asia/Tashkent"""
+  ASIA_TASHKENT
+
+  """Asia/Tbilisi"""
+  ASIA_TBILISI
+
+  """Asia/Tehran"""
+  ASIA_TEHRAN
+
+  """Asia/Thimphu"""
+  ASIA_THIMPHU
+
+  """Asia/Tokyo"""
+  ASIA_TOKYO
+
+  """Asia/Tomsk"""
+  ASIA_TOMSK
+
+  """Asia/Ulaanbaatar"""
+  ASIA_ULAANBAATAR
+
+  """Asia/Urumqi"""
+  ASIA_URUMQI
+
+  """Asia/Ust-Nera"""
+  ASIA_UST_NERA
+
+  """Asia/Vientiane"""
+  ASIA_VIENTIANE
+
+  """Asia/Vladivostok"""
+  ASIA_VLADIVOSTOK
+
+  """Asia/Yakutsk"""
+  ASIA_YAKUTSK
+
+  """Asia/Yangon"""
+  ASIA_YANGON
+
+  """Asia/Yekaterinburg"""
+  ASIA_YEKATERINBURG
+
+  """Asia/Yerevan"""
+  ASIA_YEREVAN
+
+  """Atlantic/Azores"""
+  ATLANTIC_AZORES
+
+  """Atlantic/Bermuda"""
+  ATLANTIC_BERMUDA
+
+  """Atlantic/Canary"""
+  ATLANTIC_CANARY
+
+  """Atlantic/Cape_Verde"""
+  ATLANTIC_CAPE_VERDE
+
+  """Atlantic/Faroe"""
+  ATLANTIC_FAROE
+
+  """Atlantic/Madeira"""
+  ATLANTIC_MADEIRA
+
+  """Atlantic/Reykjavik"""
+  ATLANTIC_REYKJAVIK
+
+  """Atlantic/South_Georgia"""
+  ATLANTIC_SOUTH_GEORGIA
+
+  """Atlantic/St_Helena"""
+  ATLANTIC_ST_HELENA
+
+  """Atlantic/Stanley"""
+  ATLANTIC_STANLEY
+
+  """Australia/Adelaide"""
+  AUSTRALIA_ADELAIDE
+
+  """Australia/Brisbane"""
+  AUSTRALIA_BRISBANE
+
+  """Australia/Broken_Hill"""
+  AUSTRALIA_BROKEN_HILL
+
+  """Australia/Darwin"""
+  AUSTRALIA_DARWIN
+
+  """Australia/Eucla"""
+  AUSTRALIA_EUCLA
+
+  """Australia/Hobart"""
+  AUSTRALIA_HOBART
+
+  """Australia/Lindeman"""
+  AUSTRALIA_LINDEMAN
+
+  """Australia/Lord_Howe"""
+  AUSTRALIA_LORD_HOWE
+
+  """Australia/Melbourne"""
+  AUSTRALIA_MELBOURNE
+
+  """Australia/Perth"""
+  AUSTRALIA_PERTH
+
+  """Australia/Sydney"""
+  AUSTRALIA_SYDNEY
+
+  """Canada/Atlantic"""
+  CANADA_ATLANTIC
+
+  """Canada/Central"""
+  CANADA_CENTRAL
+
+  """Canada/Eastern"""
+  CANADA_EASTERN
+
+  """Canada/Mountain"""
+  CANADA_MOUNTAIN
+
+  """Canada/Newfoundland"""
+  CANADA_NEWFOUNDLAND
+
+  """Canada/Pacific"""
+  CANADA_PACIFIC
+
+  """Europe/Amsterdam"""
+  EUROPE_AMSTERDAM
+
+  """Europe/Andorra"""
+  EUROPE_ANDORRA
+
+  """Europe/Astrakhan"""
+  EUROPE_ASTRAKHAN
+
+  """Europe/Athens"""
+  EUROPE_ATHENS
+
+  """Europe/Belgrade"""
+  EUROPE_BELGRADE
+
+  """Europe/Berlin"""
+  EUROPE_BERLIN
+
+  """Europe/Bratislava"""
+  EUROPE_BRATISLAVA
+
+  """Europe/Brussels"""
+  EUROPE_BRUSSELS
+
+  """Europe/Bucharest"""
+  EUROPE_BUCHAREST
+
+  """Europe/Budapest"""
+  EUROPE_BUDAPEST
+
+  """Europe/Busingen"""
+  EUROPE_BUSINGEN
+
+  """Europe/Chisinau"""
+  EUROPE_CHISINAU
+
+  """Europe/Copenhagen"""
+  EUROPE_COPENHAGEN
+
+  """Europe/Dublin"""
+  EUROPE_DUBLIN
+
+  """Europe/Gibraltar"""
+  EUROPE_GIBRALTAR
+
+  """Europe/Guernsey"""
+  EUROPE_GUERNSEY
+
+  """Europe/Helsinki"""
+  EUROPE_HELSINKI
+
+  """Europe/Isle_of_Man"""
+  EUROPE_ISLE_OF_MAN
+
+  """Europe/Istanbul"""
+  EUROPE_ISTANBUL
+
+  """Europe/Jersey"""
+  EUROPE_JERSEY
+
+  """Europe/Kaliningrad"""
+  EUROPE_KALININGRAD
+
+  """Europe/Kiev"""
+  EUROPE_KIEV
+
+  """Europe/Kirov"""
+  EUROPE_KIROV
+
+  """Europe/Lisbon"""
+  EUROPE_LISBON
+
+  """Europe/Ljubljana"""
+  EUROPE_LJUBLJANA
+
+  """Europe/London"""
+  EUROPE_LONDON
+
+  """Europe/Luxembourg"""
+  EUROPE_LUXEMBOURG
+
+  """Europe/Madrid"""
+  EUROPE_MADRID
+
+  """Europe/Malta"""
+  EUROPE_MALTA
+
+  """Europe/Mariehamn"""
+  EUROPE_MARIEHAMN
+
+  """Europe/Minsk"""
+  EUROPE_MINSK
+
+  """Europe/Monaco"""
+  EUROPE_MONACO
+
+  """Europe/Moscow"""
+  EUROPE_MOSCOW
+
+  """Europe/Oslo"""
+  EUROPE_OSLO
+
+  """Europe/Paris"""
+  EUROPE_PARIS
+
+  """Europe/Podgorica"""
+  EUROPE_PODGORICA
+
+  """Europe/Prague"""
+  EUROPE_PRAGUE
+
+  """Europe/Riga"""
+  EUROPE_RIGA
+
+  """Europe/Rome"""
+  EUROPE_ROME
+
+  """Europe/Samara"""
+  EUROPE_SAMARA
+
+  """Europe/San_Marino"""
+  EUROPE_SAN_MARINO
+
+  """Europe/Sarajevo"""
+  EUROPE_SARAJEVO
+
+  """Europe/Saratov"""
+  EUROPE_SARATOV
+
+  """Europe/Simferopol"""
+  EUROPE_SIMFEROPOL
+
+  """Europe/Skopje"""
+  EUROPE_SKOPJE
+
+  """Europe/Sofia"""
+  EUROPE_SOFIA
+
+  """Europe/Stockholm"""
+  EUROPE_STOCKHOLM
+
+  """Europe/Tallinn"""
+  EUROPE_TALLINN
+
+  """Europe/Tirane"""
+  EUROPE_TIRANE
+
+  """Europe/Ulyanovsk"""
+  EUROPE_ULYANOVSK
+
+  """Europe/Uzhgorod"""
+  EUROPE_UZHGOROD
+
+  """Europe/Vaduz"""
+  EUROPE_VADUZ
+
+  """Europe/Vatican"""
+  EUROPE_VATICAN
+
+  """Europe/Vienna"""
+  EUROPE_VIENNA
+
+  """Europe/Vilnius"""
+  EUROPE_VILNIUS
+
+  """Europe/Volgograd"""
+  EUROPE_VOLGOGRAD
+
+  """Europe/Warsaw"""
+  EUROPE_WARSAW
+
+  """Europe/Zagreb"""
+  EUROPE_ZAGREB
+
+  """Europe/Zaporozhye"""
+  EUROPE_ZAPOROZHYE
+
+  """Europe/Zurich"""
+  EUROPE_ZURICH
+
+  """GMT"""
+  GMT
+
+  """Indian/Antananarivo"""
+  INDIAN_ANTANANARIVO
+
+  """Indian/Chagos"""
+  INDIAN_CHAGOS
+
+  """Indian/Christmas"""
+  INDIAN_CHRISTMAS
+
+  """Indian/Cocos"""
+  INDIAN_COCOS
+
+  """Indian/Comoro"""
+  INDIAN_COMORO
+
+  """Indian/Kerguelen"""
+  INDIAN_KERGUELEN
+
+  """Indian/Mahe"""
+  INDIAN_MAHE
+
+  """Indian/Maldives"""
+  INDIAN_MALDIVES
+
+  """Indian/Mauritius"""
+  INDIAN_MAURITIUS
+
+  """Indian/Mayotte"""
+  INDIAN_MAYOTTE
+
+  """Indian/Reunion"""
+  INDIAN_REUNION
+
+  """Pacific/Apia"""
+  PACIFIC_APIA
+
+  """Pacific/Auckland"""
+  PACIFIC_AUCKLAND
+
+  """Pacific/Bougainville"""
+  PACIFIC_BOUGAINVILLE
+
+  """Pacific/Chatham"""
+  PACIFIC_CHATHAM
+
+  """Pacific/Chuuk"""
+  PACIFIC_CHUUK
+
+  """Pacific/Easter"""
+  PACIFIC_EASTER
+
+  """Pacific/Efate"""
+  PACIFIC_EFATE
+
+  """Pacific/Fakaofo"""
+  PACIFIC_FAKAOFO
+
+  """Pacific/Fiji"""
+  PACIFIC_FIJI
+
+  """Pacific/Funafuti"""
+  PACIFIC_FUNAFUTI
+
+  """Pacific/Galapagos"""
+  PACIFIC_GALAPAGOS
+
+  """Pacific/Gambier"""
+  PACIFIC_GAMBIER
+
+  """Pacific/Guadalcanal"""
+  PACIFIC_GUADALCANAL
+
+  """Pacific/Guam"""
+  PACIFIC_GUAM
+
+  """Pacific/Honolulu"""
+  PACIFIC_HONOLULU
+
+  """Pacific/Kanton"""
+  PACIFIC_KANTON
+
+  """Pacific/Kiritimati"""
+  PACIFIC_KIRITIMATI
+
+  """Pacific/Kosrae"""
+  PACIFIC_KOSRAE
+
+  """Pacific/Kwajalein"""
+  PACIFIC_KWAJALEIN
+
+  """Pacific/Majuro"""
+  PACIFIC_MAJURO
+
+  """Pacific/Marquesas"""
+  PACIFIC_MARQUESAS
+
+  """Pacific/Midway"""
+  PACIFIC_MIDWAY
+
+  """Pacific/Nauru"""
+  PACIFIC_NAURU
+
+  """Pacific/Niue"""
+  PACIFIC_NIUE
+
+  """Pacific/Norfolk"""
+  PACIFIC_NORFOLK
+
+  """Pacific/Noumea"""
+  PACIFIC_NOUMEA
+
+  """Pacific/Pago_Pago"""
+  PACIFIC_PAGO_PAGO
+
+  """Pacific/Palau"""
+  PACIFIC_PALAU
+
+  """Pacific/Pitcairn"""
+  PACIFIC_PITCAIRN
+
+  """Pacific/Pohnpei"""
+  PACIFIC_POHNPEI
+
+  """Pacific/Port_Moresby"""
+  PACIFIC_PORT_MORESBY
+
+  """Pacific/Rarotonga"""
+  PACIFIC_RAROTONGA
+
+  """Pacific/Saipan"""
+  PACIFIC_SAIPAN
+
+  """Pacific/Tahiti"""
+  PACIFIC_TAHITI
+
+  """Pacific/Tarawa"""
+  PACIFIC_TARAWA
+
+  """Pacific/Tongatapu"""
+  PACIFIC_TONGATAPU
+
+  """Pacific/Wake"""
+  PACIFIC_WAKE
+
+  """Pacific/Wallis"""
+  PACIFIC_WALLIS
+
+  """US/Alaska"""
+  US_ALASKA
+
+  """US/Arizona"""
+  US_ARIZONA
+
+  """US/Central"""
+  US_CENTRAL
+
+  """US/Eastern"""
+  US_EASTERN
+
+  """US/Hawaii"""
+  US_HAWAII
+
+  """US/Mountain"""
+  US_MOUNTAIN
+
+  """US/Pacific"""
+  US_PACIFIC
+
+  """UTC"""
+  UTC
+}
+
+"""The Edge type used for graphql queries"""
+type EdgeType implements Node {
+  """The ID of the object"""
+  id: ID!
+
+  """Unique identifier for the edge device."""
+  uuid: UUID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  deletedAt: DateTime
+
+  """MAC address of the edge device."""
+  macAddress: String
+
+  """User friendly name displayed throughout apps."""
+  name: String!
+  organization: OrganizationType
+
+  """Serial number of the edge device."""
+  serial: String
+  cameraSet(offset: Int, before: String, after: String, first: Int, last: Int): CameraTypeConnection!
+}
+
+type IncidentFeedbackSummaryTypeConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [IncidentFeedbackSummaryTypeEdge]!
+}
+
+"""
+A Relay edge containing a `IncidentFeedbackSummaryType` and its cursor.
+"""
+type IncidentFeedbackSummaryTypeEdge {
+  """The item at the end of the edge"""
+  node: IncidentFeedbackSummaryType
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""Production line status groups (e.g. aggregate data)"""
+type ProductionLineStatusGroup {
+  metrics: ProductionLineStatusMetrics!
+  dimensions: ProductionLineStatusDimension!
+}
+
+"""Production line status group metrics"""
+type ProductionLineStatusMetrics {
+  """Duration of production line uptime (in seconds)"""
+  uptimeDurationSeconds: Int!
+
+  """Duration of production line downtime (in seconds)"""
+  downtimeDurationSeconds: Int!
+
+  """Duration of time where production line status is unknown (in seconds)"""
+  unknownDurationSeconds: Int!
+}
+
+"""Production line status group dimensions."""
+type ProductionLineStatusDimension {
+  """
+  Production line group datetime truncated to the appropriate date part based on the group_by property (e.g. hourly groups are truncated to the hour, daily groups truncated to the day, etc.). All values are localized to the event zone's timezone.
+  """
+  datetime: DateTime!
+
+  """Max timestamp of all events contained in this aggregate group."""
+  maxTimestamp: DateTime!
+  organization: OrganizationType!
+  zone: ZoneType!
+  camera: CameraType!
+}
+
+type OrganizationTypeConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [OrganizationTypeEdge]!
+}
+
+"""A Relay edge containing a `OrganizationType` and its cursor."""
+type OrganizationTypeEdge {
+  """The item at the end of the edge"""
+  node: OrganizationType
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+type IntegrationFields {
+  filteredRawIncidents(fromUtc: DateTime, toUtc: DateTime, organizationKey: [String], zoneKey: [String], cameraUuid: [String], incidentTypeFilter: String, feedbackType: String, offset: Int, before: String, after: String, first: Int, last: Int): IncidentTypeConnection
+  rawIncidentsFromFilters(fromUtc: DateTime, toUtc: DateTime, filters: [FilterInputType], offset: Int, before: String, after: String, first: Int, last: Int): IncidentTypeConnection
+}
+
+input ReviewQueueContext {
+  reviewPanelId: Int
+  incidentExclusionList: [String]
+}
+
+"""Wrapper for all top-level analytics fields."""
+type AnalyticsType {
+  series(fromUtc: DateTime!, toUtc: DateTime!, groupBy: String!, filters: [FilterInputType]): [SeriesType]
+}
+
+"""Wrapper type for grouping aggregate types by key."""
+type SeriesType {
+  key: DateTime
+  priorityCounts: PriorityCountType!
+  statusCounts: StatusCountType!
+  incidentTypeCounts: GenericScalar!
+}
+
+"""Aggregate counts by priority."""
+type PriorityCountType {
+  lowPriorityCount: Int!
+  mediumPriorityCount: Int!
+  highPriorityCount: Int!
+}
+
+"""Aggregate counts by status."""
+type StatusCountType {
+  openCount: Int!
+  resolvedCount: Int!
+}
+
+type Mutation {
+  zoneCreate(organizationKey: String!, zoneKey: String!, zoneName: String!, zoneType: String!): ZoneCreate
+
+  """Ability for a user to invite a user to register."""
+  userInvite(invitees: [InvitationInputSchema]!): UserInvite
+  userUpdate(firstName: String, isActive: Boolean, lastName: String, roles: [String], userId: ID!): UserUpdate
+  userZonesUpdate(userId: ID!, zones: [ID]!): UserZonesUpdate
+  userRoleUpdate(roleId: ID!, userId: ID!): UserRoleUpdate
+  userRemove(userId: ID!): UserRemove
+
+  """Ability for a user to resend an invitation to a user to register."""
+  userResendInvitation(invitationToken: String!): UserResendInvitation
+
+  """Reviewer account creation mutation."""
+  reviewerAccountCreate(email: String!, name: String!, password: String!): ReviewerAccountCreate
+  reviewerAccountRoleUpdate(userId: ID!): ReviewerAccountRoleUpdate
+  userMfaUpdate(toggledMfaOn: Boolean!, userId: String!): UserMFAUpdate
+  userNameUpdate(firstName: String, lastName: String, userId: String!): UserNameUpdate
+  currentUserAddBookmark(incidentId: ID!): CurrentUserAddBookmark
+  currentUserRemoveBookmark(incidentId: ID!): CurrentUserRemoveBookmark
+  currentUserOrganizationUpdate(organizationId: ID!): CurrentUserOrganizationUpdate
+  currentUserSiteUpdate(siteId: ID!): CurrentUserSiteUpdate
+  organizationCreate(organizationKey: String!, organizationName: String!, timeZone: String = "US/Pacific"): OrganizationCreate
+  assignIncident(assignData: UserIncidentSchema!): CreateUserIncident
+  unassignIncident(assigneeId: ID, incidentId: ID): DeleteUserIncident
+  incidentCreateScenario(incidentId: ID, scenarioType: ScenarioType): IncidentCreateScenario
+  incidentResolve(incidentId: ID!): IncidentResolve
+  incidentReopen(incidentId: ID!): IncidentReopen
+  incidentExportVideo(incidentId: ID!, labeled: Boolean): IncidentExportVideo
+  incidentHighlight(incidentId: ID!): IncidentHighlight
+  incidentUndoHighlight(incidentId: ID!): IncidentUndoHighlight
+
+  """Ability for a user to share an incident for viewing."""
+  incidentCreateShareLink(incidentId: ID!): IncidentCreateShareLink
+  createIncidentFeedback(elapsedMillisecondsBetweenReviews: Int, feedbackText: String!, feedbackType: String!, feedbackValue: String!, incidentId: ID!, incidentServedTimestampSeconds: Int): CreateIncidentFeedback
+  createComment(incidentId: ID!, text: String!): CreateComment
+  cameraCreate(cameraName: String!, cameraUuid: String!, organizationKey: String!, zoneKey: String!): CameraCreate
+
+  """Update an camera identified by its id"""
+  cameraUpdate(cameraId: ID!, cameraName: String!): CameraUpdate
+  cameraConfigNewCreate(actionableRegions: JSONString, doors: JSONString, drivingAreas: JSONString, endOfAisles: JSONString, intersections: JSONString, motionDetectionZones: JSONString, noObstructionRegions: JSONString, noPedestrianZones: JSONString, uuid: String!): CameraConfigNewCreate
+}
+
+type ZoneCreate {
+  zone: ZoneType
+}
+
+"""Ability for a user to invite a user to register."""
+type UserInvite {
+  status: Boolean
+}
+
+input InvitationInputSchema {
+  email: String!
+  roleId: String!
+  zoneIds: [String]!
+}
+
+type UserUpdate {
+  user: UserType
+}
+
+type UserZonesUpdate {
+  status: Boolean
+}
+
+type UserRoleUpdate {
+  status: Boolean
+}
+
+type UserRemove {
+  status: Boolean
+}
+
+"""Ability for a user to resend an invitation to a user to register."""
+type UserResendInvitation {
+  status: Boolean
+}
+
+"""Reviewer account creation mutation."""
+type ReviewerAccountCreate {
+  user: UserType
+}
+
+type ReviewerAccountRoleUpdate {
+  status: Boolean
+}
+
+type UserMFAUpdate {
+  success: Boolean
+}
+
+type UserNameUpdate {
+  user: UserType
+}
+
+type CurrentUserAddBookmark {
+  incident: IncidentType
+}
+
+type CurrentUserRemoveBookmark {
+  incident: IncidentType
+}
+
+type CurrentUserOrganizationUpdate {
+  status: Boolean
+}
+
+type CurrentUserSiteUpdate {
+  status: Boolean
+  newSiteId: ID
+}
+
+type OrganizationCreate {
+  organization: OrganizationType
+}
+
+type CreateUserIncident {
+  users: [UserType]
+}
+
+input UserIncidentSchema {
+  incidentId: ID!
+  assigneeIds: [ID]
+  note: String
+}
+
+type DeleteUserIncident {
+  assign: AssignSchema
+}
+
+type IncidentCreateScenario {
+  incident: IncidentType
+}
+
+"""An enumeration."""
+enum ScenarioType {
+  POSITIVE
+  NEGATIVE
+}
+
+type IncidentResolve {
+  incident: IncidentType
+}
+
+type IncidentReopen {
+  incident: IncidentType
+}
+
+type IncidentExportVideo {
+  downloadUrl: String
+}
+
+type IncidentHighlight {
+  incident: IncidentType
+}
+
+type IncidentUndoHighlight {
+  incident: IncidentType
+}
+
+"""Ability for a user to share an incident for viewing."""
+type IncidentCreateShareLink {
+  shareLink: String
+}
+
+type CreateIncidentFeedback {
+  incidentFeedback: IncidentFeedbackType
+  userErrors: [UserError]
+}
+
+type UserError {
+  message: String!
+  code: String
+  field: [String]
+}
+
+type CreateComment {
+  comment: CommentType
+}
+
+type CameraCreate {
+  camera: CameraType
+}
+
+"""Update an camera identified by its id"""
+type CameraUpdate {
+  camera: CameraType
+}
+
+type CameraConfigNewCreate {
+  cameraConfigNew: CameraConfigNewModelType
+  isUpdated: Boolean
+}

@@ -1,0 +1,14 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_binary(
+    name = "hello",
+    embed = [":golang_lib"],
+    visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "golang_lib",
+    srcs = ["hello.go"],
+    importpath = "github.com/voxel-ai/voxel/experimental/troycarlson/golang",
+    visibility = ["//visibility:private"],
+)

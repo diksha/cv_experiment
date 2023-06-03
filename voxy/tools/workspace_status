@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [[ -e /proc/sys/kernel/random/uuid ]]; then
+	UUID="$(cat /proc/sys/kernel/random/uuid)"
+else
+	UUID="$(uuidgen)"
+fi
+
+echo "CURRENT_TIME $(date +%s)"
+echo "RANDOM_HASH $UUID"
+echo "USER_NAME $USER"
+echo "GIT_COMMIT $(git describe --always --dirty)"

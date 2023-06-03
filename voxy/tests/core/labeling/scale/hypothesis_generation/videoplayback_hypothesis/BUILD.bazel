@@ -1,0 +1,10 @@
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+voxel_py_test(
+    name = "annotations_hypothesis_integration_test",
+    srcs = ["annotations_hypothesis_integration_test.py"],
+    tags = ["requires-network"],
+    deps = [
+        "//core/labeling/scale/hypothesis_generation/videoplayback_hypothesis:annotations_hypothesis",
+    ],
+)

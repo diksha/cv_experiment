@@ -1,0 +1,26 @@
+load("@aspect_rules_js//js:defs.bzl", "js_binary")
+load("@aspect_rules_ts//ts:defs.bzl", "ts_project")
+
+ts_project(
+    name = "ts",
+    srcs = glob([
+        "src/*.ts",
+    ]),
+    declaration = True,
+    tsconfig = "//:tsconfig",
+    deps = [
+        "//:node_modules/@types/express",
+        "//:node_modules/@types/node",
+        "//:node_modules/@types/pg",
+        "//:node_modules/express",
+        "//:node_modules/pg",
+    ],
+)
+
+js_binary(
+    name = "index",
+    data = [
+        ":ts",
+    ],
+    entry_point = "src/index.js",
+)

@@ -1,0 +1,29 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+package(default_visibility = ["//visibility:public"])
+
+voxel_py_test(
+    name = "test_abstract",
+    srcs = ["test_abstract.py"],
+    deps = [
+        "//lib/publisher:abstract",
+    ],
+)
+
+voxel_py_test(
+    name = "test_kinesis",
+    srcs = ["test_kinesis.py"],
+    deps = [
+        "//lib/publisher:kinesis",
+        requirement("botocore"),
+    ],
+)
+
+voxel_py_test(
+    name = "test_sns",
+    srcs = ["test_sns.py"],
+    deps = [
+        "//lib/publisher:sns",
+    ],
+)

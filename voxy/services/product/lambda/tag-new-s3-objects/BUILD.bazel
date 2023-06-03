@@ -1,0 +1,46 @@
+load("@aspect_rules_jest//jest:defs.bzl", "jest_test")
+load("@aspect_rules_js//js:defs.bzl", "js_binary")
+load("@aspect_rules_swc//swc:defs.bzl", "swc")
+load("@aspect_rules_ts//ts:defs.bzl", "ts_project")
+load("@bazel_skylib//lib:partial.bzl", "partial")
+
+ts_project(
+    name = "ts",
+    srcs = [
+        "constants.ts",
+        "handler.test.ts",
+        "handler.ts",
+        "types.ts",
+    ],
+    declaration = True,
+    transpiler = partial.make(
+        swc,
+        swcrc = "//:.swcrc",
+    ),
+    tsconfig = "//:tsconfig",
+    deps = [
+        "//:node_modules/@aws-sdk/client-s3",
+        "//:node_modules/@types/aws-lambda",
+        "//:node_modules/@types/jest",
+        "//:node_modules/@types/node",
+        "//:node_modules/aws-lambda",
+        "//:node_modules/aws-sdk-client-mock",
+    ],
+)
+
+js_binary(
+    name = "handler",
+    data = [
+        ":ts",
+        # Added by swc during transpilation and used at runtime
+        "//:node_modules/regenerator-runtime",
+    ],
+    entry_point = "handler.js",
+)
+
+jest_test(
+    name = "handler_test",
+    config = "//:jest_config",
+    data = [":ts"],
+    node_modules = "//:node_modules",
+)

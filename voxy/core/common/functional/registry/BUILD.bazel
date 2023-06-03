@@ -1,0 +1,18 @@
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = [
+    "//core/common/functional:__subpackages__",
+    "//core/ml:__subpackages__",
+    "//core/perception:__subpackages__",
+])
+
+py_library(
+    name = "registry",
+    srcs = [
+        "registry.py",
+    ],
+    deps = [
+        "//core/common/functional/lib:transform",
+        "//core/common/utils:registry",
+    ],
+)

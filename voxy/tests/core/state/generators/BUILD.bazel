@@ -1,0 +1,32 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+package(default_visibility = ["//visibility:public"])
+
+voxel_py_test(
+    name = "pit_test",
+    srcs = ["pit_test.py"],
+    deps = [
+        "//core/state/generators:pit",
+        "//core/structs",
+    ],
+)
+
+voxel_py_test(
+    name = "person_test",
+    srcs = ["person_test.py"],
+    deps = [
+        "//core/state/generators:person",
+        "//core/structs",
+        requirement("pyyaml"),
+    ],
+)
+
+voxel_py_test(
+    name = "obstruction_test",
+    srcs = ["obstruction_test.py"],
+    deps = [
+        "//core/state/generators:obstruction",
+        "//core/structs",
+    ],
+)

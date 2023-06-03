@@ -1,0 +1,20 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+
+data_path: /home/nasha/data/datasets/spills/voxel_spills_v4-v8-fp
+model_path: /home/nasha/data/models/spills
+batch_size: 4
+n_epochs: 1
+image_size: [640,1088]
+dataset_type: smp_segmentation
+model: smp
+augmentation: albumentations

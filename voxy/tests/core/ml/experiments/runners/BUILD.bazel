@@ -1,0 +1,15 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+voxel_py_test(
+    name = "experiment_manager_test",
+    srcs = [
+        "experiment_manager_test.py",
+    ],
+    deps = [
+        requirement("sematic"),
+        "//core/infra/sematic/shared:mock_sematic_funcs",
+        "//core/infra/sematic/shared:utils",
+        "//core/ml/experiments/runners:experiment_manager",
+    ],
+)

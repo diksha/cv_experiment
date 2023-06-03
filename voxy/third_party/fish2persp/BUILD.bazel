@@ -1,0 +1,23 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+
+cc_library(
+    name = "bitmaplib",
+    srcs = [
+        "bitmaplib.c",
+    ],
+    hdrs = ["bitmaplib.h"],
+    copts = ["-Wall -O3"],
+)
+
+cc_binary(
+    name = "fish2persp",
+    srcs = [
+        "fish2persp.c",
+        "fish2persp.h",
+    ],
+    copts = ["-Wall -O3"],
+    features = ["fully_static_link"],
+    linkopts = ["-ljpeg -lm"],
+    visibility = ["//visibility:public"],
+    deps = [":bitmaplib"],
+)

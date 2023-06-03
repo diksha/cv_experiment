@@ -1,0 +1,13 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+py_library(
+    name = "registry",
+    srcs = glob(["*.py"]),
+    data = [],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("torch"),
+        requirement("torchvision"),
+    ],
+)

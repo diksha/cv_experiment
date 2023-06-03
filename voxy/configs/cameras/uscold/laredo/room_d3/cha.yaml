@@ -1,0 +1,78 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+
+camera_uuid: uscold/laredo/room_d3/cha
+
+camera:
+  arn: arn:aws:kinesisvideo:us-west-2:360054435465:stream/uscold-laredo-0007/1651957614996
+  version: 7
+
+perception:
+  enabled: True
+  detector_tracker:
+    model_path: artifacts_2021-12-06-00-00-00-0000-yolo/best_608_1024.engine
+    height: 608
+    width: 1024
+    actor2class: { PERSON: 0, PIT: 1 }
+  acausal_layer:
+    PPESmoothener:
+      time_interval_ms: 10000
+      pose_points_min_confidence_threshold: 0.5
+  pose:
+    enabled: True
+    activity_classifier_enabled: False
+    classifier_path: artifacts_pose_classifier_90/pose_classifier_90.pickle.dat
+    model_path: artifacts_03_21_2023_pose_0630_jit_update/fast_res50_256x192.pt
+  reach_classifier:
+    enabled: False
+    model_type: DL ##DT (DL: Deep learning based, DT: Decision Tree based, HM: Heuristic Model)
+    model_path: artifacts_03_23_2023_overreaching_model_jit/voxel_ergo_ml_overreaching_2022-05-23-jit.pt
+  door_classifier:
+    enabled: False
+    model_path: artifacts_door_classifier_resnet50_dataset4/voxel_door_classifier_dataset4_resnet50_traced_model.pth
+  vest_classifier:
+    enabled: True
+    min_actor_pixel_area: 2000
+    model_path: artifacts_04_18_2023_voxel_safetyvest_vit_laredo-2_laredo_2022-09-15-jit/voxel_safetyvest_vit_laredo-2_laredo_2022-09-15-jit.pt
+    model_type: Transformers ##ConvNet Detection
+  hat_classifier:
+    enabled: False
+    model_path: artifacts_hard_hat_occlusion_vit_v4_2022-11-18-jit/hard_hat_occlusion_vit_v4_2022-11-18-jit.pt
+    is_classification_by_detection: False
+  spill:
+    enabled: True
+    model_path: artifacts_02_05_2023_spill_generalized_jit/smp-bd6b62dfd5b64dcfb4970102e2c9b2aa-jit.pt
+    min_run_time_difference_ms: 15000
+    min_pixel_size: 200
+    # The max_consequitive_runs do not have any effect unless the max_frame_segments in temporal also has the same value to store the results from these consecutive runs.
+    max_consecutive_runs: 1
+    post_process_enabled: True
+    frame_segment2class: { UNKNOWN: 0, SPILL: 1 }
+
+temporal:
+  max_frame_segments: 9
+
+incident:
+  #TODO(delorean): remove this when the experiment is over
+  should_generate_on_cooldown: True
+  monitors_requested: []
+  incident_machine_enabled: False
+  state_machine_monitors_requested:
+    [spill, no_stop_at_aisle_end, intersection, safety_vest]
+  incident_machine_params:
+    intersection:
+      per_camera_cooldown_s: 120 # 2 minutes
+    no_stop_at_aisle_end:
+      per_camera_cooldown_s: 120 # 2 minutes
+
+publisher:
+  organization_key: USCOLD

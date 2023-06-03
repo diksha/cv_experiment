@@ -1,0 +1,9 @@
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+voxel_py_test(
+    name = "registry_test",
+    srcs = ["registry_test.py"],
+    deps = [
+        "//core/perception/inference/transforms",
+    ],
+)

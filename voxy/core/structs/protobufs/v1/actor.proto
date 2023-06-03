@@ -1,0 +1,58 @@
+// Copyright 2020-2021 Voxel Labs, Inc.
+// All rights reserved.
+//
+// This document may not be reproduced, republished, distributed, transmitted,
+// displayed, broadcast or otherwise exploited in any manner without the express
+// prior written permission of Voxel Labs, Inc. The receipt or possession of this
+// document does not convey any rights to reproduce, disclose, or distribute its
+// contents, or to manufacture, use, or sell anything that it may describe, in
+// whole or in part.
+
+// trunk-ignore-all(buf-lint) 
+
+syntax = "proto3";
+
+package core.structs.protobufs.v1;
+enum ActorCategory {
+    // Change to UNSPECIFIED
+    ACTOR_CATEGORY_UNKNOWN = 0; 
+    ACTOR_CATEGORY_PERSON = 1;
+    ACTOR_CATEGORY_PIT = 2;
+    ACTOR_CATEGORY_DOOR = 3;
+    ACTOR_CATEGORY_HARD_HAT = 4;
+    ACTOR_CATEGORY_SAFETY_VEST = 5;
+    ACTOR_CATEGORY_BARE_CHEST = 6;
+    ACTOR_CATEGORY_BARE_HEAD = 7;
+    ACTOR_CATEGORY_INTERSECTION = 8;
+    ACTOR_CATEGORY_AISLE_END = 9;
+    ACTOR_CATEGORY_TRUCK = 10;
+    ACTOR_CATEGORY_VEHICLE = 11;
+    ACTOR_CATEGORY_TRAILER = 12;
+    ACTOR_CATEGORY_BIKE = 13;
+    ACTOR_CATEGORY_BUS = 14;
+    ACTOR_CATEGORY_MOTION_DETECTION_ZONE = 15;
+    ACTOR_CATEGORY_DRIVING_AREA = 16;
+    ACTOR_CATEGORY_NO_PED_ZONE = 17;
+    ACTOR_CATEGORY_SAFETY_GLOVE = 18;
+    ACTOR_CATEGORY_BARE_HAND = 19;
+    ACTOR_CATEGORY_SPILL = 20;
+    ACTOR_CATEGORY_PALLET = 21;
+    ACTOR_CATEGORY_PIT_V2 = 22;
+    ACTOR_CATEGORY_PERSON_V2 = 23;
+    ACTOR_CATEGORY_COVERED_HEAD = 24;
+    ACTOR_CATEGORY_OBSTRUCTION = 25;
+}
+
+enum ActivityType {
+    // Change to UNSPECIFIED
+    ACTIVITY_TYPE_UNKNOWN = 0;
+    ACTIVITY_TYPE_LIFTING = 1;
+    ACTIVITY_TYPE_REACHING = 2; 
+}
+
+enum PostureType {
+    // Change to UNSPECIFIED
+    POSTURE_TYPE_UNKNOWN = 0;
+    POSTURE_TYPE_GOOD = 1; 
+    POSTURE_TYPE_BAD = 2; 
+}

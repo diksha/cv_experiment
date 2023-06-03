@@ -1,0 +1,36 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+py_library(
+    name = "abstract",
+    srcs = [
+        "abstract.py",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+py_library(
+    name = "kinesis",
+    srcs = [
+        "kinesis.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("boto3"),
+        requirement("botocore"),
+        "//lib/publisher:abstract",
+    ],
+)
+
+py_library(
+    name = "sns",
+    srcs = [
+        "sns.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("boto3"),
+        requirement("botocore"),
+        "//lib/publisher:abstract",
+    ],
+)

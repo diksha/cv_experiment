@@ -1,0 +1,69 @@
+#
+# Copyright 2023 Voxel Labs, Inc.
+# All rights reserved.
+#
+# This document may not be reproduced, republished, distributed, transmitted,
+# displayed, broadcast or otherwise exploited in any manner without the express
+# prior written permission of Voxel Labs, Inc. The receipt or possession of this
+# document does not convey any rights to reproduce, disclose, or distribute its
+# contents, or to manufacture, use, or sell anything that it may describe, in
+# whole or in part.
+#
+#
+scenario_for_incidents: [NO_STOP_AT_END_OF_AISLE]
+scenarios:
+  # POSITIVE SCENARIOS
+  - camera_uuid: uscold/laredo/room_d4/cha
+    incidents: [NO_STOP_AT_END_OF_AISLE]
+    video_uuid: uscold/laredo/room_d4/cha/scenarios/NO_STOP_AT_END_OF_AISLE/POSITIVE/8d61d538-ab10-4469-a22e-0c1109bb43eb_0000
+  - camera_uuid: uscold/laredo/room_d2/cha
+    incidents: [NO_STOP_AT_END_OF_AISLE]
+    video_uuid: uscold/laredo/room_d2/cha/scenarios/NO_STOP_AT_END_OF_AISLE/POSITIVE/86b248ad-d848-4f85-9b34-dbe04cd07886_0000
+  - camera_uuid: uscold/laredo/room_f1/cha
+    incidents: [NO_STOP_AT_END_OF_AISLE]
+    video_uuid: uscold/laredo/room_f1/cha/scenarios/NO_STOP_AT_END_OF_AISLE/POSITIVE/7eff1faf-8639-4d6d-a29d-d9f0944e5eab_0000
+  - camera_uuid: trieagle/ocala/0007/cha
+    incidents: [NO_STOP_AT_END_OF_AISLE]
+    video_uuid: trieagle/ocala/0007/cha/scenarios/NO_STOP_AT_END_OF_AISLE/POSITIVE/ab52027e-902b-40c9-9f94-db8622da2af7_0000
+  - camera_uuid: trieagle/ocala/0008/cha
+    incidents: [NO_STOP_AT_END_OF_AISLE]
+    video_uuid: trieagle/ocala/0008/cha/scenarios/NO_STOP_AT_END_OF_AISLE/POSITIVE/d97a6e64-87c7-4e7d-8f58-76abe0ba2046_0000
+  - camera_uuid: verst/walton/0006/cha
+    incidents: [NO_STOP_AT_END_OF_AISLE]
+    video_uuid: verst/walton/0006/cha/scenarios/NO_STOP_AT_END_OF_AISLE/POSITIVE/9a5658f8-bcfc-4112-96f8-503028fd5c46_0000
+  - camera_uuid: verst/walton/0007/cha
+    incidents: [NO_STOP_AT_END_OF_AISLE]
+    video_uuid: verst/walton/0007/cha/scenarios/NO_STOP_AT_END_OF_AISLE/POSITIVE/1db14ad6-bb44-4d49-bba4-6ea89a088c56_0000
+  - camera_uuid: verst/walton/0008/cha
+    incidents: [NO_STOP_AT_END_OF_AISLE]
+    video_uuid: verst/walton/0008/cha/scenarios/NO_STOP_AT_END_OF_AISLE/POSITIVE/852e2253-1f52-4a80-b92c-495f368a0358_0000
+  - camera_uuid: verst/walton/0009/cha
+    incidents: [NO_STOP_AT_END_OF_AISLE]
+    video_uuid: verst/walton/0009/cha/scenarios/NO_STOP_AT_END_OF_AISLE/POSITIVE/6bb4958a-268a-4114-839f-ebf931be3583_0000
+  - camera_uuid: verst/walton/0010/cha
+    incidents: [NO_STOP_AT_END_OF_AISLE]
+    video_uuid: verst/walton/0010/cha/scenarios/NO_STOP_AT_END_OF_AISLE/POSITIVE/583611df-c2de-4b19-9833-41c77082f096_0000
+  - camera_uuid: verst/walton/0011/cha
+    incidents: [NO_STOP_AT_END_OF_AISLE]
+    video_uuid: verst/walton/0011/cha/scenarios/NO_STOP_AT_END_OF_AISLE/POSITIVE/7a6ae084-9a1d-4638-9493-d336079c7f96_0000
+  - camera_uuid: wesco/reno/0016/cha
+    incidents: [NO_STOP_AT_END_OF_AISLE]
+    video_uuid: wesco/reno/0016/cha/scenarios/NO_STOP_AT_END_OF_AISLE/POSITIVE/0d731ce8-82d2-4fb6-bb80-23228257a3b6_0000
+  - camera_uuid: ulta/dallas/0002/cha
+    incidents: [NO_STOP_AT_END_OF_AISLE]
+    video_uuid: ulta/dallas/0002/cha/scenarios/NO_STOP_AT_END_OF_AISLE/POSITIVE/48db8f90-f7a4-41dd-b49d-f4b9c61c5c71_0000
+  - camera_uuid: ulta/dallas/0005/cha
+    incidents: [NO_STOP_AT_END_OF_AISLE]
+    video_uuid: ulta/dallas/0005/cha/scenarios/NO_STOP_AT_END_OF_AISLE/POSITIVE/bf13586c-6170-4342-9b6a-343a44d07a0c_0000
+  - camera_uuid: wn_foods/hayward/0007/cha
+    incidents: [NO_STOP_AT_END_OF_AISLE]
+    video_uuid: wn_foods/hayward/0007/cha/scenarios/NO_STOP_AT_END_OF_AISLE/POSITIVE/0653e072-5e5b-4210-b64c-e2c7acfa3d17_0000
+  - camera_uuid: ppg/cedar_falls/0001/cha
+    incidents: [NO_STOP_AT_END_OF_AISLE]
+    video_uuid: ppg/cedar_falls/0001/cha/scenarios/NO_STOP_AT_END_OF_AISLE/POSITIVE/222e8c25-a709-400b-b08c-6a17072262bb_0000
+  - camera_uuid: piston_automotive/marion/0001/cha
+    incidents: [NO_STOP_AT_END_OF_AISLE]
+    video_uuid: piston_automotive/marion/0001/cha/scenarios/NO_STOP_AT_END_OF_AISLE/POSITIVE/23d28523-06c4-4544-b2e5-3afe9a001149_0000
+  - camera_uuid: michaels/tracy/0006/cha
+    incidents: [NO_STOP_AT_END_OF_AISLE]
+    video_uuid: michaels/tracy/0006/cha/scenarios/NO_STOP_AT_END_OF_AISLE/POSITIVE/1ba784e7-b5c2-480c-97fa-9ca2346e0ae0_0000

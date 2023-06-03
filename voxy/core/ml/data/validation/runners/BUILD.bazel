@@ -1,0 +1,11 @@
+load("@rules_python//python:defs.bzl", "py_binary")
+
+py_binary(
+    name = "aggregate_yolo_validation",
+    srcs = [
+        "aggregate_yolo_validation.py",
+    ],
+    deps = [
+        "//core/ml/data/validation/lib:aggregate_yolo_validation",
+    ],
+)

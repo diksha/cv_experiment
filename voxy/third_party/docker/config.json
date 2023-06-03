@@ -1,0 +1,15 @@
+{
+  "credHelpers": {
+    "public.ecr.aws": "ecr-login",
+    "360054435465.dkr.ecr.us-west-2.amazonaws.com": "ecr-login",
+    "203670452561.dkr.ecr.us-west-2.amazonaws.com": "ecr-login",
+    "667031391229.dkr.ecr.us-west-2.amazonaws.com": "ecr-login",
+    "115099983231.dkr.ecr.us-west-2.amazonaws.com": "ecr-login",
+    "asia.gcr.io": "gcloud",
+    "eu.gcr.io": "gcloud",
+    "gcr.io": "gcloud",
+    "marketplace.gcr.io": "gcloud",
+    "staging-k8s.gcr.io": "gcloud",
+    "us.gcr.io": "gcloud"
+  }
+}

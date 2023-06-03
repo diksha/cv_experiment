@@ -1,0 +1,3 @@
+#!/bin/bash
+
+exec ./bazel run //third_party/flake8:flake8 -- "$@"

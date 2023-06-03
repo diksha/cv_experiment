@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Takes in the base sha and diff sha of the commits and generates all
+# the bazel targets that were affected in those. This will allow us
+# to run tests only for the affected targets.
+
+set -euo pipefail
+
+script_dir=$(realpath -s "$0")
+tools_dir=$(dirname "$script_dir")
+workspace_dir=$(dirname "$tools_dir")
+
+base_revision_sha=$1
+diff_revision_sha=$2
+
+temp_dir=$(mktemp -d /tmp/XXXXXXXXX)
+
+starting_hashes_json="$temp_dir/starting_hashes.json"
+final_hashes_json="$temp_dir/final_hashes.json"
+impacted_targets_path="$temp_dir/impacted_targets.txt"
+impacted_test_targets_path="$temp_dir/impacted_test_targets.txt"
+workspace_path=$workspace_dir
+bazel_path="$workspace_dir/bazel"
+bazel_diff_path="$workspace_dir/bazel run //third_party/bazel-diff:bazel-diff --"
+
+echo "Generating Hashes for $base_revision_sha"
+git -C "$workspace_path" checkout "$base_revision_sha" --quiet
+$bazel_diff_path generate-hashes -w "$workspace_path" -b "$bazel_path" "$starting_hashes_json"
+
+echo "Generating Hashes for $diff_revision_sha"
+git -C "$workspace_path" checkout "$diff_revision_sha" --quiet
+$bazel_diff_path generate-hashes -w "$workspace_path" -b "$bazel_path" "$final_hashes_json"
+
+echo "Determining Impacted Targets"
+$bazel_diff_path -sh "$starting_hashes_json" -fh "$final_hashes_json" -w "$workspace_path" -b "$bazel_path" -o "$impacted_targets_path"
+
+impacted_targets=$(<"$impacted_targets_path")
+rm -rf "$starting_hashes_json" "$final_hashes_json" "$impacted_targets_path" "$impacted_test_targets_path"
+
+echo "Impacted Targets between $base_revision_sha and $diff_revision_sha:"
+echo "$impacted_targets"

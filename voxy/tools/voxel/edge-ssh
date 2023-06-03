@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -eou pipefail
+
+FILEPATH=$(readlink -f "$0")
+VOXEL_TOOLSDIR=$(dirname "$FILEPATH")
+TOOLSDIR=$(dirname "$VOXEL_TOOLSDIR")
+
+exec "$TOOLSDIR"/bazel run //tools/voxel:edge-ssh -- "$@"

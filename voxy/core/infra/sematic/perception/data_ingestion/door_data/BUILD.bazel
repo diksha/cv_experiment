@@ -1,0 +1,51 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+load("//third_party/sematic:defs.bzl", "voxel_sematic_pipeline")
+
+voxel_sematic_pipeline(
+    name = "main",
+    base = "//third_party/sematic:cuda_base_image",
+    bases = {
+        # This is stupid, but `import lightly.api` imports CUDA, even when we're
+        # only trying to call the API.  Sematic upgrade will fix hopefully, and we can look
+        # at how much of this change we can revert once done (prepare_lightly_worker probably
+        # actually requires CUDA for the import)
+        #"cuda": "//third_party/sematic:cuda_base_image",
+        "default": "//third_party/sematic:cuda_base_image",
+        "lightly-image": "//third_party/sematic:lightly_sematic_base",
+    },
+    env = {
+        "NVIDIA_DRIVER_CAPABILITIES": "compute,utility",
+        "NVIDIA_VISIBLE_DEVICES": "all",
+    },
+    deps = [
+        requirement("mergedeep"),
+        "//core/infra/sematic/perception/data_ingestion/door_data:pipeline",
+        "//core/infra/sematic/shared:utils",
+        "//core/utils:yaml_jinja",
+    ],
+)
+
+py_library(
+    name = "pipeline",
+    srcs = ["pipeline.py"],
+    data = [
+        "//core/infra/sematic/perception/data_ingestion/door_data/configs",
+        "//core/ml/data/curation/configs",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        requirement("sematic"),
+        "//core/infra/sematic/shared:aws_funcs",
+        "//core/labeling/logs_store:chunk_and_upload_video_logs_lib",
+        "//core/labeling/logs_store:ingest_data_collection_metaverse_lib",
+        "//core/labeling/scale/runners:create_scale_tasks_lib",
+        "//core/labeling/tools:pull_kinesis_feed_lib",
+        "//core/ml/data/curation:check_camera_uuid_lib",
+        "//core/ml/data/curation:crop_s3_videos_lib",
+        "//core/ml/data/curation:prepare_lightly_run_lib",
+        "//core/ml/data/curation:trim_lightly_clips_lib",
+        "//core/ml/data/curation/lib",
+    ],
+)

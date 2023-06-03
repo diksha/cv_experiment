@@ -1,0 +1,67 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+py_library(
+    name = "scale_batch_wrapper",
+    srcs = [
+        "scale_batch_wrapper.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("scaleapi"),
+        ":scale_client",
+        "//core/utils:voxel_decorators",
+    ],
+)
+
+py_library(
+    name = "scale_task_wrapper",
+    srcs = [
+        "scale_task_wrapper.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("scaleapi"),
+        ":scale_client",
+        requirement("loguru"),
+        "//core/utils:voxel_decorators",
+    ],
+)
+
+py_library(
+    name = "scale_task_retry",
+    srcs = [
+        "scale_task_retry.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("scaleapi"),
+        ":scale_client",
+        requirement("loguru"),
+    ],
+)
+
+py_library(
+    name = "scale_client",
+    srcs = [
+        "scale_client.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("scaleapi"),
+        "//core/utils:aws_utils",
+    ],
+)
+
+py_library(
+    name = "utils",
+    srcs = [
+        "utils.py",
+    ],
+    data = ["//core/labeling/scale/task_creation:scale_taxonomies"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("jsondiff"),
+        requirement("loguru"),
+    ],
+)

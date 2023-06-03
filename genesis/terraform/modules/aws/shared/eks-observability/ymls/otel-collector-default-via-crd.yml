@@ -1,0 +1,447 @@
+resources:
+  - apiVersion: opentelemetry.io/v1alpha1
+    kind: OpenTelemetryCollector
+    metadata:
+      name: ${COLLECTOR_NAME}
+    spec:
+      mode: daemonset
+      serviceAccount: ${SERVICE_ACCOUNT_NAME}
+      env:
+        - name: CLUSTER_NAME
+          value: ${CLUSTER_NAME}
+      ports:
+        - name: collector-grpc
+          port: 4317
+        - name: collector-http
+          port: 4318
+        - name: pprof
+          port: 1888
+        - name: health-check
+          port: 13133
+        - name: prometheus-external
+          port: 8889
+        - name: zpages
+          port: 55670
+      image: "otel/opentelemetry-collector-contrib:0.56.0"
+      tolerations:
+      - key: nvidia.com/gpu
+        operator: Equal
+        value: "true" # Toleration alone doesn't matter as the node selector is set to true or false as per requirements
+        effect: NoSchedule
+      volumeMounts:
+        - mountPath: /var/log
+          name: varlog
+          readOnly: true
+        - mountPath: /var/lib/docker/containers
+          name: varlibdockercontainers
+          readOnly: true
+      volumes:
+        - name: varlog
+          hostPath:
+            path: /var/log
+        - name: varlibdockercontainers
+          hostPath:
+            path: /var/lib/docker/containers
+      config: |
+        extensions:
+          health_check:
+            path: "/health/status"
+            check_collector_pipeline:
+              enabled: false
+              interval: "5m"
+              exporter_failure_threshold: 5
+          pprof:
+          zpages:
+
+        receivers:
+          filelog:
+            include:
+              - /var/log/pods/*/*/*.log
+            exclude:
+              # Exclude logs from all containers named otel-collector
+              - /var/log/pods/*/otel-collector/*.log
+              - /var/log/pods/*/otc-container/*.log
+              - /var/log/pods/*/loki/*.log
+            start_at: end
+            include_file_path: true
+            include_file_name: false
+            operators:
+              ####################################################################################
+              # Pre-formatter. Find base container runtime format and forward logs
+              - type: router
+                id: pre-process-router
+                routes:
+                  - output: parser-docker
+                    expr: 'body matches "^\\{"'
+                  - output: parser-crio
+                    expr: 'body matches "^[^ Z]+ "'
+                  - output: parser-containerd
+                    expr: 'body matches "^[^ Z]+Z"'
+
+              # Parse CRI-O format
+              - type: regex_parser
+                id: parser-crio
+                regex: "^(?P<time>[^ Z]+) (?P<stream>stdout|stderr) (?P<source>[^ ]*) ?(?P<log>.*)$"
+                output: process-router
+                timestamp:
+                  parse_from: attributes.time
+                  layout_type: gotime
+                  layout: "2006-01-02T15:04:05.000000000-07:00"
+
+              # Parse CRI-Containerd format
+              - type: regex_parser
+                id: parser-containerd
+                regex: "^(?P<time>[^ ^Z]+Z) (?P<stream>stdout|stderr) (?P<source>[^ ]*) ?(?P<log>.*)$"
+                output: process-router
+                timestamp:
+                  parse_from: attributes.time
+                  layout: "%Y-%m-%dT%H:%M:%S.%LZ"
+
+              # Parse Docker format
+              - type: json_parser
+                id: parser-docker
+                output: process-router
+                timestamp:
+                  parse_from: attributes.time
+                  layout: "%Y-%m-%dT%H:%M:%S.%LZ"
+              ####################################################################################
+              # Parse actual log message and route accodingly
+              - type: router
+                id: process-router
+                routes:
+                  - output: process-json-log
+                    expr: body matches "^\\{[ \t \n][^*\"].*[^*\"]\\}$"
+                default: set-attribute-log-as-body
+
+              - type: json_parser
+                id: process-json-log
+                parse_from: attributes.log
+                parse_to: attributes.data
+                output: find-message-field-in-attributes
+                on_error: send
+              - type: move
+                id: set-attribute-log-as-body
+                from: attributes.log
+                to: body
+                output: extract_metadata_from_filepath
+              # All parsing done. Now set all expected fields
+              - type: router
+                id: find-message-field-in-attributes
+                routes:
+                  - expr: "attributes.data != nil && attributes.data.msg != nil"
+                    output: set-message-field-from-msg
+                  - expr: "attributes.data != nil && attributes.data.message != nil"
+                    output: set-message-field-from-message
+                  - expr: "attributes.data != nil && attributes.data.text != nil"
+                    output: set-message-field-from-text
+                default: set-attribute-log-as-body
+              - type: move
+                id: set-message-field-from-msg
+                from: attributes.data.msg
+                to: body
+                output: extract_metadata_from_filepath
+              - type: move
+                id: set-message-field-from-message
+                from: attributes.data.message
+                to: body
+                output: extract_metadata_from_filepath
+              - type: move
+                id: set-message-field-from-text
+                from: attributes.data.text
+                to: body
+                output: extract_metadata_from_filepath
+              - type: add
+                id: set-default-message
+                field: body
+                value: "-"
+                output: set-default-source
+
+              - type: add
+                id: set-default-source
+                field: attributes.source
+                value: "-"
+                output: extract_metadata_from_filepath
+              ####################################################################################
+              # Post processing
+              # Extract metadata from file path
+              - type: regex_parser
+                id: extract_metadata_from_filepath
+                regex: '^.*\/(?P<f_namespace>[^_]+)_(?P<f_pod_name>[^_]+)_(?P<f_pod_uid>[a-f0-9\-]{36})\/(?P<f_container>[^\._]+)\/(?P<f_c_restart_count>\d+)\.log$'
+                parse_from: attributes["log.file.path"]
+              - type: remove
+                id: remove-attributes-log
+                field: attributes.log
+                if: "attributes.log != nil"
+              - type: remove
+                id: remove-attributes-time
+                field: attributes.time
+                if: "attributes.time != nil"
+              - type: remove
+                id: remove-attributes-ts
+                field: attributes.ts
+                if: "attributes.ts != nil"
+              - type: remove
+                id: remove-attributes-tsNs
+                field: attributes.tsNs
+                if: "attributes.tsNs != nil"
+              - type: remove
+                id: remove-attributes-log-file-path
+                field: attributes["log.file.path"]
+                if: 'attributes["log.file.path"] != nil'
+              - type: move
+                id: move-attributes-ns
+                from: attributes.f_namespace
+                to: attributes["k8s.namespace.name"]
+              - type: move
+                id: move-attributes-pod-name
+                from: attributes.f_pod_name
+                to: attributes["k8s.pod.name"]
+              - type: move
+                id: move-attributes-pod-uid
+                from: attributes.f_pod_uid
+                to: attributes["k8s.pod.uid"]
+              - type: move
+                id: move-attributes-container
+                from: attributes.f_container
+                to: attributes["k8s.container.name"]
+              - type: move
+                id: move-attributes-restart-count
+                from: attributes.f_c_restart_count
+                to:
+                  attributes["k8s.container.restart_count"]
+                  ####################################################################################
+
+          otlp:
+            protocols:
+              grpc:
+              http:
+          # prometheus:
+          #   config:
+          #     scrape_configs:
+          #       - job_name: "otel-collector"
+          #         scrape_interval: 5s
+          #         static_configs:
+          #           - targets: ["0.0.0.0:8888"]
+        exporters:
+          logging:
+            loglevel: info
+          prometheus:
+            endpoint: "0.0.0.0:8889"
+            # namespace: ${NAMESPACE}
+            send_timestamps: true
+            metric_expiration: 180m
+            resource_to_telemetry_conversion:
+              enabled: true
+            # enable_open_metrics: true
+          otlp:
+            # compression: none
+            endpoint: ${OTLP_TRACING_ENDPOINT}
+            tls:
+              insecure: true
+          loki:
+            endpoint: ${LOKI_BASE_ENDPOINT}/loki/api/v1/push
+            tenant_id: "${LOKI_TENANT_ID}"
+            format: body
+            labels:
+              resource:
+                k8s_node: ""
+                k8s_container: ""
+                k8s_pod: ""
+                k8s_namespace: ""
+                k8s_pod_restart_count: ""
+                k8s_pod_uid: ""
+                k8s_cloud_zone: ""
+                k8s_cluster: ""
+                k8s_deployment: ""
+              attributes:
+                k8s_container: ""
+                k8s_pod: ""
+                k8s_namespace: ""
+                k8s_cloud_zone: ""
+                k8s_deployment: ""
+                k8s_pod_restart_count: ""
+                k8s_pod_uid: ""
+                k8s_cluster: ""
+                k8s_node: ""
+                resource_name: ""
+                request_id: ""
+                level: ""
+                severity: ""
+                http_code: ""
+              record:
+                traceID: "trace_id"
+        processors:
+          spanmetrics:
+            metrics_exporter: prometheus
+            latency_histogram_buckets:
+              [100us, 1ms, 10ms, 250ms, 2s]
+            dimensions:
+              - name: http.method
+                default: GET
+              - name: http.status_code
+              - name: k8s_cloud_zone
+              - name: k8s_cluster
+              - name: resource_name
+              - name: k8s.pod.name
+              - name: k8s.deployment.name
+              - name: k8s.namespace.name
+            dimensions_cache_size: 1000
+            aggregation_temporality: "AGGREGATION_TEMPORALITY_CUMULATIVE"
+          # span:
+          #   name:
+          #     from_attributes: ["service.name", "operation"]
+          #     separator: "::"
+          batch:
+            send_batch_size: 100
+            timeout: 5s
+          # https://pkg.go.dev/github.com/open-telemetry/opentelemetry-collector-contrib/processor/k8sattributesprocessor
+          k8sattributes:
+            auth_type: "serviceAccount"
+            passthrough: false
+            extract:
+              metadata:
+                - k8s.pod.name
+                - k8s.deployment.name
+                - k8s.cluster.name
+                - k8s.namespace.name
+                - k8s.node.name
+                - k8s.pod.start_time
+                - container.image.name
+                - container.image.tag
+            pod_association:
+              - from: resource_attribute
+                name: k8s.pod.uid
+              - from: resource_attribute
+                name: k8s.pod.ip
+              - from: connection
+                name: ip
+          attributes:
+            actions:
+              - key: k8s_cloud_zone
+                value: "${AWS_REGION}"
+                action: upsert
+              - key: k8s_cluster
+                value: ${CLUSTER_NAME}
+                action: upsert
+              - key: resource_name
+                value: unknown-resource
+                action: upsert
+              - key: k8s_node
+                from_attribute: k8s.node.name
+                action: upsert
+              - key: k8s_namespace
+                from_attribute: k8s.namespace.name
+                action: upsert
+              - key: k8s_pod
+                from_attribute: k8s.pod.name
+                action: upsert
+              - key: k8s_container
+                from_attribute: k8s.container.name
+                action: upsert
+              - key: k8s_deployment
+                from_attribute: k8s.deployment.name
+                action: upsert
+              - key: k8s_pod_uid
+                from_attribute: k8s.pod.uid
+                action: upsert
+              - key: k8s_pod_restart_count
+                from_attribute: k8s.container.restart_count
+                action: upsert
+              - key: resource_name
+                from_attribute: resource.name
+                action: insert
+              - key: http_code
+                from_attribute: http.status_code
+                action: upsert
+              - key: log.file.path
+                action: delete
+              - key: k8s.node.name
+                action: delete
+              - key: k8s.namespace.name
+                action: delete
+              - key: k8s.deployment.name
+                action: delete
+              - key: k8s.pod.name
+                action: delete
+              - key: k8s.container.name
+                action: delete
+              - key: k8s.container.restart_count
+                action: delete
+              - key: k8s.pod.uid
+                action: delete
+              - key: resource.name
+                action: delete
+              - key: http.status_code
+                action: delete
+              - key: log.file.path
+                action: delete
+              - key: time
+                action: delete
+              - key: ts
+                action: delete
+              - key: tsNs
+                action: delete
+              - key: stream
+                action: delete
+              - key: stream
+                action: delete
+        service:
+          extensions: [health_check, pprof, zpages]
+          pipelines:
+            traces:
+              receivers: [otlp]
+              processors: [k8sattributes, attributes, spanmetrics, batch]
+              exporters: [otlp]
+            metrics:
+              receivers: [otlp]
+              processors: [k8sattributes, attributes, batch]
+              exporters: [prometheus]
+            logs:
+              receivers: [otlp, filelog]
+              processors: [k8sattributes, attributes, batch]
+              exporters: [loki]
+  - apiVersion: monitoring.coreos.com/v1
+    kind: ServiceMonitor
+    metadata:
+      name: otel-collector-${COLLECTOR_NAME}
+      labels:
+        prometheus: default
+    spec:
+      endpoints:
+        - port: prometheus-external
+          path: /metrics
+          interval: 30s
+          honorTimestamps: true
+        - port: monitoring
+          path: /metrics
+          honorTimestamps: true
+          interval: 30s
+      jobLabel: otel-collector-${COLLECTOR_NAME}
+      namespaceSelector:
+        matchNames:
+          - ${NAMESPACE}
+      selector:
+        matchLabels:
+          app.kubernetes.io/name: ${COLLECTOR_NAME}-collector
+          prometheus: default
+  - apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRole
+    metadata:
+      name: otel-collector-${NAMESPACE}-${COLLECTOR_NAME}
+    rules:
+      - apiGroups: [""]
+        resources: ["pods", "nodes","namespaces"]
+        verbs: ["get", "watch", "list"]
+
+  - apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRoleBinding
+    metadata:
+      name: otel-collector-${COLLECTOR_NAME}
+    subjects:
+      - kind: ServiceAccount
+        name: ${SERVICE_ACCOUNT_NAME}
+        namespace: ${NAMESPACE}
+    roleRef:
+      kind: ClusterRole
+      name: otel-collector-${NAMESPACE}-${COLLECTOR_NAME}
+      apiGroup: rbac.authorization.k8s.io

@@ -1,0 +1,38 @@
+#
+# Copyright 2020-2021 Voxel Labs, Inc.
+# All rights reserved.
+#
+# This document may not be reproduced, republished, distributed, transmitted,
+# displayed, broadcast or otherwise exploited in any manner without the express
+# prior written permission of Voxel Labs, Inc. The receipt or possession of this
+# document does not convey any rights to reproduce, disclose, or distribute its
+# contents, or to manufacture, use, or sell anything that it may describe, in
+# whole or in part.
+#
+
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+load("//third_party/sematic:defs.bzl", "voxel_sematic_pipeline")
+
+voxel_sematic_pipeline(
+    name = "main",
+    base = "//third_party/sematic:cuda_base_image",
+    deps = [
+        ":pipeline",
+        "//core/infra/sematic/shared:utils",
+    ],
+)
+
+py_library(
+    name = "pipeline",
+    srcs = ["pipeline.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        requirement("sematic"),
+        "//core/infra/sematic/shared:resources",
+        "//core/labeling/label_conversion:add_to_metaverse",
+        "//core/labeling/scale/lib/converters:scale_voxel_conversion",
+        "//core/ml/data/validation/lib:class_distribution",
+    ],
+)

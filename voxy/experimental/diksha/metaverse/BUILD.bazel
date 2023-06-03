@@ -1,0 +1,35 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+
+py_binary(
+    name = "ingest",
+    srcs = [
+        "ingest.py",
+    ],
+    data = [
+        ":csv",
+    ],
+    deps = [
+        "//core/metaverse",
+    ],
+)
+
+py_binary(
+    name = "read_scenario_sets",
+    srcs = [
+        "read_scenario_sets.py",
+    ],
+    deps = [
+        "//core/infra/cloud:gcs_utils",
+        "//core/labeling/label_conversion:read_consumable_labels",
+        "//core/metaverse",
+        requirement("loguru"),
+        "//core/metaverse/api",
+    ],
+)
+
+filegroup(
+    name = "csv",
+    srcs = glob(["*.csv"]),
+    visibility = ["//visibility:public"],
+)

@@ -1,0 +1,15 @@
+load("@rules_python//python:defs.bzl", "py_binary")
+
+package(default_visibility = ["//visibility:public"])
+
+py_binary(
+    name = "lightly_runner",
+    srcs = ["lightly_runner.py"],
+    data = [
+        "//core/ml/data/curation/configs",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/ml/data/curation/lib",
+    ],
+)

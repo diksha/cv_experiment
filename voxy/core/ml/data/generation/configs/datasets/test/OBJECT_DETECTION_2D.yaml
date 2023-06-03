@@ -1,0 +1,79 @@
+#
+# Copyright 2020-2021 Voxel Labs, Inc.
+# All rights reserved.
+#
+# This document may not be reproduced, republished, distributed, transmitted,
+# displayed, broadcast or otherwise exploited in any manner without the express
+# prior written permission of Voxel Labs, Inc. The receipt or possession of this
+# document does not convey any rights to reproduce, disclose, or distribute its
+# contents, or to manufacture, use, or sell anything that it may describe, in
+# whole or in part.
+#
+
+{% set actor_categories=["PERSON_V2", "PIT_V2"] %}
+
+dataset_generation:
+  ray:
+    n_nodes: 1
+  source: 
+     name: "MetaverseStream"
+     params: 
+        query: 'query get_data_collections_from_logset( $logset_uuid: String ) 
+        { 
+          data_collection_from_data_collection_logset(data_collection_logset_uuid: $logset_uuid)
+          { 
+            data_collection_type,
+            uuid, 
+            voxel_uuid, 
+            name, 
+            is_test,  
+            path, 
+            frame_ref 
+            { 
+              frame_number, 
+              uuid, relative_image_path,
+              relative_timestamp_ms, 
+              actors_ref 
+                { 
+                  polygon,
+                  category, 
+                  track_uuid, 
+                  track_id, 
+                  door_state 
+                } 
+            } 
+          } 
+        }'
+        query_name: 'data_collection_from_data_collection_logset'
+        query_variables:
+           logset_uuid: {{logset["uuid"]}}
+  reader: "DataCollectionStream"
+  data_transform:
+    transforms:
+      - name: GetData
+        params: {}
+  label_transform:
+    transforms:
+      - name: GetLabelYOLO
+        params:
+          actor_categories: {{actor_categories}}
+  observer_transform:
+    transforms:
+      - name: GetAttribute
+        params:
+          attribute: "actors"
+      - name: "FilterActorsByCategory"
+        params:
+          categories: {{actor_categories}}
+  is_test_transform:
+    transforms:
+      - name: "GetAttribute"
+        params:
+          attribute: "is_test"
+  writer: 
+   name: "YOLOWriter"
+   params: 
+      actor_categories: {{actor_categories}}
+      output_directory: /data
+      output_cloud_bucket: voxel-temp
+      output_cloud_prefix: smoke_tests/training/OBJECT_DETECTION_2D/yolo

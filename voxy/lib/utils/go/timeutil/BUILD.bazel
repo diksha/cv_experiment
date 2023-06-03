@@ -1,0 +1,23 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "timeutil",
+    srcs = [
+        "time.go",
+        "timerange.go",
+    ],
+    importpath = "github.com/voxel-ai/voxel/lib/utils/go/timeutil",
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "timeutil_test",
+    srcs = [
+        "time_test.go",
+        "timerange_test.go",
+    ],
+    deps = [
+        ":timeutil",
+        "@com_github_stretchr_testify//assert",
+    ],
+)

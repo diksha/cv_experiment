@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# The build target for http_file is @repo_name//file:file
+# but the executable file is bazel-voxel/external/repo_name/file/downloaded
+# `bazel run` doesn't seem to work (target not executable)
+
+./bazel build @ibazel//file:file
+bazel-"${PWD##*/}"/external/ibazel/file/downloaded -bazel_path ./bazel "$@"

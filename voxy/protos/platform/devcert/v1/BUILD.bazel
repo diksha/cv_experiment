@@ -1,0 +1,76 @@
+load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
+load("@build_stack_rules_proto//rules:proto_compiled_sources.bzl", "proto_compiled_sources")
+load("@build_stack_rules_proto//rules/go:proto_go_library.bzl", "proto_go_library")
+load("@build_stack_rules_proto//rules/py:proto_py_library.bzl", "proto_py_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+go_library(
+    name = "devcert",
+    srcs = [
+        "devcert.pb.go",
+        "devcert_grpc.pb.go",
+    ],
+    importpath = "github.com/voxel-ai/voxel/protos/platform/devcert/v1",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@org_golang_google_grpc//:go_default_library",
+        "@org_golang_google_grpc//codes",
+        "@org_golang_google_grpc//status",
+        "@org_golang_google_protobuf//reflect/protoreflect",
+        "@org_golang_google_protobuf//runtime/protoimpl",
+    ],
+)
+
+proto_library(
+    name = "devcertpb_proto",
+    srcs = ["devcert.proto"],
+    visibility = ["//visibility:public"],
+)
+
+proto_compiled_sources(
+    name = "devcertpb_go_compiled_sources",
+    srcs = [
+        "devcert.pb.go",
+        "devcert_grpc.pb.go",
+    ],
+    output_mappings = [
+        "devcert.pb.go=github.com/voxel-ai/voxel/protos/platform/devcert/v1/devcert.pb.go",
+        "devcert_grpc.pb.go=github.com/voxel-ai/voxel/protos/platform/devcert/v1/devcert_grpc.pb.go",
+    ],
+    plugins = [
+        "@build_stack_rules_proto//plugin/golang/protobuf:protoc-gen-go",
+        "@build_stack_rules_proto//plugin/grpc/grpc-go:protoc-gen-go-grpc",
+    ],
+    proto = "devcertpb_proto",
+)
+
+proto_go_library(
+    name = "devcertpb_go_proto",
+    srcs = [
+        "devcert.pb.go",
+        "devcert_grpc.pb.go",
+    ],
+    importpath = "github.com/voxel-ai/voxel/protos/platform/devcert/v1",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@org_golang_google_grpc//:go_default_library",
+        "@org_golang_google_grpc//codes",
+        "@org_golang_google_grpc//status",
+        "@org_golang_google_protobuf//reflect/protoreflect",
+        "@org_golang_google_protobuf//runtime/protoimpl",
+    ],
+)
+
+proto_compile(
+    name = "devcertpb_python_compile",
+    outputs = ["devcert_pb2.py"],
+    plugins = ["@build_stack_rules_proto//plugin/builtin:python"],
+    proto = "devcertpb_proto",
+)
+
+proto_py_library(
+    name = "devcertpb_py_library",
+    srcs = ["devcert_pb2.py"],
+    visibility = ["//visibility:public"],
+)

@@ -1,0 +1,11 @@
+load("@pip_deps//:requirements.bzl", "all_requirements")
+load("@rules_py//py:defs.bzl", "py_binary")
+
+py_binary(
+    name = "jupyter",
+    srcs = ["main.py"],
+    main = "main.py",
+    deps = [
+        "//third_party/galileo",
+    ] + all_requirements,
+)

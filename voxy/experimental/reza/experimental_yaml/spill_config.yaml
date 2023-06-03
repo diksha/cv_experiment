@@ -1,0 +1,19 @@
+".*":
+  incident:
+        dry_run: true
+        monitors_requested: []
+        state_machine_monitors_requested: [spill]
+  perception:
+    enabled: True
+    spill:
+      min_run_time_difference_ms: 1000
+      min_pixel_size: 200
+      # The max_consequitive_runs do not have any effect unless the max_frame_segments in temporal also has the same value to store the results from these consecutive runs.
+      max_consecutive_runs: 1
+      post_process_enabled: True
+      frame_segment2class: {UNKNOWN: 0, SPILL: 1}
+temporal:
+  max_past_frames: 60
+  max_future_frames: 30
+  expire_threshold_ms: 120000
+  max_frame_segments: 9

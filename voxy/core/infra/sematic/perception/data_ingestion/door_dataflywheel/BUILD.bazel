@@ -1,0 +1,46 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+load("//third_party/sematic:defs.bzl", "voxel_sematic_pipeline")
+
+voxel_sematic_pipeline(
+    name = "main",
+    bases = {
+        "default": "//third_party/sematic:no_cuda_base_image",
+        "lightly-image": "//third_party/sematic:lightly_sematic_base",
+    },
+    env = {
+        "NVIDIA_DRIVER_CAPABILITIES": "compute,utility",
+        "NVIDIA_VISIBLE_DEVICES": "all",
+    },
+    deps = [
+        ":pipeline",
+        "//core/infra/sematic/shared:utils",
+    ],
+)
+
+py_library(
+    name = "pipeline",
+    srcs = ["pipeline.py"],
+    data = [
+        "//core/infra/sematic/perception/data_ingestion/dataflywheel/configs",
+        "//core/labeling/configs",
+        "//core/ml/data/collection/configs",
+        "//core/ml/data/curation/configs",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        "//core/ml/common:utils",
+        requirement("sematic"),
+        "//core/infra/sematic/shared:aws_funcs",
+        "//core/labeling/logs_store:chunk_and_upload_video_logs_lib",
+        "//core/labeling/logs_store:ingest_data_collection_metaverse_lib",
+        "//core/labeling/scale/runners:create_scale_tasks_lib",
+        "//core/metaverse/api",
+        "//core/ml/data/collection:data_collector_lib",
+        "//core/ml/data/curation:crop_s3_videos_lib",
+        "//core/ml/data/curation:prepare_lightly_run_lib",
+        "//core/ml/data/curation:trim_lightly_clips_lib",
+        "//core/ml/data/curation/lib",
+    ],
+)

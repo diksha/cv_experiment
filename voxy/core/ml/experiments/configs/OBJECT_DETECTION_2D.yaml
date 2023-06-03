@@ -1,0 +1,5 @@
+task_purpose: OBJECT_DETECTION_2D
+service_category: OBJECT_DETECTION
+model_config: core/ml/training/configs/YOLOv5.yaml
+dataset_config: core/ml/data/generation/configs/datasets/OBJECT_DETECTION_2D.yaml
+logset_config: core/ml/data/generation/configs/logsets/OBJECT_DETECTION_2D.yaml

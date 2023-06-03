@@ -1,0 +1,31 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+py_library(
+    name = "aggregate_yolo_validation",
+    srcs = [
+        "aggregate_yolo_validation.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("pandas"),
+        requirement("tqdm"),
+        "//core/utils:aws_utils",
+    ],
+)
+
+py_library(
+    name = "class_distribution",
+    srcs = [
+        "class_distribution.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("sematic"),
+        "//core/infra/sematic/shared:resources",
+        "//core/metaverse/utils:door_dataset_utils",
+        "//core/structs",
+        "//core/utils/logging/slack:get_slack_webhooks",
+        "//core/utils/logging/slack:synchronous_webhook_wrapper",
+    ],
+)

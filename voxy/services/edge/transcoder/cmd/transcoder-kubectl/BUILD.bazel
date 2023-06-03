@@ -1,0 +1,44 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
+
+go_library(
+    name = "transcoder-kubectl_lib",
+    srcs = [
+        "config.go",
+        "main.go",
+    ],
+    importpath = "github.com/voxel-ai/voxel/services/edge/transcoder/cmd/transcoder-kubectl",
+    visibility = ["//visibility:private"],
+    deps = [
+        "//lib/infra/edge/edgeconfig",
+        "//protos/edge/edgeconfig/v1:edgeconfig",
+        "@com_github_aws_aws_sdk_go_v2//aws",
+        "@com_github_aws_aws_sdk_go_v2_config//:config",
+        "@com_github_cristalhq_aconfig//:aconfig",
+        "@com_github_cristalhq_aconfig_aconfigyaml//:aconfigyaml",
+        "@com_github_davecgh_go_spew//spew",
+        "@io_k8s_api//apps/v1:apps",
+        "@io_k8s_api//core/v1:core",
+        "@io_k8s_apimachinery//pkg/apis/meta/v1:meta",
+        "@io_k8s_client_go//applyconfigurations/apps/v1:apps",
+        "@io_k8s_client_go//applyconfigurations/core/v1:core",
+        "@io_k8s_client_go//kubernetes",
+        "@io_k8s_client_go//rest",
+        "@io_k8s_client_go//tools/clientcmd",
+        "@io_k8s_sigs_yaml//:yaml",
+        "@org_golang_google_protobuf//encoding/protojson",
+        "@org_golang_google_protobuf//proto",
+    ],
+)
+
+go_binary(
+    name = "transcoder-kubectl",
+    embed = [":transcoder-kubectl_lib"],
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "transcoder-kubectl_test",
+    srcs = ["main_test.go"],
+    embed = [":transcoder-kubectl_lib"],
+    deps = ["@com_github_stretchr_testify//assert"],
+)

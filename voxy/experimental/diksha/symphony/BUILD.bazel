@@ -1,0 +1,25 @@
+load("@io_bazel_rules_docker//container:container.bzl", "container_push")
+load("@rules_python//python:defs.bzl", "py_binary")
+load("//third_party/containers/python3:image.bzl", "py3_image")
+
+py_binary(
+    name = "print",
+    srcs = [
+        "print.py",
+    ],
+)
+
+py3_image(
+    name = "print_image",
+    binary = ":print",
+)
+
+container_push(
+    name = "print_image_image_push",
+    format = "Docker",
+    image = ":print_image",
+    registry = "us.gcr.io/sodium-carving-227300",
+    repository = "voxel/experimental",
+    tag = "$(IMAGE_TAG)",
+    tags = ["manual"],
+)

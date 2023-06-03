@@ -1,0 +1,108 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary", "py_library")
+
+py_library(
+    name = "graph_config_utils",
+    srcs = ["graph_config_utils.py"],
+    data = [
+        "//configs",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/execution/utils:graph_config_builder",
+        "//core/structs",
+        "//core/utils:yaml_jinja",
+        "//core/utils/logging:list_indented_yaml_dumper",
+        requirement("mergedeep"),
+        requirement("loguru"),
+        "//core/incident_machine/machines",
+        "//core/incidents:utils",
+        "//protos/perception/graph_config/v1:graphconfigpb_py_library",
+        "//services/platform/polygon/lib/proto_schema:validator",
+    ],
+)
+
+py_library(
+    name = "graph_config_builder",
+    srcs = ["graph_config_builder.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        "//lib/utils/py/dict:merge",
+    ],
+)
+
+py_library(
+    name = "frame_queue",
+    srcs = ["frame_queue.py"],
+    visibility = ["//visibility:public"],
+)
+
+py_library(
+    name = "fetch_camera_config_lib",
+    srcs = ["fetch_camera_config_lib.py"],
+    data = [
+        "//configs",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/utils:yaml_jinja",
+        requirement("requests"),
+        requirement("loguru"),
+        "//core/utils:aws_utils",
+    ],
+)
+
+py_binary(
+    name = "fetch_camera_configs",
+    srcs = ["fetch_camera_configs.py"],
+    deps = [
+        ":fetch_camera_config_lib",
+        ":graph_config_utils",
+    ],
+)
+
+py_binary(
+    name = "collate_from_log_keys",
+    srcs = ["collate_from_log_keys.py"],
+    deps = [
+        ":collate_logs",
+        "//core/utils:aws_utils",
+    ],
+)
+
+py_binary(
+    name = "collate_logs",
+    srcs = ["collate_logs.py"],
+    deps = [
+        "//core/utils:aws_utils",
+        requirement("mcap_protobuf_support"),
+        requirement("numpy"),
+        requirement("tqdm"),
+        requirement("loguru"),
+    ],
+)
+
+py_library(
+    name = "aggregate_metrics",
+    srcs = ["aggregate_metrics.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/structs",
+    ],
+)
+
+py_library(
+    name = "get_production_incidents",
+    srcs = ["get_production_incidents.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/structs",
+    ],
+)
+
+py_library(
+    name = "perception_runner_context",
+    srcs = ["perception_runner_context.py"],
+    visibility = ["//visibility:public"],
+)

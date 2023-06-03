@@ -1,0 +1,113 @@
+load("@io_bazel_rules_docker//container:container.bzl", "container_image", "container_push")
+load("@io_bazel_rules_docker//docker/util:run.bzl", "container_run_and_commit_layer")
+load("@io_bazel_rules_docker//python:image.bzl", "py_layer")
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary", "py_library")
+load("//third_party/containers/python3:image.bzl", "py3_image")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "detr",
+    srcs = ["detr.py"],
+    data = [
+        "@artifacts_vest_classifier-10-26",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("wandb"),
+        requirement("pytorch_lightning"),
+        requirement("torch"),
+        requirement("transformers"),
+        requirement("torchvision"),
+        requirement("numpy"),
+        requirement("scikit-learn"),
+    ],
+)
+
+py_binary(
+    name = "train_detr",
+    srcs = ["train_detr.py"],
+    data = [
+        "@artifacts_vest_classifier-10-26",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("wandb"),
+        requirement("timm"),
+        requirement("torch"),
+        requirement("torchvision"),
+        requirement("numpy"),
+        requirement("scikit-learn"),
+        ":coco_dataset",
+        ":detr",
+        "//core/infra/cloud:gcs_utils",
+    ],
+)
+
+#TODO update depenedencies
+
+py_library(
+    name = "coco_dataset",
+    srcs = ["coco_dataset.py"],
+    data = [
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("wandb"),
+        requirement("torch"),
+        requirement("torchvision"),
+        requirement("pycocotools"),
+        requirement("numpy"),
+        requirement("scikit-learn"),
+    ],
+)
+
+#TODO make this a bazel rule somewhere to avoid the duplicate code
+container_run_and_commit_layer(
+    name = "voxel_cuda_11_4_ubuntu_20_04_detr_data_layer",
+    commands = [
+        "apt-get update",
+        "mkdir -p /data/labels",
+        "gsutil -q cp gs://voxel-users/common/WandB/.netrc ~/",
+        "gsutil -q cp -r gs://voxel-users/nasha/ppe_detection/detr/labels/person_pit_hard_hat_safety_vest/*  /data/labels",
+        "gsutil -q -m  cp -r gs://voxel-users/nasha/ppe_detection/detr/*  /data/",
+    ],
+    env = {
+        "DEBIAN_FRONTEND": "noninteractive",
+    },
+    image = "@voxel_cuda_11_4_ubuntu_20_04//image",
+    tags = ["manual"],
+)
+
+# construct an image with this layer
+container_image(
+    name = "voxel_cuda_11_4_ubuntu_20_04_detr_data",
+    base = "@voxel_cuda_11_4_ubuntu_20_04//image",
+    layers = [":voxel_cuda_11_4_ubuntu_20_04_detr_data_layer"],
+)
+
+py_layer(
+    name = "pip_deps_detr",
+    filter = "@pip_deps",
+    deps = [":train_detr"],
+)
+
+py3_image(
+    name = "detr_training_data_image",
+    base = ":voxel_cuda_11_4_ubuntu_20_04_detr_data",
+    binary = ":train_detr",
+    layers = [":pip_deps_detr"],
+)
+
+container_push(
+    name = "detr_training_data_image_push_with_tag",
+    format = "Docker",
+    image = ":detr_training_data_image",
+    registry = "us.gcr.io/sodium-carving-227300",
+    repository = "voxel/execution/runners",
+    tag = "$(IMAGE_TAG)",
+    tags = ["manual"],
+)
+
+# This is the container to be used to train symphony

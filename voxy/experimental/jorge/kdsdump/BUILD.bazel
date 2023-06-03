@@ -1,0 +1,15 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "kdsdump_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/voxel-ai/voxel/experimental/jorge/kdsdump",
+    visibility = ["//visibility:private"],
+    deps = ["@com_github_harlow_kinesis_consumer//:kinesis-consumer"],
+)
+
+go_binary(
+    name = "kdsdump",
+    embed = [":kdsdump_lib"],
+    visibility = ["//visibility:public"],
+)

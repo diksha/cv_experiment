@@ -1,0 +1,1706 @@
+#### BAD_POSTURE
+
+scenario_for_incidents: [BAD_POSTURE, NO_STOP_AT_INTERSECTION, SPILL, PIGGYBACK, OPEN_DOOR_DURATION, DOOR_VIOLATION, NO_STOP_AT_DOOR_INTERSECTION, OVERREACHING, PARKING_DURATION, OVERREACHING] 
+scenarios:
+  # POSITIVE SCENARIOS - 3 videos
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - BAD_POSTURE
+    video_uuid: americold/modesto/0001/cha/scenarios/BAD_POSTURE/POSITIVE/a3c82fc0-450a-4403-ba46-490a88740ad1_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - BAD_POSTURE
+    video_uuid: americold/modesto/0001/cha/scenarios/BAD_POSTURE/POSITIVE/231ab03e-8ac8-4306-91c8-5e62e47f558d_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - BAD_POSTURE
+    video_uuid: americold/modesto/0001/cha/scenarios/BAD_POSTURE/POSITIVE/8b42cb24-bdaf-4294-9a97-4c018a455041_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/BAD_POSTURE/NEGATIVE/29ca2e0a-37aa-47a1-b9ed-496cfb304fe3_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/BAD_POSTURE/NEGATIVE/f7f86925-aff5-4cbb-bf2b-91bafb43afd1_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/BAD_POSTURE/NEGATIVE/4e5c398a-f789-488f-98f1-4357e6a6b347_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/BAD_POSTURE/NEGATIVE/35e7373c-96d9-4b9a-91b1-bf6402740a2d_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/BAD_POSTURE/NEGATIVE/9c10041f-7828-4d02-8b59-cf6e4a71162c_0000
+
+  #### BAD_POSTURE
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - BAD_POSTURE
+    video_uuid: americold/modesto/0002/cha/scenarios/BAD_POSTURE/POSITIVE/fcb048b2-25bb-49e3-b2ce-baab69c708ac_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - BAD_POSTURE
+    video_uuid: americold/modesto/0002/cha/scenarios/BAD_POSTURE/POSITIVE/2fbd7389-9752-4d15-a3d5-b83335d7fcb1_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - BAD_POSTURE
+    video_uuid: americold/modesto/0002/cha/scenarios/BAD_POSTURE/POSITIVE/ae780338-34de-4779-a2ce-6318238a4ff8_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - BAD_POSTURE
+    video_uuid: americold/modesto/0002/cha/scenarios/BAD_POSTURE/POSITIVE/fb6ad739-aaf7-4a93-9876-c21a1b06fcc2_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - BAD_POSTURE
+    video_uuid: americold/modesto/0002/cha/scenarios/BAD_POSTURE/POSITIVE/171f938a-1c23-46e1-9b42-9dc87612c29d_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/BAD_POSTURE/NEGATIVE/5511a5c4-c1f3-4d83-808a-daaeb88edc1c_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/BAD_POSTURE/NEGATIVE/ad7859c3-cbe4-4b13-8f29-cd45aa3a4015_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/BAD_POSTURE/NEGATIVE/887c16c7-d06f-46b1-a02d-a0cb24778827_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/BAD_POSTURE/NEGATIVE/71fd6894-e410-49f6-980f-0a42f30667a0_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/BAD_POSTURE/NEGATIVE/8efcc1a8-96da-4721-94ed-8dc1431c2a44_0000
+
+
+  #### BAD_POSTURE
+  # POSITIVE SCENARIOS - 0 videos
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/BAD_POSTURE/NEGATIVE/623aa46c-0c1d-41a1-a9c9-4f414a4f5e91_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/BAD_POSTURE/NEGATIVE/7582249c-6b4f-4770-91d9-c48d4786da35_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/BAD_POSTURE/NEGATIVE/33c26074-6183-4b85-8ac3-216d21d594fe_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/BAD_POSTURE/NEGATIVE/8f7e6189-cc5e-4599-b5d1-7bdbdbf40fd4_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/BAD_POSTURE/NEGATIVE/aa2cbd43-1260-4d48-90db-97d2258c2b41_0000
+
+  #### BAD_POSTURE
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0004/cha
+    incidents:
+      - BAD_POSTURE
+    video_uuid: americold/modesto/0004/cha/scenarios/BAD_POSTURE/POSITIVE/b233b636-f308-4971-845d-dc6bf79be5f2_0000
+  - camera_uuid: americold/modesto/0004/cha
+    incidents:
+      - BAD_POSTURE
+    video_uuid: americold/modesto/0004/cha/scenarios/BAD_POSTURE/POSITIVE/0fbd6d8a-6447-422b-b21b-695ca91485c4_0000
+  - camera_uuid: americold/modesto/0004/cha
+    incidents:
+      - BAD_POSTURE
+    video_uuid: americold/modesto/0004/cha/scenarios/BAD_POSTURE/POSITIVE/1a33fd98-d5e4-4d9a-b501-27bb69596b2e_0000
+  - camera_uuid: americold/modesto/0004/cha
+    incidents:
+      - BAD_POSTURE
+    video_uuid: americold/modesto/0004/cha/scenarios/BAD_POSTURE/POSITIVE/40c217ca-2308-42c5-8d79-8a18386cfba9_0000
+  - camera_uuid: americold/modesto/0004/cha
+    incidents:
+      - BAD_POSTURE
+    video_uuid: americold/modesto/0004/cha/scenarios/BAD_POSTURE/POSITIVE/49e61b4f-ad91-4ef4-83f0-71982d8119a9_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0004/cha
+    incidents: []
+    video_uuid: americold/modesto/0004/cha/scenarios/BAD_POSTURE/NEGATIVE/dd90579a-de5e-4c46-9fac-27f94b928e0b_0000
+  - camera_uuid: americold/modesto/0004/cha
+    incidents: []
+    video_uuid: americold/modesto/0004/cha/scenarios/BAD_POSTURE/NEGATIVE/e4d5a03a-44a1-4a3f-a03d-e204b821b403_0000
+  - camera_uuid: americold/modesto/0004/cha
+    incidents: []
+    video_uuid: americold/modesto/0004/cha/scenarios/BAD_POSTURE/NEGATIVE/3e50ef2e-2fc0-4be9-aa82-15d1ac9f509e_0000
+  - camera_uuid: americold/modesto/0004/cha
+    incidents: []
+    video_uuid: americold/modesto/0004/cha/scenarios/BAD_POSTURE/NEGATIVE/8522aa9c-7cb9-4220-af7a-5c41bbfbed55_0000
+  - camera_uuid: americold/modesto/0004/cha
+    incidents: []
+    video_uuid: americold/modesto/0004/cha/scenarios/BAD_POSTURE/NEGATIVE/adbff813-7c0c-4c18-b06b-124bf7438142_0000
+
+  #### BAD_POSTURE
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0009/cha
+    incidents:
+      - BAD_POSTURE
+    video_uuid: americold/modesto/0009/cha/scenarios/BAD_POSTURE/POSITIVE/63bf610d-bbed-4e26-b517-f9aafe3c0b63_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents:
+      - BAD_POSTURE
+    video_uuid: americold/modesto/0009/cha/scenarios/BAD_POSTURE/POSITIVE/520e788f-dfe0-4bfe-8c9d-472634313289_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents:
+      - BAD_POSTURE
+    video_uuid: americold/modesto/0009/cha/scenarios/BAD_POSTURE/POSITIVE/f09818ae-7ce3-45d9-8dfd-ec5dd53b1000_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents:
+      - BAD_POSTURE
+    video_uuid: americold/modesto/0009/cha/scenarios/BAD_POSTURE/POSITIVE/53cd38b8-d01b-4ccb-b57b-39082fad94f0_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents:
+      - BAD_POSTURE
+    video_uuid: americold/modesto/0009/cha/scenarios/BAD_POSTURE/POSITIVE/93ca4d9d-e2da-4509-808f-6f112a4cd584_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: []
+    video_uuid: americold/modesto/0009/cha/scenarios/BAD_POSTURE/NEGATIVE/6c5abf60-a982-47e3-9c28-7d6346590464_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: []
+    video_uuid: americold/modesto/0009/cha/scenarios/BAD_POSTURE/NEGATIVE/cd684d2b-b0da-476f-ab00-2fbaeac50e4e_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: []
+    video_uuid: americold/modesto/0009/cha/scenarios/BAD_POSTURE/NEGATIVE/01f8a781-0e49-4599-b331-9fb444671d2f_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: []
+    video_uuid: americold/modesto/0009/cha/scenarios/BAD_POSTURE/NEGATIVE/de337a81-9965-4f0b-8ce2-4aa1f7d3b08c_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: []
+    video_uuid: americold/modesto/0009/cha/scenarios/BAD_POSTURE/NEGATIVE/98e140a0-c473-4e10-a476-f80b3941f706_0000
+
+  #### BAD_POSTURE
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0010/cha
+    incidents:
+      - BAD_POSTURE
+    video_uuid: americold/modesto/0010/cha/scenarios/BAD_POSTURE/POSITIVE/48077d63-ebeb-48a3-a89f-e652e5f9429e_0000
+  - camera_uuid: americold/modesto/0010/cha
+    incidents:
+      - BAD_POSTURE
+    video_uuid: americold/modesto/0010/cha/scenarios/BAD_POSTURE/POSITIVE/5ac92a52-2a8e-409d-9edf-c121738c0e0c_0000
+  - camera_uuid: americold/modesto/0010/cha
+    incidents:
+      - BAD_POSTURE
+    video_uuid: americold/modesto/0010/cha/scenarios/BAD_POSTURE/POSITIVE/1f3b59bf-f34c-4d8b-80a6-2d71f8d421f6_0000
+  - camera_uuid: americold/modesto/0010/cha
+    incidents:
+      - BAD_POSTURE
+    video_uuid: americold/modesto/0010/cha/scenarios/BAD_POSTURE/POSITIVE/ace59dfa-ba8d-48c2-8eff-e017586664d7_0000
+  - camera_uuid: americold/modesto/0010/cha
+    incidents:
+      - BAD_POSTURE
+    video_uuid: americold/modesto/0010/cha/scenarios/BAD_POSTURE/POSITIVE/29d3bd57-dcd2-4f52-8297-59d8fda11815_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0010/cha
+    incidents: []
+    video_uuid: americold/modesto/0010/cha/scenarios/BAD_POSTURE/NEGATIVE/c7d08c6f-6bff-4e7a-8215-261d947e1561_0000
+  - camera_uuid: americold/modesto/0010/cha
+    incidents: []
+    video_uuid: americold/modesto/0010/cha/scenarios/BAD_POSTURE/NEGATIVE/89c3a4ed-252e-4aa0-9ee0-2c1e13f91dbc_0000
+  - camera_uuid: americold/modesto/0010/cha
+    incidents: []
+    video_uuid: americold/modesto/0010/cha/scenarios/BAD_POSTURE/NEGATIVE/624b101c-33d8-4d73-b408-af4f171611ed_0000
+  - camera_uuid: americold/modesto/0010/cha
+    incidents: []
+    video_uuid: americold/modesto/0010/cha/scenarios/BAD_POSTURE/NEGATIVE/415c7150-2af7-46bd-bc3e-91e49ded1ce6_0000
+  - camera_uuid: americold/modesto/0010/cha
+    incidents: []
+    video_uuid: americold/modesto/0010/cha/scenarios/BAD_POSTURE/NEGATIVE/7cd69462-0b01-4db0-ad41-6b46a7a9928c_0000
+
+  #### BAD_POSTURE
+  # POSITIVE SCENARIOS - 2 videos
+  - camera_uuid: americold/modesto/0011/cha
+    incidents:
+      - BAD_POSTURE
+    video_uuid: americold/modesto/0011/cha/scenarios/BAD_POSTURE/POSITIVE/2596de5b-873a-4250-ab2c-dc1c441cdc85_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents:
+      - BAD_POSTURE
+    video_uuid: americold/modesto/0011/cha/scenarios/BAD_POSTURE/POSITIVE/6fff0434-9d27-4546-a4b7-c1ad017fe507_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/BAD_POSTURE/NEGATIVE/9330ced6-4383-42df-8d0d-eff6fd0e6b13_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/BAD_POSTURE/NEGATIVE/cac8eb4d-1ae0-432b-8238-b437834b543f_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/BAD_POSTURE/NEGATIVE/39a30445-a49a-4f54-a895-02e61fa68401_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/BAD_POSTURE/NEGATIVE/4e99fc72-d38f-41e6-be44-de5cf7547c51_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/BAD_POSTURE/NEGATIVE/9c913572-b956-40fe-8121-ee0c0cc3e713_0000
+
+
+    #### BAD_POSTURE
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0012/cha
+    incidents:
+      - BAD_POSTURE
+    video_uuid: americold/modesto/0012/cha/scenarios/BAD_POSTURE/POSITIVE/6bd0a35d-1ca1-43c6-a731-ccb1d44ce260_0000
+  - camera_uuid: americold/modesto/0012/cha
+    incidents:
+      - BAD_POSTURE
+    video_uuid: americold/modesto/0012/cha/scenarios/BAD_POSTURE/POSITIVE/7a373a8e-1716-4ed9-8513-ccc5481bf600_0000
+  - camera_uuid: americold/modesto/0012/cha
+    incidents:
+      - BAD_POSTURE
+    video_uuid: americold/modesto/0012/cha/scenarios/BAD_POSTURE/POSITIVE/95cdb960-af6f-4578-a609-83b3604bef12_0000
+  - camera_uuid: americold/modesto/0012/cha
+    incidents:
+      - BAD_POSTURE
+    video_uuid: americold/modesto/0012/cha/scenarios/BAD_POSTURE/POSITIVE/0724e2b6-402d-4ff3-b020-e7c08a805ad0_0000
+  - camera_uuid: americold/modesto/0012/cha
+    incidents:
+      - BAD_POSTURE
+    video_uuid: americold/modesto/0012/cha/scenarios/BAD_POSTURE/POSITIVE/46381dec-aa7f-4198-8ba5-22fafdcd96d7_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0012/cha
+    incidents: []
+    video_uuid: americold/modesto/0012/cha/scenarios/BAD_POSTURE/NEGATIVE/3950045d-9d29-4a0d-81ea-cb66b62a3ab9_0000
+  - camera_uuid: americold/modesto/0012/cha
+    incidents: []
+    video_uuid: americold/modesto/0012/cha/scenarios/BAD_POSTURE/NEGATIVE/e7550df1-a336-4397-a9bc-5cf2f1ffebe6_0000
+  - camera_uuid: americold/modesto/0012/cha
+    incidents: []
+    video_uuid: americold/modesto/0012/cha/scenarios/BAD_POSTURE/NEGATIVE/1c6a2054-3b87-4cd0-8cbd-c98e96726ea6_0000
+  - camera_uuid: americold/modesto/0012/cha
+    incidents: []
+    video_uuid: americold/modesto/0012/cha/scenarios/BAD_POSTURE/NEGATIVE/a54caf45-e640-4b99-a0fc-79f99e2b4f8e_0000
+  - camera_uuid: americold/modesto/0012/cha
+    incidents: []
+    video_uuid: americold/modesto/0012/cha/scenarios/BAD_POSTURE/NEGATIVE/2545d2d0-95ba-4384-9b49-2a393c3553ff_0000
+
+
+
+
+  #### NO_STOP_AT_INTERSECTION
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - NO_STOP_AT_INTERSECTION
+    video_uuid: americold/modesto/0001/cha/scenarios/NO_STOP_AT_INTERSECTION/POSITIVE/1a97d929-4fe7-4289-897a-668a5a90e7ed_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - NO_STOP_AT_INTERSECTION
+    video_uuid: americold/modesto/0001/cha/scenarios/NO_STOP_AT_INTERSECTION/POSITIVE/5b2a4b7c-c330-4a0e-a52f-39f90c762465_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - NO_STOP_AT_INTERSECTION
+    video_uuid: americold/modesto/0001/cha/scenarios/NO_STOP_AT_INTERSECTION/POSITIVE/b9bab84b-a2de-4aa6-9c38-35f4db7abadf_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - NO_STOP_AT_INTERSECTION
+    video_uuid: americold/modesto/0001/cha/scenarios/NO_STOP_AT_INTERSECTION/POSITIVE/1f0f4c97-a3dc-481b-8932-d67301892270_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - NO_STOP_AT_INTERSECTION
+    video_uuid: americold/modesto/0001/cha/scenarios/NO_STOP_AT_INTERSECTION/POSITIVE/5a0a6478-88b6-412b-a8b3-ad10c476c282_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/NO_STOP_AT_INTERSECTION/NEGATIVE/345696ed-c71a-446d-a34f-cc4d6d28a6b7_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/NO_STOP_AT_INTERSECTION/NEGATIVE/f4830378-646f-4cd8-a503-efd13bdbbdbe_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/NO_STOP_AT_INTERSECTION/NEGATIVE/b0bcb617-ebfb-4dcb-aa39-51add496f84a_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/NO_STOP_AT_INTERSECTION/NEGATIVE/085c9df2-2de8-4115-aea7-ab5a118a0396_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/NO_STOP_AT_INTERSECTION/NEGATIVE/df320493-6348-4d04-b806-85fe380f3432_0000
+
+  #### PARKING_DURATION
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - PARKING_DURATION
+    video_uuid: americold/modesto/0001/cha/scenarios/PARKING_DURATION/POSITIVE/884604d3-b81c-47a2-a02b-685dcae6a767_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - PARKING_DURATION
+    video_uuid: americold/modesto/0001/cha/scenarios/PARKING_DURATION/POSITIVE/7889a6f6-7e17-4e2a-b4db-048c362074c0_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - PARKING_DURATION
+    video_uuid: americold/modesto/0001/cha/scenarios/PARKING_DURATION/POSITIVE/398eb3f0-5af2-4f17-91b1-762938897192_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - PARKING_DURATION
+    video_uuid: americold/modesto/0001/cha/scenarios/PARKING_DURATION/POSITIVE/73fd4111-9ab0-4871-b82b-752713a08a4a_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - PARKING_DURATION
+    video_uuid: americold/modesto/0001/cha/scenarios/PARKING_DURATION/POSITIVE/e2ac86d7-ca52-4292-8730-1fd2482cc7cd_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/PARKING_DURATION/NEGATIVE/5200cac6-b15a-4ad4-ac71-2a7d952b1e43_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/PARKING_DURATION/NEGATIVE/9015270c-86ea-4fc0-b63a-6dbe230ea9cc_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/PARKING_DURATION/NEGATIVE/53901c76-71c8-4756-a8ac-ff1d3ba12d42_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/PARKING_DURATION/NEGATIVE/8fd860c0-54fc-4caa-8da3-4fcf77c219fd_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/PARKING_DURATION/NEGATIVE/486625cd-1740-4b5e-956f-21e06cbaf445_0000
+
+
+  #### PARKING_DURATION
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - PARKING_DURATION
+    video_uuid: americold/modesto/0002/cha/scenarios/PARKING_DURATION/POSITIVE/bb856be6-c375-4d49-a6e6-24e7be385407_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - PARKING_DURATION
+    video_uuid: americold/modesto/0002/cha/scenarios/PARKING_DURATION/POSITIVE/bb987611-a22c-4870-8f20-21731e965fcd_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - PARKING_DURATION
+    video_uuid: americold/modesto/0002/cha/scenarios/PARKING_DURATION/POSITIVE/6239a9e9-cc1a-4c50-9571-5dd54cc066f2_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - PARKING_DURATION
+    video_uuid: americold/modesto/0002/cha/scenarios/PARKING_DURATION/POSITIVE/5246e98c-5bd1-4381-9bc6-47249c22f06c_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - PARKING_DURATION
+    video_uuid: americold/modesto/0002/cha/scenarios/PARKING_DURATION/POSITIVE/e7a852db-e1d9-42c1-9f4e-07ef059eb7e7_0000
+  # NEGATIVE SCENARIOS - 4 videos
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/PARKING_DURATION/NEGATIVE/7e1066e9-ffe2-4774-911d-983af4be7b35_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/PARKING_DURATION/NEGATIVE/319119b0-4aa1-4123-8897-e3873824f3b0_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/PARKING_DURATION/NEGATIVE/4f1cea32-5bf0-4f18-85af-0e9fd7744d9b_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/PARKING_DURATION/NEGATIVE/0a5e8bfa-d2d0-4923-bef9-dd363f02f163_0000
+
+  #### PARKING_DURATION
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0003/cha
+    incidents:
+      - PARKING_DURATION
+    video_uuid: americold/modesto/0003/cha/scenarios/PARKING_DURATION/POSITIVE/44c1562b-42d2-4d66-bf6b-2c9608cd7765_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents:
+      - PARKING_DURATION
+    video_uuid: americold/modesto/0003/cha/scenarios/PARKING_DURATION/POSITIVE/418a8049-31ab-46b8-831c-5976e1e957f3_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents:
+      - PARKING_DURATION
+    video_uuid: americold/modesto/0003/cha/scenarios/PARKING_DURATION/POSITIVE/3a4eb069-cb4f-484d-95dd-cc3bf93694cc_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents:
+      - PARKING_DURATION
+    video_uuid: americold/modesto/0003/cha/scenarios/PARKING_DURATION/POSITIVE/643c8de7-c532-49fd-8ed1-ade678e7413c_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents:
+      - PARKING_DURATION
+    video_uuid: americold/modesto/0003/cha/scenarios/PARKING_DURATION/POSITIVE/b25cb920-454a-4e3a-ae19-e63e9d2ce566_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/PARKING_DURATION/NEGATIVE/25f12d57-173e-41ff-8491-c843b02a2b38_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/PARKING_DURATION/NEGATIVE/37770d33-f7c8-40fa-ba26-db8ab2b23284_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/PARKING_DURATION/NEGATIVE/71d6e15b-a846-47c2-b369-0d05eec0b995_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/PARKING_DURATION/NEGATIVE/c98898c6-8c0a-4361-9ba6-c769a0c918af_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/PARKING_DURATION/NEGATIVE/10654e4a-01fb-4fe8-bb89-2de14ca440bf_0000
+
+
+  #### PARKING_DURATION
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0010/cha
+    incidents:
+      - PARKING_DURATION
+    video_uuid: americold/modesto/0010/cha/scenarios/PARKING_DURATION/POSITIVE/0409d9b1-56d8-49db-b938-934950ef5a75_0000
+  - camera_uuid: americold/modesto/0010/cha
+    incidents:
+      - PARKING_DURATION
+    video_uuid: americold/modesto/0010/cha/scenarios/PARKING_DURATION/POSITIVE/8acd944e-9136-4d3e-99c7-705286c88205_0000
+  - camera_uuid: americold/modesto/0010/cha
+    incidents:
+      - PARKING_DURATION
+    video_uuid: americold/modesto/0010/cha/scenarios/PARKING_DURATION/POSITIVE/50b2824c-3b53-4a78-b387-aac347f7a682_0000
+  - camera_uuid: americold/modesto/0010/cha
+    incidents:
+      - PARKING_DURATION
+    video_uuid: americold/modesto/0010/cha/scenarios/PARKING_DURATION/POSITIVE/da5cf2e2-798f-4a16-a606-05d7bd03695c_0000
+  - camera_uuid: americold/modesto/0010/cha
+    incidents:
+      - PARKING_DURATION
+    video_uuid: americold/modesto/0010/cha/scenarios/PARKING_DURATION/POSITIVE/de4b7f13-841d-4a0f-86d4-d0af70d9e92e_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0010/cha
+    incidents: []
+    video_uuid: americold/modesto/0010/cha/scenarios/PARKING_DURATION/NEGATIVE/67407b62-5a24-44bc-9fdb-07ef093c2be4_0000
+  - camera_uuid: americold/modesto/0010/cha
+    incidents: []
+    video_uuid: americold/modesto/0010/cha/scenarios/PARKING_DURATION/NEGATIVE/98a04682-10e3-4a92-b466-a52b1dba3a0d_0000
+  - camera_uuid: americold/modesto/0010/cha
+    incidents: []
+    video_uuid: americold/modesto/0010/cha/scenarios/PARKING_DURATION/NEGATIVE/b198699b-6049-41de-905b-8340324e2b1e_0000
+  - camera_uuid: americold/modesto/0010/cha
+    incidents: []
+    video_uuid: americold/modesto/0010/cha/scenarios/PARKING_DURATION/NEGATIVE/ccc933b0-bc3d-4c3c-828c-8e7fa443624f_0000
+  - camera_uuid: americold/modesto/0010/cha
+    incidents: []
+    video_uuid: americold/modesto/0010/cha/scenarios/PARKING_DURATION/NEGATIVE/821e3e9d-48c3-4df1-b5b6-9e7841c018db_0000
+
+  #### PARKING_DURATION
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0011/cha
+    incidents:
+      - PARKING_DURATION
+    video_uuid: americold/modesto/0011/cha/scenarios/PARKING_DURATION/POSITIVE/81de9de7-be84-4e2b-969f-60a358a646a9_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents:
+      - PARKING_DURATION
+    video_uuid: americold/modesto/0011/cha/scenarios/PARKING_DURATION/POSITIVE/3c713d5e-7489-4d99-b982-e32f8497676f_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents:
+      - PARKING_DURATION
+    video_uuid: americold/modesto/0011/cha/scenarios/PARKING_DURATION/POSITIVE/d2d8ffcd-17b9-4956-9719-5abbcd7ff5d8_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents:
+      - PARKING_DURATION
+    video_uuid: americold/modesto/0011/cha/scenarios/PARKING_DURATION/POSITIVE/d1e3f0b4-07bc-417d-95db-7cbe320e137e_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents:
+      - PARKING_DURATION
+    video_uuid: americold/modesto/0011/cha/scenarios/PARKING_DURATION/POSITIVE/1c911cfb-2b92-4f51-88ac-963e4f9ce61f_0000
+    # NEGATIVE SCENARIOS - 2 videos
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/PARKING_DURATION/NEGATIVE/ed5e95f4-1621-4a6b-9ffe-96697659152b_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/PARKING_DURATION/NEGATIVE/9a57f7b9-0033-4f45-800f-34d757c6312a_0000
+
+
+  #### PARKING_DURATION
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0012/cha
+    incidents:
+      - PARKING_DURATION
+    video_uuid: americold/modesto/0012/cha/scenarios/PARKING_DURATION/POSITIVE/af62d6ff-f2c7-4211-9439-8adc1fdfe2d3_0000
+  - camera_uuid: americold/modesto/0012/cha
+    incidents:
+      - PARKING_DURATION
+    video_uuid: americold/modesto/0012/cha/scenarios/PARKING_DURATION/POSITIVE/a790cd9c-f2fa-4f8c-89f0-09153a69b8af_0000
+  - camera_uuid: americold/modesto/0012/cha
+    incidents:
+      - PARKING_DURATION
+    video_uuid: americold/modesto/0012/cha/scenarios/PARKING_DURATION/POSITIVE/7a57f2ed-f142-4ba9-867b-32212abc9c99_0000
+  - camera_uuid: americold/modesto/0012/cha
+    incidents:
+      - PARKING_DURATION
+    video_uuid: americold/modesto/0012/cha/scenarios/PARKING_DURATION/POSITIVE/a2359a4b-0d88-4a8a-8e62-9176504212c2_0000
+  - camera_uuid: americold/modesto/0012/cha
+    incidents:
+      - PARKING_DURATION
+    video_uuid: americold/modesto/0012/cha/scenarios/PARKING_DURATION/POSITIVE/79a1295a-a0f4-4aef-8014-008bfa639ed4_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0012/cha
+    incidents: []
+    video_uuid: americold/modesto/0012/cha/scenarios/PARKING_DURATION/NEGATIVE/f5fc92c6-fbe2-4b35-bede-4512c8782f50_0000
+  - camera_uuid: americold/modesto/0012/cha
+    incidents: []
+    video_uuid: americold/modesto/0012/cha/scenarios/PARKING_DURATION/NEGATIVE/49aab4cc-4b38-4a79-a321-f35a541852d0_0000
+  - camera_uuid: americold/modesto/0012/cha
+    incidents: []
+    video_uuid: americold/modesto/0012/cha/scenarios/PARKING_DURATION/NEGATIVE/507589e6-a4ca-43f2-a890-5d29cbe058aa_0000
+  - camera_uuid: americold/modesto/0012/cha
+    incidents: []
+    video_uuid: americold/modesto/0012/cha/scenarios/PARKING_DURATION/NEGATIVE/5d40c543-4335-40f5-8f14-f5ba849b4261_0000
+  - camera_uuid: americold/modesto/0012/cha
+    incidents: []
+    video_uuid: americold/modesto/0012/cha/scenarios/PARKING_DURATION/NEGATIVE/94b3b228-b448-4cd5-9496-db85b2dc0cec_0000
+
+
+  #### OVERREACHING
+  # POSITIVE SCENARIOS - 0 videos
+  # NEGATIVE SCENARIOS - 3 videos
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/OVERREACHING/NEGATIVE/a1afed7a-7f0e-4c76-8277-3c0abd3898f1_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/OVERREACHING/NEGATIVE/a1ad85d2-e5fd-4517-b5e8-b043e167bfa2_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/OVERREACHING/NEGATIVE/7dc8b945-ea45-49f2-8832-03bea70df4c4_0000
+
+
+  #### OVERREACHING
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - OVERREACHING
+    video_uuid: americold/modesto/0002/cha/scenarios/OVERREACHING/POSITIVE/964b59d1-6a51-4baa-b3b0-1925e3ffe10a_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - OVERREACHING
+    video_uuid: americold/modesto/0002/cha/scenarios/OVERREACHING/POSITIVE/45f462a2-e017-4d87-ab5c-ae79acb948b0_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - OVERREACHING
+    video_uuid: americold/modesto/0002/cha/scenarios/OVERREACHING/POSITIVE/6ce3f2ff-c58f-4982-9216-04242d3f57c8_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - OVERREACHING
+    video_uuid: americold/modesto/0002/cha/scenarios/OVERREACHING/POSITIVE/f158079c-d8c8-47a8-bf72-c01e964d78ab_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - OVERREACHING
+    video_uuid: americold/modesto/0002/cha/scenarios/OVERREACHING/POSITIVE/dc5c5ded-8876-4c4e-a40a-7cdacf8cf528_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/OVERREACHING/NEGATIVE/aa04f2e0-a790-4c80-be94-94a41724f799_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/OVERREACHING/NEGATIVE/427262fb-a22e-46e7-be92-1040e4fcfce6_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/OVERREACHING/NEGATIVE/1f11e50b-77d1-4870-8ea5-9b810216db43_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/OVERREACHING/NEGATIVE/fa72d32f-90fa-42f7-bc96-24c1bd2b9322_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/OVERREACHING/NEGATIVE/7e076be0-b30f-44f0-84ea-6df7359c4029_0000
+
+
+
+  #### OVERREACHING
+  # POSITIVE SCENARIOS - 0 videos
+  # NEGATIVE SCENARIOS - 1 videos
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/OVERREACHING/NEGATIVE/bc4e4bf1-6c08-421a-a6d4-8a618a562295_0000
+
+
+  #### OVERREACHING
+  # POSITIVE SCENARIOS - 0 videos
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0004/cha
+    incidents: []
+    video_uuid: americold/modesto/0004/cha/scenarios/OVERREACHING/NEGATIVE/be7e0dab-f915-4399-9910-8261f87e1463_0000
+  - camera_uuid: americold/modesto/0004/cha
+    incidents: []
+    video_uuid: americold/modesto/0004/cha/scenarios/OVERREACHING/NEGATIVE/85339618-04e8-43ff-9098-05ce34cc7f08_0000
+  - camera_uuid: americold/modesto/0004/cha
+    incidents: []
+    video_uuid: americold/modesto/0004/cha/scenarios/OVERREACHING/NEGATIVE/bd7ca1cb-f12c-44fa-83e7-a3bb92d8f5f6_0000
+  - camera_uuid: americold/modesto/0004/cha
+    incidents: []
+    video_uuid: americold/modesto/0004/cha/scenarios/OVERREACHING/NEGATIVE/86a2d23a-f141-48b3-bbc1-c91ac360de9a_0000
+  - camera_uuid: americold/modesto/0004/cha
+    incidents: []
+    video_uuid: americold/modesto/0004/cha/scenarios/OVERREACHING/NEGATIVE/0db7c926-88a3-497d-b129-1a43738858be_0000
+
+
+  #### OVERREACHING
+  # POSITIVE SCENARIOS - 1 videos
+  - camera_uuid: americold/modesto/0009/cha
+    incidents:
+      - OVERREACHING
+    video_uuid: americold/modesto/0009/cha/scenarios/OVERREACHING/POSITIVE/dfc09392-fdc3-4d9f-92ed-1da449484e35_0000
+  # NEGATIVE SCENARIOS - 1 videos
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: []
+    video_uuid: americold/modesto/0009/cha/scenarios/OVERREACHING/NEGATIVE/c7e10211-64b8-46dd-8c78-319f846902f4_0000
+
+
+
+  #### OVERREACHING
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0010/cha
+    incidents:
+      - OVERREACHING
+    video_uuid: americold/modesto/0010/cha/scenarios/OVERREACHING/POSITIVE/2841e156-1060-4b14-b39d-7056f77917a1_0000
+  - camera_uuid: americold/modesto/0010/cha
+    incidents:
+      - OVERREACHING
+    video_uuid: americold/modesto/0010/cha/scenarios/OVERREACHING/POSITIVE/f4356929-561f-40a5-8f07-d1e05271fce9_0000
+  - camera_uuid: americold/modesto/0010/cha
+    incidents:
+      - OVERREACHING
+    video_uuid: americold/modesto/0010/cha/scenarios/OVERREACHING/POSITIVE/be9de80a-1701-447b-92f3-a9d3943ba06d_0000
+  - camera_uuid: americold/modesto/0010/cha
+    incidents:
+      - OVERREACHING
+    video_uuid: americold/modesto/0010/cha/scenarios/OVERREACHING/POSITIVE/d83a8dfb-9e47-430d-a106-1599d72ec95d_0000
+  - camera_uuid: americold/modesto/0010/cha
+    incidents:
+      - OVERREACHING
+    video_uuid: americold/modesto/0010/cha/scenarios/OVERREACHING/POSITIVE/bf31c6e0-69a9-4dd6-a402-ccc01158291e_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0010/cha
+    incidents: []
+    video_uuid: americold/modesto/0010/cha/scenarios/OVERREACHING/NEGATIVE/457d89bf-0352-4431-8115-f10685f03d9f_0000
+  - camera_uuid: americold/modesto/0010/cha
+    incidents: []
+    video_uuid: americold/modesto/0010/cha/scenarios/OVERREACHING/NEGATIVE/849f5e58-b30c-4fed-bb46-aa2c2710c26e_0000
+  - camera_uuid: americold/modesto/0010/cha
+    incidents: []
+    video_uuid: americold/modesto/0010/cha/scenarios/OVERREACHING/NEGATIVE/caa540f1-6fdd-4c0a-b454-13fe19af9998_0000
+  - camera_uuid: americold/modesto/0010/cha
+    incidents: []
+    video_uuid: americold/modesto/0010/cha/scenarios/OVERREACHING/NEGATIVE/652f5c24-d287-4340-9dbe-ba236a784531_0000
+  - camera_uuid: americold/modesto/0010/cha
+    incidents: []
+    video_uuid: americold/modesto/0010/cha/scenarios/OVERREACHING/NEGATIVE/7a5f056c-88cd-4b6c-9472-1c074dd5569b_0000
+
+
+  #### OVERREACHING
+  # POSITIVE SCENARIOS - 2 videos
+  - camera_uuid: americold/modesto/0011/cha
+    incidents:
+      - OVERREACHING
+    video_uuid: americold/modesto/0011/cha/scenarios/OVERREACHING/POSITIVE/24663d03-e3d4-44f7-baf4-1fe51706698e_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents:
+      - OVERREACHING
+    video_uuid: americold/modesto/0011/cha/scenarios/OVERREACHING/POSITIVE/47190c50-eb1f-401e-a966-08f8a9c12616_0000
+  # NEGATIVE SCENARIOS - 2 videos
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/OVERREACHING/NEGATIVE/e3e8900c-8b09-48d0-9340-bce018e66835_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/OVERREACHING/NEGATIVE/49ca66a4-7198-42f1-893c-e14449c7a9eb_0000
+
+
+  #### OVERREACHING
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0012/cha
+    incidents:
+      - OVERREACHING
+    video_uuid: americold/modesto/0012/cha/scenarios/OVERREACHING/POSITIVE/d86d4524-e726-4319-9086-4114b9d9a920_0000
+  - camera_uuid: americold/modesto/0012/cha
+    incidents:
+      - OVERREACHING
+    video_uuid: americold/modesto/0012/cha/scenarios/OVERREACHING/POSITIVE/74494ccf-f422-4e07-9399-689c09f55f19_0000
+  - camera_uuid: americold/modesto/0012/cha
+    incidents:
+      - OVERREACHING
+    video_uuid: americold/modesto/0012/cha/scenarios/OVERREACHING/POSITIVE/3d5069d1-5269-4dc3-9995-2492256b48e7_0000
+  - camera_uuid: americold/modesto/0012/cha
+    incidents:
+      - OVERREACHING
+    video_uuid: americold/modesto/0012/cha/scenarios/OVERREACHING/POSITIVE/1050a85d-0554-4020-9573-bce1d104580c_0000
+  - camera_uuid: americold/modesto/0012/cha
+    incidents:
+      - OVERREACHING
+    video_uuid: americold/modesto/0012/cha/scenarios/OVERREACHING/POSITIVE/6b34bdc7-c8d1-45a0-8ab9-a6bf6f56de2f_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0012/cha
+    incidents: []
+    video_uuid: americold/modesto/0012/cha/scenarios/OVERREACHING/NEGATIVE/48f78051-7a9c-40e4-9643-632dd655ecf9_0000
+  - camera_uuid: americold/modesto/0012/cha
+    incidents: []
+    video_uuid: americold/modesto/0012/cha/scenarios/OVERREACHING/NEGATIVE/f9e3454e-065d-45a6-902a-bf6e016f08f0_0000
+  - camera_uuid: americold/modesto/0012/cha
+    incidents: []
+    video_uuid: americold/modesto/0012/cha/scenarios/OVERREACHING/NEGATIVE/7b4ee377-e9db-446a-9482-ea8ebf0c4e94_0000
+  - camera_uuid: americold/modesto/0012/cha
+    incidents: []
+    video_uuid: americold/modesto/0012/cha/scenarios/OVERREACHING/NEGATIVE/25ec6d53-cb91-4477-b9c0-e279359cad91_0000
+  - camera_uuid: americold/modesto/0012/cha
+    incidents: []
+    video_uuid: americold/modesto/0012/cha/scenarios/OVERREACHING/NEGATIVE/5f3b1e2f-b8ad-40cf-9512-d6e9cacac050_0000
+
+
+  #### NO_STOP_AT_DOOR_INTERSECTION
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - NO_STOP_AT_DOOR_INTERSECTION
+    video_uuid: americold/modesto/0001/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/47dcaf85-64ee-48b1-a9e3-25f7f64fd944_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - NO_STOP_AT_DOOR_INTERSECTION
+    video_uuid: americold/modesto/0001/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/64a5fbfd-6b2d-461a-b21a-d6c49a4cd330_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - NO_STOP_AT_DOOR_INTERSECTION
+    video_uuid: americold/modesto/0001/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/fd30f3c8-f2dc-42b0-a540-96d00de94084_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - NO_STOP_AT_DOOR_INTERSECTION
+    video_uuid: americold/modesto/0001/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/33bc8698-bdb6-4d22-990f-e857fedd7411_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - NO_STOP_AT_DOOR_INTERSECTION
+    video_uuid: americold/modesto/0001/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/500e9087-91ff-4787-94e6-be5dbd93bd43_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/NEGATIVE/264318a7-7cff-4c5f-a203-c543c6e2a000_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/NEGATIVE/5ea651df-16a8-40a2-b727-375535c510f3_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/NEGATIVE/97ac4195-26b9-4491-8d3f-c5f50a937adb_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/NEGATIVE/56e4d6e0-13fe-4a03-aeb2-360ac8f8e92f_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/NEGATIVE/c2a7cabb-5451-4487-9b7c-b6b1e6d27e2d_0000
+
+  #### NO_STOP_AT_DOOR_INTERSECTION
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - NO_STOP_AT_DOOR_INTERSECTION
+    video_uuid: americold/modesto/0002/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/15d66c9d-175a-4af6-a9d6-3ed0733ae953_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - NO_STOP_AT_DOOR_INTERSECTION
+    video_uuid: americold/modesto/0002/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/7b581cb4-30b1-492f-b58a-e52ff4e67998_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - NO_STOP_AT_DOOR_INTERSECTION
+    video_uuid: americold/modesto/0002/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/9d1d51f3-4a5f-482f-9bae-e64acc664dcd_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - NO_STOP_AT_DOOR_INTERSECTION
+    video_uuid: americold/modesto/0002/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/8cdc16e6-cad8-4178-84ff-3c83847f9db5_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - NO_STOP_AT_DOOR_INTERSECTION
+    video_uuid: americold/modesto/0002/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/6184500f-860a-4bcb-8808-c6051d9056d7_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/NEGATIVE/cce2f205-7048-4552-ad59-c4d3e1a4e536_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/NEGATIVE/63bf5bed-c338-41ea-829f-b91f28fd5883_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/NEGATIVE/17067a99-3bd1-40b7-8799-db5d58d776cb_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/NEGATIVE/935a9137-5016-48bc-88c1-aad7b782e0ff_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/NEGATIVE/2b36e968-35d2-4d6e-9f9b-da661311059f_0000
+
+
+  #### NO_STOP_AT_DOOR_INTERSECTION
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0003/cha
+    incidents:
+      - NO_STOP_AT_DOOR_INTERSECTION
+    video_uuid: americold/modesto/0003/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/8b953cdb-b0b2-4923-a85f-59310bf6ae7e_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents:
+      - NO_STOP_AT_DOOR_INTERSECTION
+    video_uuid: americold/modesto/0003/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/a14b6cca-c010-4481-ae2b-43176e05ea82_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents:
+      - NO_STOP_AT_DOOR_INTERSECTION
+    video_uuid: americold/modesto/0003/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/e1bc3296-d8f3-4eca-8852-6c4b05558100_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents:
+      - NO_STOP_AT_DOOR_INTERSECTION
+    video_uuid: americold/modesto/0003/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/e8d4ca32-8187-4e02-b34b-0b27025ac805_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents:
+      - NO_STOP_AT_DOOR_INTERSECTION
+    video_uuid: americold/modesto/0003/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/e844686d-ab6b-4829-9567-32539a6023d5_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/NEGATIVE/2d6df077-3b3b-49c7-bd45-b9b4f87fcfd2_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/NEGATIVE/4fb36bb7-6cf1-4c74-97ba-c39e9ffdabab_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/NEGATIVE/82a2c1fd-12ee-4ec9-85e9-be950ecb561c_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/NEGATIVE/47bb07d2-6fca-4cf9-bc16-79a4e1d6d60b_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/NEGATIVE/d846cdf6-f9e3-4ec1-838f-21b1fedd18f8_0000
+
+
+  #### NO_STOP_AT_DOOR_INTERSECTION
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0009/cha
+    incidents:
+      - NO_STOP_AT_DOOR_INTERSECTION
+    video_uuid: americold/modesto/0009/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/6908a369-ac7a-4d57-884f-6fec39584b2d_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents:
+      - NO_STOP_AT_DOOR_INTERSECTION
+    video_uuid: americold/modesto/0009/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/fcb1d2c8-9447-4a0e-bebc-bef8033c8b9a_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents:
+      - NO_STOP_AT_DOOR_INTERSECTION
+    video_uuid: americold/modesto/0009/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/40376466-4352-46d6-9cac-87f21af5c99f_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents:
+      - NO_STOP_AT_DOOR_INTERSECTION
+    video_uuid: americold/modesto/0009/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/a46927d3-22b8-4f79-a853-b7d80a18f4e7_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents:
+      - NO_STOP_AT_DOOR_INTERSECTION
+    video_uuid: americold/modesto/0009/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/11e46148-1de2-4a0d-ab77-0546eb362b41_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: []
+    video_uuid: americold/modesto/0009/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/NEGATIVE/ab9fe7ff-ec63-4e68-8501-6a0206d09d12_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: []
+    video_uuid: americold/modesto/0009/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/NEGATIVE/8af530ee-6d32-445e-a8dd-812a5d77849e_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: []
+    video_uuid: americold/modesto/0009/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/NEGATIVE/a17e6374-4939-434b-9051-f76d55bb235d_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: []
+    video_uuid: americold/modesto/0009/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/NEGATIVE/fbe54085-44e7-4339-b3a0-a227e7abb69a_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: []
+    video_uuid: americold/modesto/0009/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/NEGATIVE/034d67f8-0304-45f0-9d7c-7688bb16b3f1_0000
+
+
+  #### NO_STOP_AT_DOOR_INTERSECTION
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0011/cha
+    incidents:
+      - NO_STOP_AT_DOOR_INTERSECTION
+    video_uuid: americold/modesto/0011/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/53429e1d-93a0-4794-a4ac-d98d82797ca5_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents:
+      - NO_STOP_AT_DOOR_INTERSECTION
+    video_uuid: americold/modesto/0011/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/e4ad312e-ebf8-4b16-96be-28571c7a137a_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents:
+      - NO_STOP_AT_DOOR_INTERSECTION
+    video_uuid: americold/modesto/0011/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/3b1a494f-18f5-45e7-b77c-a4ec3a615caf_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents:
+      - NO_STOP_AT_DOOR_INTERSECTION
+    video_uuid: americold/modesto/0011/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/1bfe0bb3-48a8-41d2-904b-5ae59310ee0c_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents:
+      - NO_STOP_AT_DOOR_INTERSECTION
+    video_uuid: americold/modesto/0011/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/POSITIVE/3e31f02b-0db0-457e-80eb-100c4eea90f0_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/NEGATIVE/3e0bb534-1352-40ee-9e93-f204265277d4_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/NEGATIVE/9537ec20-3e7c-45da-908c-a44a78a7d332_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/NEGATIVE/7e3f30e5-13d8-4316-972d-acd8d8df419b_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/NEGATIVE/3bd52450-669a-46e6-9952-95977fad6c56_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/NO_STOP_AT_DOOR_INTERSECTION/NEGATIVE/4d0c48fc-5d70-4c91-9b7e-87e21d44e8c4_0000
+
+
+  #### DOOR_VIOLATION
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - DOOR_VIOLATION
+    video_uuid: americold/modesto/0001/cha/scenarios/DOOR_VIOLATION/POSITIVE/5bb70c8b-b007-476e-a0d8-877d17db336c_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - DOOR_VIOLATION
+    video_uuid: americold/modesto/0001/cha/scenarios/DOOR_VIOLATION/POSITIVE/0449525c-ef78-43b5-b1d1-3806b094a174_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - DOOR_VIOLATION
+    video_uuid: americold/modesto/0001/cha/scenarios/DOOR_VIOLATION/POSITIVE/aea6c6c3-00dd-47c9-9a6e-35514ef74558_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - DOOR_VIOLATION
+    video_uuid: americold/modesto/0001/cha/scenarios/DOOR_VIOLATION/POSITIVE/4a021371-2730-428c-ab62-483452954bb5_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - DOOR_VIOLATION
+    video_uuid: americold/modesto/0001/cha/scenarios/DOOR_VIOLATION/POSITIVE/e8acb1a7-bbd4-47ad-bfc7-c9ed3c041af1_0000
+  # NEGATIVE SCENARIOS - 4 videos
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/DOOR_VIOLATION/NEGATIVE/195e8fac-7a45-4f13-b72f-7bdccae36c86_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/DOOR_VIOLATION/NEGATIVE/273ba0b8-8cf2-4b34-b677-fc2b4fe66450_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/DOOR_VIOLATION/NEGATIVE/bd282ac3-87bf-4966-98db-43358790131a_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/DOOR_VIOLATION/NEGATIVE/ef68393d-2915-4539-9df0-8e206ce46d8e_0000
+
+
+  #### DOOR_VIOLATION
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - DOOR_VIOLATION
+    video_uuid: americold/modesto/0002/cha/scenarios/DOOR_VIOLATION/POSITIVE/41dbb20d-6eba-4709-8532-4a83bf83df63_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - DOOR_VIOLATION
+    video_uuid: americold/modesto/0002/cha/scenarios/DOOR_VIOLATION/POSITIVE/56253b41-40f1-4a16-989e-1736c1ce273a_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - DOOR_VIOLATION
+    video_uuid: americold/modesto/0002/cha/scenarios/DOOR_VIOLATION/POSITIVE/2ed33ebe-1a58-40cf-a1d8-a8cecb936515_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - DOOR_VIOLATION
+    video_uuid: americold/modesto/0002/cha/scenarios/DOOR_VIOLATION/POSITIVE/2c235ac6-e491-41c8-a288-3e0f958a9231_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - DOOR_VIOLATION
+    video_uuid: americold/modesto/0002/cha/scenarios/DOOR_VIOLATION/POSITIVE/0c29c226-b172-4506-807c-fdcd30a31d8f_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/DOOR_VIOLATION/NEGATIVE/de7aa2f3-2610-49e4-8f5f-6c1132657f34_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/DOOR_VIOLATION/NEGATIVE/5bc05a6a-f069-43d4-abce-ec17a77bb529_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/DOOR_VIOLATION/NEGATIVE/02091566-5c3b-49bc-ac58-e4fd0183181e_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/DOOR_VIOLATION/NEGATIVE/05444966-518d-4ffe-92c3-223d11d0e305_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/DOOR_VIOLATION/NEGATIVE/ec64d8fa-5b15-49d9-84f4-e545ecaaca93_0000
+
+  #### DOOR_VIOLATION
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0003/cha
+    incidents:
+      - DOOR_VIOLATION
+    video_uuid: americold/modesto/0003/cha/scenarios/DOOR_VIOLATION/POSITIVE/5a875a36-7a82-4fe2-b219-ff5218baaef9_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents:
+      - DOOR_VIOLATION
+    video_uuid: americold/modesto/0003/cha/scenarios/DOOR_VIOLATION/POSITIVE/8985bc6b-d195-4292-bd3b-8c9c8895d0bf_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents:
+      - DOOR_VIOLATION
+    video_uuid: americold/modesto/0003/cha/scenarios/DOOR_VIOLATION/POSITIVE/e602edd6-781f-44e1-9f75-d64faefd60ba_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents:
+      - DOOR_VIOLATION
+    video_uuid: americold/modesto/0003/cha/scenarios/DOOR_VIOLATION/POSITIVE/22e25d71-4d65-4f07-a3da-463ee060ccfb_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents:
+      - DOOR_VIOLATION
+    video_uuid: americold/modesto/0003/cha/scenarios/DOOR_VIOLATION/POSITIVE/3b5cddd9-2d8f-4f6f-b7ba-53da284514c1_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/DOOR_VIOLATION/NEGATIVE/f38b6f1d-0f38-4266-894a-0611ab4777c9_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/DOOR_VIOLATION/NEGATIVE/e8038c57-10ec-469e-a9df-94294b63c77d_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/DOOR_VIOLATION/NEGATIVE/9247a869-e717-40c2-b7bc-79421180eb0b_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/DOOR_VIOLATION/NEGATIVE/b6ad0455-561d-4a62-a767-69a3be631fe0_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/DOOR_VIOLATION/NEGATIVE/adaef62b-9d58-4ce4-886b-44278cb85f20_0000
+
+
+  #### DOOR_VIOLATION
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0009/cha
+    incidents:
+      - DOOR_VIOLATION
+    video_uuid: americold/modesto/0009/cha/scenarios/DOOR_VIOLATION/POSITIVE/fb54b86b-fc72-4f3b-8c86-5adea40e14b2_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents:
+      - DOOR_VIOLATION
+    video_uuid: americold/modesto/0009/cha/scenarios/DOOR_VIOLATION/POSITIVE/89570a9b-72c2-46b2-987f-916ca1bceab2_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents:
+      - DOOR_VIOLATION
+    video_uuid: americold/modesto/0009/cha/scenarios/DOOR_VIOLATION/POSITIVE/17c03860-2b11-4ce0-bbdd-7cefcbd769d6_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents:
+      - DOOR_VIOLATION
+    video_uuid: americold/modesto/0009/cha/scenarios/DOOR_VIOLATION/POSITIVE/82d7cd73-03b9-40a0-8b03-4d613ced24f0_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents:
+      - DOOR_VIOLATION
+    video_uuid: americold/modesto/0009/cha/scenarios/DOOR_VIOLATION/POSITIVE/857ee18d-6f85-4d8f-8d21-af68ab73ead1_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: []
+    video_uuid: americold/modesto/0009/cha/scenarios/DOOR_VIOLATION/NEGATIVE/fe6b1879-20f4-4d1d-b921-d1b3c3bf7c36_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: []
+    video_uuid: americold/modesto/0009/cha/scenarios/DOOR_VIOLATION/NEGATIVE/7883d80c-ade2-42d5-9233-2c449c879be9_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: []
+    video_uuid: americold/modesto/0009/cha/scenarios/DOOR_VIOLATION/NEGATIVE/256a6d68-d35b-498c-8e39-82d168f038cd_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: []
+    video_uuid: americold/modesto/0009/cha/scenarios/DOOR_VIOLATION/NEGATIVE/92e66bb3-a8db-415c-ba18-60081e391860_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: []
+    video_uuid: americold/modesto/0009/cha/scenarios/DOOR_VIOLATION/NEGATIVE/340a7ad4-a4ea-45bb-bb90-a72ffc53ff05_0000
+
+
+
+  #### DOOR_VIOLATION
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0011/cha
+    incidents:
+      - DOOR_VIOLATION
+    video_uuid: americold/modesto/0011/cha/scenarios/DOOR_VIOLATION/POSITIVE/50ec8c3c-f0a2-4fe7-882f-5262511f50ae_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents:
+      - DOOR_VIOLATION
+    video_uuid: americold/modesto/0011/cha/scenarios/DOOR_VIOLATION/POSITIVE/2dedab29-030f-4c47-a51b-5c9378f6fe6c_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents:
+      - DOOR_VIOLATION
+    video_uuid: americold/modesto/0011/cha/scenarios/DOOR_VIOLATION/POSITIVE/66104e0e-9d83-4c7f-ac5d-031c2e11f260_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents:
+      - DOOR_VIOLATION
+    video_uuid: americold/modesto/0011/cha/scenarios/DOOR_VIOLATION/POSITIVE/78e169c9-2703-4710-b5a1-4f9a03102348_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents:
+      - DOOR_VIOLATION
+    video_uuid: americold/modesto/0011/cha/scenarios/DOOR_VIOLATION/POSITIVE/2e8d7234-5b96-47c2-bd64-8d8501979555_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/DOOR_VIOLATION/NEGATIVE/96456d9d-3db9-4d5c-a5d6-6a8043dc8f55_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/DOOR_VIOLATION/NEGATIVE/12a8b06b-1ad6-4b37-b55e-ba11201d11bf_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/DOOR_VIOLATION/NEGATIVE/95422ebe-37d5-4a24-b456-61cf70c231b1_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/DOOR_VIOLATION/NEGATIVE/2e142ee9-891b-4f47-b2c1-d239f8fc6801_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/DOOR_VIOLATION/NEGATIVE/8a9d6b6d-c6aa-49b0-8873-facd0a751662_0000
+
+
+
+  #### OPEN_DOOR_DURATION
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - OPEN_DOOR_DURATION
+    video_uuid: americold/modesto/0001/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/9cf5b728-813b-4b69-a518-da0a3ad9c565_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - OPEN_DOOR_DURATION
+    video_uuid: americold/modesto/0001/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/c5f37870-462b-4b62-bf2e-2322fd5af979_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - OPEN_DOOR_DURATION
+    video_uuid: americold/modesto/0001/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/bf6a012e-ea90-424b-9b74-3355159666dc_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - OPEN_DOOR_DURATION
+    video_uuid: americold/modesto/0001/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/837d9ff9-f96b-463e-b3ed-dea4add654d7_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - OPEN_DOOR_DURATION
+    video_uuid: americold/modesto/0001/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/ccfe980c-5f33-46a1-86ae-fff5e8695c6f_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/ecd4a89e-655b-4481-a5ee-ea8a5c9c8075_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/21f416e2-cbfd-4f6b-b581-2f8b3ecd736f_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/4d94c308-eac2-4dfc-9d1b-e9d272e8b403_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/52077484-c2f1-492b-bec2-8f7a2b112ef9_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/2ec238e1-0e0b-466c-87f8-13f19206bd35_0000
+
+  #### OPEN_DOOR_DURATION
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - OPEN_DOOR_DURATION
+    video_uuid: americold/modesto/0002/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/e835a338-d544-411f-9fd6-34402089e3ed_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - OPEN_DOOR_DURATION
+    video_uuid: americold/modesto/0002/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/eae828b6-6bd8-4c52-9d73-84f60896445d_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - OPEN_DOOR_DURATION
+    video_uuid: americold/modesto/0002/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/6053e35b-6def-4b56-9a14-2dc71f88cbf5_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - OPEN_DOOR_DURATION
+    video_uuid: americold/modesto/0002/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/5eac0eed-2f53-4fbe-86f6-f3ec73f0044a_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - OPEN_DOOR_DURATION
+    video_uuid: americold/modesto/0002/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/0d3d9d63-aa89-4c59-a01c-8fe606b7b2af_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/ade644f6-eb46-4da0-975f-2f8bb1d521dc_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/4ee979a0-b282-4984-87c1-ad6bc95481c4_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/2310da5a-c018-462c-85e0-dace00f5310f_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/489f9bd4-3801-4947-9f46-e927319a46f4_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/6067f3d8-942c-4509-927a-768faf0daf2d_0000
+
+
+  #### OPEN_DOOR_DURATION
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0003/cha
+    incidents:
+      - OPEN_DOOR_DURATION
+    video_uuid: americold/modesto/0003/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/18e5fe9b-4f45-4121-baca-b8fe26f631a7_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents:
+      - OPEN_DOOR_DURATION
+    video_uuid: americold/modesto/0003/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/400edffe-43f1-4334-9019-9c1258394b81_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents:
+      - OPEN_DOOR_DURATION
+    video_uuid: americold/modesto/0003/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/f50e99a4-59cb-4e0b-898b-c2f47c434133_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents:
+      - OPEN_DOOR_DURATION
+    video_uuid: americold/modesto/0003/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/f24c5fb5-5131-4599-aeed-cb995babfa9e_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents:
+      - OPEN_DOOR_DURATION
+    video_uuid: americold/modesto/0003/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/1b1536cb-7b50-4ac7-88d9-7e296b001116_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/cf88dbda-5248-4155-942c-2245a9da6cb3_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/55e8ede3-39b8-441f-a61e-df8670545fb6_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/f2bffc85-21db-4a67-ad88-784a73266e43_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/732c0a74-2d51-4f0e-9a86-a2cb9d5677ff_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/72d64d81-0db0-4553-8deb-c99bb5e91373_0000
+
+  #### OPEN_DOOR_DURATION
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0009/cha
+    incidents:
+      - OPEN_DOOR_DURATION
+    video_uuid: americold/modesto/0009/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/0617afef-c072-42b8-a901-fb54c2269091_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents:
+      - OPEN_DOOR_DURATION
+    video_uuid: americold/modesto/0009/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/50891c66-4b4f-4d80-8d03-99e57aff11fa_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents:
+      - OPEN_DOOR_DURATION
+    video_uuid: americold/modesto/0009/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/b23715fe-f06a-4b84-9542-354dc4033375_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents:
+      - OPEN_DOOR_DURATION
+    video_uuid: americold/modesto/0009/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/1970d32b-0c5e-4e0c-8a2a-58b3b411813f_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents:
+      - OPEN_DOOR_DURATION
+    video_uuid: americold/modesto/0009/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/d158ca51-57a0-4ef2-afe7-7394a65133a7_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: []
+    video_uuid: americold/modesto/0009/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/0cfe1464-9bd4-403c-b76a-4dccc94b73e8_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: []
+    video_uuid: americold/modesto/0009/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/d8a09a9e-e853-4f80-97ff-813a3c9bee3c_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: []
+    video_uuid: americold/modesto/0009/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/e3cb5d04-c3de-4701-81de-989160eeaba3_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: []
+    video_uuid: americold/modesto/0009/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/183a5306-a717-4582-8c67-c92eb1254650_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: []
+    video_uuid: americold/modesto/0009/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/2b2190fa-58a5-4bc3-a427-a0ac5fbcedcd_0000
+
+
+  #### OPEN_DOOR_DURATION
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0011/cha
+    incidents:
+      - OPEN_DOOR_DURATION
+    video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/da00ac7c-cc2b-4cb1-acf7-6a2d022ab48c_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents:
+      - OPEN_DOOR_DURATION
+    video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/4ea5dcaa-3ae7-4118-ac02-04ea7e587de8_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents:
+      - OPEN_DOOR_DURATION
+    video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/e4632375-971e-49cf-8900-5c718821bddf_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents:
+      - OPEN_DOOR_DURATION
+    video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/818da7f0-d48d-48f5-a1a4-bfa586932c47_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents:
+      - OPEN_DOOR_DURATION
+    video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/POSITIVE/6b91028f-d85e-4d39-a6fb-597189b41b40_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/1e019b45-d128-4cea-ac86-ac35c46b1b3e_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/b6e2984c-9215-48fe-a749-21ce3d519bde_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/6c21d3f6-1ea5-4758-8a64-7324eb36ee15_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/d99558cd-129a-439a-a210-af30b151a67c_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/OPEN_DOOR_DURATION/NEGATIVE/d86a1258-16cc-430a-8a8f-f8e2cf3604b5_0000
+
+
+  #### PIGGYBACK
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - PIGGYBACK
+    video_uuid: americold/modesto/0001/cha/scenarios/PIGGYBACK/POSITIVE/20292ed2-f244-408d-92bd-9d6e59867a5c_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - PIGGYBACK
+    video_uuid: americold/modesto/0001/cha/scenarios/PIGGYBACK/POSITIVE/6d037669-5078-41ea-b7b1-aa258369cac9_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - PIGGYBACK
+    video_uuid: americold/modesto/0001/cha/scenarios/PIGGYBACK/POSITIVE/efa5efd0-1582-439e-93f4-e8fb6684593f_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - PIGGYBACK
+    video_uuid: americold/modesto/0001/cha/scenarios/PIGGYBACK/POSITIVE/5fbcee08-e7eb-4f9a-9f6a-60ccd5104309_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents:
+      - PIGGYBACK
+    video_uuid: americold/modesto/0001/cha/scenarios/PIGGYBACK/POSITIVE/f2468d07-0cfb-4779-96dd-9ff9f5f6620a_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/PIGGYBACK/NEGATIVE/3424a7c7-39ef-48ea-aed4-6e070dc30b64_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/PIGGYBACK/NEGATIVE/7aa913dd-92ed-4cdb-bf08-41dcf184f0b5_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/PIGGYBACK/NEGATIVE/364e4ea5-82d6-4410-a2f1-430a8ebd32a7_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/PIGGYBACK/NEGATIVE/9bb05fdb-6e36-4363-bd7d-159096258858_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/PIGGYBACK/NEGATIVE/336ac21e-f313-4f46-912f-3894e5348284_0000
+
+
+  #### PIGGYBACK
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - PIGGYBACK
+    video_uuid: americold/modesto/0002/cha/scenarios/PIGGYBACK/POSITIVE/40a534bc-f786-47e6-8515-d42ec12030a8_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - PIGGYBACK
+    video_uuid: americold/modesto/0002/cha/scenarios/PIGGYBACK/POSITIVE/639af407-1ad5-48ce-a29e-ab83a0c1eace_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - PIGGYBACK
+    video_uuid: americold/modesto/0002/cha/scenarios/PIGGYBACK/POSITIVE/daee4873-db38-4149-a7c6-bf10c1426181_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - PIGGYBACK
+    video_uuid: americold/modesto/0002/cha/scenarios/PIGGYBACK/POSITIVE/d60f40ad-8734-4dbc-a9ba-eb7d0939ddfc_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - PIGGYBACK
+    video_uuid: americold/modesto/0002/cha/scenarios/PIGGYBACK/POSITIVE/be0bf6c4-e0b9-4b80-9641-986783b8b632_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/PIGGYBACK/NEGATIVE/5dc6b2d8-4e63-4aea-97b7-a85752023a46_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/PIGGYBACK/NEGATIVE/bf220e19-55df-4253-be2a-61eb194190bd_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/PIGGYBACK/NEGATIVE/ca6afc99-0e5a-49a0-ab79-53869f7e914c_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/PIGGYBACK/NEGATIVE/b3cfb833-a444-4865-9d38-df43ccd17fd5_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/PIGGYBACK/NEGATIVE/12cf1b9a-7cca-4f23-b506-5c3446898a48_0000
+
+
+  #### PIGGYBACK
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0003/cha
+    incidents:
+      - PIGGYBACK
+    video_uuid: americold/modesto/0003/cha/scenarios/PIGGYBACK/POSITIVE/ca67fb65-e252-46f2-bbc2-5f1dd7ff3020_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents:
+      - PIGGYBACK
+    video_uuid: americold/modesto/0003/cha/scenarios/PIGGYBACK/POSITIVE/3d37e1da-6551-4a47-b4fe-10a9c8e7c23d_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents:
+      - PIGGYBACK
+    video_uuid: americold/modesto/0003/cha/scenarios/PIGGYBACK/POSITIVE/77629db7-be04-4266-ab7e-e6a8dd35cf63_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents:
+      - PIGGYBACK
+    video_uuid: americold/modesto/0003/cha/scenarios/PIGGYBACK/POSITIVE/78114371-119d-45db-b440-6e66d027534c_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents:
+      - PIGGYBACK
+    video_uuid: americold/modesto/0003/cha/scenarios/PIGGYBACK/POSITIVE/9d705dc6-eb77-4e13-a36f-15c8626529ad_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/PIGGYBACK/NEGATIVE/a7c825b0-70c6-4962-888d-bebe86b532a4_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/PIGGYBACK/NEGATIVE/388e35b6-b0a1-42e9-bae2-62347db11994_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/PIGGYBACK/NEGATIVE/6596a7cc-df84-49c0-b925-85edccbaa0b7_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/PIGGYBACK/NEGATIVE/f7b6c303-7a76-4427-8d96-9d77007b171b_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/PIGGYBACK/NEGATIVE/78c90d9e-39db-4f54-8749-791ff03948da_0000
+
+  #### PIGGYBACK
+  # POSITIVE SCENARIOS - 0 videos
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: []
+    video_uuid: americold/modesto/0009/cha/scenarios/PIGGYBACK/NEGATIVE/fe88acde-5087-469d-b30a-ed8f4c205afc_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: []
+    video_uuid: americold/modesto/0009/cha/scenarios/PIGGYBACK/NEGATIVE/563c37ee-eb7b-48b5-86e3-c7f899e178c6_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: []
+    video_uuid: americold/modesto/0009/cha/scenarios/PIGGYBACK/NEGATIVE/7ce90939-df29-4675-bcd4-88ee6ed29659_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: []
+    video_uuid: americold/modesto/0009/cha/scenarios/PIGGYBACK/NEGATIVE/0120e829-9e5c-45ba-bb81-8605b210b3f3_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: []
+    video_uuid: americold/modesto/0009/cha/scenarios/PIGGYBACK/NEGATIVE/3f28a9e5-f1f1-43f5-aa07-d846ab5c279c_0000
+
+
+  #### PIGGYBACK
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0011/cha
+    incidents:
+      - PIGGYBACK
+    video_uuid: americold/modesto/0011/cha/scenarios/PIGGYBACK/POSITIVE/630fe7cf-b449-445b-bf08-c42860cb83a4_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents:
+      - PIGGYBACK
+    video_uuid: americold/modesto/0011/cha/scenarios/PIGGYBACK/POSITIVE/952844f1-1a0d-4a83-a186-0c4862222aa0_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents:
+      - PIGGYBACK
+    video_uuid: americold/modesto/0011/cha/scenarios/PIGGYBACK/POSITIVE/39fddaa3-bd3d-4790-ad05-b38d133f0d8d_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents:
+      - PIGGYBACK
+    video_uuid: americold/modesto/0011/cha/scenarios/PIGGYBACK/POSITIVE/a1a11dba-f4ab-4de4-9dce-3774f99ef3fd_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents:
+      - PIGGYBACK
+    video_uuid: americold/modesto/0011/cha/scenarios/PIGGYBACK/POSITIVE/9ada19b6-ed6a-4c8e-8998-7e3bbfe73de1_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/PIGGYBACK/NEGATIVE/cfa1fa90-b626-4b76-aaa5-1819bee25ec5_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/PIGGYBACK/NEGATIVE/7f178194-7d12-4e3a-9a6f-526f48a4a3c5_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/PIGGYBACK/NEGATIVE/cf077de0-abd2-41fe-ade3-a76cbab37392_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/PIGGYBACK/NEGATIVE/ed1e6577-b4c5-446e-9b57-60e22a2ebbcf_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/PIGGYBACK/NEGATIVE/cce80ec9-8856-4c33-b161-81c71a0160c3_0000
+
+  #### SPILL
+  # POSITIVE SCENARIOS - 0 videos
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/SPILL/NEGATIVE/37ca7723-cafa-4e96-ad93-c475c4966c2e_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/SPILL/NEGATIVE/0aedc964-6f4f-4726-8292-716dd4de6501_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/SPILL/NEGATIVE/7b88d682-f70d-4654-992d-118517fcf49e_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/SPILL/NEGATIVE/c5cf9f39-c65a-4f03-b66d-70a843e272c8_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: []
+    video_uuid: americold/modesto/0001/cha/scenarios/SPILL/NEGATIVE/5e54fe2a-5bf5-4170-9d7a-40be6d34a5fb_0000
+
+
+  #### SPILL
+  # POSITIVE SCENARIOS - 4 videos
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - SPILL
+    video_uuid: americold/modesto/0002/cha/scenarios/SPILL/POSITIVE/c13c9389-791d-4071-80f5-7494e6bb41fe_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - SPILL
+    video_uuid: americold/modesto/0002/cha/scenarios/SPILL/POSITIVE/49a8acde-7be5-4531-b9c3-dfc5bea71b37_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - SPILL
+    video_uuid: americold/modesto/0002/cha/scenarios/SPILL/POSITIVE/ab8b9570-1ce2-4613-b26b-fa761f4cebcb_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents:
+      - SPILL
+    video_uuid: americold/modesto/0002/cha/scenarios/SPILL/POSITIVE/ca4c2cee-d26d-4a1f-b8f4-4cbf3486a5dd_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/SPILL/NEGATIVE/c5de710c-7422-460c-a669-a3e5eac33028_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/SPILL/NEGATIVE/ff673353-896f-48cd-a5a3-d0341f982901_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/SPILL/NEGATIVE/81c3f6f8-6d47-4886-a508-c701a089aabf_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/SPILL/NEGATIVE/fe8ccc87-b280-44e3-bb85-1570d28051a0_0000
+  - camera_uuid: americold/modesto/0002/cha
+    incidents: []
+    video_uuid: americold/modesto/0002/cha/scenarios/SPILL/NEGATIVE/f07dbdd8-0c3a-4b08-bdcb-31cd954798d0_0000
+
+  #### SPILL
+  # POSITIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0003/cha
+    incidents:
+      - SPILL
+    video_uuid: americold/modesto/0003/cha/scenarios/SPILL/POSITIVE/6fa31e22-d8c7-47d0-a158-3286a8646e79_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents:
+      - SPILL
+    video_uuid: americold/modesto/0003/cha/scenarios/SPILL/POSITIVE/57b5ec5d-af69-46b5-8d64-4757caaef35d_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents:
+      - SPILL
+    video_uuid: americold/modesto/0003/cha/scenarios/SPILL/POSITIVE/bc8bc41b-e4dc-44c1-8c88-f50c67e27122_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents:
+      - SPILL
+    video_uuid: americold/modesto/0003/cha/scenarios/SPILL/POSITIVE/9efd6f5b-6885-4a7d-b393-5dfda44b3ea8_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents:
+      - SPILL
+    video_uuid: americold/modesto/0003/cha/scenarios/SPILL/POSITIVE/c13f05f9-0b34-4c5b-85f3-0385358021fc_0000
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/SPILL/NEGATIVE/89a8cc22-56a6-464c-9f36-c1461664e7eb_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/SPILL/NEGATIVE/ce8e790b-8521-4e49-8778-1610b440ab02_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/SPILL/NEGATIVE/76c1a4fc-309d-4cf6-acfe-fa3d88a20b2d_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/SPILL/NEGATIVE/3adde371-aa9b-4a87-806c-d77dd1877eab_0000
+  - camera_uuid: americold/modesto/0003/cha
+    incidents: []
+    video_uuid: americold/modesto/0003/cha/scenarios/SPILL/NEGATIVE/a757c2cf-1aea-4e17-beda-642fc7aecf49_0000
+
+
+  #### SPILL
+  # POSITIVE SCENARIOS - 0 videos
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0004/cha
+    incidents: []
+    video_uuid: americold/modesto/0004/cha/scenarios/SPILL/NEGATIVE/83dff691-5e13-4e81-9ba3-478a81b2feb5_0000
+  - camera_uuid: americold/modesto/0004/cha
+    incidents: []
+    video_uuid: americold/modesto/0004/cha/scenarios/SPILL/NEGATIVE/874d9567-7b6c-4ae1-bc76-44aa15fd3c4a_0000
+  - camera_uuid: americold/modesto/0004/cha
+    incidents: []
+    video_uuid: americold/modesto/0004/cha/scenarios/SPILL/NEGATIVE/40111aa2-9288-4850-9d2f-bc8e20a14aeb_0000
+  - camera_uuid: americold/modesto/0004/cha
+    incidents: []
+    video_uuid: americold/modesto/0004/cha/scenarios/SPILL/NEGATIVE/ec2f0366-6afd-46b2-ab7b-6c824791b2bf_0000
+  - camera_uuid: americold/modesto/0004/cha
+    incidents: []
+    video_uuid: americold/modesto/0004/cha/scenarios/SPILL/NEGATIVE/1ab7f15f-c1e2-4e74-8a83-74e5ad517516_0000
+
+
+
+  #### SPILL
+  # POSITIVE SCENARIOS - 0 videos
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: []
+    video_uuid: americold/modesto/0009/cha/scenarios/SPILL/NEGATIVE/386cebcb-d2f4-4c97-a292-9bf8fb93de3b_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: []
+    video_uuid: americold/modesto/0009/cha/scenarios/SPILL/NEGATIVE/61347151-a4cd-4e73-acff-e89dd9dc3908_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: []
+    video_uuid: americold/modesto/0009/cha/scenarios/SPILL/NEGATIVE/b57df735-c81c-4704-92a9-541a1d40b53a_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: []
+    video_uuid: americold/modesto/0009/cha/scenarios/SPILL/NEGATIVE/2092e646-68a3-41a0-a320-0957ced35eff_0000
+  - camera_uuid: americold/modesto/0009/cha
+    incidents: []
+    video_uuid: americold/modesto/0009/cha/scenarios/SPILL/NEGATIVE/c86f05c7-b72f-44a2-8b15-ff66e3e08be5_0000
+
+
+  #### SPILL
+  # POSITIVE SCENARIOS - 0 videos
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0010/cha
+    incidents: []
+    video_uuid: americold/modesto/0010/cha/scenarios/SPILL/NEGATIVE/8230c446-6f5d-4cb0-98a9-9a9d7f336abd_0000
+  - camera_uuid: americold/modesto/0010/cha
+    incidents: []
+    video_uuid: americold/modesto/0010/cha/scenarios/SPILL/NEGATIVE/7d132abb-17d0-4fe2-ba95-14b95edf5bc0_0000
+  - camera_uuid: americold/modesto/0010/cha
+    incidents: []
+    video_uuid: americold/modesto/0010/cha/scenarios/SPILL/NEGATIVE/7db30e1e-f60c-475c-8252-c4737e134015_0000
+  - camera_uuid: americold/modesto/0010/cha
+    incidents: []
+    video_uuid: americold/modesto/0010/cha/scenarios/SPILL/NEGATIVE/b2157dbc-e5cb-4a98-9839-73248066e2da_0000
+  - camera_uuid: americold/modesto/0010/cha
+    incidents: []
+    video_uuid: americold/modesto/0010/cha/scenarios/SPILL/NEGATIVE/c7fcc5f2-0ade-4efb-b0ba-852a7cc8ecce_0000
+
+  #### SPILL
+  # POSITIVE SCENARIOS - 0 videos
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/SPILL/NEGATIVE/7f8a7bcc-8331-4f1a-b15d-d8b00019fca4_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/SPILL/NEGATIVE/7cea67f6-6946-4ef6-b3c3-1f83af249939_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/SPILL/NEGATIVE/fb8cd4a0-d6db-464c-a854-c55ca4a00f45_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/SPILL/NEGATIVE/32833f66-c1d5-4eef-9d07-fcfe15204bde_0000
+  - camera_uuid: americold/modesto/0011/cha
+    incidents: []
+    video_uuid: americold/modesto/0011/cha/scenarios/SPILL/NEGATIVE/c4223cbb-393b-46fa-928d-268a4416ac6f_0000
+
+
+  #### SPILL
+  # POSITIVE SCENARIOS - 0 videos
+  # NEGATIVE SCENARIOS - 5 videos
+  - camera_uuid: americold/modesto/0012/cha
+    incidents: []
+    video_uuid: americold/modesto/0012/cha/scenarios/SPILL/NEGATIVE/3f48ea6f-d7ec-4535-8471-e30e975d898c_0000
+  - camera_uuid: americold/modesto/0012/cha
+    incidents: []
+    video_uuid: americold/modesto/0012/cha/scenarios/SPILL/NEGATIVE/10c206b9-02a4-4d3d-af8d-f9ef3b42f8e6_0000
+  - camera_uuid: americold/modesto/0012/cha
+    incidents: []
+    video_uuid: americold/modesto/0012/cha/scenarios/SPILL/NEGATIVE/4dc5846e-df45-4575-b787-2e2c93ea229c_0000
+  - camera_uuid: americold/modesto/0012/cha
+    incidents: []
+    video_uuid: americold/modesto/0012/cha/scenarios/SPILL/NEGATIVE/f85592a0-5aae-4613-b280-15cd41ccb1f0_0000
+  - camera_uuid: americold/modesto/0012/cha
+    incidents: []
+    video_uuid: americold/modesto/0012/cha/scenarios/SPILL/NEGATIVE/d38b5479-49c9-4a82-b679-edf67ca72656_0000

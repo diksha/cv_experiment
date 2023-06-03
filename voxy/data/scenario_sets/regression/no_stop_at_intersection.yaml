@@ -1,0 +1,57 @@
+#
+# Copyright 2023 Voxel Labs, Inc.
+# All rights reserved.
+#
+# This document may not be reproduced, republished, distributed, transmitted,
+# displayed, broadcast or otherwise exploited in any manner without the express
+# prior written permission of Voxel Labs, Inc. The receipt or possession of this
+# document does not convey any rights to reproduce, disclose, or distribute its
+# contents, or to manufacture, use, or sell anything that it may describe, in
+# whole or in part.
+#
+#
+scenario_for_incidents: [NO_STOP_AT_INTERSECTION]
+scenarios:
+  # POSITIVE SCENARIOS
+  - camera_uuid: uscold/laredo/room_d5p/cha
+    incidents: [NO_STOP_AT_INTERSECTION]
+    video_uuid: uscold/laredo/room_d5p/cha/scenarios/NO_STOP_AT_INTERSECTION/POSITIVE/f574d287-cc4d-45fc-85fe-509e2ba7e697_0000
+  - camera_uuid: uscold/laredo/room_d4/cha
+    incidents: [NO_STOP_AT_INTERSECTION]
+    video_uuid: uscold/laredo/room_d4/cha/scenarios/NO_STOP_AT_INTERSECTION/POSITIVE/3584f7a7-6915-4f2e-b5bd-1a9afa55b61e_0000
+  - camera_uuid: uscold/laredo/room_d2/cha
+    incidents: [NO_STOP_AT_INTERSECTION]
+    video_uuid: uscold/laredo/room_d2/cha/scenarios/NO_STOP_AT_INTERSECTION/POSITIVE/397e7436-8a9d-4607-9b55-4250d302d703_0000
+  - camera_uuid: uscold/laredo/room_d3/cha
+    incidents: [NO_STOP_AT_INTERSECTION]
+    video_uuid: uscold/laredo/room_d3/cha/scenarios/NO_STOP_AT_INTERSECTION/POSITIVE/d09a15b2-15e0-4b26-873b-c04eb9d2dd80_0000
+  - camera_uuid: uscold/laredo/room_f1/cha
+    incidents: [NO_STOP_AT_INTERSECTION]
+    video_uuid: uscold/laredo/room_f1/cha/scenarios/NO_STOP_AT_INTERSECTION/POSITIVE/952b7f4c-1530-43c7-8155-6c274d4fcb3d_0000
+  - camera_uuid: uscold/laredo/room_d1p/cha
+    incidents: [NO_STOP_AT_INTERSECTION]
+    video_uuid: uscold/laredo/room_d1p/cha/scenarios/NO_STOP_AT_INTERSECTION/POSITIVE/ad5d53e3-b2de-4ef5-9cad-a336b8faa628_0000
+  - camera_uuid: americold/modesto/0001/cha
+    incidents: [NO_STOP_AT_INTERSECTION]
+    video_uuid: americold/modesto/0001/cha/scenarios/NO_STOP_AT_INTERSECTION/POSITIVE/1a97d929-4fe7-4289-897a-668a5a90e7ed_0000
+  - camera_uuid: verst/walton/0001/cha
+    incidents: [NO_STOP_AT_INTERSECTION]
+    video_uuid: verst/walton/0001/cha/scenarios/NO_STOP_AT_INTERSECTION/POSITIVE/7560f6f8-8573-4a6f-846b-5de7a4540d00_0000
+  - camera_uuid: verst/walton/0003/cha
+    incidents: [NO_STOP_AT_INTERSECTION]
+    video_uuid: verst/walton/0003/cha/scenarios/NO_STOP_AT_INTERSECTION/POSITIVE/df2a6f5b-a250-4735-b8e0-4195c0de1c50_0000
+  - camera_uuid: verst/walton/0004/cha
+    incidents: [NO_STOP_AT_INTERSECTION]
+    video_uuid: verst/walton/0004/cha/scenarios/NO_STOP_AT_INTERSECTION/POSITIVE/dc410392-a9cd-423f-b7ac-732ab45b0ad7_0000
+  - camera_uuid: americold/tacoma/0002/cha
+    incidents: [NO_STOP_AT_INTERSECTION]
+    video_uuid: americold/tacoma/0002/cha/scenarios/NO_STOP_AT_INTERSECTION/POSITIVE/6cc0d6d2-1f12-4fcf-8130-92b6c82987c8_0000
+  - camera_uuid: office_depot/dallas/0002/cha
+    incidents: [NO_STOP_AT_INTERSECTION]
+    video_uuid: office_depot/dallas/0002/cha/scenarios/NO_STOP_AT_INTERSECTION/POSITIVE/c2cf261f-6ddb-469a-a274-d06d5651a2c3_0000
+  - camera_uuid: americold/tacoma/0003/cha
+    incidents: [NO_STOP_AT_INTERSECTION]
+    video_uuid: americold/tacoma/0003/cha/scenarios/NO_STOP_AT_INTERSECTION/POSITIVE/40150e8f-490b-4d37-ba8b-db8d78e93ca3_0000
+  - camera_uuid: americold/ontario/0110/cha
+    incidents: [NO_STOP_AT_INTERSECTION]
+    video_uuid: americold/ontario/0110/cha/scenarios/NO_STOP_AT_INTERSECTION/POSITIVE/c36655f0-f83b-4e3d-8f54-3589077aadb3_0000

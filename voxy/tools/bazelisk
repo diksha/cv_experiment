@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -euo pipefail
+
+FILEPATH=$(readlink -f "$0")
+BASEDIR=$(dirname "$FILEPATH")
+WORKSPACEDIR=$(dirname "$BASEDIR")
+cd "$WORKSPACEDIR" || exit 1
+
+if [[ $OSTYPE == "darwin"* ]]; then
+	if [ -z "$(which bazelisk)" ]; then
+		echo "This workspace requires bazelisk to be installed into the system on Mac."
+		echo "The easiest way to do this is with homebrew via 'brew install bazelisk'"
+		exit 1
+	fi
+	BAZELISK="bazelisk"
+else
+	BAZELISK="$WORKSPACEDIR/tools/bazelisk-linux-amd64-1.11.0"
+fi
+
+exec "$BAZELISK" "$@"

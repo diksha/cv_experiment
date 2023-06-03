@@ -1,0 +1,121 @@
+syntax = "proto3";
+package protos.perception.graph_config.v1;
+option go_package = "github.com/voxel-ai/voxel/protos/perception/graph_config/v1;graphconfigpb";
+
+enum GpuRuntimeBackend {
+    GPU_RUNTIME_BACKEND_UNSPECIFIED = 0;
+    GPU_RUNTIME_BACKEND_LOCAL = 1;
+    GPU_RUNTIME_BACKEND_REMOTE_TRITON = 2;
+}
+
+message GpuRuntimeConfig {
+    optional GpuRuntimeBackend runtime = 1;
+}
+
+message DetectorTrackerPerceptionConfig {
+    optional int32 height = 1;
+    optional int32 width = 2;
+    optional string model_path = 3;
+    map<string, int32> actor2class = 4;
+}
+
+message DoorClassifierPerceptionConfig {
+    optional bool enabled = 1;
+    optional string model_path = 2;
+    optional string model_type = 3;
+}
+
+message HatClassifierPerceptionConfig {
+    optional bool enabled = 1;
+    optional string model_path = 2;
+    optional bool is_classification_by_detection = 3;
+    optional int32 min_actor_pixel_area = 4;
+}
+
+message LiftClassifierPerceptionConfig {
+    optional bool enabled = 1;
+    optional string model_path = 2;
+    optional string model_type = 3;
+}
+
+message PosePerceptionConfig {
+    optional bool enabled = 1;
+    optional string model_path = 2;
+    optional bool activity_classifier_enabled = 3;
+    optional string classifier_path = 4;
+}
+
+message ReachClassifierPerceptionConfig {
+    optional bool enabled = 1;
+    optional string model_path = 2;
+    optional string model_type = 3;
+}
+
+message VestClassifierPerceptionConfig {
+    optional bool enabled = 1;
+    optional string model_path = 2;
+    optional string model_type = 3;
+    optional int32 min_actor_pixel_area = 4;
+}
+
+message PPESmoothenerPerceptionConfig {
+    optional int32 time_interval_ms = 1;
+    optional int32 safety_vest_time_interval_ms = 2;
+    optional float pose_points_min_confidence_threshold = 3;
+}
+
+message AcausalLayerPerceptionConfig {
+    // trunk-ignore(buf-lint/FIELD_LOWER_SNAKE_CASE)
+    optional PPESmoothenerPerceptionConfig PPESmoothener = 1;
+}
+
+message SpillPerceptionConfig {
+    optional bool enabled = 1;
+    optional string model_path = 2;
+    optional int32 min_run_time_difference_ms = 3;
+    optional int32 min_pixel_size = 4;
+    optional int32 max_consecutive_runs = 5;
+    optional bool post_process_enabled = 6;
+    map<string, int32> frame_segment2class = 7;
+}
+
+message MotionZoneDetectionPerceptionConfig {
+    optional bool enabled = 1;
+    optional int32 gaussian_kernel_size = 2;
+    optional int32 variance_threshold = 3;
+    optional int32 bg_frames_history = 4;
+}
+
+message CarryObjectPerceptionConfig {
+    optional bool enabled = 1;
+    optional int32 min_actor_pixel_area = 2;
+    optional string model_path = 3;
+    map<string, int32> prediction2class = 4;
+}
+
+message ObstructionSegmenter {
+    optional bool enabled = 1;
+    optional string model_path = 2;
+    optional bool post_process_enabled = 3;
+    map<string, int32> frame_segment2class = 4;
+    optional int32 min_pixel_size = 5;
+    optional int32 min_run_time_difference_ms = 6;
+    repeated string ignore_actor_categories = 7;
+}
+
+message PerceptionConfig {
+    optional bool enabled = 1;
+    optional DetectorTrackerPerceptionConfig detector_tracker = 2;
+    optional DoorClassifierPerceptionConfig door_classifier = 3;
+    optional HatClassifierPerceptionConfig hat_classifier = 4;
+    optional LiftClassifierPerceptionConfig lift_classifier = 5;
+    optional PosePerceptionConfig pose = 6;
+    optional ReachClassifierPerceptionConfig reach_classifier = 7;
+    optional VestClassifierPerceptionConfig vest_classifier = 8;
+    optional AcausalLayerPerceptionConfig acausal_layer = 9;
+    optional SpillPerceptionConfig spill = 10;
+    optional MotionZoneDetectionPerceptionConfig motion_zone_detection = 11;
+    optional CarryObjectPerceptionConfig carry_object_classifier = 12;
+    optional GpuRuntimeConfig gpu_runtime = 13;
+    optional ObstructionSegmenter obstruction_segmenter = 14;
+}

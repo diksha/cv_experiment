@@ -1,0 +1,8 @@
+load("@npm//:apollo/package_json.bzl", "bin")
+
+bin.apollo_binary(
+    name = "apollo",
+    data = [
+        "//:node_modules/graphql",
+    ],
+)

@@ -1,0 +1,19 @@
+models:
+  - artifact_model_paths:
+      - artifacts_2022-10-26_americold_modesto_0009_cha/2022-10-26_americold_modesto_0009_cha.pt
+    config:
+      platform: pytorch_libtorch
+      max_batch_size: 16
+      input:
+        - name: images
+          data_type: TYPE_FP32
+          format: FORMAT_NCHW
+          dims:
+            - 3
+            - 224
+            - 224
+      output:
+        - name: output0
+          data_type: TYPE_FP32
+          dims:
+            - 3

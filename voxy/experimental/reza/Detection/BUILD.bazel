@@ -1,0 +1,19 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+
+package(default_visibility = ["//visibility:public"])
+
+py_binary(
+    name = "data_inspection",
+    srcs = ["data_inspection.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("torch"),
+        requirement("torchvision"),
+        requirement("numpy"),
+        requirement("scikit-learn"),
+        requirement("matplotlib"),
+        requirement("wandb"),
+        "//core/infra/cloud:gcs_utils",
+    ],
+)

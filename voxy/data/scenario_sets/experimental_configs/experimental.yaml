@@ -1,0 +1,12 @@
+".*":
+  incident:
+    dry_run: true
+    state_machine_monitors_requested: [bad_posture]
+  perception:
+    carry_object_classifier:
+      enabled: True
+      min_actor_pixel_area: 2000
+      model_path: artifacts_03_24_2023_carry_classifier_jit/best_lift_DSv4_RN34-jit.pt 
+      prediction2class:
+        NOT_CARRYING: 0
+        CARRYING: 1

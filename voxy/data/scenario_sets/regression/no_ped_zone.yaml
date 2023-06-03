@@ -1,0 +1,54 @@
+#
+# Copyright 2023 Voxel Labs, Inc.
+# All rights reserved.
+#
+# This document may not be reproduced, republished, distributed, transmitted,
+# displayed, broadcast or otherwise exploited in any manner without the express
+# prior written permission of Voxel Labs, Inc. The receipt or possession of this
+# document does not convey any rights to reproduce, disclose, or distribute its
+# contents, or to manufacture, use, or sell anything that it may describe, in
+# whole or in part.
+#
+#
+scenario_for_incidents: [NO_PED_ZONE]
+scenarios:
+  # POSITIVE SCENARIOS
+  - camera_uuid: uscold/laredo/dock04/cha
+    incidents: [NO_PED_ZONE]
+    video_uuid: uscold/laredo/dock04/cha/4b6db807-6fe2-4ec4-ac76-bd9359ca5c1c_0000
+  - camera_uuid: uscold/laredo/dock04/cha
+    incidents: [NO_PED_ZONE]
+    video_uuid: uscold/laredo/dock04/cha/e17529fb-8c06-4775-b5d7-87c89e01b07a_0000
+  - camera_uuid: uscold/laredo/doors_14_20/cha
+    incidents: [NO_PED_ZONE]
+    video_uuid: uscold/laredo/doors_14_20/cha/626f67a3-7c8f-4acc-9b16-7527014eaa1a_0000
+  - camera_uuid: uscold/laredo/dock03/cha
+    incidents: [NO_PED_ZONE]
+    video_uuid: uscold/laredo/dock03/cha/82e4e8c5-02c3-41ee-94d3-92594467576c_0000
+  - camera_uuid: uscold/laredo/dock03/cha
+    incidents: [NO_PED_ZONE]
+    video_uuid: uscold/laredo/dock03/cha/6cb88de3-7a7a-445c-8136-163e59da5700_0000
+  - camera_uuid: buildersfirstsource/dixieline/0007/cha
+    incidents: [NO_PED_ZONE]
+    video_uuid: buildersfirstsource/dixieline/0007/cha/b0514ddb-d071-4a8e-9966-a2b846f3e553_0000
+  - camera_uuid: buildersfirstsource/dixieline/0010/cha
+    incidents: [NO_PED_ZONE]
+    video_uuid: buildersfirstsource/dixieline/0010/cha/90310458-8cc5-4d83-92a6-ba90232a18d2_0000
+  - camera_uuid: verst/walton/0005/cha
+    incidents: [NO_PED_ZONE]
+    video_uuid: verst/walton/0005/cha/0067abc0-0b17-4bc4-a3ca-49ae40a7fd00_0000
+  - camera_uuid: verst/walton/0002/cha
+    incidents: [NO_PED_ZONE]
+    video_uuid: verst/walton/0002/cha/scenarios/NO_PED_ZONE/POSITIVE/c39a339f-c636-47d8-a903-dd288da38f80_0000
+  - camera_uuid: verst/walton/0003/cha
+    incidents: [NO_PED_ZONE]
+    video_uuid: verst/walton/0003/cha/scenarios/NO_PED_ZONE/POSITIVE/fbd63103-012e-4118-bd49-230641cfecc0_0000
+  - camera_uuid: ulta/dallas/0003/cha
+    incidents: [NO_PED_ZONE]
+    video_uuid: ulta/dallas/0003/cha/scenarios/NO_PED_ZONE/POSITIVE/fc268404-2257-4e0e-8a27-bbc8f477553a_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0006/cha
+    incidents: [NO_PED_ZONE]
+    video_uuid: vertical_cold_storage/bolingbrook/0006/cha/8ae01db6-3bae-4500-bdbc-9f4afadf1b77_0000
+  - camera_uuid: vertical_cold_storage/bolingbrook/0006/cha
+    incidents: [NO_PED_ZONE]
+    video_uuid: vertical_cold_storage/bolingbrook/0006/cha/76c37961-32a3-4116-9e45-edf8f7596900_0000

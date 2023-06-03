@@ -1,0 +1,12 @@
+[
+  {
+
+    "origin": [
+      "https://app.staging.voxelai.com",
+      "https://app.voxelai.com"
+    ],
+    "method": ["GET"],
+    "responseHeader": ["Content-Type"],
+    "maxAgeSeconds": 3600
+  }
+]

@@ -1,0 +1,15 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+scenarios:
+# # blue shirt
+- video_uuid: uscold/laredo/dock01/cha/scenarios_regressio_set/Dock_01_PilotIV_2021_06_28_0003_safety_vest_neg_0
+  camera_uuid: uscold/laredo/dock01/cha

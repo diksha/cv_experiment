@@ -1,0 +1,10 @@
+{% set camera_uuids=task["camera_uuids"] %}
+
+
+- organizations: []
+  zones: []
+  cameras: {{ camera_uuids }}
+  incidents:
+    open_door_duration: invalid
+    piggyback: all
+    door_violation: all

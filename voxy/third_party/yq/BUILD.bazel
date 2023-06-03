@@ -1,0 +1,9 @@
+genrule(
+    name = "yq_bin",
+    srcs = [],
+    outs = ["yq"],
+    cmd = "cp $(YQ_BIN) $@",
+    executable = 1,
+    toolchains = ["@yq_toolchains//:resolved_toolchain"],
+    visibility = ["//visibility:public"],
+)

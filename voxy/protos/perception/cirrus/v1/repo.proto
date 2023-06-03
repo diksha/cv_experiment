@@ -1,0 +1,21 @@
+syntax = "proto3";
+package protos.perception.cirrus.v1;
+option go_package = "github.com/voxel-ai/voxel/protos/perception/cirrus/v1;cirruspb";
+import "protos/third_party/triton/model_config.proto";
+
+message Repository {
+    repeated Model models = 1;
+    repeated Ensemble ensembles = 2;
+}
+
+message Model {
+    repeated string artifact_model_paths = 1;
+    protos.third_party.triton.ModelConfig config = 2;
+    bool disable_warmup_generation = 4;
+}
+
+message Ensemble {
+    string primary_model_name = 1;
+    repeated string artifact_model_paths = 2;
+    protos.third_party.triton.ModelConfig config = 3;
+}

@@ -1,0 +1,44 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+apiVersion: batch/v1
+kind: Job
+metadata:
+  # Unique key of the Job instance
+  name: diksha-detectron2-mpii-coco-1
+spec:
+  template:
+    metadata:
+      name: diksha-detectron2-mpii-coco-1
+    spec:
+      serviceAccountName: k8
+      hostIPC: True
+      containers:
+      - name: detectron2
+        image: us.gcr.io/sodium-carving-227300/voxel/experimental:haddy_1628843821
+        command: ["/bin/sh", "-c"]
+        args: ["apt update && mkdir /data && gsutil -m cp -r gs://voxel-users/common/mpii/* /data/ && ls /data/ && gsutil cp gs://voxel-users/common/WandB/.netrc ~/ && /app/experimental/diksha/detectron2/train_mpii_coco.runfiles/python_interpreter_3_8_10/python /app/experimental/diksha/detectron2/train_mpii_coco -lr 0.003 -epochs 20 -out_dir /data/output -data_dir /data -wandb_name diksha-detectron2-mpii-coco-1 -num_gpus 1
+ && gsutil cp -r /data/output/* gs://voxel-users/diksha/experiments/detectron2/diksha-detectron2-mpii-coco-1"]
+        resources:
+          limits:
+            cpu: 8
+            nvidia.com/gpu: 1
+            memory: "50Gi"
+            ephemeral-storage: "40Gi"
+          requests:
+            cpu: 8
+            memory: "50Gi"
+            nvidia.com/gpu: 1
+            ephemeral-storage: "40Gi"
+      # Do not restart containers after they exit
+      restartPolicy: Never
+  # of retries before marking as failed.
+  backoffLimit: 1

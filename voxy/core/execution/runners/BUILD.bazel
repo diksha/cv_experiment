@@ -1,0 +1,197 @@
+load("@io_bazel_rules_docker//container:container.bzl", "container_image", "container_push")
+load("@io_bazel_rules_docker//python:image.bzl", "py_layer")
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_pkg//:pkg.bzl", "pkg_tar")
+load("@rules_python//python:defs.bzl", "py_binary")
+load("//third_party/containers/python3:image.bzl", "py3_image")
+
+# ============================================================================
+# Develop
+# ============================================================================
+py_binary(
+    name = "develop",
+    srcs = ["develop.py"],
+    data = [
+        "//configs",
+        "//data:scenario_sets",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("mergedeep"),
+        requirement("snoop"),
+        requirement("loguru"),
+        requirement("tqdm"),
+        "//core/execution/graphs:develop",
+        "//core/execution/utils:graph_config_utils",
+        "//core/execution/utils:perception_runner_context",
+        "//core/scenarios:evaluate_performance",
+        "//core/utils:logger",
+        "//core/utils:yaml_jinja",
+    ],
+)
+
+py_binary(
+    name = "replay",
+    srcs = ["replay.py"],
+    data = [
+        "//configs",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("mergedeep"),
+        requirement("snoop"),
+        requirement("loguru"),
+        requirement("pandas"),
+        "//core/execution/graphs:replay",
+        "//core/execution/utils:aggregate_metrics",
+        "//core/execution/utils:get_production_incidents",
+        "//core/execution/utils:graph_config_utils",
+        "//core/scenarios:evaluate_performance",
+        "//core/utils:logger",
+        "//core/utils:yaml_jinja",
+        "//lib/utils:fetch_camera_frames",
+    ],
+)
+
+# This is to speed up the container creation by putting
+# all pip requirements in a seperate layer.
+# Ideally this should be defined in .bzl rule implementation
+# but somehow it creats conflict.
+py_layer(
+    name = "pip_deps_develop",
+    filter = "@pip_deps",
+    deps = [":develop"],
+)
+
+py3_image(
+    name = "develop_image",
+    binary = ":develop",
+    layers = [":pip_deps_develop"],
+    tags = ["manual"],
+)
+
+container_push(
+    name = "develop_push",
+    format = "Docker",
+    image = ":develop_image",
+    registry = "us.gcr.io/sodium-carving-227300",
+    repository = "voxel/execution/runners",
+    stamp = "@io_bazel_rules_docker//stamp:always",
+    tag = "{BUILD_USER}_{BUILD_TIMESTAMP}",
+    tags = ["manual"],
+)
+
+container_push(
+    name = "develop_push_with_tag",
+    format = "Docker",
+    image = ":develop_image",
+    registry = "us.gcr.io/sodium-carving-227300",
+    repository = "voxel/execution/runners",
+    tag = "$(IMAGE_TAG)",
+    tags = ["manual"],
+)
+
+container_push(
+    name = "develop_push_aws",
+    format = "Docker",
+    image = ":develop_image",
+    registry = "667031391229.dkr.ecr.us-west-2.amazonaws.com",
+    repository = "voxel/develop",
+    stamp = "@io_bazel_rules_docker//stamp:always",
+    tag = "{BUILD_USER}_{BUILD_TIMESTAMP}",
+    tags = ["manual"],
+)
+
+# ============================================================================
+# Integration testing
+# ============================================================================
+
+py_binary(
+    name = "edge_smoke_test",
+    srcs = ["production.py"],
+    data = [
+        "//configs",
+        "@artifacts_edge_server_test_video",
+    ],
+    main = "production.py",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/execution/graphs:production",
+        "//core/utils:logger",
+    ],
+)
+
+py3_image(
+    name = "edge_smoke_test_image",
+    binary = ":edge_smoke_test",
+    tags = ["manual"],
+)
+
+container_push(
+    name = "edge_smoke_test_push_aws",
+    format = "Docker",
+    image = ":edge_smoke_test_image",
+    registry = "667031391229.dkr.ecr.us-west-2.amazonaws.com",
+    repository = "voxel/edge_smoke_test",
+    stamp = "@io_bazel_rules_docker//stamp:always",
+    tag = "{BUILD_USER}_{BUILD_TIMESTAMP}",
+    tags = ["manual"],
+)
+
+# ============================================================================
+# Production
+# ============================================================================
+
+py_binary(
+    name = "production",
+    srcs = ["production.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/execution/lib:production_lib",
+    ],
+)
+
+# This is to speed up the container creation by putting
+# all pip requirements in a seperate layer.
+# Ideally this should be defined in .bzl rule implementation
+# but somehow it creats conflict.
+py_layer(
+    name = "pip_deps_production",
+    filter = "@pip_deps",
+    deps = [":production"],
+)
+
+py3_image(
+    name = "production_image",
+    base = "@voxel_cuda_11_4_ubuntu_20_04//image",
+    binary = ":production",
+    layers = [
+        ":pip_deps_production",
+    ],
+    tags = ["manual"],
+)
+
+pkg_tar(
+    name = "production_image_scripts",
+    srcs = ["entrypoint.sh"],
+    mode = "0755",
+    package_dir = "etc",
+)
+
+container_image(
+    name = "production_image_with_scripts",
+    base = ":production_image",
+    tags = ["manual"],
+    tars = [":production_image_scripts"],
+)
+
+container_push(
+    name = "production_push_aws",
+    format = "Docker",
+    image = ":production_image_with_scripts",
+    registry = "360054435465.dkr.ecr.us-west-2.amazonaws.com",
+    repository = "voxel/production",
+    stamp = "@io_bazel_rules_docker//stamp:always",
+    tag = "$(TAG)",
+    tags = ["manual"],
+)

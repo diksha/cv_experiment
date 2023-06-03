@@ -1,0 +1,68 @@
+models:
+  - artifact_model_paths:
+      - artifacts_2022-10-28_hensley_chandler_0005_cha/2022-10-28_hensley_chandler_0005_cha.pt
+      - artifacts_2022-11-08_hensley_phoenix_0002_cha/2022-11-08_hensley_phoenix_0002_cha.pt
+      - artifacts_2022-10-28_hensley_phoenix_0003_cha/2022-10-28_hensley_phoenix_0003_cha.pt
+      - artifacts_02_15_2023_buildersfirstsource_dixieline_0001_cha/855251d5-940a-4977-8ae2-28ff961239cb.pt
+      - artifacts_2022-11-08_builderfirstsource_solanabeach_0003_cha/2022-11-08_builderfirstsource_solanabeach_0003_cha.pt
+      - artifacts_2022-10-28_feb_distributing_biloxi_0005_cha/2022-10-28_feb_distributing_biloxi_0005_cha.pt
+      - artifacts_2022-10-28_uscold_quakertown_0002_cha/2022-10-28_uscold_quakertown_0002_cha.pt
+      - artifacts_2022-10-28_americold_sanford_0005_cha/2022-10-28_americold_sanford_0005_cha.pt
+      - artifacts_2022-10-28_americold_sanford_0001_cha/2022-10-28_americold_sanford_0001_cha.pt
+      - artifacts_2022-10-28_americold_taunton_0007_cha/2022-10-28_americold_taunton_0007_cha.pt
+      - artifacts_2022-10-28_americold_taunton_0010_cha/2022-10-28_americold_taunton_0010_cha.pt
+      - artifacts_2022-10-28_americold_taunton_0006_cha/2022-10-28_americold_taunton_0006_cha.pt
+      - artifacts_2022-10-25-T19-22americold_tacoma_0004_cha/2022-10-25-T19-22americold_tacoma_0004_cha.pt
+      - artifacts_02_15_2023_americold_tacoma_0005_cha/8fcfdb4e-f2aa-476d-b2e5-f7347755d1f2.pt
+      - artifacts_03_04_2023_generalized_freezer_door/c89809bd-ddad-451b-8e5e-c1e7d3434b41.pt
+      - artifacts_2022-10-26_americold_ontario_0009_cha/2022-10-26_americold_ontario_0009_cha.pt
+      - artifacts_02_24_2023_americold_ontario_0004_cha/1ce53a31-91d4-4d1c-b24a-87d30e88d689.pt
+      - artifacts_03_04_2023_generalized_freezer_door/c89809bd-ddad-451b-8e5e-c1e7d3434b41.pt
+      - artifacts_2022-10-26_americold_ontario_0003_cha/2022-10-26_americold_ontario_0003_cha.pt
+      - artifacts_02_15_2023_americold_ontario_0005_cha/54dedcff-fcc9-4521-927b-9c9f3114b320.pt
+      - artifacts_2022-10-26_americold_ontario_0011_cha/2022-10-26_americold_ontario_0011_cha.pt
+      - artifacts_02_15_2023_americold_ontario_0006_cha/b623a0be-0dbf-40c9-ab03-e3c6f1324d21.pt
+      - artifacts_03_13_2023_americold_ontario_0104_fine_tuned_freezer_generalized_model/7df6fe0c-5e28-43f0-b375-6b231975cfff.pt
+      - artifacts_2022-10-26_americold_ontario_0012_cha/2022-10-26_americold_ontario_0012_cha.pt
+      - artifacts_2022-10-31_americold_ontario_0001_cha/2022-10-31_americold_ontario_0001_cha.pt
+      - artifacts_2022-10-26_americold_modesto_0009_cha/2022-10-26_americold_modesto_0009_cha.pt
+      - artifacts_2022-10-26_americold_modesto_0002_cha/2022-10-26_americold_modesto_0002_cha.pt
+      - artifacts_2022-10-26_americold_modesto_0003_cha/2022-10-26_americold_modesto_0003_cha.pt
+      - artifacts_2022-10-26_americold_modesto_0005_cha/2022-10-26_americold_modesto_0005_cha.pt
+      - artifacts_03_05_2023_americold_modesto_0011_cha/256037fe-697a-4484-ab48-8c81b6ea18e1.pt
+      - artifacts_2022-10-26_americold_modesto_0001_cha/2022-10-26_americold_modesto_0001_cha.pt
+      - artifacts_2022-11-08_americold_savannah_bloomingdale_0006_cha/2022-11-08_americold_savannah_bloomingdale_0006_cha.pt
+      - artifacts_2022-10-28_americold_savannah_pooler_0006_cha/2022-10-28_americold_savannah_pooler_0006_cha.pt
+      - artifacts_02_15_2023_innovate_manufacturing_knoxville_0004_cha/6ec9304f-e1be-4731-b687-82c318bfbf6d.pt
+      - artifacts_01_18_2023_generalized-front-door/3f11d513-b9bd-471e-862e-4d2474fc443c.pt
+      - artifacts_01_09_2023_wn_foods_hayward_0009_cha/8380802c-969f-44a0-b909-72c83fa2bb66.pt
+      - artifacts_02_15_2023_wn_foods_hayward_0011_cha/9b4a0f9b-5c33-4af2-b6d1-238ee9b30232.pt
+      - artifacts_01_09_2023_wn_foods_hayward_0012_cha/860ebac6-dc32-43ed-91dd-a6b61bc04dce.pt
+      - artifacts_02_06_2023_generalized_EXIT_Door_new/7547a635-1ae9-4b9a-b44a-4e8991269ead.pt
+      - artifacts_02_06_2023_generalized_EXIT_Door_new/7547a635-1ae9-4b9a-b44a-4e8991269ead.pt
+      - artifacts_02_06_2023_generalized_EXIT_Door_new/7547a635-1ae9-4b9a-b44a-4e8991269ead.pt
+      - artifacts_03_03_2023_ulta_dallas_0004_cha/eacec874-5f92-43b6-8eb8-3fb0162ed60d.pt
+      - artifacts_02_06_2023_generalized_EXIT_Door_new/7547a635-1ae9-4b9a-b44a-4e8991269ead.pt
+      - artifacts_02_06_2023_generalized_EXIT_Door_new/7547a635-1ae9-4b9a-b44a-4e8991269ead.pt
+      - artifacts_2022-10-28_trieagle_ocala_0005_cha/2022-10-28_trieagle_ocala_0005_cha.pt
+      - artifacts_2022-10-28_trieagle_ocala_0001_cha/2022-10-28_trieagle_ocala_0001_cha.pt
+      - artifacts_02_06_2023_generalized_EXIT_Door_new/7547a635-1ae9-4b9a-b44a-4e8991269ead.pt
+    config:
+      platform: pytorch_libtorch
+      max_batch_size: 16
+      input:
+        - name: images
+          data_type: TYPE_FP32
+          format: FORMAT_NCHW
+          dims:
+            - 3
+            - 224
+            - 224
+      output:
+        - name: output0
+          data_type: TYPE_FP32
+          dims:
+            - 3
+      parameters:
+        INFERENCE_MODE:
+          string_value: "true"

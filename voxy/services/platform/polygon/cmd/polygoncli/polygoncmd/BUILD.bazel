@@ -1,0 +1,17 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "polygoncmd",
+    srcs = ["polygon_cli.go"],
+    importpath = "github.com/voxel-ai/voxel/services/platform/polygon/cmd/polygoncli/polygoncmd",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//protos/platform/polygon/v1:polygon",
+        "//services/platform/devcert",
+        "@com_github_rs_zerolog//log",
+        "@com_github_spf13_cobra//:cobra",
+        "@org_golang_google_grpc//:go_default_library",
+        "@org_golang_google_grpc//credentials",
+        "@org_golang_google_grpc//credentials/insecure",
+    ],
+)

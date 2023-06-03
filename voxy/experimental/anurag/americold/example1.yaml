@@ -1,0 +1,42 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+apiVersion: batch/v1
+kind: Job
+metadata:
+  # Unique key of the Job instance
+  name: americold-test-job1
+spec:
+  template:
+    metadata:
+      name: americold-test-job1
+    spec:
+      serviceAccountName: k8
+      hostIPC: True
+      containers:
+      - name: yolov5
+        image: us.gcr.io/sodium-carving-227300/voxel/onboard:1615878130
+        command: ["/bin/sh", "-c"]
+        args: ["mkdir /data && mkdir -p /var/tmp/voxel/incidents/ && gsutil -m cp -r gs://voxel-raw-video-logs/americold/modesto/2021-03-16/ch12/2021-03-15_02-11-38.mp4 /data/ && ls /data/ && python3 /voxel/main.py --camera_uuid americold/modesto/e_dock_north/ch12 --camera_url /data/2021-03-15_02-11-38.mp4  && gsutil cp -r /var/tmp/voxel/incidents/* gs://voxel-users/anurag/incidents-k8/"]
+        resources:
+          limits:
+            nvidia.com/gpu: 1
+            memory: "50Gi"
+            ephemeral-storage: "40Gi"
+          requests:
+            cpu: 8
+            memory: "50Gi"
+            nvidia.com/gpu: 1
+            ephemeral-storage: "40Gi"
+      # Do not restart containers after they exit
+      restartPolicy: Never
+  # of retries before marking as failed.
+  backoffLimit: 1

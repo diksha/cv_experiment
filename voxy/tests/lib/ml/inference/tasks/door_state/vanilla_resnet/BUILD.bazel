@@ -1,0 +1,14 @@
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+package(default_visibility = ["//visibility:public"])
+
+voxel_py_test(
+    name = "test_inference_utils",
+    srcs = ["test_inference_utils.py"],
+    deps = [
+        "//core/incidents:utils",
+        "//core/perception/inference/transforms",
+        "//core/structs",
+        "//lib/ml/inference/tasks/door_state/vanilla_resnet:utils",
+    ],
+)

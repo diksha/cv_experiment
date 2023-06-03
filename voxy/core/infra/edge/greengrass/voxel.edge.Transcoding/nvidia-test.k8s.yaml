@@ -1,0 +1,39 @@
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-deployment
+  labels:
+    app: test
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: test
+  template:
+    metadata:
+      labels:
+        app: test
+    spec:
+      containers:
+        - name: camera1
+          command: ["nvidia-smi", "-l", "1"]
+          env:
+            - name: NVIDIA_VISIBLE_DEVICES
+              value: "all"
+          image: nvidia/cuda:11.4.1-runtime-ubuntu20.04
+        - name: camera2
+          command: ["nvidia-smi", "-l", "1"]
+          env:
+            - name: NVIDIA_VISIBLE_DEVICES
+              value: "all"
+          image: nvidia/cuda:11.4.1-runtime-ubuntu20.04
+        - name: camera3
+          command: ["nvidia-smi", "-l", "1"]
+          env:
+            - name: NVIDIA_VISIBLE_DEVICES
+              value: "all"
+          image: nvidia/cuda:11.4.1-runtime-ubuntu20.04
+          imagePullPolicy: IfNotPresent

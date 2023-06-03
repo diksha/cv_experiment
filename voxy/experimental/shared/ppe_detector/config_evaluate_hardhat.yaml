@@ -1,0 +1,23 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+
+data:
+  path: "/home/reza_voxelsafety_com/experiments/ppe_classifaction/data/hardhat_detector_images"
+  labels: ["no_hat", "hat"]
+  width: 1024
+  height: 608
+model:
+  path: "artifacts_detectron-9-17-2021/model_final.ts"
+experiments:
+  name: "production_hat_detector"
+  object: "HARD_HAT"
+  cropped: 0

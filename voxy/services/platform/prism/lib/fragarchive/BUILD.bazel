@@ -1,0 +1,36 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "fragarchive",
+    srcs = [
+        "archive.go",
+        "metadata.go",
+    ],
+    importpath = "github.com/voxel-ai/voxel/services/platform/prism/lib/fragarchive",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//services/platform/prism/lib/fragarchive/key",
+        "@com_github_aws_aws_sdk_go_v2_service_s3//:s3",
+        "@com_github_aws_smithy_go//:smithy-go",
+        "@com_github_davecgh_go_spew//spew",
+        "@com_github_rs_zerolog//:zerolog",
+        "@com_github_rs_zerolog//log",
+    ],
+)
+
+go_test(
+    name = "fragarchive_test",
+    srcs = [
+        "archive_test.go",
+        "metadata_test.go",
+    ],
+    deps = [
+        ":fragarchive",
+        "//lib/utils/aws/fake",
+        "//services/platform/prism/lib/fragarchive/key",
+        "@com_github_aws_aws_sdk_go_v2_service_s3//:s3",
+        "@com_github_aws_smithy_go//:smithy-go",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+    ],
+)

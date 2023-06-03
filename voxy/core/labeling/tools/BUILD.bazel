@@ -1,0 +1,74 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary", "py_library")
+
+py_binary(
+    name = "generate_signed_video_url",
+    srcs = [
+        "generate_signed_video_url.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/labeling:video_helper_mixin",
+    ],
+)
+
+py_binary(
+    name = "sync_camera_config",
+    srcs = [
+        "queries.py",
+        "sync_camera_config.py",
+        "utils.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("requests"),
+        requirement("loguru"),
+        "//core/common:queries",
+        requirement("botocore"),
+        "//core/execution/utils:graph_config_utils",
+        "//core/labeling/scale/runners:camera_config_raw_labels",
+        "//core/labeling/tools:pull_kinesis_feed_lib",
+        "//core/metaverse",
+        "//core/structs",
+        "//core/utils:json_utils",
+    ],
+)
+
+py_library(
+    name = "pull_kinesis_feed_lib",
+    srcs = ["pull_kinesis_feed.py"],
+    data = ["//configs"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/infra/cloud:kinesis_utils",
+        "//core/infra/sematic/shared:resources",
+        "//core/utils:aws_utils",
+        "//core/utils:yaml_jinja",
+        requirement("tqdm"),
+        requirement("pyyaml"),
+        requirement("sematic"),
+    ],
+)
+
+py_binary(
+    name = "pull_kinesis_feed",
+    srcs = [
+        "pull_kinesis_feed.py",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":pull_kinesis_feed_lib",
+    ],
+)
+
+py_binary(
+    name = "pull_kinesis_feed_site",
+    srcs = [
+        "pull_kinesis_feed_site.py",
+    ],
+    data = ["//configs"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":pull_kinesis_feed_lib",
+    ],
+)

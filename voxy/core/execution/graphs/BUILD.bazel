@@ -1,0 +1,78 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+py_library(
+    name = "metrics_constants",
+    srcs = ["metrics_constants.py"],
+    visibility = ["//visibility:public"],
+)
+
+py_library(
+    name = "abstract",
+    srcs = ["abstract.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//lib/infra/utils:resolve_model_path",
+    ],
+)
+
+py_library(
+    name = "develop",
+    srcs = ["develop.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("opencv-python"),
+        requirement("loguru"),
+        "//core/execution/graphs:abstract",
+        "//core/execution/nodes:annotation",
+        "//core/execution/nodes:incident_writer",
+        "//core/execution/nodes:mega",
+        "//core/execution/nodes:perception",
+        "//core/execution/nodes:publisher",
+        "//core/execution/nodes:video_stream",
+        "//core/execution/nodes:video_writer",
+        "//core/execution/utils:perception_runner_context",
+        "//core/utils:actionable_region_utils",
+        "//core/utils:aws_utils",
+    ],
+)
+
+py_library(
+    name = "replay",
+    srcs = ["replay.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("opencv-python"),
+        requirement("loguru"),
+        "//core/execution/graphs:abstract",
+        "//core/execution/nodes:incident_writer",
+        "//core/execution/nodes:mega",
+        "//core/execution/nodes:perception",
+        "//core/execution/nodes:publisher",
+        "//core/utils:actionable_region_utils",
+        "//core/utils:aws_utils",
+    ],
+)
+
+py_library(
+    name = "production",
+    srcs = ["production.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        requirement("boto3"),
+        requirement("botocore"),
+        "//core/execution/graphs:abstract",
+        "//core/execution/graphs:metrics_constants",
+        "//core/execution/nodes:camera_stream",
+        "//core/execution/nodes:incident_writer",
+        "//core/execution/nodes:mega",
+        "//core/execution/nodes:perception",
+        "//core/execution/nodes:publisher",
+        "//core/execution/utils:perception_runner_context",
+        "//lib/infra/metrics:register_metrics",
+        "//lib/publisher:kinesis",
+        "//lib/utils/aws:session",
+        "//services/platform/prism/lib:publisher",
+    ],
+)

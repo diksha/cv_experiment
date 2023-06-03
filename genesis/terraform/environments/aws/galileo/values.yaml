@@ -1,0 +1,4 @@
+state_prefix: aws-galileo-v1
+variables:
+  galileo_vpc_cidr_root: "24"
+  environment: development

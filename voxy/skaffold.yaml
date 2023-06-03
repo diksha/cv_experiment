@@ -1,0 +1,13 @@
+apiVersion: skaffold/v4beta2
+kind: Config
+
+manifests:
+  rawYaml:
+  - ./core/portal/infra/k8s/*
+  hooks:
+    before:
+      - host:
+          command: ["sh", "-c", "./core/scripts/wait_for_minikube_service_account.sh"]
+
+deploy:
+  kubectl: {}

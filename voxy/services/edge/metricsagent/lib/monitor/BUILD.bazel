@@ -1,0 +1,39 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "monitor",
+    srcs = [
+        "core.go",
+        "gpu.go",
+        "network.go",
+    ],
+    importpath = "github.com/voxel-ai/voxel/services/edge/metricsagent/lib/monitor",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//go/edge/metricsctx",
+        "@com_github_shirou_gopsutil//cpu",
+        "@com_github_shirou_gopsutil//disk",
+        "@com_github_shirou_gopsutil//load",
+        "@com_github_shirou_gopsutil//mem",
+        "@com_github_shirou_gopsutil//net",
+    ],
+)
+
+go_test(
+    name = "monitor_test",
+    srcs = [
+        "core_test.go",
+        "gpu_test.go",
+        "network_test.go",
+        "utils_test.go",
+    ],
+    data = glob(["testdata/**"]),
+    embed = [":monitor"],
+    deps = [
+        "//go/edge/metricsctx",
+        "@com_github_aws_aws_sdk_go_v2_service_cloudwatch//:cloudwatch",
+        "@com_github_aws_aws_sdk_go_v2_service_cloudwatch//types",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+    ],
+)

@@ -1,0 +1,38 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+voxel_py_test(
+    name = "yolo_data_generation_pipeline_test",
+    srcs = [
+        "yolo_data_generation_pipeline_test.py",
+    ],
+    deps = [
+        requirement("sematic"),
+        "//core/infra/sematic/perception/yolo:yolo_data_generation_pipeline",
+        "//core/infra/sematic/shared:mock_sematic_funcs",
+        "//core/infra/sematic/shared:utils",
+    ],
+)
+
+voxel_py_test(
+    name = "yolo_training_pipeline_test",
+    srcs = [
+        "yolo_training_pipeline_test.py",
+    ],
+    deps = [
+        requirement("sematic"),
+        "//core/infra/sematic/perception/yolo:yolo_options",
+        "//core/infra/sematic/perception/yolo:yolo_training_pipeline",
+        "//core/infra/sematic/shared:mock_sematic_funcs",
+    ],
+)
+
+voxel_py_test(
+    name = "yolo_options_test",
+    srcs = [
+        "yolo_options_test.py",
+    ],
+    deps = [
+        "//core/infra/sematic/perception/yolo:yolo_options",
+    ],
+)

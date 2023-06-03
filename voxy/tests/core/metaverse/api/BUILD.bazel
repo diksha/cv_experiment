@@ -1,0 +1,19 @@
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+package(default_visibility = ["//visibility:public"])
+
+voxel_py_test(
+    name = "data_collection_queries_test",
+    srcs = ["data_collection_queries_test.py"],
+    deps = [
+        "//core/metaverse/api",
+    ],
+)
+
+voxel_py_test(
+    name = "datapool_queries_import_test",
+    srcs = ["datapool_queries_import_test.py"],
+    deps = [
+        "//core/metaverse/api:datapool_api",
+    ],
+)

@@ -1,0 +1,48 @@
+image:
+  repository: hoppscotch/hoppscotch
+  pullPolicy: Always
+  tag: latest
+
+service:
+  type: ClusterIP
+  port: 80
+  containerPort: 3000
+
+resources:
+  requests:
+    cpu: 512m
+    memory: 1000Mi
+  limits:
+    cpu: 512m
+    memory: 1000Mi
+
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+
+env:
+  config:
+    # Google Analytics ID
+    GA_ID: G-3Y5NDDD46K
+
+    # Google Tag Manager ID
+    GTM_ID: G-3Y5NDDD46K
+
+    # Firebase config
+    API_KEY: AIzaSyD1JkUl19BPasKXiLJVM31Zt765RbNizaA
+    AUTH_DOMAIN: voxel-hoppscotch.firebaseapp.com
+    DATABASE_URL: https://voxel-hoppscotch.firebaseio.com
+    PROJECT_ID: voxel-hoppscotch
+    STORAGE_BUCKET: voxel-hoppscotch.appspot.com
+    MESSAGING_SENDER_ID: 664463624723
+    APP_ID: 1:664463624723:web:8d0554589ee79a62fb8de6
+    MEASUREMENT_ID: G-3Y5NDDD46K
+
+    # Base URL
+    BASE_URL: https://${DOMAIN}
+
+    # Backend URLs
+    BACKEND_GQL_URL: https://${DOMAIN}/graphql
+    BACKEND_WS_URL: wss://${DOMAIN}/graphql

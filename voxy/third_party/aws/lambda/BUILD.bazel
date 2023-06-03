@@ -1,0 +1,75 @@
+load("@io_bazel_rules_docker//container:container.bzl", "container_image", "container_push")
+load(
+    "@io_bazel_rules_docker//docker/util:run.bzl",
+    "container_run_and_commit_layer",
+)
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+load(":defs.bzl", "py_aws_lambda_container_image")
+
+exports_files(["update-function.sh"])
+
+container_run_and_commit_layer(
+    name = "py_baseimage-packages",
+    commands = [
+        "yum -y update",
+        "yum -y install mesa-libGL",
+    ],
+    docker_run_flags = ["--entrypoint="],
+    env = {
+        "DEBIAN_FRONTEND": "noninteractive",
+    },
+    image = "@aws_lambda_python_baseimage//image",
+    tags = ["manual"],
+)
+
+container_image(
+    name = "py_baseimage",
+    base = "@aws_lambda_python_baseimage//image",
+    layers = [":py_baseimage-packages"],
+    tags = ["manual"],
+    visibility = ["//visibility:public"],
+)
+
+py_binary(
+    name = "hello_world",
+    srcs = ["hello_world.py"],
+    deps = [
+        requirement("loguru"),
+        requirement("boto3"),
+    ],
+)
+
+py_aws_lambda_container_image(
+    name = "hello_world-py-image",
+    handler = "hello_world.lambda_handler",
+    target = ":hello_world",
+)
+
+container_push(
+    name = "push-noop",
+    format = "Docker",
+    image = ":hello_world-py-image",
+    registry = "203670452561.dkr.ecr.us-west-2.amazonaws.com",
+    repository = "third_party/aws/lambda/noop",
+    tag = "latest",
+    tags = ["manual"],
+)
+
+container_push(
+    name = "push-py_baseimage",
+    format = "Docker",
+    image = ":py_baseimage",
+    registry = "203670452561.dkr.ecr.us-west-2.amazonaws.com",
+    repository = "third_party/aws/lambda/python",
+    tag = "v0.0.1",
+    tags = ["manual"],
+)
+
+sh_binary(
+    name = "update-function-code",
+    srcs = ["update-function.sh"],
+    data = ["//third_party/aws/cli:aws_cli"],
+    visibility = ["//visibility:public"],
+    deps = ["@bazel_tools//tools/bash/runfiles"],
+)

@@ -1,0 +1,39 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+load("//third_party/sematic:defs.bzl", "voxel_sematic_pipeline")
+
+py_library(
+    name = "pipeline",
+    srcs = ["pipeline.py"],
+    data = [
+        "//core/ml/data/collection/configs",
+        "//core/ml/data/curation/configs",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("sematic"),
+        requirement("opencv-python"),
+        requirement("numpy"),
+        requirement("boto3"),
+        "//core/infra/sematic/shared:resources",
+        "//core/ml/data/collection:data_collector",
+        "//core/ml/data/curation:prepare_lightly_run_lib",
+        "//core/ml/data/curation:voxel_lightly_utils",
+        "//core/ml/data/curation/lib",
+        "//core/utils:aws_utils",
+        "//core/utils:yaml_jinja",
+    ],
+)
+
+voxel_sematic_pipeline(
+    name = "main",
+    bases = {
+        "default": "//third_party/sematic:no_cuda_base_image",
+        "lightly-image": "//third_party/sematic:lightly_sematic_base",
+    },
+    deps = [
+        requirement("sematic"),
+        ":pipeline",
+        "//core/infra/sematic/shared:utils",
+    ],
+)

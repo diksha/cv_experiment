@@ -1,0 +1,41 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+apiVersion: batch/v1
+kind: Job
+metadata:
+  # Unique key of the Job instance
+  name: haddy-sample-dataset-15k-2
+spec:
+  template:
+    metadata:
+      name: haddy-sample-dataset-15k-1
+    spec:
+      serviceAccountName: k8
+      hostIPC: True
+      containers:
+      - name: dataset-sampler
+        image: us.gcr.io/sodium-carving-227300/voxel/experimental:haddy_1631245831
+        command: ["/bin/sh", "-c"]
+        args: ["python3 /app/core/datasets/tools/random_sample_yolo_dataset --dataset_config_path gs://voxel-datasets/derived/aimh.isti.cnr.it/dataset.yml --output_path gs://voxel-users/common/ppe_synthetic_data_derived_15k/ --max_samples 15000"]
+        resources:
+          limits:
+            cpu: 4
+            nvidia.com/gpu: 0
+            memory: "16Gi"
+          requests:
+            cpu: 4
+            memory: "16Gi"
+            nvidia.com/gpu: 0
+      # Do not restart containers after they exit
+      restartPolicy: Never
+  # of retries before marking as failed.
+  backoffLimit: 0

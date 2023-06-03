@@ -1,0 +1,15 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+
+py_binary(
+    name = "generate_demo_data",
+    srcs = [
+        "generate_demo_data.py",
+    ],
+    deps = [
+        requirement("django"),
+        requirement("loguru"),
+        "//core/portal:app_lib",
+        "//core/utils:aws_utils",
+    ],
+)

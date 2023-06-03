@@ -1,0 +1,99 @@
+auth:
+  register: false
+metrics:
+  enabled: true
+serviceAccount:
+  enabled: true
+google:
+  clientId: ${GOOGLE_CLIENT_ID}
+filestore:
+  backend: filesystem
+  filesystem:
+    persistence:
+      storageClass: gp3-retain
+      size: 10Gi
+
+ingress:
+  enabled: false
+
+config:
+  sentryConfPy: |
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    USE_X_FORWARDED_HOST = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
+
+system:
+  url: https://sentry.voxelplatform.com
+
+
+nginx:
+  enabled: true
+  service:
+    type: ClusterIP
+
+postgresql:
+  persistence:
+    size: 250Gi
+    storageClass: gp3-retain
+
+zookeeper:
+  replicaCount: 3
+  autopurge:
+    purgeInterval: 1
+  persistence:
+    size: 50Gi
+    storageClass: gp3-retain
+
+
+clickhouse:
+  persistentVolumeClaim:
+    dataPersistentVolume:
+      storage: 50Gi
+      storageClass: gp3-retain
+
+redis:
+  master:
+    extraFlags:
+      - "--maxmemory-policy volatile-lru"
+      - "--maxmemory 2500mb"
+    persistence:
+      enabled: false
+    resources:
+      limits:
+        cpu: 1024m
+        memory: 4000Mi
+  replica:
+    extraFlags:
+      - "--maxmemory-policy volatile-lru"
+      - "--maxmemory 2500mb"
+    replicaCount: 1
+    persistence:
+      enabled: false 
+    resources:
+      limits:
+        cpu: 1024m
+        memory: 4000Mi
+
+kafka:
+  replicaCount: 3
+  logRetentionHours: 12
+  persistence:
+    size: 20Gi
+    storageClass: gp3-retain
+
+rabbitmq:
+  replicaCount: 3
+
+sentry:
+  cleanup:
+    days: 14
+  subscriptionConsumerEvents:
+    commitBatchSize: 20
+  subscriptionConsumerTransactions:
+    commitBatchSize: 20
+  postProcessForwardErrors:
+    commitBatchSize: 20
+  postProcessForwardTransactions:
+    commitBatchSize: 20

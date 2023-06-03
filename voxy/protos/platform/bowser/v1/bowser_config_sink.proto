@@ -1,0 +1,34 @@
+syntax = "proto3";
+package protos.platform.bowser.v1;
+option go_package = "github.com/voxel-ai/voxel/protos/platform/bowser/v1";
+
+/* ProcessorSink represents the business configuration objects used to execute a Bowser Processor ProcessorSink */
+
+message ProcessorSink {
+    string name = 1; //Bowser allows to name this process
+    ProcessorSinkLocal local = 2; // Represent the configuration to generate local text file
+    ProcessorSinkAws aws =3; // Represent the configuration to generate aws data
+}
+
+/* ProcessorSinkLocal represents the business configuration objects used to execute a Bowser Processor ProcessorSink dedicated to local*/
+
+message ProcessorSinkLocal{
+    string out_location = 1; //Where to generate the file in the local Bowser Task Manager
+}
+
+/* ProcessorSinkAws represents the business configuration objects used to execute a Bowser Processor ProcessorSink dedicated to AWS */
+
+message ProcessorSinkAws{
+    ProcessorSinkAwsS3 s3 =2; // Dedicated to AWS s3 - sent file to it
+    ProcessorSinkerAwsKinesis kinesis =3; // Dedicated to AWS Kinesis - send data to it
+}
+
+message ProcessorSinkAwsS3{
+    string bucket = 1;
+}
+
+message ProcessorSinkerAwsKinesis{
+    string endpoint = 1;
+}
+
+

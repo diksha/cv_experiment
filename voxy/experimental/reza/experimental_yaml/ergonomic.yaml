@@ -1,0 +1,15 @@
+".*":
+  incident:
+        dry_run: true
+        monitors_requested: []
+        state_machine_monitors_requested: [overreaching]
+  perception:
+    pose_classifier:
+      enabled: True
+      model_path:  artifacts_ergo_ml/voxel_ergo_ml_2022-05-05.pth
+    lift_classifier:
+      enabled: False
+      model_path: artifacts_lift_classifier_01282022/lift_classifer_01282022.sav
+    reach_classifier:
+      enabled: False
+      model_path: artifacts_reach_classifier_01242022/reach_classifer_01242022.sav

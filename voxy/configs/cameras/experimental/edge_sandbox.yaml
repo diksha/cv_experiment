@@ -1,0 +1,54 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+
+camera_uuid: americold/modesto/e_dock_north/ch12
+camera_url: artifacts_edge_server_test_video/edge_server_test_video.mp4
+
+camera:
+  min_frame_difference_ms: 85
+
+perception:
+  detector_tracker:
+    model_path: artifacts_yolo-person-pit-exp2-dataset3/best.torchscript.pt
+    vest_model_path: "artifacts_vest_classifier-9-19/vest_classifier_resnet18_traced_model.pth"
+    height: 480
+    width: 960
+    actor2class: { PERSON: 0, PIT: 1, HARD_HAT: 2, SAFETY_VEST: 3 }
+    should_do_temporal_propagation: 0
+  pose:
+    enabled: True
+    model_path: artifacts_03_21_2023_pose_0630_jit_update/fast_res50_256x192.pt
+  lift_classifier:
+    enabled: true
+    model_path: artifacts_lift_classifier_01282022/lift_classifer_01282022.sav
+  door_classifier:
+    enabled: True
+    model_path: artifacts_door_classifier_resnet50_dataset4/voxel_door_classifier_dataset4_resnet50_traced_model.pth
+
+temporal:
+  max_past_frames: 60
+  max_future_frames: 30
+  expire_threshold_ms: 120000
+
+incident:
+  monitors_requested: [parking, piggyback, open_door, door_intersection]
+  dry_run: False
+  # This directory must be bind-mounted from Docker host
+  temp_directory: /var/tmp/voxel/incidents
+  generate_temp_subdirs: True
+
+publisher:
+  enabled: True
+  # These values will send data to the sandbox organization in production
+  portal_host: https://app.voxelai.com
+  auth_token: 6bdeb3310546f9cae57c87604f80ece37ba6da43
+  organization_key: VOXEL_SANDBOX

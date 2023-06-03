@@ -1,0 +1,11 @@
+load("//third_party/pytest:build_defs.bzl", "voxel_py_test")
+
+package(default_visibility = ["//visibility:public"])
+
+voxel_py_test(
+    name = "vit_pose_test",
+    srcs = ["vit_pose_test.py"],
+    deps = [
+        "//core/perception/pose:vit_pose",
+    ],
+)

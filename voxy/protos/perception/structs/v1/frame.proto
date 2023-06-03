@@ -1,0 +1,37 @@
+// Copyright 2020-2021 Voxel Labs, Inc.
+// All rights reserved.
+//
+// This document may not be reproduced, republished, distributed, transmitted,
+// displayed, broadcast or otherwise exploited in any manner without the express
+// prior written permission of Voxel Labs, Inc. The receipt or possession of this
+// document does not convey any rights to reproduce, disclose, or distribute its
+// contents, or to manufacture, use, or sell anything that it may describe, in
+// whole or in part.
+
+syntax = "proto3";
+
+package protos.perception.structs.v1;
+
+
+option go_package = "github.com/voxel-ai/voxel/protos/perception/structs/v1;structspb";
+
+import "protos/perception/structs/v1/actor.proto";
+import "protos/perception/types/v1/types.proto";
+
+// Mutable Attributes
+message Frame {
+    optional uint32 frame_number = 1;
+    optional uint32 frame_width = 2;
+    optional uint32 frame_height = 3;
+    optional protos.perception.types.v1.Timestamp timestamp = 4;
+    repeated protos.perception.structs.v1.Actor actors = 5;
+    optional string relative_image_path = 6;
+}
+
+message CameraFrame {
+    string camera_uuid = 1;
+    string run_uuid = 2;
+
+    // leave space for more metadata in the future
+    Frame frame = 50;
+}

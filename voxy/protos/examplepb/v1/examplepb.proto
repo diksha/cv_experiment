@@ -1,0 +1,25 @@
+syntax = "proto3";
+package protos.examplepb.v1;
+option go_package = "github.com/voxel-ai/voxel/protos/examplepb/v1;examplepb";
+
+import "google/protobuf/descriptor.proto";
+
+extend google.protobuf.FieldOptions {
+    int32 voxel_example = 949123;
+}
+
+message Example {
+    string message = 1;
+}
+
+message SayHelloRequest {
+    string message = 1 [(voxel_example) = 10];
+}
+
+message SayHelloResponse {
+    string message = 1;
+}
+
+service ExampleService {
+    rpc SayHello(SayHelloRequest) returns (SayHelloResponse);
+}

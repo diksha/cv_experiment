@@ -1,0 +1,106 @@
+#
+# Copyright 2022 Voxel Labs, Inc.
+# All rights reserved.
+#
+# This document may not be reproduced, republished, distributed, transmitted,
+# displayed, broadcast or otherwise exploited in any manner without the express
+# prior written permission of Voxel Labs, Inc. The receipt or possession of this
+# document does not convey any rights to reproduce, disclose, or distribute its
+# contents, or to manufacture, use, or sell anything that it may describe, in
+# whole or in part.
+#
+
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+load("//third_party/sematic:defs.bzl", "voxel_sematic_pipeline")
+
+voxel_sematic_pipeline(
+    name = "main",
+    bases = {
+        "default": "//third_party/sematic:no_cuda_base_image",
+        "yolov5-base": "//third_party/sematic:yolov5_sematic_base",
+    },
+    deps = [
+        requirement("loguru"),
+        requirement("sematic"),
+        ":pipeline",
+        "//core/infra/sematic/shared:utils",
+    ],
+)
+
+py_library(
+    name = "pipeline",
+    srcs = ["pipeline.py"],
+    data = [
+        "//core/infra/sematic/perception/yolo/configs",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        requirement("mergedeep"),
+        requirement("sematic"),
+        ":yolo_data_generation_pipeline",
+        ":yolo_options",
+        ":yolo_training_pipeline",
+        "//core/utils:yaml_jinja",
+    ],
+)
+
+voxel_sematic_pipeline(
+    name = "yolo_data_generation_main",
+    deps = [
+        ":yolo_data_generation_pipeline",
+        ":yolo_options",
+        "//core/infra/sematic/shared:utils",
+    ],
+)
+
+py_library(
+    name = "yolo_data_generation_pipeline",
+    srcs = ["yolo_data_generation_pipeline.py"],
+    data = [
+        "//core/ml/data/generation/configs",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        "//core/infra/sematic/shared:resources",
+        "//core/ml/data/generation/resources/api:generator",
+        requirement("sematic"),
+    ],
+)
+
+voxel_sematic_pipeline(
+    name = "yolo_training_main",
+    bases = {
+        "default": "//third_party/sematic:no_cuda_base_image",
+        "yolov5-base": "//third_party/sematic:yolov5_sematic_base",
+    },
+    deps = [
+        ":yolo_options",
+        ":yolo_training_pipeline",
+        "//core/infra/sematic/shared:utils",
+    ],
+)
+
+py_library(
+    name = "yolo_options",
+    srcs = ["yolo_options.py"],
+    visibility = ["//visibility:public"],
+)
+
+py_library(
+    name = "yolo_training_pipeline",
+    srcs = ["yolo_training_pipeline.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        requirement("sematic"),
+        ":yolo_options",
+        "//core/infra/sematic/shared:resources",
+        "//core/ml/data/generation/resources/api:generator",
+        "//core/ml/data/validation/lib:aggregate_yolo_validation",
+        "//core/utils:aws_utils",
+        "//core/utils:subprocess_utils",
+    ],
+)

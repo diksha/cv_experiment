@@ -1,0 +1,89 @@
+load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
+load("@build_stack_rules_proto//rules:proto_compiled_sources.bzl", "proto_compiled_sources")
+load("@build_stack_rules_proto//rules/go:proto_go_library.bzl", "proto_go_library")
+load("@build_stack_rules_proto//rules/py:proto_py_library.bzl", "proto_py_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+go_library(
+    name = "graph_config",
+    srcs = [
+        "graph_params.pb.go",
+        "incident_machine_params.pb.go",
+        "perception_params.pb.go",
+    ],
+    importpath = "github.com/voxel-ai/voxel/protos/perception/graph_config/v1",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@org_golang_google_protobuf//reflect/protoreflect",
+        "@org_golang_google_protobuf//runtime/protoimpl",
+        "@org_golang_google_protobuf//types/known/timestamppb",
+    ],
+)
+
+proto_library(
+    name = "graphconfigpb_proto",
+    srcs = [
+        "graph_params.proto",
+        "incident_machine_params.proto",
+        "perception_params.proto",
+    ],
+    visibility = ["//visibility:public"],
+    deps = ["@com_google_protobuf//:timestamp_proto"],
+)
+
+proto_compiled_sources(
+    name = "graphconfigpb_go_compiled_sources",
+    srcs = [
+        "graph_params.pb.go",
+        "incident_machine_params.pb.go",
+        "perception_params.pb.go",
+    ],
+    output_mappings = [
+        "graph_params.pb.go=github.com/voxel-ai/voxel/protos/perception/graph_config/v1/graph_params.pb.go",
+        "incident_machine_params.pb.go=github.com/voxel-ai/voxel/protos/perception/graph_config/v1/incident_machine_params.pb.go",
+        "perception_params.pb.go=github.com/voxel-ai/voxel/protos/perception/graph_config/v1/perception_params.pb.go",
+    ],
+    plugins = ["@build_stack_rules_proto//plugin/golang/protobuf:protoc-gen-go"],
+    proto = "graphconfigpb_proto",
+)
+
+proto_go_library(
+    name = "graphconfigpb_go_proto",
+    srcs = [
+        "graph_params.pb.go",
+        "incident_machine_params.pb.go",
+        "perception_params.pb.go",
+    ],
+    importpath = "github.com/voxel-ai/voxel/protos/perception/graph_config/v1",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@org_golang_google_grpc//:go_default_library",
+        "@org_golang_google_grpc//codes",
+        "@org_golang_google_grpc//status",
+        "@org_golang_google_protobuf//reflect/protoreflect",
+        "@org_golang_google_protobuf//runtime/protoimpl",
+        "@org_golang_google_protobuf//types/known/timestamppb",
+    ],
+)
+
+proto_compile(
+    name = "graphconfigpb_python_compile",
+    outputs = [
+        "graph_params_pb2.py",
+        "incident_machine_params_pb2.py",
+        "perception_params_pb2.py",
+    ],
+    plugins = ["@build_stack_rules_proto//plugin/builtin:python"],
+    proto = "graphconfigpb_proto",
+)
+
+proto_py_library(
+    name = "graphconfigpb_py_library",
+    srcs = [
+        "graph_params_pb2.py",
+        "incident_machine_params_pb2.py",
+        "perception_params_pb2.py",
+    ],
+    visibility = ["//visibility:public"],
+)

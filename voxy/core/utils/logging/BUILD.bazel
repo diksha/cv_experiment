@@ -1,0 +1,79 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_library")
+
+package(default_visibility = ["//visibility:public"])
+
+py_library(
+    name = "logger",
+    srcs = ["logger.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/structs",
+        "//core/utils:aws_utils",
+        requirement("loguru"),
+        requirement("mcap-protobuf-support"),
+    ],
+)
+
+py_library(
+    name = "node_logger",
+    srcs = ["node_logger.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("opencv-python"),
+        requirement("loguru"),
+        "//core/utils/logging:logger",
+    ],
+)
+
+py_library(
+    name = "proto_node",
+    srcs = ["proto_node.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":mcap",
+        requirement("loguru"),
+    ],
+)
+
+py_library(
+    name = "mcap",
+    srcs = ["mcap.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        requirement("protobuf"),
+    ],
+)
+
+py_library(
+    name = "visualization",
+    srcs = glob(["visual*.py"]),
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("av"),
+        requirement("numpy"),
+        "//core/structs",
+        "//core/utils:aws_utils",
+        "//core/utils:video_reader",
+        "//core/utils/logging:log_decoding_utility",
+    ],
+)
+
+py_library(
+    name = "log_decoding_utility",
+    srcs = ["log_decoding_utility.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//core/structs",
+    ],
+)
+
+py_library(
+    name = "list_indented_yaml_dumper",
+    srcs = ["list_indented_yaml_dumper.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("pyyaml"),
+    ],
+)

@@ -1,0 +1,15 @@
+import {
+  GetDashboardData_currentUser_site_assigneeStats,
+  GetDashboardData_currentUser_site_incidentAnalytics_incidentAggregateGroups,
+  GetDashboardData_currentUser_site_incidentCategories_incidentTypes,
+  GetDashboardData_currentUser_site_cameras_edges_node,
+} from "__generated__/GetDashboardData";
+
+export type IncidentAggregateGroup = GetDashboardData_currentUser_site_incidentAnalytics_incidentAggregateGroups;
+export type IncidentType = Omit<GetDashboardData_currentUser_site_incidentCategories_incidentTypes, "__typename">;
+export type Camera = GetDashboardData_currentUser_site_cameras_edges_node;
+export interface IncidentAggregateGroupByDate extends IncidentAggregateGroup {
+  dateCount: number;
+}
+
+export type AssigneeStats = GetDashboardData_currentUser_site_assigneeStats;

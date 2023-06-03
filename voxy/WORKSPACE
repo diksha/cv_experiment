@@ -1,0 +1,796 @@
+workspace(
+    name = "voxel",
+)
+
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository", "new_git_repository")
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive", "http_file", "http_jar")
+
+# this has to be loaded before s3_archive so we don't end up in an infinite loop
+
+http_archive(
+    name = "aws_cli",
+    build_file = "//third_party/aws/cli:BUILD.bazel",
+    sha256 = "a6465f123a58caef3be32d3c9165078058d225fa2e9576764928c881565c2fff",
+    urls = ["https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.4.11.zip"],
+)
+
+####################### Hermetic Python #######################
+
+http_archive(
+    name = "rules_python",
+    sha256 = "8c8fe44ef0a9afc256d1e75ad5f448bb59b81aba149b8958f02f7b3a98f5d9b4",
+    strip_prefix = "rules_python-0.13.0",
+    url = "https://github.com/bazelbuild/rules_python/archive/refs/tags/0.13.0.tar.gz",
+)
+
+load("@rules_python//python:repositories.bzl", "python_register_toolchains")
+
+python_register_toolchains(
+    name = "python",
+    python_version = "3.9.13",
+)
+
+load("@python//:defs.bzl", "interpreter")
+load("@rules_python//python:pip.bzl", "package_annotation", "pip_parse")
+
+PY_WHEEL_RULE_CONTENT = """\
+load("@rules_py//py:defs.bzl", "py_wheel")
+py_wheel(
+    name = "wheel",
+    src = ":whl",
+)
+"""
+
+PACKAGES = [
+    "vaex-core",
+    "vaex-hdf5",
+]
+
+ANNOTATIONS = {
+    pkg: package_annotation(additive_build_content = PY_WHEEL_RULE_CONTENT)
+    for pkg in PACKAGES
+}
+
+pip_parse(
+    name = "pip_deps",
+    annotations = ANNOTATIONS,
+    enable_implicit_namespace_pkgs = True,
+    python_interpreter_target = interpreter,
+    requirements_lock = "//:third_party/pypi/requirements.txt",
+)
+
+# Load & call the generated starlark macro which populates the @pip_deps repo.
+load("@pip_deps//:requirements.bzl", install_pip_deps = "install_deps")
+
+install_pip_deps()
+
+pip_parse(
+    name = "fisheye_pip_deps",
+    enable_implicit_namespace_pkgs = True,
+    python_interpreter_target = interpreter,
+    requirements_lock = "//services/perception/fisheye:requirements.txt",
+)
+
+load("@fisheye_pip_deps//:requirements.bzl", install_fisheye_pip_deps = "install_deps")
+
+install_fisheye_pip_deps()
+
+register_execution_platforms(
+    "@local_config_platform//:host",
+    "@io_bazel_rules_docker//platforms:local_container_platform",
+)
+
+http_archive(
+    name = "io_bazel_rules_go",
+    sha256 = "19ef30b21eae581177e0028f6f4b1f54c66467017be33d211ab6fc81da01ea4d",
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/rules_go/releases/download/v0.38.0/rules_go-v0.38.0.zip",
+        "https://github.com/bazelbuild/rules_go/releases/download/v0.38.0/rules_go-v0.38.0.zip",
+    ],
+)
+
+http_archive(
+    name = "bazel_gazelle",
+    sha256 = "efbbba6ac1a4fd342d5122cbdfdb82aeb2cf2862e35022c752eaddffada7c3f3",
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/bazel-gazelle/releases/download/v0.27.0/bazel-gazelle-v0.27.0.tar.gz",
+        "https://github.com/bazelbuild/bazel-gazelle/releases/download/v0.27.0/bazel-gazelle-v0.27.0.tar.gz",
+    ],
+)
+
+load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies", "go_repository")
+load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
+load("//:go_deps.bzl", "go_dependencies")
+
+# gazelle:repository_macro go_deps.bzl%go_dependencies
+go_dependencies()
+
+go_rules_dependencies()
+
+go_register_toolchains(version = "1.19.5")
+
+gazelle_dependencies()
+
+# override this dep as it seems to break without the override
+go_repository(
+    name = "com_github_census_instrumentation_opencensus_proto",
+    build_extra_args = ["-exclude=src"],  # keep
+    importpath = "github.com/census-instrumentation/opencensus-proto",
+    sum = "h1:glEXhBS5PSLLv4IXzLA5yPRVX4bilULVyxxbrfOtDAk=",
+    version = "v0.2.1",
+)
+
+####################### Golang #######################
+
+####################### Protobuf #######################
+
+####################### Hermetic Python #######################
+
+####################### Golang #######################
+
+http_archive(
+    name = "build_stack_rules_proto",
+    sha256 = "7dc33e2cb70c0233f7bccac5d64e1579f3cd95ae1da760a89a1bbad15fa92204",
+    strip_prefix = "rules_proto-2a65e3d74769f417f7d6db6d03466e6fbc198ade",
+    urls = ["https://github.com/stackb/rules_proto/archive/2a65e3d74769f417f7d6db6d03466e6fbc198ade.tar.gz"],
+)
+
+go_repository(
+    name = "com_github_hashicorp_go_set",
+    importpath = "github.com/hashicorp/go-set",
+    sum = "h1:ghg3RoSWfRkP6efWp6w7pcjPs478/i/vFLwVOJt4I0I=",
+    version = "v0.1.12",
+)
+
+register_toolchains("@build_stack_rules_proto//toolchain:standard")
+
+load("@build_stack_rules_proto//deps:core_deps.bzl", "core_deps")
+
+core_deps()
+
+http_archive(
+    name = "com_google_protobuf",
+    strip_prefix = "protobuf-3.20.3",
+    url = "https://github.com/protocolbuffers/protobuf/releases/download/v3.20.3/protobuf-all-3.20.3.tar.gz",
+)
+
+load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
+
+protobuf_deps()
+
+load("@build_stack_rules_proto//:go_deps.bzl", "gazelle_protobuf_extension_go_deps")
+
+gazelle_protobuf_extension_go_deps()
+
+load("@build_stack_rules_proto//deps:protobuf_core_deps.bzl", "protobuf_core_deps")
+
+protobuf_core_deps()
+
+####################### Protobuf #######################
+
+####################### JS/TS/Web #######################
+
+http_archive(
+    name = "aspect_rules_js",
+    sha256 = "d8827db3c34fe47607a0668e86524fd85d5bd74f2bfca93046d07f890b5ad4df",
+    strip_prefix = "rules_js-1.27.0",
+    url = "https://github.com/aspect-build/rules_js/releases/download/v1.27.0/rules_js-v1.27.0.tar.gz",
+)
+
+http_archive(
+    name = "aspect_rules_ts",
+    sha256 = "58b6c0ad158fc42883dafa157f1a25cddd65bcd788a772620192ac9ceefa0d78",
+    strip_prefix = "rules_ts-1.3.2",
+    url = "https://github.com/aspect-build/rules_ts/releases/download/v1.3.2/rules_ts-v1.3.2.tar.gz",
+)
+
+http_archive(
+    name = "aspect_rules_swc",
+    sha256 = "c35e633c2c90a4cd6796e66d66bcf37d31a81737afc76030201a9ef8599abc58",
+    strip_prefix = "rules_swc-0.21.3",
+    url = "https://github.com/aspect-build/rules_swc/archive/refs/tags/v0.21.3.tar.gz",
+)
+
+http_archive(
+    name = "aspect_rules_jest",
+    sha256 = "175f92448bd11b398ee94c6bb09cabf76df75a77d21c9555723798c58a2e73c8",
+    strip_prefix = "rules_jest-0.19.2",
+    url = "https://github.com/aspect-build/rules_jest/releases/download/v0.19.2/rules_jest-v0.19.2.tar.gz",
+)
+
+load("@aspect_rules_js//js:repositories.bzl", "rules_js_dependencies")
+
+rules_js_dependencies()
+
+load("@aspect_rules_ts//ts:repositories.bzl", "rules_ts_dependencies")
+
+rules_ts_dependencies(
+    ts_version_from = "//:package.json",
+)
+
+load("@rules_nodejs//nodejs:repositories.bzl", "DEFAULT_NODE_VERSION", "nodejs_register_toolchains")
+
+nodejs_register_toolchains(
+    name = "nodejs",
+    node_version = DEFAULT_NODE_VERSION,
+)
+
+load("@aspect_rules_js//npm:npm_import.bzl", "npm_translate_lock", "pnpm_repository")
+
+pnpm_repository(name = "pnpm")
+
+npm_translate_lock(
+    name = "npm",
+    data = [
+        "//:package.json",
+    ],
+    npmrc = "//:.npmrc",
+    pnpm_lock = "//:pnpm-lock.yaml",
+    verify_node_modules_ignored = "//:.bazelignore",
+)
+
+load("@npm//:repositories.bzl", "npm_repositories")
+
+npm_repositories()
+
+npm_translate_lock(
+    name = "npm_portal_web",
+    data = [
+        "//services/portal/web:package.json",
+    ],
+    npmrc = "//services/portal/web:.npmrc",
+    pnpm_lock = "//services/portal/web:pnpm-lock.yaml",
+    verify_node_modules_ignored = "//:.bazelignore",
+)
+
+load("@npm_portal_web//:repositories.bzl", npm_portal_web_repositories = "npm_repositories")
+
+npm_portal_web_repositories()
+
+load("@aspect_rules_swc//swc:dependencies.bzl", "rules_swc_dependencies")
+
+rules_swc_dependencies()
+
+load("@aspect_rules_swc//swc:repositories.bzl", "swc_register_toolchains", LATEST_SWC_VERSION = "LATEST_VERSION")
+
+swc_register_toolchains(
+    name = "swc",
+    swc_version = LATEST_SWC_VERSION,
+)
+
+load("@aspect_rules_jest//jest:dependencies.bzl", "rules_jest_dependencies")
+
+rules_jest_dependencies()
+
+####################### JS/TS/Web #######################
+
+#################### Aspect Bazel Lib ####################
+
+http_archive(
+    name = "aspect_bazel_lib",
+    sha256 = "8a329d66e95b36efcfb66e0c1074e5f36b9be7e5b6fce96605315db088eb1407",
+    strip_prefix = "bazel-lib-1.5.1",
+    url = "https://github.com/aspect-build/bazel-lib/archive/refs/tags/v1.5.1.tar.gz",
+)
+
+load("@aspect_bazel_lib//lib:repositories.bzl", "aspect_bazel_lib_dependencies", "register_jq_toolchains", "register_yq_toolchains")
+
+aspect_bazel_lib_dependencies()
+
+# Register the following toolchain to use jq
+
+register_jq_toolchains()
+
+# Register the following toolchain to use yq
+
+register_yq_toolchains()
+
+#################### Aspect Bazel Lib ####################
+
+#################### Sematic Bazel Lib ####################
+
+git_repository(
+    name = "rules_sematic",
+    remote = "https://github.com/sematic-ai/sematic.git",
+    strip_prefix = "bazel",
+    tag = "v0.30.0",
+)
+
+#################### Sematic Bazel Lib ####################
+
+git_repository(
+    name = "rules_py",
+    commit = "c89d9481d52d277e12cf0c88aa8c1c72a76500c7",
+    remote = "https://github.com/aspect-build/rules_py",
+)
+
+####################### Containers #######################
+
+http_archive(
+    name = "io_bazel_rules_docker",
+    sha256 = "b1e80761a8a8243d03ebca8845e9cc1ba6c82ce7c5179ce2b295cd36f7e394bf",
+    urls = ["https://github.com/bazelbuild/rules_docker/releases/download/v0.25.0/rules_docker-v0.25.0.tar.gz"],
+)
+
+http_archive(
+    name = "rules_pkg",
+    sha256 = "451e08a4d78988c06fa3f9306ec813b836b1d076d0f055595444ba4ff22b867f",
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/rules_pkg/releases/download/0.7.1/rules_pkg-0.7.1.tar.gz",
+        "https://github.com/bazelbuild/rules_pkg/releases/download/0.7.1/rules_pkg-0.7.1.tar.gz",
+    ],
+)
+
+load("@rules_pkg//:deps.bzl", "rules_pkg_dependencies")
+
+rules_pkg_dependencies()
+
+load(
+    "@io_bazel_rules_docker//toolchains/docker:toolchain.bzl",
+    docker_toolchain_configure = "toolchain_configure",
+)
+
+docker_toolchain_configure(
+    name = "docker_config",
+    client_config = "//third_party/docker:config.json",
+)
+
+load("@docker_config//:pull.bzl", authenticated_container_pull = "container_pull")
+load(
+    "@io_bazel_rules_docker//repositories:repositories.bzl",
+    container_repositories = "repositories",
+)
+
+container_repositories()
+
+load("@io_bazel_rules_docker//go:image.bzl", _go_image_repos = "repositories")
+
+_go_image_repos()
+
+load("@rules_sematic//:pipeline.bzl", sematic_base_images = "base_images")
+
+sematic_base_images()
+
+load("@io_bazel_rules_docker//repositories:deps.bzl", container_deps = "deps")
+
+container_deps()
+
+load(
+    "@io_bazel_rules_docker//container:container.bzl",
+    "container_pull",
+)
+
+# docker ecr login utility
+http_file(
+    name = "docker_credential_ecr_login_linux_amd64",
+    sha256 = "af805202cb5d627dde2e6d4be1f519b195fd5a3a35ddc88d5010b4a4e5a98dd8",
+    urls = ["https://amazon-ecr-credential-helper-releases.s3.us-east-2.amazonaws.com/0.6.0/linux-amd64/docker-credential-ecr-login"],
+)
+
+container_pull(
+    name = "apache_flink_1_16_1",
+    digest = "sha256:c8ac3ebd75a4647c36116eb4169be7d7bbf9dbe3afcc2d16227e7b22e0be74f9",
+    registry = "public.ecr.aws",
+    repository = "docker/library/flink",
+    tag = "1.16.1",
+)
+
+# Images used as base for //go/cmd/edge-camera-streamer
+container_pull(
+    name = "ubuntu_20_04",
+    digest = "sha256:9d42d0e3e57bc067d10a75ee33bdd1a5298e95e5fc3c5d1fce98b455cb879249",
+    registry = "public.ecr.aws",
+    repository = "docker/library/ubuntu",
+    tag = "20.04",
+)
+
+container_pull(
+    name = "aws_lambda_python_baseimage",
+    digest = "sha256:e3d5decbab4ddca757c7de36637b50826165efddecfe8b7ef76db761f51b790d",
+    registry = "public.ecr.aws",
+    repository = "lambda/python",
+    tag = "3.9",
+)
+
+authenticated_container_pull(
+    name = "voxel_lambda_python_baseimage",
+    digest = "sha256:adfa85f7e0aa02d80377b96d8bdd0e8f63e7955cb4bf22c7d64a21f9806f0ad1",
+    registry = "203670452561.dkr.ecr.us-west-2.amazonaws.com",
+    repository = "third_party/aws/lambda/python",
+    tag = "v0.0.1",
+)
+
+# Just a push of the image created by
+# third_party/sematic/refresh_yolo_image.sh
+# we'll want to add that to bazel mechanisms to produce
+# eventually
+authenticated_container_pull(
+    name = "yolov5_repush",
+    digest = "sha256:8adb11c4241f1045b8a86bc983f54117febd47027f49e5d90c530dfff2051b4d",
+    registry = "203670452561.dkr.ecr.us-west-2.amazonaws.com",
+    repository = "sematic",
+    tag = "yolov5-base-2023-03-29T20-45-41",
+)
+
+authenticated_container_pull(
+    name = "spill_repush",
+    digest = "sha256:fdcfa5243237a056d5062a025b6c61c361f6773be1cf250c485e7f1460ed595d",
+    registry = "203670452561.dkr.ecr.us-west-2.amazonaws.com",
+    repository = "/sematic",
+    tag = "spill-base",
+)
+
+authenticated_container_pull(
+    name = "voxel_edge_edge_transcoder_cuda_base",
+    digest = "sha256:1c28df6696f26cf59e4fe2f09655a1d8300f16aec3a97383bc6f99f871e8caf4",
+    registry = "360054435465.dkr.ecr.us-west-2.amazonaws.com",
+    repository = "/voxel/edge/edge-transcoder-cuda-base",
+    tag = "4310f46b1",
+)
+
+authenticated_container_pull(
+    name = "voxel_edge_edge_transcoder_quicksync_base",
+    digest = "sha256:712c116015c6e8b8093f42fa8b8e22d35491b7fdc1da513b9886ab96e0ce044a",
+    registry = "360054435465.dkr.ecr.us-west-2.amazonaws.com",
+    repository = "/voxel/edge/edge-transcoder-quicksync-base",
+    tag = "bde7fde0a",
+)
+
+authenticated_container_pull(
+    name = "nvidia_cuda_11_6_devel_ubuntu_20_04",
+    digest = "sha256:5a819580a3cdb4e762dd09ea053a25c62f1a7a18464869b074e0ef9b76799d96",
+    registry = "203670452561.dkr.ecr.us-west-2.amazonaws.com",
+    repository = "dockerhub/nvidia/cuda",
+    tag = "11.6.0-devel-ubuntu20.04",
+)
+
+authenticated_container_pull(
+    name = "nvidia_cuda_11_6_runtime_ubuntu_20_04",
+    digest = "sha256:c818e2447dad5fd22dfe5cdc5b511d59ebc53b240e5c44f0164c0f06e244d213",
+    registry = "203670452561.dkr.ecr.us-west-2.amazonaws.com",
+    repository = "dockerhub/nvidia/cuda",
+    tag = "11.6.0-runtime-ubuntu20.04",
+)
+
+authenticated_container_pull(
+    name = "voxel_ubuntu_20_04",
+    digest = "sha256:5657d64f57d57f243e135a6396ebd0f1593cbb1d2e29e57d27389f157c8dc177",
+    registry = "203670452561.dkr.ecr.us-west-2.amazonaws.com",
+    repository = "voxel-ci/ubuntu",
+    tag = "20.04_voxel_v1",
+)
+
+authenticated_container_pull(
+    name = "voxel_cuda_11_4_ubuntu_20_04",
+    digest = "sha256:7a9ab58a7fe7d04115439f38e1d5cd8bd7d7facac81dedf4220d641dcd6deb2c",
+    registry = "203670452561.dkr.ecr.us-west-2.amazonaws.com",
+    repository = "voxel-ci/ubuntu",
+    tag = "11.4.1-cudnn8-ubuntu20.04_voxel_v1",
+)
+
+authenticated_container_pull(
+    name = "voxel_cuda_11_4_runtime_ubuntu_20_04",
+    digest = "sha256:4d4303d55ff3814b565f959979296d418ecb5e333fc8431fdc41830fd709d16f",
+    registry = "203670452561.dkr.ecr.us-west-2.amazonaws.com",
+    repository = "voxel-ci/ubuntu",
+    tag = "11.4.1-cudnn8-runtime-ubuntu20.04_voxel_v1",
+)
+
+# Just a push of the image created by
+# third_party/sematic/refresh_lightly_image.sh
+# we'll want to add that to bazel mechanisms to produce
+# eventually
+authenticated_container_pull(
+    name = "lightly_worker_repush",
+    digest = "sha256:583d319e6d82dab738bcd8a32bb9956500336cd01f6b15bb7056b737d952d1fa",
+    registry = "203670452561.dkr.ecr.us-west-2.amazonaws.com",
+    repository = "sematic",
+    tag = "lightly-base-2.6.5",
+)
+
+####################### Base Containers #######################
+
+################### multirun ########################
+
+git_repository(
+    name = "com_github_ash2k_bazel_tools",
+    commit = "8ec69576f63c254a089a63ebf7385e7ee1a871e9",
+    remote = "https://github.com/ash2k/bazel-tools.git",
+)
+
+load("@com_github_ash2k_bazel_tools//multirun:deps.bzl", "multirun_dependencies")
+
+multirun_dependencies()
+
+#####################################################
+
+################# aws session manager plugin ####################
+
+new_git_repository(
+    name = "com_github_aws_session_manager_plugin",
+    build_file_content = """
+filegroup(
+    name = "src",
+    srcs = glob(["**/**"]),
+    visibility = ["//visibility:public"],
+)
+""",
+    commit = "916aa5c1c241967baaf20a0f3edcde44a45e4dfb",
+    remote = "https://github.com/aws/session-manager-plugin",
+    shallow_since = "1655496529 -0700",
+)
+
+#################################################################
+
+####################### Packages #######################
+
+http_archive(
+    name = "gcloud",
+    build_file = "//third_party/google/gcloud:BUILD.bazel",
+    sha256 = "d8ea1bd3e2b27d8eaa1fc5b6b8424f6a7a2d6e06323563f54e08a48f3d942b4f",
+    urls = ["https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-354.0.0-linux-x86_64.tar.gz"],
+)
+
+http_archive(
+    name = "helm",
+    build_file_content = """sh_binary(
+    name = "helm",
+    srcs = ["@helm//:linux-amd64/helm"],
+    visibility = ["//visibility:public"],
+)""",
+    sha256 = "07c100849925623dc1913209cd1a30f0a9b80a5b4d6ff2153c609d11b043e262",
+    urls = ["https://get.helm.sh/helm-v3.6.3-linux-amd64.tar.gz"],
+)
+
+http_file(
+    name = "kubectl",
+    executable = True,
+    sha256 = "9f74f2fa7ee32ad07e17211725992248470310ca1988214518806b39b1dad9f0",
+    urls = ["https://dl.k8s.io/release/v1.21.0/bin/linux/amd64/kubectl"],
+)
+
+http_file(
+    name = "argocd",
+    executable = True,
+    sha256 = "249a7409e8d602347668420ac4cb2c828565fe72d1b9bffb06bbf7c816ec38c6",
+    urls = ["https://github.com/argoproj/argo-cd/releases/download/v2.5.2/argocd-linux-amd64"],
+)
+
+http_file(
+    name = "minikube",
+    executable = True,
+    sha256 = "7579e5763a4e441500e5709eb058384c9cfe9c9dd888b39905b2cdf3d30fbf36",
+    urls = ["https://github.com/kubernetes/minikube/releases/download/v1.22.0/minikube-linux-amd64"],
+)
+
+http_file(
+    name = "skaffold",
+    executable = True,
+    sha256 = "62fe1c68bf8b177e43fb900a4166b4f087ac5b68f927a6854d625bf38c8bcc41",
+    urls = ["https://github.com/GoogleContainerTools/skaffold/releases/download/v2.1.0/skaffold-linux-amd64"],
+)
+
+http_file(
+    name = "buildifier",
+    executable = True,
+    sha256 = "069a03fc1fa46135e3f71e075696e09389344710ccee798b2722c50a2d92d55a",
+    urls = ["https://github.com/bazelbuild/buildtools/releases/download/4.0.1/buildifier"],
+)
+
+http_file(
+    name = "ibazel",
+    executable = True,
+    sha256 = "c2806fc892464f138ce78c5ed30397b42d73cdf3c7e2868219f7f6b39bca9514",
+    urls = ["https://github.com/bazelbuild/bazel-watcher/releases/download/v0.16.2/ibazel_linux_amd64"],
+)
+
+http_file(
+    name = "codecov",
+    executable = True,
+    sha256 = "671cf0d89d1c149f57e1a9a31f3fb567ab4209e4d5829f13ff7b8c104db7131f",
+    urls = ["https://github.com/codecov/uploader/releases/download/v0.4.0/codecov-linux"],
+)
+
+http_archive(
+    name = "rover",
+    build_file_content = """
+sh_binary(
+    name = "rover_bin",
+    srcs = ["@rover//:rover"],
+    visibility = ["//visibility:public"],
+)
+""",
+    sha256 = "439530db8d459d4c88aa013391c0afba99a0b3312eb54db190a9b8c3735a0b3a",
+    strip_prefix = "dist",
+    urls = ["https://github.com/apollographql/rover/releases/download/v0.7.0/rover-v0.7.0-x86_64-unknown-linux-gnu.tar.gz"],
+)
+
+http_archive(
+    name = "trunk_linux_x86_64",
+    build_file_content = """
+exports_files([
+    "trunk",
+])
+""",
+    sha256 = "b5794d6684e276b55198512a2779de445dba194592bdfcd77e18671bf379e19c",
+    urls = ["https://trunk.io/releases/1.9.1/trunk-1.9.1-linux-x86_64.tar.gz"],
+)
+
+http_archive(
+    name = "trunk_darwin_arm64",
+    build_file_content = """
+exports_files([
+    "trunk",
+])
+""",
+    sha256 = "6fcf74b60f1a8db1d42374419b688b0cabf5ea674f7310217e632e8a355ec5c5",
+    urls = ["https://trunk.io/releases/1.9.1/trunk-1.9.1-darwin-arm64.tar.gz"],
+)
+
+http_archive(
+    name = "lcov",
+    build_file_content = """
+exports_files([
+"bin/genhtml",
+])
+""",
+    sha256 = "14995699187440e0ae4da57fe3a64adc0a3c5cf14feab971f8db38fb7d8f071a",
+    strip_prefix = "lcov-1.14",
+    url = "http://downloads.sourceforge.net/ltp/lcov-1.14.tar.gz",
+)
+
+http_jar(
+    name = "bazel_diff",
+    sha256 = "ac8197a9c1b5cd58352b48d7bfa9fb15e563f05a51cfcb56242dfa64bdcfd639",
+    urls = [
+        "https://github.com/Tinder/bazel-diff/releases/download/3.4.2/bazel-diff_deploy.jar",
+    ],
+)
+
+new_git_repository(
+    name = "autoaugment",
+    build_file = "//third_party/autoaugment:BUILD.bazel",
+    commit = "19c8c484807b3462e59561501794d744e88b56bf",
+    remote = "https://github.com/DeepVoltaire/AutoAugment",
+    shallow_since = "1627033173 -0400",
+)
+
+http_archive(
+    name = "ffmpeg_sources",
+    build_file_content = """
+filegroup(
+    name = "ffmpeg_sources",
+    srcs = glob(["**"]),
+    visibility = ["//visibility:public"],
+)
+""",
+    sha256 = "55eb6aab5ee235550fa54a33eaf8bf1b4ec66c01453182b12f6a993d75698b03",
+    strip_prefix = "ffmpeg-5.1",
+    url = "https://ffmpeg.org/releases/ffmpeg-5.1.tar.xz",
+)
+
+http_archive(
+    name = "aws_kvssink_sources",
+    build_file_content = """
+filegroup(
+    name = "aws_kvssink_sources",
+    srcs = glob(["**"]),
+    visibility = ["//visibility:public"],
+)
+""",
+    sha256 = "6a21409132687b1f370e814cb5b1d3f270a8443f87fac0aa1ef3fc03d42165a5",
+    strip_prefix = "amazon-kinesis-video-streams-producer-sdk-cpp-3.3.1",
+    url = "https://github.com/awslabs/amazon-kinesis-video-streams-producer-sdk-cpp/archive/refs/tags/v3.3.1.tar.gz",
+)
+
+http_archive(
+    name = "matroska_specification",
+    build_file_content = """
+exports_files(["ebml_matroska.xml"])
+""",
+    sha256 = "e9fe34f3cf93deb9810ab1ed055dd4a8868d3bdb5ad81e462be22bbb8209ce91",
+    strip_prefix = "matroska-specification-draft-ietf-cellar-matroska-06",
+    url = "https://github.com/ietf-wg-cellar/matroska-specification/archive/refs/tags/draft-ietf-cellar-matroska-06.zip",
+)
+
+####################### Artifacts #######################
+
+load("//:artifacts.bzl", "voxel_artifacts")
+
+voxel_artifacts()
+
+load("//rules:s3_archive.bzl", "s3_archive")
+
+s3_archive(
+    name = "mkvtagreader_testdata",
+    build_file_content = """
+filegroup(
+    name = "mkvtagreader_testdata",
+    srcs = glob(["**"]),
+    visibility = ["//visibility:public"],
+)
+""",
+    sha256 = "c25b7155a947514fbf2f29ac656738f6f748471cda3a71f1409c98e10e1ccecd",
+    url = "s3://voxel-storage/testdata/mkvtagreader/testdata_v2.zip",
+)
+
+s3_archive(
+    name = "kinesis_utils_testdata",
+    build_file_content = """
+filegroup(
+    name = "kinesis_utils_testdata",
+    srcs = glob(["**"]),
+    visibility = ["//visibility:public"],
+)
+""",
+    sha256 = "07e6e4cb5eb30db0ee7c989afe32aec3c3bafa0215c7be11df4b503881fdf868",
+    url = "s3://voxel-storage/testdata/kinesis_utils/testdata_v2.zip",
+)
+
+s3_archive(
+    name = "artifacts_office_cam_720p_mkv",
+    build_file_content = """
+filegroup(
+    name = "artifacts_office_cam_720p_mkv",
+    srcs = glob(["**"]),
+    visibility = ["//visibility:public"],
+)
+""",
+    sha256 = "57d8e7e276f0d0e3223d7bd4e32d522def81567832c5ef6440ab896fd7520b9f",
+    url = "s3://voxel-storage/artifactory/office_cam_720p_mkv/57d8e7e276f0d0e3223d7bd4e32d522def81567832c5ef6440ab896fd7520b9f/office_cam_720p_mkv.zip",
+)
+
+s3_archive(
+    name = "artifacts_ffmpeg_static_binary",
+    build_file_content = """
+filegroup(
+    name = "artifacts_ffmpeg_static_binary",
+    srcs = glob(["**"]),
+    visibility = ["//visibility:public"],
+)
+""",
+    sha256 = "b54806fff96647aee8fa6dbccdce305308221b9a3ebdbe815966fb82a9bc252b",
+    strip_prefix = "ffmpeg-5.0.1-amd64-static",
+    url = "s3://voxel-storage/artifactory/ffmpeg-release-5.0.1-amd64-static.tar.xz/b54806fff96647aee8fa6dbccdce305308221b9a3ebdbe815966fb82a9bc252b/ffmpeg-release-5.0.1-amd64-static.tar.xz",
+)
+
+s3_archive(
+    name = "artifacts_office_cam_mp4",
+    build_file_content = """
+filegroup(
+    name = "artifacts_office_cam_mp4",
+    srcs = glob(["**"]),
+    visibility = ["//visibility:public"],
+)
+""",
+    sha256 = "2f43fd960b8ecaacea17122bd9a74576e834a48fb23e5106f9dd837f06ec7141",
+    url = "s3://voxel-storage/artifactory/office_cam_mp4/2f43fd960b8ecaacea17122bd9a74576e834a48fb23e5106f9dd837f06ec7141/office_cam_mp4.zip",
+)
+
+s3_archive(
+    name = "artifacts_edge_server_test_video",
+    build_file_content = """
+filegroup(
+    name = "artifacts_edge_server_test_video",
+    srcs = glob(["**"]),
+    visibility = ["//visibility:public"],
+)
+""",
+    sha256 = "181c9fc647c4950ed933be3e040c5def9ca6e2e00044a6724ceefbee2e2c9dd1",
+    url = "s3://voxel-storage/artifactory/edge_server_test_video/181c9fc647c4950ed933be3e040c5def9ca6e2e00044a6724ceefbee2e2c9dd1/edge_server_test_video.tar.gz",
+)
+
+s3_archive(
+    name = "voxel_kvspusher_testdata",
+    build_file_content = """
+filegroup(
+    name = "voxel_kvspusher_testdata",
+    srcs = glob(["**"]),
+    visibility = ["//visibility:public"],
+)
+""",
+    sha256 = "d7c4fd2842397433b753de866261f97031c716079e3d2027d661d32d5a8c0f5a",
+    url = "s3://voxel-storage/testdata/kvspusher/testdata_v3.zip",
+)
+
+####################### Artifacts #######################

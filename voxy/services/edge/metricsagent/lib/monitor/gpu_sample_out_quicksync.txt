@@ -1,0 +1,48 @@
+sample output from `intel_gpu_top -J` begins below dashed line
+
+-----------------------------------
+{
+	"period": {
+		"duration": 1000.433157,
+		"unit": "ms"
+	},
+	"frequency": {
+		"requested": 278.879202,
+		"actual": 263.885696,
+		"unit": "MHz"
+	},
+	"interrupts": {
+		"count": 117.948910,
+		"unit": "irq/s"
+	},
+	"rc6": {
+		"value": 86.777831,
+		"unit": "%"
+	},
+	"engines": {
+		"Render/3D/0": {
+			"busy": 4.701493,
+			"sema": 0.000000,
+			"wait": 0.000000,
+			"unit": "%"
+		},
+		"Blitter/0": {
+			"busy": 0.000000,
+			"sema": 0.000000,
+			"wait": 0.000000,
+			"unit": "%"
+		},
+		"Video/0": {
+			"busy": 12.645111,
+			"sema": 2.498963,
+			"wait": 0.000000,
+			"unit": "%"
+		},
+		"VideoEnhance/0": {
+			"busy": 0.000000,
+			"sema": 0.000000,
+			"wait": 0.000000,
+			"unit": "%"
+		}
+	}
+}

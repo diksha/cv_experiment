@@ -1,0 +1,134 @@
+# sudo crontab -u voxel -e
+# sudo service cron restart
+
+
+# # Starts at 6 57 and record for 4 hours 300 seconds. 180 seconds pre start and 120 seconds after.
+# 57 6 * * * timeout 14700 /home/voxel/code/bin/record.sh admin 007abcABC 192.168.4.98 location_id zone_id camera_id
+# 57 6 * * * timeout 14700 /home/voxel/code/bin/record.sh admin 007abcABC 192.168.4.98 location_id zone_id camera_id
+# 57 6 * * * timeout 14700 /home/voxel/code/bin/record.sh admin 007abcABC 192.168.4.98 location_id zone_id camera_id
+# 57 6 * * * timeout 14700 /home/voxel/code/bin/record.sh admin 007abcABC 192.168.4.98 location_id zone_id camera_id
+# 57 6 * * * timeout 14700 /home/voxel/code/bin/record.sh admin 007abcABC 192.168.4.98 location_id zone_id camera_id
+# 57 6 * * * timeout 14700 /home/voxel/code/bin/record.sh admin 007abcABC 192.168.4.98 location_id zone_id camera_id
+# 57 6 * * * timeout 14700 /home/voxel/code/bin/record.sh admin 007abcABC 192.168.4.98 location_id zone_id camera_id
+# 57 6 * * * timeout 14700 /home/voxel/code/bin/record.sh admin 007abcABC 192.168.4.98 location_id zone_id camera_id
+
+
+
+# # Starts at 15 57 and record for 4 hours 300 seconds. 60 seconds pre start and 40 seconds after.
+# 57 15 * * * timeout 14700 /home/voxel/code/bin/record.sh admin 007abcABC 192.168.4.98 location_id zone_id camera_id
+# 57 15 * * * timeout 14700 /home/voxel/code/bin/record.sh admin 007abcABC 192.168.4.98 location_id zone_id camera_id
+# 57 15 * * * timeout 14700 /home/voxel/code/bin/record.sh admin 007abcABC 192.168.4.98 location_id zone_id camera_id
+# 57 15 * * * timeout 14700 /home/voxel/code/bin/record.sh admin 007abcABC 192.168.4.98 location_id zone_id camera_id
+# 57 15 * * * timeout 14700 /home/voxel/code/bin/record.sh admin 007abcABC 192.168.4.98 location_id zone_id camera_id
+# 57 15 * * * timeout 14700 /home/voxel/code/bin/record.sh admin 007abcABC 192.168.4.98 location_id zone_id camera_id
+# 57 15 * * * timeout 14700 /home/voxel/code/bin/record.sh admin 007abcABC 192.168.4.98 location_id zone_id camera_id
+# 57 15 * * * timeout 14700 /home/voxel/code/bin/record.sh admin 007abcABC 192.168.4.98 location_id zone_id camera_id
+
+
+
+# # Starts at 22 00 and run for 10 minutes to delete any videos which are less than 500 MB in size.
+# 00 22 * * * timeout 600 find /home/voxel/data/videos/ -type 'f' -size -500M -delete
+
+# # Starts at 23 00 to move the files from local disk to cloud and runs for 7 hours 30 minutes.
+# # It only deletes the file once if it has been successfully moved, so if it timeouts in between we will be fine.
+# 0 23 * * * timeout 27000 gsutil -m mv -r -c -e -n /home/voxel/data/videos/* gs://voxel-raw-videos/
+
+
+
+# # # Commands for port forwarding
+# sudo nano /etc/sysctl.conf
+# net.ipv4.ip_forward=1
+# net.ipv4.icmp_echo_ignore_all=1   # Disable Ping
+# sudo sysctl -p
+# sudo sysctl --system
+
+# sudo apt install redir
+# redir :28401 10.1.10.248:80
+
+
+
+
+# Security
+# sudo nano /etc/ssh/sshd_config
+# PermitRootLogin no
+# ChallengeResponseAuthentication no
+# PasswordAuthentication no
+# UsePAM no
+# Port <> some non standard port, let's keep it fixed for all our machines.
+# service sshd restart
+
+# sudo ufw enable
+# sudo ufw default deny incoming
+# sudo ufw allow 28400/tcp   # SSH Port, let's actuall use a non standard port for ssh
+# sudo ufw allow 28401/tcp
+# sudo ufw allow 28402/tcp
+# sudo ufw allow 28403/tcp
+# sudo ufw allow 28404/tcp
+# sudo ufw allow 28405/tcp
+# sudo ufw allow 28406/tcp
+# sudo ufw allow 28407/tcp
+# sudo ufw allow 28408/tcp
+# sudo ufw reload
+
+# SSH Authorized Keys
+# nano ~/.ssh/authorized_keys
+
+# ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCegTRLGCUuik29IA1BXnFJBha8s3Wiq2nggwXuUrVJpIhxcRgI/mn/THHytyOOlr8yBT8udMuf91zAqc3coKggJ8DXSQEnJz1WU+6y71AD134vhl4Rmk/GuWwWqk7vA2gjmj9Qtw2lmGiY2Es8ETglgNUbe/X2PSGfxVlTH/KzklF1p0+fIt8b5GoIt/341WYc9O9OXtrXzIfCoocjnBWSNaVvqMWNOAsqX44xR3vGzQG7nF1hH04QiYkTuFtfMQ8aFUabiPLqcqPgb/wccVPS2d3sAOZbLQ+Iq1E8kvqvp9fEASGRbXPNOd10hJkSP90CKlmusA6V9HgoqYBHvcHh voxel
+
+
+# Set fail to ban
+# sudo apt-get install fail2ban -y
+# sudo nano /etc/fail2ban/jail.local
+# [DEFAULT]
+# ignoreip = 127.0.0.1/8 ::1
+# bantime = 3600
+# findtime = 600
+# maxretry = 3
+# [sshd]
+# enabled = true
+
+# sudo service fail2ban restart
+
+# DDNS
+
+# sudo apt install ddclient
+# Run ddclient on PPP connect NO
+# Run ddclient as daemon? Yes
+# Interval 5m
+# Fill anything in other fields
+
+# sudo nano /etc/ddclient.conf
+# protocol=dyndns2
+# use=web, web=checkip.dyndns.com/, web-skip='IP Address'
+# server=dynupdate.no-ip.com
+# login=anurag234
+# password='007abcABC'
+# formfitness.ddns.net
+
+# sudo ddclient
+
+# sudo passwd
+
+# Do we need physical security? Such as ensuring disk encryption.
+
+NaCl@1074K=MoltenSalt
+
+
+sudo nano /etc/init.d/portforward
+
+#!bin/bash
+nohup redir :28401 10.1.10.248:80
+nohup redir :28402 10.1.10.215:80
+nohup redir :28403 10.1.10.242:80
+nohup redir :28404 10.1.10.245:80
+nohup redir :28405 10.1.10.237:80
+nohup redir :28406 10.1.10.239:80
+nohup redir :28407 10.1.10.233:80
+nohup redir :28408 10.1.10.216:80
+
+
+sudo chmod a+x /etc/init.d/portforward
+sudo update-rc.d portforward defaults
+sudo update-rc.d portforward enable
+
+sudo service portforward restart

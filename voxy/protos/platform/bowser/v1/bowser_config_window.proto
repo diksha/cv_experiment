@@ -1,0 +1,12 @@
+syntax = "proto3";
+package protos.platform.bowser.v1;
+option go_package = "github.com/voxel-ai/voxel/protos/platform/bowser/v1";
+
+
+/* ProcessorWindow represents the business configuration objects used to execute a Bowser Processor Window */
+
+message ProcessorWindow {
+    int32 time_second = 1; // the number of second that the window will perform before to release the keyed stream
+}
+
+

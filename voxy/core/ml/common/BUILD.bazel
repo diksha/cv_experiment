@@ -1,0 +1,33 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+
+package(
+    default_visibility = [
+        "//core/infra/sematic/perception:__subpackages__",
+        "//core/ml:__subpackages__",
+    ],
+)
+
+py_binary(
+    name = "utils",
+    srcs = [
+        "utils.py",
+    ],
+    deps = [
+        "//core/utils:camera_config_utils",
+        requirement("mergedeep"),
+        requirement("loguru"),
+    ],
+)
+
+py_binary(
+    name = "torch_utils",
+    srcs = [
+        "torch_utils.py",
+    ],
+    deps = [
+        requirement("torch"),
+        requirement("torchvision"),
+        requirement("numpy"),
+    ],
+)

@@ -1,0 +1,134 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+---
+version: "3.9"
+services:
+  uscold_laredo_dock01_cha:
+    container_name: uscold_laredo_dock01_cha
+    image: 667031391229.dkr.ecr.us-west-2.amazonaws.com/voxel/production:${IMAGE_TAG}
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=artifacts_edge-production-temp-key/sodium-carving-227300-5b5ef437ef41.json
+      - AWS_REGION
+      - SVCUID
+      - AWS_GG_NUCLEUS_DOMAIN_SOCKET_FILEPATH_FOR_COMPONENT
+      - AWS_CONTAINER_AUTHORIZATION_TOKEN
+      - AWS_CONTAINER_CREDENTIALS_FULL_URI
+      - IMAGE_TAG
+    ipc: host
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - /var/tmp/voxel:/var/tmp/voxel
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            capabilities: [gpu]
+    command:
+      - --camera_config_path=configs/cameras/uscold/laredo/dock01/cha.yaml
+  uscold_laredo_dock03_cha:
+    container_name: uscold_laredo_dock03_cha
+    image: 667031391229.dkr.ecr.us-west-2.amazonaws.com/voxel/production:${IMAGE_TAG}
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=artifacts_edge-production-temp-key/sodium-carving-227300-5b5ef437ef41.json
+      - AWS_REGION
+      - SVCUID
+      - AWS_GG_NUCLEUS_DOMAIN_SOCKET_FILEPATH_FOR_COMPONENT
+      - AWS_CONTAINER_AUTHORIZATION_TOKEN
+      - AWS_CONTAINER_CREDENTIALS_FULL_URI
+      - IMAGE_TAG
+    ipc: host
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - /var/tmp/voxel:/var/tmp/voxel
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            capabilities: [gpu]
+    command:
+      - --camera_config_path=configs/cameras/uscold/laredo/dock03/cha.yaml
+  uscold_laredo_dock04_cha:
+    container_name: uscold_laredo_dock04_cha
+    image: 667031391229.dkr.ecr.us-west-2.amazonaws.com/voxel/production:${IMAGE_TAG}
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=artifacts_edge-production-temp-key/sodium-carving-227300-5b5ef437ef41.json
+      - AWS_REGION
+      - SVCUID
+      - AWS_GG_NUCLEUS_DOMAIN_SOCKET_FILEPATH_FOR_COMPONENT
+      - AWS_CONTAINER_AUTHORIZATION_TOKEN
+      - AWS_CONTAINER_CREDENTIALS_FULL_URI
+      - IMAGE_TAG
+    ipc: host
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - /var/tmp/voxel:/var/tmp/voxel
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            capabilities: [gpu]
+    command:
+      - --camera_config_path=configs/cameras/uscold/laredo/dock04/cha.yaml
+  uscold_laredo_doors_14_20_cha:
+    container_name: uscold_laredo_doors_14_20_cha
+    image: 667031391229.dkr.ecr.us-west-2.amazonaws.com/voxel/production:${IMAGE_TAG}
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=artifacts_edge-production-temp-key/sodium-carving-227300-5b5ef437ef41.json
+      - AWS_REGION
+      - SVCUID
+      - AWS_GG_NUCLEUS_DOMAIN_SOCKET_FILEPATH_FOR_COMPONENT
+      - AWS_CONTAINER_AUTHORIZATION_TOKEN
+      - AWS_CONTAINER_CREDENTIALS_FULL_URI
+      - IMAGE_TAG
+    ipc: host
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - /var/tmp/voxel:/var/tmp/voxel
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            capabilities: [gpu]
+    command:
+      - --camera_config_path=configs/cameras/uscold/laredo/doors_14_20/cha.yaml
+  uscold_laredo_room_f1_cha:
+    container_name: uscold_laredo_room_f1_cha
+    image: 667031391229.dkr.ecr.us-west-2.amazonaws.com/voxel/production:${IMAGE_TAG}
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=artifacts_edge-production-temp-key/sodium-carving-227300-5b5ef437ef41.json
+      - AWS_REGION
+      - SVCUID
+      - AWS_GG_NUCLEUS_DOMAIN_SOCKET_FILEPATH_FOR_COMPONENT
+      - AWS_CONTAINER_AUTHORIZATION_TOKEN
+      - AWS_CONTAINER_CREDENTIALS_FULL_URI
+      - IMAGE_TAG
+    ipc: host
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - /var/tmp/voxel:/var/tmp/voxel
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            capabilities: [gpu]
+    command:
+      - --camera_config_path=configs/cameras/uscold/laredo/room_f1/cha.yaml

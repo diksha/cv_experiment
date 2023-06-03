@@ -1,0 +1,27 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary", "py_library")
+
+py_library(
+    name = "generate_yolo_dataset_lib",
+    srcs = ["generate_yolo_dataset.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("loguru"),
+        requirement("scikit-learn"),
+        requirement("pandas"),
+        requirement("sematic"),
+        "//core/infra/sematic/shared:resources",
+        "//core/metaverse",
+        "//core/structs",
+        "//core/utils:aws_utils",
+    ],
+)
+
+py_binary(
+    name = "generate_yolo_dataset",
+    srcs = ["generate_yolo_dataset.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":generate_yolo_dataset_lib",
+    ],
+)

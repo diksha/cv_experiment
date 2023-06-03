@@ -1,0 +1,84 @@
+{{- if .Values.job }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "generic.fullname" . }}
+  labels:
+    {{- include "generic.labels" . | nindent 4 }}
+spec:
+  ttlSecondsAfterFinished: 100
+  template:
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "generic.serviceAccountName" . }}
+      {{- with .Values.secrets }}
+      volumes:
+      - name: {{ .name }}
+        csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: {{ .secretProviderClass }}
+      {{- end }}
+      containers:
+      - name: main
+        securityContext:
+          {{- toYaml .Values.securityContext | nindent 12 }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        command: [{{ .Values.command }}]
+        args: {{- range .Values.args }}
+        - {{. | quote}}
+        {{- end }}
+        {{- with .Values.secrets }}
+        volumeMounts:
+        - name: {{ .name }}
+          mountPath: {{ .mountPath }}
+          readOnly: true
+        {{- end }}
+        env:
+        - name:  HELM_RELEASE_NAME
+          value: {{ .Release.Name }}
+        - name:  IMAGE_REPO
+          value: "{{ .Values.image.repository }}"
+        - name:  IMAGE_TAG
+          value: {{ .Values.image.tag | default .Chart.AppVersion }}
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        - name: HOST_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.hostIP
+        - name: ENVIRONMENT
+          value: {{ .Values.environment }}
+        envFrom:
+          - secretRef:
+              name: {{ include "generic.fullname" . }}
+
+        {{- range .Values.env.secret_refs }}
+
+          - secretRef:
+            name: {{ . | quote }}
+
+        {{- end }}
+          - configMapRef:
+              name: {{ include "generic.fullname" . }}
+
+        {{- range .Values.env.config_refs }}
+
+          - configMapRef:
+              name: {{ . | quote }}
+
+        {{- end }}
+      
+        ports:
+          - name: http
+            containerPort: {{ default 80 .Values.job.containerPort }}
+            protocol: TCP
+      restartPolicy: Never
+{{- end }}

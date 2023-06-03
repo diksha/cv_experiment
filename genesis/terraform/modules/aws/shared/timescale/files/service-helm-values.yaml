@@ -1,0 +1,42 @@
+backup:
+  enabled: true
+  env:
+  - name: PGBACKREST_REPO1_S3_BUCKET
+    value: ${BACKUP_BUCKET_NAME}
+  - name: PGBACKREST_REPO1_S3_REGION
+    value: ${REGION}
+  - name: PGBACKREST_REPO1_S3_ROLE
+    value: ${IRSA_ROLE_NAME}
+  - name: PGBACKREST_REPO1_S3_KEY_TYPE
+    value: auto
+  resources:
+    limits:
+      cpu: 2000m
+      memory: 8000Mi
+
+persistentVolumes:
+  data:
+    enabled: true
+    size: 500Gi
+    storageClass: gp3-retain
+  wal:
+    enabled: true
+    size: 20Gi
+    storageClass: gp3-retain
+
+resources:
+  requests:
+    cpu: 2000m
+    memory: 8000Mi
+  limits:
+    cpu: 8000m
+    memory: 32000Mi
+
+serviceAccount:
+  create: true
+  name: ${SERVICE_ACCOUNT_NAME}
+  annotations: 
+    eks.amazonaws.com/role-arn: ${IRSA_ROLE_ARN}
+
+sharedMemory:
+  useMount: true

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+exec ./bazel run @pip_deps_sematic//:rules_python_wheel_entry_point_sematic -- "$@"

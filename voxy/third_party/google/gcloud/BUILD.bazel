@@ -1,0 +1,30 @@
+load("@rules_python//python:defs.bzl", "py_binary")
+
+exports_files([
+    "google-cloud-sdk/lib/gcloud.py",
+    "google-cloud-sdk/bin/bootstrapping/gsutil.py",
+])
+
+filegroup(
+    name = "gcloud_files",
+    srcs = glob(["**"]),
+    visibility = ["//visibility:public"],
+)
+
+py_binary(
+    name = "gcloud",
+    srcs = ["@gcloud//:gcloud_files"],
+    # Add this so that non-py files like config.json are also packaged.
+    data = ["@gcloud//:gcloud_files"],
+    main = "@gcloud//:google-cloud-sdk/lib/gcloud.py",
+    visibility = ["//visibility:public"],
+)
+
+py_binary(
+    name = "gsutil",
+    srcs = ["@gcloud//:gcloud_files"],
+    # Add this so that non-py files like config.json are also packaged.
+    data = ["@gcloud//:gcloud_files"],
+    main = "@gcloud//:google-cloud-sdk/bin/bootstrapping/gsutil.py",
+    visibility = ["//visibility:public"],
+)

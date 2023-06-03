@@ -1,0 +1,32 @@
+##
+## Copyright 2020-2021 Voxel Labs, Inc.
+## All rights reserved.
+##
+## This document may not be reproduced, republished, distributed, transmitted,
+## displayed, broadcast or otherwise exploited in any manner without the express
+## prior written permission of Voxel Labs, Inc. The receipt or possession of this
+## document does not convey any rights to reproduce, disclose, or distribute its
+## contents, or to manufacture, use, or sell anything that it may describe, in
+## whole or in part.
+##
+
+{% set image_tag=GENERATE_UUID_WITH_PREFIX("dataset_") %}
+{% set camera_uuids=ITEMS_FROM_FILE("/home/nasha_voxelsafety_com/voxel/experimental/nasha/door_classifier/camera_uuids")%}
+{% set video_uuids=ITEMS_FROM_METAVERSE(camera_uuids) %}
+{% set job_uuid = GENERATE_UUID_WITH_PREFIX("dataset") %}
+buildkite_jobs:
+  -
+    name : dataset_container
+    type: bazel
+    command: //experimental/vai/door_classifier:dataset_push --define IMAGE_TAG={{image_tag}}
+  -
+    name: {{job_uuid}}
+    items: {{video_uuids}}
+    type: k8s
+    command: /app/experimental/vai/door_classifier/dataset_aug --dataset_version 8 --video_uuid 
+    image: us.gcr.io/sodium-carving-227300/voxel/experimental:{{image_tag}}
+    gpus: 0
+    cpus: 1
+    memory_mb: 4000
+    depends_on:
+      - dataset_container

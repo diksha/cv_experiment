@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "x509pem",
+    srcs = ["x509pem.go"],
+    importpath = "github.com/voxel-ai/voxel/lib/utils/x509pem",
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "x509pem_test",
+    srcs = ["x509pem_test.go"],
+    deps = [
+        ":x509pem",
+        "@com_github_madflojo_testcerts//:testcerts",
+        "@com_github_stretchr_testify//assert",
+        "@com_github_stretchr_testify//require",
+    ],
+)

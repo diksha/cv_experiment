@@ -1,0 +1,180 @@
+{
+        "period": {
+                "duration": 0.008688,
+                "unit": "ms"
+        },
+        "frequency": {
+                "requested": 0.000000,
+                "actual": 0.000000,
+                "unit": "MHz"
+        },
+        "interrupts": {
+                "count": 0.000000,
+                "unit": "irq/s"
+        },
+        "rc6": {
+                "value": 0.000000,
+                "unit": "%"
+        },
+        "engines": {
+                "Render/3D/0": {
+                        "busy": 0.000000,
+                        "sema": 0.000000,
+                        "wait": 0.000000,
+                        "unit": "%"
+                },
+                "Blitter/0": {
+                        "busy": 0.000000,
+                        "sema": 0.000000,
+                        "wait": 0.000000,
+                        "unit": "%"
+                },
+                "Video/0": {
+                        "busy": 100.000000,
+                        "sema": 0.000000,
+                        "wait": 0.000000,
+                        "unit": "%"
+                },
+                "VideoEnhance/0": {
+                        "busy": 0.000000,
+                        "sema": 0.000000,
+                        "wait": 0.000000,
+                        "unit": "%"
+                }
+        }
+},
+{
+        "period": {
+                "duration": 1000.764995,
+                "unit": "ms"
+        },
+        "frequency": {
+                "requested": 455.651429,
+                "actual": 406.688885,
+                "unit": "MHz"
+        },
+        "interrupts": {
+                "count": 263.798196,
+                "unit": "irq/s"
+        },
+        "rc6": {
+                "value": 70.851655,
+                "unit": "%"
+        },
+        "engines": {
+                "Render/3D/0": {
+                        "busy": 12.904720,
+                        "sema": 0.000000,
+                        "wait": 0.000000,
+                        "unit": "%"
+                },
+                "Blitter/0": {
+                        "busy": 0.000000,
+                        "sema": 0.000000,
+                        "wait": 0.000000,
+                        "unit": "%"
+                },
+                "Video/0": {
+                        "busy": 25.832190,
+                        "sema": 4.996840,
+                        "wait": 0.000000,
+                        "unit": "%"
+                },
+                "VideoEnhance/0": {
+                        "busy": 0.000000,
+                        "sema": 0.000000,
+                        "wait": 0.000000,
+                        "unit": "%"
+                }
+        }
+},
+{
+        "period": {
+                "duration": 1000.297990,
+                "unit": "ms"
+        },
+        "frequency": {
+                "requested": 474.858497,
+                "actual": 429.871902,
+                "unit": "MHz"
+        },
+        "interrupts": {
+                "count": 289.913609,
+                "unit": "irq/s"
+        },
+        "rc6": {
+                "value": 73.319336,
+                "unit": "%"
+        },
+        "engines": {
+                "Render/3D/0": {
+                        "busy": 12.479521,
+                        "sema": 0.000000,
+                        "wait": 0.000000,
+                        "unit": "%"
+                },
+                "Blitter/0": {
+                        "busy": 0.000000,
+                        "sema": 0.000000,
+                        "wait": 0.000000,
+                        "unit": "%"
+                },
+                "Video/0": {
+                        "busy": 23.877657,
+                        "sema": 4.498435,
+                        "wait": 0.000000,
+                        "unit": "%"
+                },
+                "VideoEnhance/0": {
+                        "busy": 0.000000,
+                        "sema": 0.000000,
+                        "wait": 0.000000,
+                        "unit": "%"
+                }
+        }
+},
+{
+        "period": {
+                "duration": 1000.389374,
+                "unit": "ms"
+        },
+        "frequency": {
+                "requested": 507.802275,
+                "actual": 461.820179,
+                "unit": "MHz"
+        },
+        "interrupts": {
+                "count": 290.886736,
+                "unit": "irq/s"
+        },
+        "rc6": {
+                "value": 72.615693,
+                "unit": "%"
+        },
+        "engines": {
+                "Render/3D/0": {
+                        "busy": 12.947725,
+                        "sema": 0.000000,
+                        "wait": 0.000000,
+                        "unit": "%"
+                },
+                "Blitter/0": {
+                        "busy": 0.000000,
+                        "sema": 0.000000,
+                        "wait": 0.000000,
+                        "unit": "%"
+                },
+                "Video/0": {
+                        "busy": 22.746993,
+                        "sema": 5.006497,
+                        "wait": 0.000000,
+                        "unit": "%"
+                },
+                "VideoEnhance/0": {
+                        "busy": 0.000000,
+                        "sema": 0.000000,
+                        "wait": 0.000000,
+                        "unit": "%"
+                }
+        }
+}

@@ -1,0 +1,32 @@
+load("@pip_deps//:requirements.bzl", "requirement")
+load("@rules_python//python:defs.bzl", "py_binary")
+
+package(default_visibility = ["//visibility:public"])
+
+py_binary(
+    name = "example_usage",
+    srcs = ["example_usage.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("torchvision"),
+        requirement("loguru"),
+        requirement("matplotlib"),
+        "//third_party/vit_pose/configs",
+        "//third_party/vit_pose/models:model",
+        "//third_party/vit_pose/utils",
+    ],
+)
+
+py_binary(
+    name = "export",
+    srcs = ["export.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        requirement("torchvision"),
+        requirement("loguru"),
+        requirement("matplotlib"),
+        "//third_party/vit_pose/configs",
+        "//third_party/vit_pose/models:model",
+        "//third_party/vit_pose/utils",
+    ],
+)

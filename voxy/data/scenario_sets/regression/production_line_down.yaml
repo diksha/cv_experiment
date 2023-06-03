@@ -1,0 +1,39 @@
+#
+# Copyright 2023 Voxel Labs, Inc.
+# All rights reserved.
+#
+# This document may not be reproduced, republished, distributed, transmitted,
+# displayed, broadcast or otherwise exploited in any manner without the express
+# prior written permission of Voxel Labs, Inc. The receipt or possession of this
+# document does not convey any rights to reproduce, disclose, or distribute its
+# contents, or to manufacture, use, or sell anything that it may describe, in
+# whole or in part.
+#
+#
+scenario_for_incidents: [PRODUCTION_LINE_DOWN]
+scenarios:
+  # POSITIVE SCENARIOS
+  - camera_uuid: wn_foods/hayward/0003/cha
+    incidents: [PRODUCTION_LINE_DOWN]
+    video_uuid: wn_foods/hayward/0003/cha/eccd31df-07f9-474b-bb41-f4b26782071b_0000
+  - camera_uuid: wn_foods/hayward/0003/cha
+    incidents: [PRODUCTION_LINE_DOWN]
+    video_uuid: wn_foods/hayward/0003/cha/7fd92377-7e55-46dd-b286-2336197367d9_0000
+  - camera_uuid: wn_foods/hayward/0006/cha
+    incidents: [PRODUCTION_LINE_DOWN]
+    video_uuid: wn_foods/hayward/0006/cha/d05f58e6-c6c3-4d9b-b049-fd1a4dd78f0c_0000
+  - camera_uuid: wn_foods/hayward/0006/cha
+    incidents: [PRODUCTION_LINE_DOWN]
+    video_uuid: wn_foods/hayward/0006/cha/5c67a6c9-064b-4752-b65e-44f9ef9c4090_0000
+  - camera_uuid: innovate_manufacturing/knoxville/0013/cha
+    incidents: [PRODUCTION_LINE_DOWN]
+    video_uuid: innovate_manufacturing/knoxville/0013/cha/98f18844-c2e1-401d-8ed2-5683fdf3ea67_0000
+  - camera_uuid: innovate_manufacturing/knoxville/0013/cha
+    incidents: [PRODUCTION_LINE_DOWN]
+    video_uuid: innovate_manufacturing/knoxville/0013/cha/c8d74253-b9a7-4a77-93c4-92e7b7b03c5c_0000
+  - camera_uuid: wn_foods/hayward/0001/cha
+    incidents: [PRODUCTION_LINE_DOWN]
+    video_uuid: wn_foods/hayward/0001/cha/scenarios/PRODUCTION_LINE_DOWN/POSITIVE/72d26f45-79f2-4fef-9666-649b358e64dd_0000
+  - camera_uuid: wn_foods/hayward/0004/cha
+    incidents: [PRODUCTION_LINE_DOWN]
+    video_uuid: wn_foods/hayward/0004/cha/scenarios/PRODUCTION_LINE_DOWN/POSITIVE/bd3385d1-4a27-4adb-939a-9fcca18726b2_0000

@@ -1,0 +1,35 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "videoarchiver",
+    srcs = [
+        "config.go",
+        "kinesisvideo.go",
+        "videoarchiver.go",
+    ],
+    importpath = "github.com/voxel-ai/voxel/services/platform/prism/lib/videoarchiver",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//services/platform/prism/lib/fragarchive",
+        "//services/platform/prism/lib/fragarchive/key",
+        "//services/platform/prism/lib/internal/fragutils",
+        "@com_github_aws_aws_sdk_go_v2//aws",
+        "@com_github_aws_aws_sdk_go_v2_service_kinesisvideo//:kinesisvideo",
+        "@com_github_aws_aws_sdk_go_v2_service_kinesisvideo//types",
+        "@com_github_aws_aws_sdk_go_v2_service_kinesisvideoarchivedmedia//:kinesisvideoarchivedmedia",
+        "@com_github_aws_aws_sdk_go_v2_service_kinesisvideoarchivedmedia//types",
+        "@com_github_rs_zerolog//log",
+    ],
+)
+
+go_test(
+    name = "videoarchiver_test",
+    srcs = ["videoarchiver_test.go"],
+    deps = [
+        ":videoarchiver",
+        "//lib/utils/aws/fake",
+        "//services/platform/prism/lib/fragarchive",
+        "@com_github_aws_aws_sdk_go_v2_service_kinesisvideo//:kinesisvideo",
+        "@com_github_stretchr_testify//assert",
+    ],
+)

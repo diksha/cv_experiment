@@ -1,0 +1,29 @@
+load("@io_bazel_rules_docker//container:container.bzl", "container_push")
+load("@pip_deps//:requirements.bzl", "requirement")
+load("//third_party/flink:defs.bzl", "py_flink_pipeline")
+
+py_flink_pipeline(
+    name = "pipeline",
+    srcs = ["pipeline.py"],
+    data = [
+        "//configs",
+    ],
+    main = "pipeline.py",
+    deps = [
+        requirement("boto3"),
+        "//core/execution/nodes:incident_machine",
+        "//core/structs:protobufs",
+        "@rules_python//python/runfiles",
+    ],
+)
+
+container_push(
+    name = "push",
+    format = "Docker",
+    image = ":pipeline.image",
+    registry = "203670452561.dkr.ecr.us-west-2.amazonaws.com",
+    repository = "experimental/jorge/try_flink",
+    stamp = "@io_bazel_rules_docker//stamp:always",
+    tag = "{GIT_COMMIT}",
+    tags = ["manual"],
+)

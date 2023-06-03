@@ -1,0 +1,7 @@
+sh_binary(
+    name = "py-spy",
+    srcs = [
+        "run.sh",
+    ],
+    data = ["@pip_deps_py_spy//:whl"],
+)

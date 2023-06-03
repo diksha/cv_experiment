@@ -1,0 +1,43 @@
+{
+  "RecipeFormatVersion": "2020-01-25",
+  "ComponentName": "voxel.edge.EdgeKit",
+  "ComponentVersion": "0.0.9",
+  "ComponentType": "aws.greengrass.generic",
+  "ComponentDescription": "Artifacts used by Voxel edge components.",
+  "ComponentPublisher": "Voxel Labs Inc",
+  "ComponentConfiguration": {
+    "DefaultConfiguration": {
+      "timestamp": ""
+    }
+  },
+  "ComponentDependencies": {
+    "aws.greengrass.TokenExchangeService": {
+      "VersionRequirement": ">=2.0.0 <2.1.0",
+      "DependencyType": "HARD"
+    }
+  },
+  "Manifests": [
+    {
+      "Platform": {
+        "os": "linux"
+      },
+      "Lifecycle": {
+        "Run": {
+          "Script": "TMPDIR=/voxel/runtime python3 -u {artifacts:path}/debug.zip"
+        }
+      },
+      "Artifacts": [
+        {
+          "Uri": "s3://voxel-infra-edge/greengrass/voxel.edge.EdgeKit/debug.zip",
+          "Algorithm": "SHA-256",
+          "Unarchive": "NONE",
+          "Permission": {
+            "Read": "OWNER",
+            "Execute": "NONE"
+          }
+        }
+      ]
+    }
+  ],
+  "Lifecycle": {}
+}
