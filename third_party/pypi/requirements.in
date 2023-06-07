@@ -38,8 +38,6 @@ scikit-image
 # gdown 
 # ffmpeg
 # https://github.com/IDEA-Research/GroundingDINO.git@main#egg=GroundingDINO
-torch
-torchvision
 transformers
 addict
 yapf
@@ -65,8 +63,6 @@ setuptools
 supervision
 termcolor
 timm
-torch
-torchvision
 transformers
 yapf
 fairscale
